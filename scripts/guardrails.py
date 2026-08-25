@@ -37,10 +37,21 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # The deployed web surfaces. Server code and libraries are included — the worst hole this file
 # exists to prevent was in a server action, not a component.
+#
+# These are repository-root-relative, because in this repository the application IS the root. The
+# list they replaced — `projectx-website`, `V1.0.1-Public/frontend-dashboard`, `V1.2.0/raffle/web`
+# — was inherited verbatim from the monorepo this was extracted from, and none of those paths
+# exists here. `sources()` therefore returned an empty list and every rule reported a clean pass
+# over nothing, for as long as this file has been in this repository.
+#
+# The three directories are the shipped surface `verify-claims.mjs` and
+# `verify-no-private-hosts.mjs` already scan. `scripts/` is deliberately absent: it is build and
+# check tooling that never reaches a browser. So is `tailwind.config.ts`, whose hex literals are
+# the token definitions rule 4 protects rather than uses of them.
 WEB_ROOTS = [
-    "projectx-website",
-    "V1.0.1-Public/frontend-dashboard",
-    "V1.2.0/raffle/web",
+    "app",
+    "components",
+    "lib",
 ]
 
 SKIP_DIRS = {"node_modules", ".next", "build", "dist", ".git", "coverage"}
