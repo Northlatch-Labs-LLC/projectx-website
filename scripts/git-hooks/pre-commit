@@ -1,0 +1,3 @@
+#!/bin/sh
+# Refuse any commit that would publish a secret. See scripts/scan-secrets.py.
+exec python3 "$(git rev-parse --show-toplevel)/scripts/scan-secrets.py"
