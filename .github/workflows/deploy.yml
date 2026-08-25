@@ -27,6 +27,15 @@ jobs:
         with:
           node-version: '24'
 
+      # The gate, before anything is built or shipped. `check` is typecheck, tests, guardrails and
+      # the verify scripts; a non-zero exit from any of them stops the job here and nothing reaches
+      # production.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check
+        run: npm run check
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
