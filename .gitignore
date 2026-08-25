@@ -9,3 +9,10 @@ out/
 npm-debug.log*
 .vercel
 .env*
+
+# Internal planning docs — kept local
+PLAN.md
+PLAN-v2.md
+PLAN-final.md
+.DS_Store
+*.tsbuildinfo
