@@ -1,0 +1,162 @@
+{
+  "live": false,
+  "capturedAt": "2026-08-03T23:49:09.306Z",
+  "pool": {
+    "poolId": "0x0742576b87852b237ac688dd25ad7e390a30d8ff0c6a34666afa8d0d374766c9",
+    "epochId": "17",
+    "epochEndsAtMs": "1785860612681",
+    "phase": 0,
+    "phaseName": "OPEN",
+    "depositsPaused": false,
+    "activeDepositors": "39",
+    "totalPrincipalMist": "48000000000",
+    "stakedPrincipalMist": "43200000000",
+    "liquidMist": "4800000000",
+    "prizeSuiMist": "1120000000",
+    "prizeCoinType": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+    "prizeDecimals": 6,
+    "priceFeedId": "0x1fa7566f40f93cdbafd5a029a231e06664219444debb59beec2fe3f19ca08b7e",
+    "yieldHealth": {
+      "suiEpochsSinceYield": null,
+      "thresholdSuiEpochs": 8,
+      "consecutiveZeroYieldHarvests": 0,
+      "status": "unknown"
+    },
+    "config": {
+      "stakingFeeBps": 500,
+      "spreadBps": 200,
+      "earlyExitFeeBps": 1000,
+      "epochDurationMs": "86400000",
+      "maturityPeriodMs": "604800000",
+      "maxSlippageBps": 200,
+      "minDepositMist": "1000000000",
+      "liquidityBufferBps": 1000,
+      "validator": "0x00ae78d3e5ba5d6b8de32455474f52811b95617cbad39ebf4f9e2daf67187407"
+    }
+  },
+  "treasury": {
+    "treasuryId": "0x590d6b9d748452940daf33a346f01c17723e8cc22fcbf7e7b7d61b2c0da08f53",
+    "streamA": {
+      "availableMist": "516210284",
+      "lifetimeMist": "1026210284"
+    },
+    "streamB": {
+      "availableBaseUnits": "156218",
+      "lifetimeBaseUnits": "256218",
+      "coinType": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+      "decimals": 6
+    }
+  },
+  "settlements": [
+    {
+      "epochId": "17",
+      "winner": "0x1965c86e56bdf2838e6fbe23cab5f23efb9eab5897ae3f832df83d5585f542ae",
+      "suiConvertedMist": "1010000000",
+      "grossOut": "699331",
+      "streamBFee": "13986",
+      "winnerPayout": "685345",
+      "realisedSlippageBps": 20,
+      "settledAt": "2026-08-03T16:23:47.147Z",
+      "txDigest": "6p4UprmJgpJDxcYAeAVMJkKHovAq6XvaJtEnpB3FMkZb"
+    },
+    {
+      "epochId": "15",
+      "winner": "0x43522ac5399dceb15ba50eccad64c81202d08dd3bcaaf738f6271b982eb773ba",
+      "suiConvertedMist": "4704549802",
+      "grossOut": "3228267",
+      "streamBFee": "64565",
+      "winnerPayout": "3163702",
+      "realisedSlippageBps": 34,
+      "settledAt": "2026-08-03T06:17:15.645Z",
+      "txDigest": "7dGfzGxjws8yQUhMBkG4TLj7XF3L4yC5npVWRCDvPsfy"
+    },
+    {
+      "epochId": "13",
+      "winner": "0x1965c86e56bdf2838e6fbe23cab5f23efb9eab5897ae3f832df83d5585f542ae",
+      "suiConvertedMist": "1906777025",
+      "grossOut": "1304215",
+      "streamBFee": "26084",
+      "winnerPayout": "1278131",
+      "realisedSlippageBps": 56,
+      "settledAt": "2026-08-03T04:16:58.484Z",
+      "txDigest": "HiCefqeXnAKw3guSTfBafTFSibRsGQuDfPw5XrBQFMTQ"
+    },
+    {
+      "epochId": "12",
+      "winner": "0x8622bff221fccb1f879ead91bf47de91a71aeb9c9072a457a7ca5bf2fe848031",
+      "suiConvertedMist": "195000000",
+      "grossOut": "133519",
+      "streamBFee": "2670",
+      "winnerPayout": "130849",
+      "realisedSlippageBps": 47,
+      "settledAt": "2026-08-03T03:16:52.384Z",
+      "txDigest": "Gq3EueUbTx7LWmQDhB5BpinNswYgwd5FutVswNiC7GJ"
+    },
+    {
+      "epochId": "11",
+      "winner": "0x0a4afbf53b53fe816401749354fb12b85dae5d70f5b5a02167498221c452a094",
+      "suiConvertedMist": "20000000",
+      "grossOut": "13687",
+      "streamBFee": "273",
+      "winnerPayout": "13414",
+      "realisedSlippageBps": 34,
+      "settledAt": "2026-08-03T02:16:43.848Z",
+      "txDigest": "Ev5Uw369k8wGwLnzC8CQ9xzxjyUV1SXWYU21Hp1ExL1N"
+    },
+    {
+      "epochId": "9",
+      "winner": "0x0a4afbf53b53fe816401749354fb12b85dae5d70f5b5a02167498221c452a094",
+      "suiConvertedMist": "200000000",
+      "grossOut": "137227",
+      "streamBFee": "2744",
+      "winnerPayout": "134483",
+      "realisedSlippageBps": 22,
+      "settledAt": "2026-08-03T00:16:30.703Z",
+      "txDigest": "9RXDwjCbzPojxMPnRN9JTsX7EbYsUGRMbAb8Co8CZzVT"
+    },
+    {
+      "epochId": "8",
+      "winner": "0x1965c86e56bdf2838e6fbe23cab5f23efb9eab5897ae3f832df83d5585f542ae",
+      "suiConvertedMist": "1000000000",
+      "grossOut": "686913",
+      "streamBFee": "13738",
+      "winnerPayout": "673175",
+      "realisedSlippageBps": 17,
+      "settledAt": "2026-08-02T23:16:21.222Z",
+      "txDigest": "4htHpcweZdQExYwmTXgkkuCbTUxEACAnZUcoKHqnYphX"
+    },
+    {
+      "epochId": "7",
+      "winner": "0x43522ac5399dceb15ba50eccad64c81202d08dd3bcaaf738f6271b982eb773ba",
+      "suiConvertedMist": "1200000000",
+      "grossOut": "830564",
+      "streamBFee": "16611",
+      "winnerPayout": "813953",
+      "realisedSlippageBps": 39,
+      "settledAt": "2026-08-02T22:16:17.859Z",
+      "txDigest": "HPU85Qbc5YtqTk5A9jXHsPtC181xnPMvswxniGQ2G49X"
+    },
+    {
+      "epochId": "6",
+      "winner": "0x1965c86e56bdf2838e6fbe23cab5f23efb9eab5897ae3f832df83d5585f542ae",
+      "suiConvertedMist": "1826351777",
+      "grossOut": "1260312",
+      "streamBFee": "25206",
+      "winnerPayout": "1235106",
+      "realisedSlippageBps": 29,
+      "settledAt": "2026-08-02T21:40:41.251Z",
+      "txDigest": "69WTSVoUaCTZFyrt27K2FY66riAn1ExbDWaYVCELuhaW"
+    },
+    {
+      "epochId": "3",
+      "winner": "0x43522ac5399dceb15ba50eccad64c81202d08dd3bcaaf738f6271b982eb773ba",
+      "suiConvertedMist": "6541111112",
+      "grossOut": "4517067",
+      "streamBFee": "90341",
+      "winnerPayout": "4426726",
+      "realisedSlippageBps": 29,
+      "settledAt": "2026-08-02T19:15:41.960Z",
+      "txDigest": "DAy5zT9M26uuQR5aHVAZ8biFE1xzG16LmzujbqYa8Wkd"
+    }
+  ]
+}

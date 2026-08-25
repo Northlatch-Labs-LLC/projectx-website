@@ -1,0 +1,75 @@
+{
+  "$comment": [
+    "Strings that were corrected on a live surface and must not come back.",
+    "",
+    "This exists because corrected copy has a way of returning. Design plates, drafts and audits are",
+    "written against whatever the site said on the day they were made, and porting one months later",
+    "silently reinstates every claim fixed since. Website-plateAug11 restates the prize-funding claim",
+    "and the draw wording verbatim, and its own README describes a sponsor-funded note the markup does",
+    "not contain.",
+    "",
+    "Each entry names the string, why it was wrong, and the commit that removed it, so a reader who",
+    "trips this can read the reasoning rather than guess at it. Matching is whitespace- and",
+    "apostrophe-normalised, because JSX splits a sentence across lines and prettier moves the break.",
+    "",
+    "Adding copy that trips a rule here is not a reason to delete the rule. It is a reason to check",
+    "whether the claim became true - and if it did, to say so in the entry and remove it deliberately."
+  ],
+  "rules": [
+    {
+      "id": "prize-funded-by-yield",
+      "severity": "error",
+      "patterns": [
+        "pool's whole staking yield goes to one depositor",
+        "whole pool's interest goes to one depositor",
+        "prize is funded entirely from the staking yield",
+        "Prizes are funded from realised staking yield",
+        "Prizes are funded solely from pooled staking yield",
+        "prizes come from the pooled staking yield"
+      ],
+      "why": "The mechanism is real but it is not what has paid. The harvester has not yet covered a prize and sponsors have funded every draw settled so far. Stating the mechanism as history is the one thing the site's own 'verify it yourself' invitation cannot survive.",
+      "instead": "Describe the design, then say what has actually funded the draws, next to the figures.",
+      "fixedIn": "2e4d74e"
+    },
+    {
+      "id": "sui-name-costs-ten-a-year",
+      "severity": "error",
+      "patterns": ["$10 a year", "$10/yr for five characters", "costs $10 a year"],
+      "why": "SuiNS charges $10 for the first year and $5 to renew, read from getPriceList() and getRenewalPriceList() on mainnet. '$10 a year' overstates the ongoing cost and contradicted the price table four sections below it on the same page.",
+      "instead": "Derive the sentence from lib/suins-pricing.ts, which is drift-checked against chain.",
+      "fixedIn": "29bf49b"
+    },
+    {
+      "id": "our-draw",
+      "severity": "error",
+      "patterns": ["Your competition. Your licence. Our draw."],
+      "why": "Operator correction: the draw is not ours, it is Sui mainnet's. The organiser holds the licence, the prize and the customer; the chain settles the draw.",
+      "instead": "Your competition. Your licence. Sui Mainnet Draw.",
+      "fixedIn": "d2fbde8"
+    },
+    {
+      "id": "hardcoded-suins-tier-prices",
+      "severity": "error",
+      "patterns": ["then $5/yr", "then $50/yr", "then $150/yr"],
+      "why": "SuiNS pricing is DAO-mutable on-chain config. A figure typed into a component is a mirror nobody checks, and stale here means quoting a price the registrar will not honour.",
+      "instead": "SUINS_TIERS in lib/suins-pricing.ts, verified by scripts/verify-suins-prices.mjs.",
+      "fixedIn": "29bf49b"
+    },
+    {
+      "id": "no-loss-explained-by-funding-source",
+      "severity": "error",
+      "patterns": ["describes how the prize is funded — from yield rather than"],
+      "why": "No loss follows from principal never being spent, whatever funds the prize. Explaining it by funding source tied the guarantee to a fact that is currently false.",
+      "instead": "'No loss' describes what happens to your principal - it is never spent, whatever funds the prize.",
+      "fixedIn": "2e4d74e"
+    },
+    {
+      "id": "launcher-advertised",
+      "severity": "error",
+      "patterns": ["launch.projectxprotocol.dev", "launch.protocolx.io"],
+      "why": "Purged under D-113 and D-114, decided by the operator and executed 8 August 2026. An external audit recommended restoring DNS and serving a retirement page; that reverses a decision this repository has taken.",
+      "instead": "Nothing. LAUNCHER_URL stays fail-closed and the card does not render.",
+      "fixedIn": "c0f9be2"
+    }
+  ]
+}

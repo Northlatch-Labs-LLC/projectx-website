@@ -1,0 +1,33 @@
+{
+  "name": "@projectx/website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Presentation website for ProjectX Protocol \u2014 the no-loss prize pool deployed on Sui mainnet.",
+  "scripts": {
+    "dev": "next dev -p 4000",
+    "build": "next build",
+    "start": "next start -p 4000",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run guardrails",
+    "guardrails": "python3 scripts/guardrails.py",
+    "test": "node --test \"lib/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@mysten/sui": "^2.24.0",
+    "@mysten/suins": "^1.2.14",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  }
+}

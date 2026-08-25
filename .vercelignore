@@ -1,0 +1,15 @@
+# `.env.local` holds PROTOCOL_API_KEY; on Vercel those values come from the project's
+# environment variables instead, so uploading the file only puts the key in the bundle.
+.env
+.env.*
+
+node_modules
+.next
+out
+*.tsbuildinfo
+
+# Self-host only.
+Dockerfile
+
+.DS_Store
+*.log
