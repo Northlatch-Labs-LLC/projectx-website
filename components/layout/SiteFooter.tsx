@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import Link from 'next/link';
 import { Logo } from '@/components/ui/Logo';
 import { Badge, LiveDot } from '@/components/ui/Badge';
@@ -67,10 +66,7 @@ export function SiteFooter() {
         <div className="mt-16 grid gap-12 lg:grid-cols-[1.5fr_repeat(4,1fr)] lg:gap-8">
           <div className="flex flex-col gap-5">
             <Logo ns="footer" />
-            {/* No product count and no list. This paragraph sits on every page, so it was the
-                slowest thing in the estate to notice going stale — it still enumerated four
-                products, one of which no longer has an interface. What is described here is the
-                standard, which does not change when a surface is added or retired. */}
+            {}
             <p className="max-w-[34ch] text-[1rem] leading-[1.65] text-px-muted">
               Software built on Sui, where the rules live in a contract rather than in a policy
               page. Public, permanent, and checkable by anyone — including you.
@@ -175,9 +171,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        {/* Publisher imprint. Northlatch Labs LLC is the named publisher of this site; it develops
-            and licenses the protocol software and does not operate the vault, run any draw, sponsor
-            any prize, or hold user funds. See /disclaimer and /legal/terms. */}
+        {}
         <div className="mt-12 flex flex-col gap-4 border-t border-white/[0.06] py-8 text-[0.875rem] leading-[1.6] text-px-faint">
           <p className="max-w-[70ch]">
             Published by{' '}

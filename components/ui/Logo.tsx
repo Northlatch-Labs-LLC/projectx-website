@@ -1,28 +1,10 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/**
- * The wordmark's X. Rendered in the header, the footer and the mobile drawer, so its gradient ids
- * have to be unique per instance.
- *
- * SVG ids share a single namespace across the document. Every instance previously declared
- * `px-mark-a` and `px-mark-b`, so a page carried two or three elements under each id. Every stroke
- * in this mark — the ring included — paints through one of those references, and a reference that
- * fails to resolve renders as no paint at all rather than falling back to a colour. On engines
- * that resolve duplicate ids loosely, notably iOS Safari, what survives is the dark tile behind it
- * and the dark centre dot: a black square with no X in it.
- *
- * The namespace is a prop rather than useId or a module counter. This mark renders from server
- * components (the footer) as well as client ones (the header, the drawer), which rules out hooks;
- * and a counter would produce different values on the server and on hydration, which React reports
- * as a mismatched attribute. An explicit value at each call site is the only one of the three that
- * is both server-safe and stable across hydration.
- */
+
 export function LogoMark({
   className = 'h-8 w-8',
   ns = 'default',
 }: {
   className?: string;
-  /** Must differ per instance on a page. See the note above. */
+
   ns?: string;
 }) {
   const a = `px-mark-a-${ns}`;

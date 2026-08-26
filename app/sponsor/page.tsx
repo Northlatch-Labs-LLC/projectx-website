@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -91,10 +90,7 @@ export default function SponsorPage() {
         <div className="grid gap-5 lg:grid-cols-2">
           <Card>
             <h3 className="text-lg font-semibold text-white">How to do it</h3>
-            {/* This read as a three-step how-to. The interface it opens with was retired, and the
-                button below is conditional on one existing — so the instruction outlived the thing
-                it instructed. `sponsor_prize` is a public entry function and remains callable
-                directly, which is what the second action below is for. */}
+            {}
             <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
               {DAPP_URL
                 ? 'Open an interface, connect a wallet, use the prize funding control. One transaction. Your contribution and the epoch it landed in are emitted on chain, and every interface can list them.'

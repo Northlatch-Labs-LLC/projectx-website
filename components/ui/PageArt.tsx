@@ -1,9 +1,6 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 type ArtProps = { className?: string };
 
-// SVG ids are document-global, so every def is namespaced per scene. Two scenes on one page
-// sharing a bare id means the second silently repaints the first.
 function Defs({ id }: { id: string }) {
   return (
     <defs>
@@ -503,11 +500,6 @@ export function LegalArt({ className }: ArtProps) {
   );
 }
 
-/**
- * The social platform: principal intact at the centre, supporters in orbit around it, and the
- * one thing that leaves — the yield — streaming to a creator lit gold at the edge. The core
- * never moves; only the stream does. That is the product, drawn.
- */
 export function SocialArt({ className }: ArtProps) {
   const id = 'pa-social';
   return (
@@ -527,7 +519,7 @@ export function SocialArt({ className }: ArtProps) {
         />
       </g>
 
-      {/* Supporters: small, many, and each still whole — none is consumed by supporting. */}
+      {}
       <g filter={`url(#${id}-bloom)`}>
         {[0, 1, 2, 3, 4].map((index) => {
           const angle = 0.55 + (index / 5) * Math.PI * 2;
@@ -542,7 +534,7 @@ export function SocialArt({ className }: ArtProps) {
         })}
       </g>
 
-      {/* The yield stream — the only thing that travels outward. */}
+      {}
       <path
         d="M226 132C258 106 288 84 330 62"
         stroke={`url(#${id}-yield)`}
@@ -551,7 +543,7 @@ export function SocialArt({ className }: ArtProps) {
         filter={`url(#${id}-bloom)`}
       />
 
-      {/* The creator: lit gold, fed by the stream, holding none of the principal. */}
+      {}
       <g filter={`url(#${id}-bloom)`}>
         <circle cx="336" cy="58" r="42" fill={`url(#${id}-halo-gold)`} />
         <circle cx="336" cy="58" r="15" fill={`url(#${id}-gold)`} />

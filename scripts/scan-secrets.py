@@ -23,20 +23,12 @@ import re
 import subprocess
 import sys
 
-# Variables that actually carry credentials. Everything else in .env is public config.
 SECRET_NAME = re.compile(r'PRIVATE_KEY$|PASSWORD|SECRET|API_KEY$|DATABASE_URL$|TOKEN$')
 
-# Files holding live credentials. Read for comparison only; never staged, never printed.
 LIVE_SOURCES = [
     '.env.local',
 ]
 
-# No mnemonic regex. "Twelve consecutive lowercase words" is the shape of English prose, not
-# of a seed phrase: on 5 Aug 2026 it produced 29 findings across READMEs, Move comments and
-# JSX copy, and zero of them were secrets. Detecting a real BIP39 phrase requires checking
-# every word against the 2048-word list, and this project's keys are `suiprivkey`-encoded in
-# the Sui keystore, never mnemonics. A check that cries wolf is worse than no check — it
-# teaches you to pass `--no-verify`.
 SHAPES = [
     ('sui private key', re.compile(r'suiprivkey[a-z0-9]{40,}')),
     ('PEM private key', re.compile(r'-----BEGIN [A-Z ]*PRIVATE KEY-----')),
@@ -45,22 +37,18 @@ SHAPES = [
 
 ENV_SHAPED = re.compile(r'(^|/)\.env($|\.)')
 
-
 def h(value: str) -> str:
     return hashlib.sha256(value.encode()).hexdigest()[:12]
-
 
 def staged_paths() -> list:
     out = subprocess.run(['git', 'diff', '--cached', '--name-only', '--diff-filter=ACMR'],
                          capture_output=True, text=True).stdout
     return [p for p in out.split('\n') if p.strip()]
 
-
 def staged_blob(path: str) -> str:
     r = subprocess.run(['git', 'show', ':' + path],
                        capture_output=True, text=True, errors='ignore')
     return r.stdout if r.returncode == 0 else ''
-
 
 def live_secrets() -> dict:
     """{value: 'FILE:VARNAME'} for secret-named variables only."""
@@ -75,7 +63,6 @@ def live_secrets() -> dict:
             if len(value) >= 12 and SECRET_NAME.search(name):
                 found[value] = '%s:%s' % (src, name)
     return found
-
 
 def main() -> int:
     paths = staged_paths()
@@ -112,7 +99,6 @@ def main() -> int:
         print('  %s\n      %s  (sha256:%s)' % (path, label, digest))
     print('\nNothing was committed. Remove the value or add the path to .gitignore.')
     return 1
-
 
 if __name__ == '__main__':
     sys.exit(main())

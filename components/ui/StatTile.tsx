@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { ReactNode } from 'react';
 import { AnimatedNumber } from './AnimatedNumber';
 

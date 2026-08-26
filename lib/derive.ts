@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { SettlementRecord } from './types';
 
 export const SUGGESTED_MIN_CONTRIBUTION_SUI = 0.1;

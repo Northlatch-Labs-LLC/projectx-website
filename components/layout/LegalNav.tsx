@@ -1,12 +1,6 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import Link from 'next/link';
 
-/**
- * The small cross-nav that sits at the top of every legal page, so all five routes reach each
- * other as well as being reachable from the footer imprint. `current` suppresses the link to the
- * page you are already on and marks it for assistive tech.
- */
 const LEGAL_ROUTES = [
   { label: 'Terms', href: '/legal/terms' },
   { label: 'Privacy', href: '/legal/privacy' },

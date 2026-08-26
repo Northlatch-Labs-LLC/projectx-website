@@ -20,12 +20,6 @@ import re
 import sys
 from pathlib import Path
 
-# Internal governance vocabulary. Each entry is (pattern, what to write instead).
-#
-# Deliberately NOT banned: the word "operator" on its own. It is this product's own term for the
-# person running a competition — "the operator console", "let the operator withdraw a listing" —
-# and banning it would fire on ordinary product work, which is how a check earns being skipped.
-# Only the constructions that attribute a decision are matched.
 BANNED: list[tuple[str, str]] = [
     (r"\bD-\d{3}\b", "the change itself, not the decision record it implements"),
     (r"\bDECISIONS\.md\b", "the technical reason, without naming the internal document"),
@@ -45,9 +39,7 @@ BANNED: list[tuple[str, str]] = [
     (r"(?i)\bbasis points\b|\b\d+\s?bps\b", "nothing — commercial terms"),
 ]
 
-# Trailers git and tooling add. Never inspected: a Co-Authored-By line is not prose.
 TRAILER = re.compile(r"^\s*(Co-Authored-By|Signed-off-by|Change-Id|Reviewed-by):", re.I)
-
 
 def main() -> int:
     if len(sys.argv) < 2:
@@ -61,7 +53,6 @@ def main() -> int:
         print(f"could not read the commit message: {exc}", file=sys.stderr)
         return 2
 
-    # A comment line in a commit template is not part of the message.
     lines = [
         ln for ln in raw.splitlines()
         if not ln.lstrip().startswith("#") and not TRAILER.match(ln)
@@ -92,7 +83,6 @@ def main() -> int:
     print("", file=sys.stderr)
     print(f"  {dim}--no-verify overrides this, deliberately.{off}", file=sys.stderr)
     return 1
-
 
 if __name__ == "__main__":
     sys.exit(main())

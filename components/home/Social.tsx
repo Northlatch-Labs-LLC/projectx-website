@@ -1,24 +1,6 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Button } from '@/components/ui/Button';
 import { SOCIAL_URL } from '@/lib/links';
-
-/**
- * The social platform, given the first product block on the page.
- *
- * It leads by operator decision (18 Aug 2026): it is the flagship of the estate. It is also the
- * one product here a visitor can act on without spending anything — supporting a creator costs
- * the supporter nothing but the staking yield their deposit would otherwise have earned them.
- *
- * Every claim in this section is a restatement of what social.protocolx.io itself says and what
- * its contract permits, read from the live site on 18 August 2026 — not a marketing gloss written
- * here. Where the platform is blunt about its own limits (staking yield is small; free support is
- * reach, not a salary), this section stays blunt too. The full account lives on /social.
- *
- * "No loss" is used the way this site's claims discipline requires (claims-banned.json): it
- * describes what happens to the supporter's principal — it is never spent — not how anything is
- * funded.
- */
 
 const STEPS = [
   {

@@ -1,8 +1,6 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { ReactNode } from 'react';
 
-// Owns vertical padding for every page. Callers must not set their own py-*.
 export function Section({
   children,
   id,

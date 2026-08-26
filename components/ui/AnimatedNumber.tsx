@@ -1,10 +1,8 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
 
-// `value` is the already-formatted display string, not a raw amount.
 export function AnimatedNumber({
   value,
   className = '',

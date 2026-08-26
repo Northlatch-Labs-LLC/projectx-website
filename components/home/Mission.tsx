@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { HeroStage } from '@/components/ui/HeroStage';
 import { Button } from '@/components/ui/Button';
@@ -26,9 +25,7 @@ export async function Mission() {
   return (
     <Section>
       <div className="flex flex-col items-center gap-12">
-        {/* Sat directly under a section whose title was "A prize draw where nobody loses" — two
-            near-identical headlines about the same product, back to back. This one keeps the
-            argument for prize-linked saving; the one above keeps the mechanism. */}
+        {}
         <SectionHeader
           eyebrow="Vault · why prize savings"
           title="People save more when saving is exciting"
@@ -36,10 +33,7 @@ export async function Mission() {
           proof={`${STATS.draws} prizes awarded on Sui mainnet, and not one depositor has ever lost a coin — the contract contains no path that could take one.`}
         />
 
-        {/* The trophy and its orbiting labels — "no loss to date", "daily draw", "withdraw anytime",
-            "someone wins tonight". They used to fill half the hero, opposite a name search, where
-            every one of those phrases was about a product the visitor was not being shown. Here
-            they sit against the argument they actually illustrate. */}
+        {}
         <HeroStage className="w-full max-w-2xl" />
 
         <ul className="grid w-full gap-4 sm:grid-cols-2">

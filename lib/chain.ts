@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 export const NETWORK = 'Sui mainnet' as const;
 
 export const EXPLORER = 'https://suiscan.xyz/mainnet' as const;
@@ -69,15 +68,7 @@ export const PRIZE_COIN = {
 export const SUI_DECIMALS = 9;
 
 export function explorerUrl(object: Pick<ChainObject, 'id' | 'kind'>): string {
-  /*
-    Suiscan has no `/package/` route — a published package *is* an object, and that is where
-    the explorer serves it. `kind` still distinguishes the two because the label a reader
-    sees should say "package", but the URL must not.
 
-    Worth knowing if this ever looks wrong again: Suiscan is a single-page app and answers
-    200 for any path, rendering the not-found state client-side. A status check will not
-    catch a broken explorer link — only opening it will.
-  */
   const segment = object.kind === 'address' ? 'account' : 'object';
   return `${EXPLORER}/${segment}/${object.id}`;
 }

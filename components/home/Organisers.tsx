@@ -1,20 +1,6 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Button } from '@/components/ui/Button';
 import { RAFFLE_URL } from '@/lib/links';
-
-/**
- * The front door for the highest-value customer on the estate, who until now had none.
- *
- * A competition organiser is a registered promoter running a licensed business. They are not a
- * punter, and nothing about a no-loss prize vault speaks to them. Yet the only organiser-facing
- * page anywhere was raffle.protocolx.io/organiser, reachable only by knowing that subdomain existed
- * and then finding the third link inside it — two navigations and a guess from here.
- *
- * The copy deliberately claims no regulatory status. It says what the mechanism does and lets their
- * counsel draw the conclusion, because "our software makes you compliant" is both untrue and the
- * kind of sentence that ends up in front of a regulator.
- */
 
 const GUARANTEES = [
   {

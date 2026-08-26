@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 export function formatUnits(base: bigint | string, decimals: number, maxFractionDigits = 4): string {
   const value = typeof base === 'string' ? BigInt(base || '0') : base;
   const negative = value < 0n;

@@ -1,20 +1,5 @@
 #!/usr/bin/env node
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/**
- * Regenerate the baked fallback snapshot from the live daemon API.
- *
- * The website renders this when the daemon is unreachable, so it must be real data taken
- * from mainnet rather than plausible-looking placeholders — a fallback that invents numbers
- * is worse than an empty tile. Run it before a deploy:
- *
- *     PROTOCOL_API_URL=http://localhost:8080/api/v1 node scripts/refresh-snapshot.mjs
- *
- * Reads PROTOCOL_API_KEY from the environment when set, so a .env.local already holding the
- * key works with `node --env-file=.env.local scripts/refresh-snapshot.mjs`.
- *
- * Writes `lib/snapshot.json`. Read-only against the protocol: three GETs, nothing else.
- */
+
 import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';

@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import Link from 'next/link';
@@ -23,9 +22,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
   if (!open) return null;
 
   return (
-    // The header's toggle carries aria-controls="mobile-nav"; without this id that reference
-    // resolved to nothing, so assistive tech was told a control governs an element it could not
-    // find. The drawer rendered correctly throughout — only the association was broken.
+
     <div
       id="mobile-nav"
       className="fixed inset-0 z-[60] lg:hidden"
@@ -66,10 +63,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
             </a>
           )}
 
-          {/* No pulse here. This drawer is a client component with no access to the protocol feed,
-              so it cannot know whether anything is live — and a dot that pulses on a guess is worse
-              than no dot, because it looks exactly like one that knows. The network is a fact about
-              the deployment and is stated plainly instead. */}
+          {}
           <Badge tone="neutral" className="w-fit">
             Deployed on {NETWORK}
           </Badge>

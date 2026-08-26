@@ -35,19 +35,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# The deployed web surfaces. Server code and libraries are included — the worst hole this file
-# exists to prevent was in a server action, not a component.
-#
-# These are repository-root-relative, because in this repository the application IS the root. The
-# list they replaced — `projectx-website`, `V1.0.1-Public/frontend-dashboard`, `V1.2.0/raffle/web`
-# — was inherited verbatim from the monorepo this was extracted from, and none of those paths
-# exists here. `sources()` therefore returned an empty list and every rule reported a clean pass
-# over nothing, for as long as this file has been in this repository.
-#
-# The three directories are the shipped surface `verify-claims.mjs` and
-# `verify-no-private-hosts.mjs` already scan. `scripts/` is deliberately absent: it is build and
-# check tooling that never reaches a browser. So is `tailwind.config.ts`, whose hex literals are
-# the token definitions rule 4 protects rather than uses of them.
 WEB_ROOTS = [
     "app",
     "components",
@@ -56,7 +43,6 @@ WEB_ROOTS = [
 
 SKIP_DIRS = {"node_modules", ".next", "build", "dist", ".git", "coverage"}
 
-
 @dataclass
 class Violation:
     rule: str
@@ -64,15 +50,12 @@ class Violation:
     line: int
     detail: str
 
-
 @dataclass
 class Rule:
     id: str
     scar: str
     detail: str
-    # path -> reason. A reason is mandatory; the engine refuses an empty one.
     allow: dict[str, str] = field(default_factory=dict)
-
 
 def sources(exts: tuple[str, ...]) -> list[Path]:
     out: list[Path] = []
@@ -88,14 +71,9 @@ def sources(exts: tuple[str, ...]) -> list[Path]:
             out.append(p)
     return out
 
-
 def rel(p: Path) -> str:
     return str(p.relative_to(ROOT))
 
-
-# ══════════════════════════════════════════════════════════════════════════════════════════════
-# Rule 1 — a server action must authenticate
-# ══════════════════════════════════════════════════════════════════════════════════════════════
 R_SERVER_AUTH = Rule(
     id="server-action-auth",
     scar=(
@@ -108,7 +86,6 @@ R_SERVER_AUTH = Rule(
     ),
     detail="exported server action with no authentication call",
     allow={
-        # Deliberately unauthenticated, and each says why.
         "V1.2.0/raffle/web/app/organiser/apply/actions.ts:applicationTermsHash": (
             "returns the SHA-256 of a document that is already published at /legal/organiser-terms; "
             "there is nothing here a caller could not compute from the public page"
@@ -123,12 +100,10 @@ R_SERVER_AUTH = Rule(
 AUTH_CALL = re.compile(r"\bauthenticate[A-Z]\w*\s*\(")
 EXPORTED_ACTION = re.compile(r"^export\s+async\s+function\s+(\w+)", re.M)
 
-
 def check_server_actions() -> list[Violation]:
     out: list[Violation] = []
     for p in sources((".ts", ".tsx")):
         text = p.read_text(encoding="utf-8", errors="replace")
-        # Only files that declare themselves server actions.
         if not re.match(r"^\s*(?://.*\n|/\*[\s\S]*?\*/\s*\n)*\s*['\"]use server['\"]", text):
             continue
         for m in EXPORTED_ACTION.finditer(text):
@@ -136,7 +111,6 @@ def check_server_actions() -> list[Violation]:
             key = f"{rel(p)}:{name}"
             if key in R_SERVER_AUTH.allow:
                 continue
-            # The body runs to the next top-level export, or end of file.
             nxt = EXPORTED_ACTION.search(text, m.end())
             body = text[m.end() : nxt.start() if nxt else len(text)]
             if not AUTH_CALL.search(body):
@@ -152,10 +126,6 @@ def check_server_actions() -> list[Violation]:
                 )
     return out
 
-
-# ══════════════════════════════════════════════════════════════════════════════════════════════
-# Rule 2 — every signed transaction names its chain
-# ══════════════════════════════════════════════════════════════════════════════════════════════
 R_CHAIN = Rule(
     id="sign-names-its-chain",
     scar=(
@@ -170,13 +140,11 @@ R_CHAIN = Rule(
 
 SIGN_CALL = re.compile(r"signAndExecute\s*\(\s*\{")
 
-
 def check_sign_chain() -> list[Violation]:
     out: list[Violation] = []
     for p in sources((".ts", ".tsx")):
         text = p.read_text(encoding="utf-8", errors="replace")
         for m in SIGN_CALL.finditer(text):
-            # Read to the matching close brace of the argument object.
             depth, i = 0, m.end() - 1
             while i < len(text):
                 if text[i] == "{":
@@ -200,10 +168,6 @@ def check_sign_chain() -> list[Violation]:
                 )
     return out
 
-
-# ══════════════════════════════════════════════════════════════════════════════════════════════
-# Rule 3 — several writes in one operation must be one transaction
-# ══════════════════════════════════════════════════════════════════════════════════════════════
 R_TXN = Rule(
     id="multi-write-transaction",
     scar=(
@@ -218,7 +182,6 @@ R_TXN = Rule(
 
 WRITE_Q = re.compile(r"c\.query[^`'\"]*[`'\"]\s*(INSERT|UPDATE|DELETE)\b", re.I)
 FN_START = re.compile(r"^export\s+async\s+function\s+(\w+)", re.M)
-
 
 def check_transactions() -> list[Violation]:
     out: list[Violation] = []
@@ -243,10 +206,6 @@ def check_transactions() -> list[Violation]:
                 )
     return out
 
-
-# ══════════════════════════════════════════════════════════════════════════════════════════════
-# Rule 4 — colours come from tokens, so a second theme cannot rot
-# ══════════════════════════════════════════════════════════════════════════════════════════════
 R_COLOUR = Rule(
     id="tokenised-colour",
     scar=(
@@ -258,11 +217,8 @@ R_COLOUR = Rule(
     detail="literal colour in a component rule",
 )
 
-# Only flag colours in component rules, not inside the :root / @theme token blocks where a literal
-# is the definition rather than a use.
 TOKEN_BLOCK = re.compile(r"(@theme\s*\{|:root[^{]*\{)")
 LITERAL_COLOUR = re.compile(r"(#[0-9a-fA-F]{3,8}\b|\brgba?\(\s*\d+[\s,])")
-
 
 def check_colours() -> list[Violation]:
     out: list[Violation] = []
@@ -293,10 +249,6 @@ def check_colours() -> list[Violation]:
                 )
     return out
 
-
-# ══════════════════════════════════════════════════════════════════════════════════════════════
-# Rule 5 — a network client is bounded
-# ══════════════════════════════════════════════════════════════════════════════════════════════
 R_TIMEOUT = Rule(
     id="bounded-network-client",
     scar=(
@@ -309,7 +261,6 @@ R_TIMEOUT = Rule(
 )
 
 SUICLIENT = re.compile(r"new\s+SuiClient\s*\(\s*\{")
-
 
 def check_timeouts() -> list[Violation]:
     out: list[Violation] = []
@@ -326,8 +277,6 @@ def check_timeouts() -> list[Violation]:
                         break
                 i += 1
             arg = text[m.end() - 1 : i + 1]
-            # A bounded client either injects a fetch carrying a signal, or supplies a transport
-            # that does. `url:` alone is the unbounded default.
             if "AbortSignal" not in arg and "transport" not in arg:
                 line = text[: m.start()].count("\n") + 1
                 out.append(
@@ -341,17 +290,7 @@ def check_timeouts() -> list[Violation]:
                 )
     return out
 
-
-# Known, accepted debt. A rule newly introduced over an existing codebase finds work that
-# predates it, and a report that is permanently red is one nobody reads — this repository has
-# said so twice, about the suins surface and about the raffle's skipped build.
-#
-# So the guardrails ratchet rather than gate: the baseline records what was already there, and the
-# check fails only when a count GROWS or a new file appears. Existing debt is visible in the
-# report and cannot get worse; fixing any of it lowers the number permanently, because
-# `--update-baseline` refuses to raise one.
 BASELINE = ROOT / "scripts" / "guardrails-baseline.json"
-
 
 def load_baseline() -> dict[str, dict[str, int]]:
     if not BASELINE.exists():
@@ -359,10 +298,7 @@ def load_baseline() -> dict[str, dict[str, int]]:
     try:
         return json.loads(BASELINE.read_text())
     except Exception as exc:
-        # An unreadable baseline must not silently become "no debt allowed" or "everything
-        # allowed". Fail closed and say so.
         raise SystemExit(f"guardrails: baseline is unreadable ({exc}). Refusing to run.")
-
 
 def tally(found: list[Violation]) -> dict[str, dict[str, int]]:
     out: dict[str, dict[str, int]] = {}
@@ -370,7 +306,6 @@ def tally(found: list[Violation]) -> dict[str, dict[str, int]]:
         out.setdefault(v.rule, {}).setdefault(v.path, 0)
         out[v.rule][v.path] += 1
     return out
-
 
 RULES = [R_SERVER_AUTH, R_CHAIN, R_TXN, R_COLOUR, R_TIMEOUT]
 CHECKS = {
@@ -381,7 +316,6 @@ CHECKS = {
     R_TIMEOUT.id: check_timeouts,
 }
 
-
 def validate_allowlists() -> list[str]:
     """A suppression with no reason is itself a violation. Fails closed."""
     bad = []
@@ -390,7 +324,6 @@ def validate_allowlists() -> list[str]:
             if not reason or not reason.strip():
                 bad.append(f"{r.id}: '{path}' is suppressed with no reason")
     return bad
-
 
 def main() -> int:
     as_json = "--json" in sys.argv
@@ -406,7 +339,7 @@ def main() -> int:
     for rule in RULES:
         try:
             found.extend(CHECKS[rule.id]())
-        except Exception as exc:  # a rule that cannot run is a failure, never a skip
+        except Exception as exc:
             print(f"\033[31m✗\033[0m rule {rule.id} could not run: {type(exc).__name__}: {exc}")
             return 1
 
@@ -414,8 +347,6 @@ def main() -> int:
     base = load_baseline()
 
     if updating:
-        # Never raises a count. Recording new debt as accepted is how a ratchet becomes a rubber
-        # stamp, so this can only ever tighten the baseline.
         merged: dict[str, dict[str, int]] = {}
         for rule_id, paths in counts.items():
             for path, n in paths.items():
@@ -428,7 +359,6 @@ def main() -> int:
         print("baseline tightened")
         return 0
 
-    # A regression is a count above the baseline, or a file that had none before.
     regressions: list[Violation] = []
     for v in found:
         allowed = base.get(v.rule, {}).get(v.path, 0)
@@ -476,7 +406,6 @@ def main() -> int:
         return 1
     print(f"\033[32mno new violations\033[0m \033[2m({total_debt} accepted, pre-existing)\033[0m")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

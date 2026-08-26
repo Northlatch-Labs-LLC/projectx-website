@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 export function LadderDiagram({ depth = 6 }: { depth?: number }) {
   const tranches = Array.from({ length: depth }, (_, index) => index);
 

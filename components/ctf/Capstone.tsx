@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Badge } from '@/components/ui/Badge';
 import { Warning, ShieldCheck } from '@/components/ui/Icons';
 import { CHALLENGES } from '@/lib/ctf';

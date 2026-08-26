@@ -1,17 +1,10 @@
-/* Copyright (c) 2026 Northlatch Labs LLC. All rights reserved. */
-/* Built-by: @projectx.sui /|\ · Co-authored-by: Claude */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /*
-   * The accent as channel triplets, so a theme swaps it by redefining these rather than by
-   * recompiling Tailwind. Every `px-accent` utility in the codebase resolves through them.
-   *
-   * Blue is the default and stays the brand. Green is opt-in, stamped on <html> as
-   * data-theme="green" and remembered — a preference, not a redesign.
-   */
+
   :root {
     --px-accent-50: 234 244 255;
     --px-accent-100: 207 230 255;
@@ -23,10 +16,6 @@
     --px-accent-700: 21 80 153;
     --px-accent-800: 15 58 112;
 
-    /*
-     * The hues the accent is blended with in gradients and glows. They are themed alongside it
-     * because a green accent running into cyan and violet reads as a bug rather than a palette.
-     */
     --px-hue-2: 142 242 255;
     --px-hue-3: 63 216 245;
     --px-hue-4: 107 139 255;
@@ -57,37 +46,16 @@
   :root {
     color-scheme: dark;
 
-    /*
-     * Motion, named.
-     *
-     * cubic-bezier(0.16, 1, 0.3, 1) was written out nine times in this file and four more in
-     * components — the same curve, retyped, with no name saying what it was for. A magic number
-     * repeated thirteen times is one somebody will eventually mistype by a digit, and nothing
-     * would catch it.
-     *
-     * The scale and the names come from the August design plate's MOTION.md. The *values* are this
-     * site's own: the plate specifies 260ms and 420ms for base and slow, and this site has always
-     * used 300 and 500. Adopting the plate's numbers would have retimed every transition on a live
-     * site as a side effect of a renaming, so the vocabulary is borrowed and the feel is not
-     * touched. --duration-reveal matches the plate at 700ms because it already did.
-     *
-     * instant and fast have no caller yet. They are the two steps this scale was missing — press
-     * feedback and hover tint currently share the 300ms used for layout moves, which is why hover
-     * feels slightly heavy.
-     *
-     * Everything here is collapsed by the prefers-reduced-motion block at the end of this file.
-     */
     --duration-instant: 90ms;
     --duration-fast: 160ms;
     --duration-base: 300ms;
     --duration-slow: 500ms;
     --duration-reveal: 700ms;
 
-    /* Decisive arrival: fast out of the gate, long settle. The site's default for everything. */
     --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    /* Gentler than expo, for continuous motion that should not draw the eye. */
+
     --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
-    /* Overshoots. Reserved for confirmation moments; never for anything that repeats. */
+
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
@@ -344,11 +312,7 @@
 }
 
 @layer utilities {
-  /* The bloom the names and draws surfaces carry, so all three headlines read as one brand.
-     drop-shadow works off the element's rendered alpha, and for background-clipped text that alpha
-     is the glyphs — so the glow follows the letterforms rather than boxing them, and it needs
-     nothing added to the markup. Two static passes: a tight cyan halo for definition, a wide blue
-     one for atmosphere. No animation, so it costs one paint and never repeats. */
+
   .text-gradient-accent {
     background-image: linear-gradient(
       115deg,
@@ -412,7 +376,6 @@
   }
 }
 
-/* Single kill-switch for every animation on the site. New motion must survive this block. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -430,26 +393,6 @@
   }
 }
 
-/* === The wallet connect control =========================================
- *
- * dapp-kit ships its button in a light theme — near-white fill, dark text — which reads as a
- * foreign control dropped onto a dark surface, and looks nothing like the other buttons beside it.
- *
- * Restyled in two layers, on purpose.
- *
- * The custom properties are dapp-kit's supported theming API and survive its upgrades, but they
- * feed `background-color`, and a gradient is a `background-image` rather than a colour — so they
- * can only carry a solid. They set the brand blue.
- *
- * The gradient is then painted on top by matching the button itself. Its real class is a hashed
- * CSS-module name that changes with every dapp-kit release, so the match is on the stable
- * `[data-dapp-kit]` attribute plus a substring of the variant name rather than on the hash. The
- * selector is written twice because the control carries that attribute on itself rather than on an
- * ancestor — a descendant combinator alone matches nothing, which is why the library writes every
- * one of its own rules as the same pair. If a
- * future release changes that name, the gradient stops applying and the button falls back to the
- * solid brand blue above — degraded, not broken, and never back to white.
- */
 [data-dapp-kit] {
   --dapp-kit-backgroundColors-primaryButton: #4da2ff;
   --dapp-kit-backgroundColors-primaryButtonHover: #6bb2ff;

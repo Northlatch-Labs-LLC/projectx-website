@@ -1,6 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,

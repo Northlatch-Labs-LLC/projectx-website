@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Button } from '@/components/ui/Button';
 import { Signature } from '@/components/ui/Signature';
 import { ArrowUpRight } from '@/components/ui/Icons';

@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
@@ -125,7 +124,7 @@ export function HeroStage({ className = '' }: { className?: string }) {
                    duration-700 ease-[var(--ease-expo)] sm:w-[62%] lg:w-[58%]"
         style={{ transform: `translate3d(calc(-50% + ${pointer.x * 10}px), calc(-50% + ${pointer.y * 8}px), 0)` }}
       >
-        {/* Keyframe, not JS state: the entrance must reach its visible frame without scripts. */}
+        {}
         <div className="animate-stage-in">
           <HeroScene className="w-full" />
         </div>

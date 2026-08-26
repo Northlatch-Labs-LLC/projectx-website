@@ -1,11 +1,8 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
-// Renders visible and only hides after mount. Starting at opacity 0 would blank the page for
-// anyone whose script was blocked or has not run yet.
 export function Reveal({
   children,
   delay = 0,
@@ -48,7 +45,7 @@ export function Reveal({
 
   return (
     <Tag
-      // @ts-expect-error — one ref type across the four permitted tags
+
       ref={ref}
       className={`reveal transition-[opacity,transform] duration-700 ease-[var(--ease-expo)] ${
         hidden ? 'translate-y-5 opacity-0' : 'translate-y-0 opacity-100'

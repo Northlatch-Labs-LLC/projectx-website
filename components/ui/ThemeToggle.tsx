@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -7,16 +6,6 @@ import { useEffect, useState } from 'react';
 type Accent = 'blue' | 'green';
 const KEY = 'projectx.accent';
 
-/**
- * Switches the accent between the brand blue and green.
- *
- * It swaps CSS variables, not classes: every `px-accent` utility on the site resolves through
- * `--px-accent-*`, so redefining nine variables re-themes the whole page without a rebuild and
- * without touching a single component.
- *
- * The choice is stamped on `<html>` and remembered. Read after mount rather than during render,
- * so the static prerender and the first client render cannot disagree about which theme is on.
- */
 export function ThemeToggle() {
   const [accent, setAccent] = useState<Accent>('blue');
   const [ready, setReady] = useState(false);
@@ -26,8 +15,7 @@ export function ThemeToggle() {
     try {
       saved = window.localStorage.getItem(KEY);
     } catch {
-      // Private browsing and blocked storage both throw. The toggle still works for this
-      // session; only the remembering is lost, and there is nothing to recover from.
+
     }
     if (saved === 'green' || saved === 'blue') setAccent(saved);
     setReady(true);
@@ -41,7 +29,7 @@ export function ThemeToggle() {
     try {
       window.localStorage.setItem(KEY, accent);
     } catch {
-      // As above.
+
     }
   }, [accent, ready]);
 

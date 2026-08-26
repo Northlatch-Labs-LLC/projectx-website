@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { Metadata } from 'next';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { SocialArt } from '@/components/ui/PageArt';
@@ -9,24 +8,6 @@ import { Button } from '@/components/ui/Button';
 import { Callout } from '@/components/ui/Callout';
 import { Badge } from '@/components/ui/Badge';
 import { SOCIAL_URL } from '@/lib/links';
-
-/**
- * The account of the social platform, in full.
- *
- * Every factual claim on this page restates what social.protocolx.io states on its own surface
- * and attributes to its contract, read from the live site on 18 August 2026. Where the platform
- * is blunt about its own arithmetic — staking yield is small, free support is reach rather than a
- * salary — this page repeats the bluntness instead of rounding it up. A reader who follows the
- * link should find the product describing itself the way this page described it.
- *
- * Two figures appear: the 2.9% platform fee on paid income, and Sui's 1 SUI staking minimum.
- * Both were read from the platform's own published posts on the date above. If either changes on
- * the platform, this page is the mirror that needs updating — there is no API to drift-check
- * them against yet, which is why they are the only two figures here.
- *
- * "No loss" is used the way claims-banned.json requires: it describes what happens to principal —
- * it is never spent — not how anything downstream is funded.
- */
 
 export const metadata: Metadata = {
   title: 'Support a creator',

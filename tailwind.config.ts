@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { Config } from 'tailwindcss';
 
 export default {
@@ -16,9 +15,6 @@ export default {
           border: '#1c2740',
           'border-bright': '#2f3f61',
 
-          // Channel triplets rather than hex, so a theme can swap the accent at runtime by
-          // redefining the variables. `<alpha-value>` keeps Tailwind's /30 opacity syntax
-          // working — dropping it would silently break every px-accent/NN in the codebase.
           accent: {
             50: 'rgb(var(--px-accent-50) / <alpha-value>)',
             100: 'rgb(var(--px-accent-100) / <alpha-value>)',
@@ -32,7 +28,6 @@ export default {
             DEFAULT: 'rgb(var(--px-accent-400) / <alpha-value>)',
           },
 
-          // The accent's companions, themed with it — see the --px-hue-* block in globals.css.
           cyan: {
             light: 'rgb(var(--px-hue-2) / <alpha-value>)',
             DEFAULT: 'rgb(var(--px-hue-3) / <alpha-value>)',
@@ -50,11 +45,7 @@ export default {
 
           text: '#eef3fa',
           muted: '#9dabc4',
-          // #6b7a95 measured 4.62 on the canvas and 4.24 on a panel — an AA failure wherever faint
-          // text sits inside a card, which is most of where it is used. Lightened by the smallest
-          // step that clears 4.5 against the lighter of the two backgrounds; the canvas pair
-          // improves to 4.95 as a side effect. Do not darken this without re-running
-          // scripts/verify-contrast.mjs — it is the tightest pair on the site.
+
           faint: '#707f9a',
         },
       },
@@ -94,11 +85,6 @@ export default {
       backgroundSize: { grid: '64px 64px' },
       borderRadius: { '4xl': '1.75rem', '5xl': '2.25rem' },
 
-      /*
-       * Motion as utilities, so `ease-expo` replaces `ease-[cubic-bezier(0.16,1,0.3,1)]` and the
-       * curve stops being retyped at every call site. Values live in globals.css :root — defined
-       * once, readable in devtools, and collapsed by the reduced-motion block.
-       */
       transitionTimingFunction: {
         expo: 'var(--ease-expo)',
         quart: 'var(--ease-quart)',

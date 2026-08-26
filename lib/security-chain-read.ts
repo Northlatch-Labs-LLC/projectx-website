@@ -1,44 +1,22 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/**
- * Recorded chain read for the /security "Security and control" table.
- *
- * RULE (migration Task 10): every object ID on the security page is either read from Sui mainnet at
- * build time, or copied from THIS file, which records a dated chain read. Nothing here comes from
- * memory, from a document, or from the migration spec — except the Weir row, which the operator
- * directed be trusted from the spec as-is and is marked `source: 'spec'` so it is never mistaken
- * for a fresh read.
- *
- * How the chain rows were obtained on the date below (Sui mainnet, `fullnode.mainnet.sui.io`, via
- * the `sui` CLI — grpcurl was not available on the build host):
- *   1. read each lineage's origin package object → its publish transaction (`prevTx`);
- *   2. read that transaction's object changes → the created `0x2::package::UpgradeCap`;
- *   3. read that UpgradeCap object → its `version` (upgrades applied), `package` (latest package
- *      in the lineage) and current `owner` (the holder).
- * The holder is the UpgradeCap's CURRENT owner, not merely who it was first sent to.
- *
- * If any value cannot be verified it is `null` here and renders as "not yet published" — never a
- * guess.
- */
 
 export const SECURITY_READ_AT = '2026-08-22' as const;
 export const SECURITY_NETWORK = 'Sui mainnet' as const;
 
 export interface PackageControl {
   product: string;
-  /** Latest package ID in the lineage (from the UpgradeCap), or a trusted spec value. */
+
   packageId: string;
-  /** Original published package ID, where read from chain. */
+
   packageOrigin: string | null;
-  /** UpgradeCap.version — the number of upgrades applied. */
+
   version: string | null;
-  /** The UpgradeCap object itself, where read from chain. */
+
   upgradeCapId: string | null;
-  /** Current owner of the UpgradeCap. */
+
   upgradeCapHolder: string;
-  /** Free-text note for other capabilities. */
+
   other: string;
-  /** 'chain' rows were read on SECURITY_READ_AT; 'spec' rows are trusted from the migration spec. */
+
   source: 'chain' | 'spec';
 }
 
@@ -75,5 +53,4 @@ export const SECURITY_PACKAGES: PackageControl[] = [
   },
 ];
 
-/** zkLogin salt-service provider — {PROVIDER_FROM_CONFIG}. Not resolved from a committed config. */
 export const SALT_SERVICE_PROVIDER: string | null = null;

@@ -1,35 +1,5 @@
 #!/usr/bin/env node
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/**
- * Keep a purged host purged.
- *
- * D-114, decided by the operator and executed on 8 August 2026: the token launcher's public
- * instance is not needed and comes down. The Cloudflare record was deleted and the Vercel project
- * removed permanently, taking its domain attachment with it. The launcher's source, tests and
- * testnet deployment record were deliberately kept — only the public hosting was retired.
- *
- * This check defends that decision and does not second-guess it. It asserts one thing: no purged
- * host is advertised from this site.
- *
- * `LAUNCHER_URL` is the mechanism that holds it. It has no default — unset means the card on
- * /interfaces does not render at all — and the reasoning is written above it in `lib/links.ts`: a
- * fallback URL would advertise a host that does not resolve, and a dead link on the front door is
- * worse than no link. That property is load-bearing and was protected only by a comment, which does
- * not fail a build. One `?? 'https://launch.projectxprotocol.dev'` added by somebody tidying a null
- * check would undo it silently, on a page that still renders perfectly.
- *
- *     node scripts/verify-retired-hosts.mjs
- *
- * WHAT THIS DELIBERATELY DOES NOT CHECK. An earlier version of this file also required a
- * `middleware.ts` returning 410 for the purged host. That came from an external audit's
- * recommendation to restore the DNS record and stand up a retirement page for twelve months — which
- * is the opposite of D-114, and not a decision this repository has taken. Serving a 410 would first
- * require re-attaching the domain to a Vercel project, so the code was inert in production anyway.
- * If that decision is ever revisited, it is the operator's to make and D-114 is where it belongs.
- *
- * Source-only. No network, so there is no SKIP branch and it cannot pass for the wrong reason.
- */
+
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,7 +9,6 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const red = (s) => `\x1b[31m${s}\x1b[0m`;
 const green = (s) => `\x1b[32m${s}\x1b[0m`;
 
-/** Hosts purged under D-113 and D-114. Neither may be linked from this site. */
 const PURGED_HOSTS = ['launch.projectxprotocol.dev', 'launch.protocolx.io'];
 
 const SEARCH_DIRS = ['app', 'components', 'lib'];
@@ -56,9 +25,6 @@ function* walk(dir) {
 
 const problems = [];
 
-// 1. No purged host may appear anywhere a browser could follow it. Occurrences in a comment are the
-//    point of the file that records why the host is absent, so they are allowed; the test is the
-//    scheme, because that is what makes a string followable.
 for (const dir of SEARCH_DIRS) {
   const abs = join(ROOT, dir);
   if (!existsSync(abs)) continue;
@@ -78,8 +44,6 @@ for (const dir of SEARCH_DIRS) {
   }
 }
 
-// 2. `LAUNCHER_URL` must stay fail-closed. A default of any kind reinstates the dead link this
-//    exists to prevent, so the assertion is on the absence of a fallback, not on its value.
 const linksPath = join(ROOT, 'lib', 'links.ts');
 if (!existsSync(linksPath)) {
   problems.push('lib/links.ts is missing — LAUNCHER_URL fail-closed default cannot be verified');

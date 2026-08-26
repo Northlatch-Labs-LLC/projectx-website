@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
@@ -7,23 +6,6 @@ import { Badge } from '@/components/ui/Badge';
 import { ArrowUpRight, Code, Sparkle, Trophy, Wallet } from '@/components/ui/Icons';
 import { DAPP_URL, RAFFLE_URL, SOCIAL_URL } from '@/lib/links';
 
-/**
- * The four products, then the invitation to build a fifth.
- *
- * Social takes a full-width featured card above the grid — flagship placement, decided by the
- * operator on 18 Aug 2026 — and the remaining four cards keep their 2×2.
- *
- * This section used to be titled "One pool, many front doors", which told a visitor that Names and
- * Raffle were interfaces onto the prize vault. They are not: the raffle is its own contract with
- * its own treasury, and the registrar is a separate business selling SuiNS names. Describing three
- * products as one product with three doors was inaccurate and undersold two of them.
- *
- * Copy leads with what a person gets and what it costs them, because this page is read by people
- * deciding whether to use something, not by engineers auditing it. The mechanism is not hidden --
- * each card keeps the one sentence that says what is guaranteed -- but it comes after the offer,
- * not instead of it. The engineering account lives on /protocol, /security and /builders, which is
- * where a reader who wants it goes looking.
- */
 const LIVE = [
   {
     title: 'ProjectX Vault',
@@ -58,13 +40,7 @@ const LIVE = [
 export function InterfacesPreview() {
   return (
     <Section tone="panel" id="interfaces">
-      {/* Deliberately no longer counts the products.
-          A headline carrying a number has to be edited every time the estate changes shape, and it
-          silently stops being true the moment nobody remembers to — the previous version said four
-          products were "live and taking real transactions today", which a reader reasonably takes
-          as "you can use all four right now". One of them is a contract on mainnet with no
-          interface serving it. The claim below is about the chain and the standard we build to,
-          both of which stay true as products come and go. */}
+      {}
       <SectionHeader
         eyebrow="Built on Sui"
         title="One chain. Every promise kept in code."
@@ -138,10 +114,7 @@ export function InterfacesPreview() {
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               ) : (
-                // A product whose interface has been retired keeps its card and loses its button.
-                // Rendering the CTA against a null href would produce a link to the current page,
-                // and pointing it at whatever now occupies the old address is how "Open the vault"
-                // came to send people to the raffle.
+
                 <p className="mt-auto text-[0.8125rem] leading-[1.55] text-px-faint">
                   No interface serves this at present.
                 </p>

@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
@@ -10,28 +9,11 @@ import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
 import { getStats } from '@/lib/stats';
 import Link from 'next/link';
 
-/**
- * Below these, a volume figure is withheld rather than shown.
- *
- * The numbers are true and must stay true, so the fix is never to round one up — it is to choose
- * which to display. "Protected 52 SUI" and "43 savers" are honest, and they tell a first-time
- * visitor that nobody is here, which is an argument against depositing. The guarantee figures argue
- * for it, and they are the actual thesis.
- *
- * Thresholds rather than deletions, so the tiles return on their own when the figures start to
- * flatter, with no code change.
- */
 const DISPLAY_FLOOR = { principalSui: 5_000, depositors: 250 };
 
 export async function HowItWorks() {
   const STATS = await getStats();
 
-  /*
-   * These moved down from the hero, which is where they used to sit — under a name search, beside
-   * a headline about three products. A depositor count and a prize total measure the vault and
-   * nothing else, so they belong against the vault's own explanation rather than being read as
-   * facts about the company.
-   */
   const figures = [
     { label: 'Lost to date', value: STATS.lossesEver, tone: 'prize' as const },
     { label: 'Won so far', value: STATS.paidToWinners, unit: 'USDC', tone: 'prize' as const },
@@ -67,10 +49,7 @@ export async function HowItWorks() {
 
   return (
     <Section tone="panel">
-      {/* This section is about the vault, but its heading said "prize draw" — so it read as the
-          raffle, which is a different product with a different contract and a different buyer.
-          Two of the three vault sections on this page carried a raffle headline. The eyebrow now
-          names the product and the title describes what the vault actually does. */}
+      {}
       <SectionHeader
         eyebrow="Vault · Sui mainnet"
         title="Your deposit is never the prize"
@@ -94,14 +73,7 @@ export async function HowItWorks() {
         ))}
       </dl>
 
-      {/*
-        The mechanism in the lead above is what the contract implements. It is not what paid for
-        the figures directly above this line, and a reader who assumes it is has been misled by
-        proximity — which is why the correction sits here rather than in the footer.
-        `SettlementRecord` carries no funding source, so the site cannot render the split as a
-        figure it read; saying it in words is the honest option, and a rendered number here would
-        be one nothing measured.
-      */}
+      {}
       <p className="mx-auto mt-5 max-w-2xl text-center text-[0.9375rem] leading-[1.6] text-px-faint">
         <span className="font-semibold text-px-gold">Alpha.</span> Yield has not yet covered a
         prize. Every draw settled so far was funded by a sponsor rather than by pooled yield.

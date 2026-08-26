@@ -1,24 +1,5 @@
 #!/usr/bin/env node
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
-/**
- * Fail when a text/background pair drops below its WCAG contrast requirement.
- *
- * Measured in a browser on 14 August 2026, every pair on the home page met AA and almost all met
- * AAA. Nothing was holding it there. The palette is themed — green is opt-in via `data-theme` and
- * had never been measured at all — and a single token nudged for aesthetic reasons moves every pair
- * built on it at once. Contrast is the accessibility property most easily lost to a change that
- * looks like an improvement, and it fails silently for the people it fails.
- *
- *     node scripts/verify-contrast.mjs           # both themes
- *     node scripts/verify-contrast.mjs --verbose # print every pair and its ratio
- *
- * Reads the palette from the two places that define it: hex literals in `tailwind.config.ts` and
- * the themed `--px-*` triples in `app/globals.css`. Source-only, no browser, no network — so it has
- * no SKIP branch and cannot pass for the wrong reason. What it cannot see is stated in
- * `config/contrast-pairs.json`: gradient-filled text has no computed colour, so those pairs are
- * pinned to the darkest gradient stop instead.
- */
+
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,13 +14,6 @@ const CONFIG = JSON.parse(readFileSync(join(ROOT, 'config', 'contrast-pairs.json
 const tailwind = readFileSync(join(ROOT, 'tailwind.config.ts'), 'utf8');
 const globals = readFileSync(join(ROOT, 'app', 'globals.css'), 'utf8');
 
-/**
- * Hex tokens from tailwind.config.ts, in the two shapes it uses.
- *
- * Flat — `bg: '#05080f'` — and nested with a DEFAULT — `prize: { light: …, DEFAULT: '#3ddc97', … }`.
- * The nested form is read first: scanning flat pairs alone binds `light` and `dark` as if they were
- * top-level tokens and leaves `prize` and `gold` undefined, which is what the first run reported.
- */
 function hexTokens() {
   const out = new Map();
   for (const m of tailwind.matchAll(
@@ -53,12 +27,6 @@ function hexTokens() {
   return out;
 }
 
-/**
- * Themed triples from globals.css. `:root { --px-accent-400: 77 162 255 }` is the default and
- * `:root[data-theme='green'] { … }` overrides it. Parsed per block rather than globally, because a
- * global scan would let the green values silently win for both themes — which would report the
- * default theme as passing on numbers nobody sees.
- */
 function themedVars() {
   const blocks = { default: new Map(), green: new Map() };
   const re = /:root(\[data-theme=['"]green['"]\])?\s*\{([^}]*)\}/g;
@@ -74,7 +42,6 @@ function themedVars() {
 const HEX = hexTokens();
 const VARS = themedVars();
 
-/** Named tokens that resolve through a CSS variable rather than a literal. */
 const VAR_ALIAS = {
   'px-accent-400': 'px-accent-400',
   'px-accent-200': 'px-accent-200',
@@ -157,7 +124,6 @@ for (const theme of CONFIG.themes) {
   }
 }
 
-// An unresolvable token is a silent hole: the pair is skipped and the run still reports clean.
 if (unresolved.length > 0) {
   console.log(red(`  FAIL  ${unresolved.length} pair(s) name a colour that could not be resolved`));
   for (const u of unresolved) console.log(`        ${u}`);

@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import { Button } from '@/components/ui/Button';
 import { AuroraBackdrop, GlowBackdrop, GridBackdrop } from '@/components/ui/Backdrop';
 import { Callout } from '@/components/ui/Callout';

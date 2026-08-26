@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 'use client';
 
 import Link from 'next/link';
@@ -67,9 +66,7 @@ export function SiteHeader() {
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => {
-            // Most of the nav now points at the other three surfaces, which are separate
-            // deployments on their own domains. next/link would client-side route them and lose
-            // the new tab, so an external entry renders as a plain anchor.
+
             if ('external' in link && link.external) {
               return (
                 <a
@@ -100,15 +97,8 @@ export function SiteHeader() {
         <div className="col-start-3 flex items-center justify-end gap-2">
           <ThemeToggle />
 
-          {/* The one button in the header used to send everyone to the vault — the slowest of the
-              four products to produce a penny, and the one that asks for a deposit before it gives
-              anything back. A name is the only thing on the estate a stranger can buy in the same
-              session they arrive in, so that is what the button now offers. */}
-          {/* whitespace-nowrap is the fix, not the padding. At 375px the label wrapped to two lines
-              inside the button, which made it 80px tall inside a 64px bar — it hung out of the
-              header rather than sitting in it. Keeping the label on one line and trimming the
-              horizontal padding on small screens leaves it comfortably between the logo and the
-              menu button. */}
+          {}
+          {}
           <a
             href={NAMES_URL}
             target="_blank"

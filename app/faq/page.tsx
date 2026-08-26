@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -265,10 +264,7 @@ export default function FaqPage() {
       </Section>
 
       <Section tone="edge">
-        {/* This closed by inviting a deposit from 1 SUI. The button beside it is conditional on an
-            interface existing, so with the vault's front end retired the invitation stood on its
-            own with nothing to act on — a call to action is worse than a dead link, because a dead
-            link at least announces itself. */}
+        {}
         <Callout
           title={DAPP_URL ? 'Ready when you are' : 'Where this stands'}
           actions={

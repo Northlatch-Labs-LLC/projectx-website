@@ -1,5 +1,4 @@
-// Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+
 import type { SVGProps } from 'react';
 
 export type MarkProps = SVGProps<SVGSVGElement>;
