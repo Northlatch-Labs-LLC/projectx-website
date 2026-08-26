@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     description:
       SITE_DESCRIPTION,
     url: SITE_URL,
-    locale: 'en_US',
+    locale: 'en_GB',
   },
   twitter: {
     card: 'summary_large_image',
@@ -107,7 +107,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       className={`${roboto.variable} ${spaceGrotesk.variable} ${robotoMono.variable}`}
       // The pre-paint script below sets data-theme here, so this element legitimately differs
       // from the server HTML. Scoped to <html>'s own attributes, not its subtree.

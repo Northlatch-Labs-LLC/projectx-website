@@ -31,8 +31,7 @@ export default function LegalTermsPage() {
             <strong>Effective date:</strong> 24 August 2026
             <br />
             <strong>Publisher:</strong> Northlatch Labs LLC, a Wyoming limited liability company
-            (registration filed with the Wyoming Secretary of State; the Filing ID will be
-            published here upon approval)
+            (Wyoming Filing ID 2026-002064040)
             <br />
             <strong>Address:</strong> 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming 82609,
             United States

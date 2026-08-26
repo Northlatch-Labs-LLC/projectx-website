@@ -30,9 +30,8 @@ export default function LegalPrivacyPage() {
             <strong>Effective date:</strong> 24 August 2026
             <br />
             <strong>Controller:</strong> Northlatch Labs LLC, a Wyoming limited liability company
-            (registration filed with the Wyoming Secretary of State; the Filing ID will be
-            published here upon approval), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming 82609,
-            United States
+            (Wyoming Filing ID 2026-002064040), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming
+            82609, United States
             <br />
             <strong>Privacy contact:</strong>{' '}
             <a href="mailto:privacy@projectxprotocol.dev">privacy@projectxprotocol.dev</a>

@@ -58,9 +58,8 @@ export default function DisclaimerPage() {
         <LegalNav current="/disclaimer" />
         <p className="mb-8 text-[1rem] leading-[1.7] text-px-muted">
           This site is published by Northlatch Labs LLC, a Wyoming limited liability company
-          (registration filed with the Wyoming Secretary of State; the Filing ID will be published
-          here upon approval), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming 82609, United
-          States. Northlatch develops and licenses the ProjectX protocol software. It does not
+          (Wyoming Filing ID 2026-002064040), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming 82609,
+          United States. Northlatch develops and licenses the ProjectX protocol software. It does not
           operate the prize vault or any draw, does not sponsor any prize, and does not hold user
           funds.
         </p>
