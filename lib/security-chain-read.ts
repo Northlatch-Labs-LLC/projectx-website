@@ -21,7 +21,7 @@
  * guess.
  */
 
-export const SECURITY_READ_AT = '2026-08-22' as const;
+export const SECURITY_READ_AT = '2026-08-26' as const;
 export const SECURITY_NETWORK = 'Sui mainnet' as const;
 
 export interface PackageControl {
@@ -45,13 +45,13 @@ export interface PackageControl {
 export const SECURITY_PACKAGES: PackageControl[] = [
   {
     product: 'Weir (projectx_social)',
-    packageId: '0xc5c8…d404d (original) / 0xa7fd…1214d (v2)',
+    packageId: '0xc5c8…d404d (original) / 0xfa7e…3694 (v3)',
     packageOrigin: null,
-    version: '2',
-    upgradeCapId: null,
+    version: '3',
+    upgradeCapId: '0x895e20c44aed9c884be8dffa42c93d93653b47e86cd3a12d919998d9b1eaed08',
     upgradeCapHolder: '2-of-3 multisig 0x00e734d5…11605',
     other: 'PlatformCap, Publisher, Display — not yet published',
-    source: 'spec',
+    source: 'chain',
   },
   {
     product: 'Prize Vault (usdc_prize_factory V1.0.1)',
@@ -65,9 +65,9 @@ export const SECURITY_PACKAGES: PackageControl[] = [
   },
   {
     product: 'Draws (raffle_v1 V1.2.0)',
-    packageId: '0xf7475c7c2161c1eadf364f9e0d2212476dc20a235736e14c0aab02128aca448f',
+    packageId: '0xb475146208b53d16c3498c9757d623386c17fc197df544386ed496a74e79f8ee',
     packageOrigin: '0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a',
-    version: '4',
+    version: '6',
     upgradeCapId: '0xe6ed11ed42f1edd23366e5f0832a7874665624dc91bfd0008d5e5c3259a4fed7',
     upgradeCapHolder: '0x00e734d54be45c002579f36698823eaf2410b59eb30a398fd6c8af9e1b111605',
     other: 'not yet published',
