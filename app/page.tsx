@@ -7,6 +7,7 @@ import { Social } from '@/components/home/Social';
 import { Organisers } from '@/components/home/Organisers';
 import { HowItWorks } from '@/components/home/HowItWorks';
 import { Mission } from '@/components/home/Mission';
+import { VerificationPractice } from '@/components/home/VerificationPractice';
 import { CtaBand } from '@/components/home/CtaBand';
 
 /**
@@ -26,6 +27,10 @@ import { CtaBand } from '@/components/home/CtaBand';
  *   Organisers  ── everything about draws, aimed at who actually pays for them
  *   HowItWorks  ── the vault mechanism
  *   Mission     ── the vault argument
+ *   Verification ─ the practice behind all of the above, and the tooling direction
+ *                  (operator decision, 27 Aug 2026: this page routes buyers, and the buyer's
+ *                  last question is always "why should I trust any of it" — this block is the
+ *                  answer, placed where that question is actually asked, just before the close)
  *   CtaBand     close
  *
  * The developer section is no longer on this page. It sat between the vault and the close —
@@ -45,6 +50,7 @@ export default function HomePage() {
       <Organisers />
       <HowItWorks />
       <Mission />
+      <VerificationPractice />
 
       <div className="mx-auto w-full max-w-content px-5 sm:px-8">
         <Signature />
