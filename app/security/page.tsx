@@ -160,7 +160,10 @@ export default function SecurityPage() {
           <h2>zkLogin</h2>
           <p>
             Weir&rsquo;s zkLogin flow uses a prover at prover.protocolx.io operated by Northlatch Labs
-            LLC and a salt service operated by {SALT_SERVICE_PROVIDER ?? 'not yet published'}.
+            LLC, and a salt service{' '}
+            {SALT_SERVICE_PROVIDER
+              ? `operated by ${SALT_SERVICE_PROVIDER}`
+              : 'whose operator is not yet published here'}.
           </p>
 
           <h2>Reporting a vulnerability</h2>
