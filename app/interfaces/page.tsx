@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: '/og/interfaces.png',
         width: 1200,
         height: 630,
-        alt: 'Every way to use ProjectX — Weir (closed alpha), ProjectX Raffle (live on mainnet), ProjectX Names (closed alpha), ProjectX Vault (contract live, no interface)',
+        alt: 'Every way to use ProjectX — Weir (closed alpha), ProjectX Draws (live on mainnet), ProjectX Names (closed alpha), ProjectX Vault (contract live, no interface)',
       },
     ],
   },
