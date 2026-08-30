@@ -131,7 +131,12 @@ export const NAV_LINKS = [
   // 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in the top
   // nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set again.
   ...(DAPP_URL ? ([{ href: DAPP_URL, label: 'Vault', external: true }] as const) : []),
-  { href: `${RAFFLE_URL}/organiser`, label: 'For organisers', external: true },
+  // /organiser/apply, not /organiser. The console at /organiser is allowlisted — the contract
+  // aborts with `EOrganiserNotAllowed` for any address that has not been admitted — and it
+  // renders the full creation form to a disconnected visitor before it says so. /organiser/apply
+  // opens with "Apply to run competitions" and the admission steps, which is what this label
+  // promises. See components/home/Organisers.tsx.
+  { href: `${RAFFLE_URL}/organiser/apply`, label: 'For organisers', external: true },
   { href: '/builders', label: 'Developers' },
 ] as const;
 
@@ -156,7 +161,8 @@ export const FOOTER_SECTIONS: {
       { label: 'Support a creator', href: SOCIAL_URL, external: true },
       { label: 'Register a .sui name', href: NAMES_URL, external: true },
       { label: 'Live competitions', href: RAFFLE_URL, external: true },
-      { label: 'Run a competition', href: `${RAFFLE_URL}/organiser`, external: true },
+      // /organiser/apply for the same reason as the nav entry above.
+      { label: 'Run a competition', href: `${RAFFLE_URL}/organiser/apply`, external: true },
       // Dropped from the nav entirely while no interface serves the vault, rather than rendered
       // pointing at nothing. A nav entry is a promise that something is there.
       ...(DAPP_URL ? [{ label: 'Prize vault', href: DAPP_URL, external: true }] : []),
