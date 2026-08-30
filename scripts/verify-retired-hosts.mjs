@@ -4,13 +4,12 @@
 /**
  * Keep a purged host purged.
  *
- * D-114, decided by the operator and executed on 8 August 2026: the token launcher's public
- * instance is not needed and comes down. The Cloudflare record was deleted and the Vercel project
- * removed permanently, taking its domain attachment with it. The launcher's source, tests and
- * testnet deployment record were deliberately kept — only the public hosting was retired.
+ * The token launcher's public instance was taken down on 8 August 2026: the Cloudflare record was
+ * deleted and the Vercel project removed permanently, taking its domain attachment with it. The
+ * launcher's source, tests and testnet deployment record were kept — only the public hosting was
+ * retired.
  *
- * This check defends that decision and does not second-guess it. It asserts one thing: no purged
- * host is advertised from this site.
+ * This check asserts one thing: no purged host is advertised from this site.
  *
  * `LAUNCHER_URL` is the mechanism that holds it. It has no default — unset means the card on
  * /interfaces does not render at all — and the reasoning is written above it in `lib/links.ts`: a
@@ -22,11 +21,9 @@
  *     node scripts/verify-retired-hosts.mjs
  *
  * WHAT THIS DELIBERATELY DOES NOT CHECK. An earlier version of this file also required a
- * `middleware.ts` returning 410 for the purged host. That came from an external audit's
- * recommendation to restore the DNS record and stand up a retirement page for twelve months — which
- * is the opposite of D-114, and not a decision this repository has taken. Serving a 410 would first
- * require re-attaching the domain to a Vercel project, so the code was inert in production anyway.
- * If that decision is ever revisited, it is the operator's to make and D-114 is where it belongs.
+ * `middleware.ts` returning 410 for the purged host. Serving a 410 would first require
+ * re-attaching the domain to a Vercel project, which has not been done, so that code was inert in
+ * production and the requirement was removed.
  *
  * Source-only. No network, so there is no SKIP branch and it cannot pass for the wrong reason.
  */
@@ -39,7 +36,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const red = (s) => `\x1b[31m${s}\x1b[0m`;
 const green = (s) => `\x1b[32m${s}\x1b[0m`;
 
-/** Hosts purged under D-113 and D-114. Neither may be linked from this site. */
+/** Purged hosts. Neither may be linked from this site. */
 const PURGED_HOSTS = ['launch.projectxprotocol.dev', 'launch.protocolx.io'];
 
 const SEARCH_DIRS = ['app', 'components', 'lib'];

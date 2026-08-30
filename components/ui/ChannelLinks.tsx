@@ -6,10 +6,9 @@ import { CHANNELS } from '@/lib/links';
 /**
  * The estate's channels, rendered from the single list in lib/links.ts.
  *
- * One component rather than a row hand-written into the footer and a second one hand-written into
- * the drawer, because the failure mode of two copies is not a visual bug — it is a page that lists
- * two of our accounts next to a page that lists three, on a site that tells visitors any account
- * not on its list is an impersonator.
+ * One component rather than a row hand-written into the footer and a second into the drawer. The
+ * failure mode of two copies is not a visual bug: it is one page listing two accounts beside
+ * another listing three, on a site that tells visitors any account not on its list is not ours.
  *
  * `aria-label` carries the full label; the visible text is the short form, so the row stays a row
  * on a phone without a screen reader hearing "X" twice with no way to tell the two apart.

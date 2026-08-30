@@ -9,10 +9,6 @@
  * it was made, so porting one later reinstates every claim fixed in between — and it arrives inside
  * work that is otherwise wanted, which is exactly when nobody re-reads the sentences.
  *
- * Website-plateAug11 is the worked example. It restates the prize-funding claim verbatim, keeps the
- * draw wording the operator had changed, and its README describes a sponsor-funded note that the
- * markup does not contain. Anyone porting it in good faith would have shipped all three.
- *
  *     node scripts/verify-claims.mjs                    # scan shipped source
  *     node scripts/verify-claims.mjs path/to/file.html  # scan an external file before porting it
  *

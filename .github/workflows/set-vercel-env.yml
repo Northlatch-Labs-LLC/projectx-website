@@ -1,9 +1,8 @@
 # Built-by: @projectx.sui /|\ · Co-authored-by: Claude
 #
 # Push runtime configuration into Vercel, from the one place that already holds the deploy token.
-# Same shape as weir's workflow of the same name, for the same reason: the values are repository
-# secrets, the token that writes them is a repository secret, and nothing is ever committed or
-# echoed. Manual dispatch only — configuration moves when somebody decides it moves.
+# The values are repository secrets, the token that writes them is a repository secret, and
+# nothing is ever committed or echoed. Manual dispatch only.
 name: Set Vercel env
 
 on:

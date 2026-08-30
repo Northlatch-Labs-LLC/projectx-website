@@ -22,24 +22,17 @@ export default function LegalPrivacyPage() {
         art={<LegalArt className="w-full" />}
       />
 
-      {/* WHY THIS SECTION MOVED, 30 August 2026.
-          Until this date the policy below said the Site "does not collect names, emails or wallet
-          addresses unless you send us one by email". That stopped being true the moment the
-          announcement capture shipped on 2026-08-30: components/ui/NotifySignup.tsx renders on the
-          home page (components/home/CtaBand.tsx) and on /verification, and posts to
-          app/api/notify/route.ts, which writes the address to a Brevo contact list. A policy that
-          denies a collection the site is running is the one defect a regulator can screenshot, so
-          section 1 now describes that route field by field, from the code.
-
-          THE RULE THIS ESTABLISHES: the capture and this policy move together. If
+      {/* THE RULE THIS SECTION ESTABLISHES: the capture and this policy move together. If
           app/api/notify/route.ts changes what it stores, where it sends it, or the consent state it
           writes, section 1, section 2 (basis), section 3 (processors) and section 5 (retention)
           change in the same commit — not the next one. Adding a second capture point anywhere on
-          the Site is the same obligation.
+          the Site carries the same obligation.
 
-          Written strictly from the code as it stands: email, source page and timestamp, consent
-          recorded as `pending-doi`, nothing mailed before a double opt-in. Nothing here describes a
-          practice the estate does not have. */}
+          The one capture the Site runs today: components/ui/NotifySignup.tsx renders on the home
+          page (components/home/CtaBand.tsx) and on /verification, and posts to
+          app/api/notify/route.ts, which writes the address to a Brevo contact list. Section 1 is
+          written strictly from that route as it stands — email, source page and timestamp, consent
+          recorded as `pending-doi`, nothing mailed before a double opt-in. */}
 
       <Section width="prose">
         <LegalNav current="/legal/privacy" />

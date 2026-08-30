@@ -17,34 +17,14 @@ export const metadata: Metadata = {
 };
 
 /**
- * Rewritten 30 August 2026, on the Master's order that this hub stop being the retired vault's
- * website.
+ * INVARIANT: every answer on this page restates something already published on /verification or
+ * /verification/install — the five gates, the neutral conditions, the qualifying config, the
+ * bundle and its digest, the two prices, the independence clause. No answer here may state a
+ * claim that is not already published on one of those pages; where the published material does
+ * not settle a question, the answer says "ask us" rather than guessing.
  *
- * The page it replaces was the worst content page on the site by a distance: forty rendered
- * vault-era words against twenty-seven flagship ones, and a whole middle section — "Using the
- * vault: how it works in practice" — answering how to deposit, what the minimum is, whether gas is
- * sponsored and when you can withdraw. Every one of those answers was TRUE and none of them was
- * ANSWERABLE: the vault's interface was retired on 25 August 2026, so the page walked a reader
- * through a purchase with no door at the end of it.
- *
- * The eight vault questions are archived in full at
- * operations/archive/2026-08-30-hub-vault-sweep/app/faq/page.tsx. They are not lost and they are
- * not wrong — the mechanism they describe is documented on /protocol, and /ctf is where the vault
- * now lives on this hub, as the thing you are attacking rather than the thing you are buying. One
- * question below routes there deliberately, so a reader who arrives holding the word "vault" is
- * answered rather than stranded.
- *
- * EVERY ANSWER HERE RESTATES SOMETHING ALREADY PUBLISHED on /verification or /verification/install
- * — the five gates, the neutral conditions, the qualifying config, the bundle and its digest, the
- * two prices, the independence clause. Nothing on this page is a claim this estate had not already
- * made in writing, and nothing here answers a question the published material does not settle. Two
- * questions below say "ask us" for exactly that reason; a guess dressed as an answer is the one
- * thing a page arguing for measurement cannot afford.
- *
- * THE AMOE BLOCK IS CARRIED ACROSS VERBATIM and is not touched. It is legal substance — it
- * promises rules, a sponsor address and an entry weighting at /legal/terms that are not there, and
- * routes free entry through a DApp that does not exist. Both are held for the Master. Copy down or
- * rules up is his call, not this page's.
+ * The AMOE block below is legal text and carries its own DO-NOT-EDIT note. See it before
+ * touching anything in that section.
  */
 export default function FaqPage() {
   const product = [
@@ -366,15 +346,13 @@ export default function FaqPage() {
       </Section>
 
       {/* ───────────────────────────────────────────────────────────────────────────────────────
-          HELD FOR THE MASTER — DO NOT EDIT THIS SECTION.
+          DO NOT EDIT THIS SECTION.
 
-          Carried across verbatim from the page this file replaces. It is legal substance, not
-          marketing: it promises official rules, a sponsor's address and an entry weighting at
-          /legal/terms that are not published there, and its closing sentence routes free entry
-          "from the DApp" — an interface retired on 25 August 2026.
-
-          Copy down, or rules up. That is the Master's call and nobody else's, and the sweep of
-          30 August 2026 deliberately left it exactly as it was found.
+          Legal text, carried verbatim. Two known defects are recorded here rather than fixed,
+          because either fix changes a legal obligation: it promises official rules, a sponsor's
+          address and an entry weighting at /legal/terms that are not published there, and its
+          closing sentence routes free entry "from the DApp" — an interface retired on
+          25 August 2026.
           ─────────────────────────────────────────────────────────────────────────────────────── */}
       <Section id="amoe">
         <SectionHeader
@@ -417,9 +395,6 @@ export default function FaqPage() {
       </Section>
 
       <Section tone="edge">
-        {/* This closed by inviting a deposit from 1 SUI, then — once the interface was retired —
-            by pointing at the draws, which is a different product from anything this page now
-            answers questions about. It closes on the thing the page is about. */}
         <Callout
           title="Still deciding?"
           actions={

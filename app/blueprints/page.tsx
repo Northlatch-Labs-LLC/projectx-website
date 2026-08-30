@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlueprintsPage() {
-  // The header above promises every figure on this page is derived from the protocol's published
-  // parameters. The ladder paragraphs below used to type them out instead.
+  // INVARIANT: every figure on this page is derived from the protocol's published parameters
+  // below, never typed into the prose.
   const { config } = SNAPSHOT.pool;
   const published = BLUEPRINTS.filter((b) => b.status === 'Published');
   const upcoming = BLUEPRINTS.filter((b) => b.status !== 'Published');

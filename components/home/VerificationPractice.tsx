@@ -6,15 +6,10 @@ import { Callout } from '@/components/ui/Callout';
 import { Reveal } from '@/components/ui/Reveal';
 
 /**
- * The verification practice, stated as fact — and the direction, stated as direction.
- *
- * Every claim here is a measurement that has already happened on this estate's own contracts:
- * the mutation ledgers, the 60,000-entrant staging runs, the Sui Prover transcript for the
- * registrar's money path. Nothing here is called an audit — the security page carries the
- * independence clause and this section does not soften it.
- *
- * It used to add "nothing is offered for sale". That is no longer true and the section now says
- * so: this is the flagship, it sits second on the homepage, and the price is on the face of it.
+ * CLAIMS CONSTRAINT: every claim here must be a measurement that has already happened on this
+ * estate's own contracts — the mutation ledgers, the 60,000-entrant staging runs, the Sui Prover
+ * transcript for the registrar's money path. Nothing here may be called an audit; /security
+ * carries the independence clause and this section must not soften it.
  */
 export function VerificationPractice() {
   const layers = [
@@ -79,9 +74,9 @@ export function VerificationPractice() {
           </>
         }
       >
-        {/* Deliberately not "the layer below the audit is empty": open-source Move mutation
-            testing exists and is maintained. What it does not produce is evidence anyone can
-            carry, and that is the claim worth making. */}
+        {/* Must not say the layer below the audit is empty: open-source Move mutation testing
+            exists and is maintained. The defensible claim is narrower — it produces no evidence
+            a reader can carry. */}
         The harnesses, the staging network and the proving practice were built for our own
         contracts first. They now run on other people’s: five gates on every pull request, or a
         single measured report on one package from $1,000 — because the layer below the audit

@@ -9,11 +9,9 @@ import { Check, Copy } from './Icons';
  * A block of text a reader is expected to put in their own repository, with the copy button
  * beside it rather than the instruction "type this".
  *
- * The reason it exists is narrower than "code blocks are nice". `.protocolx-verify.json` is the
- * one file standing between a reader and five check runs, and a config transcribed by hand is a
- * config with a smart quote in it — the runner then refuses it, and the reader concludes the
- * product is broken rather than that their editor helped. Copying is the difference between a
- * three-second setup and a support conversation.
+ * It exists for a narrow reason: a `.protocolx-verify.json` transcribed by hand is a config with
+ * a smart quote in it, which the runner then refuses — and the reader concludes the product is
+ * broken rather than that their editor substituted a character.
  *
  * `AddressChip` already carries this behaviour for on-chain identifiers, and this deliberately
  * mirrors its states rather than inventing a second vocabulary: the tick replaces the clipboard

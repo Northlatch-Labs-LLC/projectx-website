@@ -30,9 +30,6 @@ export default function NotFound() {
         <p className="lead">
           The address you followed does not resolve to anything here.
         </p>
-        {/* The title read "Your deposit is unaffected", which assumes the reader has one. Most
-            people who land on a 404 do not, and the ones who do are not reassured by a broken
-            link. What is true for everyone is that nothing on this site is the system. */}
         <Callout
           className="mt-2 w-full"
           title="Nothing here is the system"

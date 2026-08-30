@@ -12,25 +12,16 @@ import { CHAIN_OBJECTS, NETWORK } from '@/lib/chain';
 import { SECURITY_PACKAGES, SECURITY_READ_AT } from '@/lib/security-chain-read';
 
 /**
- * The home page's answer to two of the four things the Master named on 30 August 2026 — *"we need
- * to present our verification, our security steps ... and we need to present ProtocolX data."*
+ * The home page's block for the security practice and the on-chain record, linking to /security
+ * and /chain.
  *
- * Verification and social already had a block on this page. Security and the on-chain record did
- * not: /security was reachable only through the footer and the drawer, and the deployment record
- * had no page at all. Both now have one, and this section is how the front door points at them.
+ * THE FIGURES COME FROM `getStats()`, the same call the block this replaced used, with the same
+ * meaning.
  *
- * It occupies the slot vacated by `HowItWorks`, the vault block, which is archived at
- * operations/archive/2026-08-30-hub-vault-sweep/components/home/HowItWorks.tsx.
- *
- * THE FIGURES ARE THE ONES THAT SECTION CARRIED, from the same `getStats()` call and with the same
- * meaning. They are kept for a reason that survives the sweep: "not one depositor has ever lost a
- * coin" is a property of a contract, checkable on chain, and it is the strongest single thing this
- * estate can say about its own record. What is gone is the framing that read them as a reason to
- * deposit — a heading that names what they measure, and no call to action beside them.
- *
- * The two DISPLAY_FLOOR tiles from the old section (principal held, depositor count) are
- * deliberately not here. They argue the size of a pool nobody can join, and the floor logic that
- * withheld them existed to avoid arguing against joining. Neither concern applies to a record.
+ * The two DISPLAY_FLOOR tiles that call carries — principal held and depositor count — are
+ * deliberately NOT rendered here. The floor logic exists to withhold a small figure from a page
+ * inviting a deposit; this block makes no such invitation and renders no call to action beside
+ * the figures, so the tiles are omitted rather than floored.
  */
 export async function Provenance() {
   const STATS = await getStats();
@@ -100,9 +91,8 @@ export async function Provenance() {
         </Reveal>
       </div>
 
-      {/* The figures the vault block used to carry, under a heading that says what they measure.
-          The vault's interface was retired on 25 August 2026 — these are a record, and the absence
-          of any button beside them is the point. */}
+      {/* Under a heading that says what they measure. No call to action beside them: the vault's
+          interface was retired on 25 August 2026 and there is nothing to press. */}
       <div className="mt-12">
         <p className="label mb-5 text-center">The vault&rsquo;s record so far</p>
         <dl className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-x-6 gap-y-7 border-y border-white/[0.07] py-8 sm:grid-cols-3">

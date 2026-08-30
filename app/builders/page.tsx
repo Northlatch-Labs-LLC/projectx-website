@@ -167,9 +167,7 @@ export default function BuildersPage() {
       </Section>
 
       {/*
-        The full address table moved to /chain on 30 August 2026 — the deployment record now has a
-        route of its own, in the navigation, on the Master's order that this hub present ProtocolX
-        data. It is rendered there from the same module, once.
+        The full address table lives on /chain and is rendered there from the same module, once.
 
         This section KEEPS its id. `#addresses` is linked from the footer band, from /interfaces and
         from anywhere anyone has ever pasted it, and a fragment cannot be redirected: the hash never

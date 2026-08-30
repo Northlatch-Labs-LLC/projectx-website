@@ -10,9 +10,8 @@ import { priceSentence } from '@/lib/suins-pricing';
 /**
  * A .sui name in one transaction, handed straight to the registrar.
  *
- * The registrar is behind Weir's closed alpha, so this is not the fastest purchase on the estate
- * and this component must not be written or placed as if it were — see lib/links.ts, where the
- * navigation records the same ordering.
+ * The registrar is behind Weir's closed alpha, so this control cannot complete a registration
+ * today and must not be written or placed as if it could — it hands off to a waiting list.
  *
  * What it does NOT do is claim availability. That needs a read from SuiNS, and this site has no
  * chain client — inventing an "available!" here would be a lie that costs the buyer a signature
