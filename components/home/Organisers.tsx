@@ -58,7 +58,21 @@ export function Organisers() {
             re-derivable by anyone afterwards from a digest you can print in your own terms.
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-            <Button href={`${RAFFLE_URL}/organiser`} variant="primary" showExternalIcon={false}>
+            {/*
+              Points at /organiser/apply, not /organiser.
+
+              /organiser is the creation console, and the contract behind it refuses any address
+              that is not on the platform allowlist — `create_raffle_v2` aborts with
+              `EOrganiserNotAllowed`. Worse, with no wallet connected that page renders the whole
+              eighteen-field creation form and says only "Connect a wallet to create", so a
+              stranger who follows this button fills the form in, connects, and is told
+              "Admission required" by a page that had every chance to say so first.
+
+              /organiser/apply is the one organiser route an unapproved wallet can actually
+              complete. A button reading "Start a competition" has to land somewhere that accepts
+              a start.
+            */}
+            <Button href={`${RAFFLE_URL}/organiser/apply`} variant="primary" showExternalIcon={false}>
               Start a competition
             </Button>
             <Button href={`${RAFFLE_URL}/rules`} variant="secondary" showExternalIcon={false}>

@@ -45,7 +45,9 @@ export function CtaBand() {
             Claim a .sui name
             <ArrowUpRight className="h-4 w-4" />
           </Button>
-          <Button href={`${RAFFLE_URL}/organiser`} variant="secondary" showExternalIcon={false}>
+          {/* /organiser/apply, not /organiser — the console refuses any wallet not on the
+              platform allowlist. See the note in components/home/Organisers.tsx. */}
+          <Button href={`${RAFFLE_URL}/organiser/apply`} variant="secondary" showExternalIcon={false}>
             Run a competition
           </Button>
           {DAPP_URL && (

@@ -65,7 +65,10 @@ export function Hero() {
             <p className="label mb-3">Or start somewhere else</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
-                href={`${RAFFLE_URL}/organiser`}
+                // /organiser/apply, not /organiser — the console refuses any wallet not on the
+                // platform allowlist, and shows a full creation form before saying so. See the
+                // note in components/home/Organisers.tsx.
+                href={`${RAFFLE_URL}/organiser/apply`}
                 variant="secondary"
                 showExternalIcon={false}
                 className="flex-1 justify-center"
