@@ -55,7 +55,7 @@ export async function HowItWorks() {
       icon: <Trophy className="h-5 w-5" />,
       title: 'One saver wins',
       body: 'Every 24 hours the whole prize pot goes to one depositor.',
-      proof: 'Drawn by Sui’s native randomness, with odds exactly proportional to your stake.',
+      proof: 'Drawn by Sui’s native randomness, weighted exactly in proportion to your stake.',
     },
     {
       icon: <ShieldCheck className="h-5 w-5" />,

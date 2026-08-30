@@ -12,13 +12,13 @@ export async function Mission() {
 
   const comparison = [
     {
-      title: 'A lottery',
+      title: 'The usual way',
       body: 'You buy a ticket. The money is gone the moment you do.',
       tone: 'bad' as const,
     },
     {
       title: 'ProjectX',
-      body: 'Keep every coin. Play for the pool’s entire yield, daily.',
+      body: 'Keep every coin. The whole day’s yield goes to one depositor.',
       tone: 'good' as const,
     },
   ];
@@ -37,9 +37,13 @@ export async function Mission() {
         />
 
         {/* The trophy and its orbiting labels — "no loss to date", "daily draw", "withdraw anytime",
-            "someone wins tonight". They used to fill half the hero, opposite a name search, where
+            "the draw runs in public". They used to fill half the hero, opposite a name search, where
             every one of those phrases was about a product the visitor was not being shown. Here
-            they sit against the argument they actually illustrate. */}
+            they sit against the argument they actually illustrate.
+
+            That last label read "someone wins tonight" until 2026-08-30. It contradicted
+            /disclaimer, which states an epoch can settle with no prize — so the hero promised a
+            winner the legal page refuses to. The replacement claims only what the chain does. */}
         <HeroStage className="w-full max-w-2xl" />
 
         <ul className="grid w-full gap-4 sm:grid-cols-2">

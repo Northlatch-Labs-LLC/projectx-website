@@ -25,7 +25,7 @@ export const BLUEPRINTS: Blueprint[] = [
   },
   {
     no: '02',
-    title: 'Honest odds',
+    title: 'Honest arithmetic',
     summary:
       'The calculator nobody has built: what a depositor’s real distribution of outcomes looks like over a year, including the part where the expected value is slightly negative.',
     revenue: 'None directly — it is the trust asset that makes every interface above it credible.',

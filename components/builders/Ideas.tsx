@@ -15,8 +15,8 @@ const GROUPS = [
         body: 'Your country, your DAO, your group chat. Same pool underneath, an interface that speaks their language and shows their currency.',
       },
       {
-        name: 'Odds and analytics',
-        body: 'Show people what their real chance is, how it changed, and what the pool has paid. Nobody has built this yet.',
+        name: 'Weighting and analytics',
+        body: 'Show people what their real weight is, how it changed, and what the pool has paid. Nobody has built this yet.',
       },
       {
         name: 'A draw bot',
@@ -39,7 +39,7 @@ const GROUPS = [
       },
       {
         name: 'A team pool',
-        body: 'A group deposits together and agrees up front how a win is split. All the coordination is yours; the odds are the protocol’s.',
+        body: 'A group deposits together and agrees up front how a win is split. All the coordination is yours; the weighting is the protocol’s.',
       },
     ],
   },

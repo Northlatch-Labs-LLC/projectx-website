@@ -108,7 +108,7 @@ export default function SponsorPage() {
                   rel="noreferrer"
                   className="btn-primary px-5"
                 >
-                  Open the Vault
+                  Open the vault
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               )}

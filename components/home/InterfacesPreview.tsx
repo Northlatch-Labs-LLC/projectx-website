@@ -32,7 +32,7 @@ const LIVE = [
     Icon: Wallet,
     accent: 'from-px-accent/20 to-px-accent/5 text-px-accent',
     blurb:
-      'Save your SUI and get a shot at a prize every day. Your deposit is never at stake — only the staking yield it earns is, and you can take it back whenever you like.',
+      'Save your SUI. Each day the whole pot goes to one depositor, and the draw runs in public. Your deposit is never at stake — only the staking yield it earns is, and you can take it back whenever you like.',
     note: 'We cover the network fee on your first deposit, so nothing stands between you and starting.',
     legal:
       'Software developed and licensed by Northlatch Labs LLC. Interface operator and prize sponsor: not yet designated. The vault contract is live on Sui mainnet; no interface serves it at present.',
@@ -79,7 +79,7 @@ export function InterfacesPreview() {
               <Sparkle className="h-5 w-5" />
             </span>
             <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-xl font-semibold text-white">ProjectX Social</h3>
+              <h3 className="text-xl font-semibold text-white">Weir</h3>
               <Badge tone="prize">Live</Badge>
               <Badge tone="gold">Flagship</Badge>
             </div>

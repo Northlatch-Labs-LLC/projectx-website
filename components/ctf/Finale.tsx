@@ -4,12 +4,24 @@ import { Button } from '@/components/ui/Button';
 import { Signature } from '@/components/ui/Signature';
 import { ArrowUpRight } from '@/components/ui/Icons';
 
+/**
+ * Two claims here were corrected on 2026-08-30, both for the same reason: they said more than the
+ * estate can evidence.
+ *
+ * Point 01 opened "Six of these are patterns" over a board of eight challenges, and no field in
+ * lib/ctf.ts marks which six. A count nobody can check from the data is a count that drifts the
+ * next time a challenge is added, so the numeral is gone rather than re-guessed.
+ *
+ * The sign-off said readers could see "what a professional review actually said", which implies an
+ * independent audit exists. /security states plainly that no independent audit has been completed.
+ * The findings are real and published — they are ours.
+ */
 export function Finale() {
   const points = [
     {
       no: '01',
       title: 'For developers',
-      body: 'Six of these are patterns, not one-offs: a time gate that should have been a counter, a guard on every function but one, a check undefined at its own boundary. You will meet them again in other people’s code.',
+      body: 'These are patterns, not one-offs: a time gate that should have been a counter, a guard on every function but one, a check undefined at its own boundary. You will meet them again in other people’s code.',
     },
     {
       no: '02',
@@ -79,7 +91,7 @@ export function Finale() {
 
             <p className="proof proof-centered mx-auto">
               Every finding, its severity and the reasoning behind each fix is published. You
-              can read what a professional review actually said about this code, then go and
+              can read what our own review actually said about this code, then go and
               exploit it yourself.
             </p>
           </div>

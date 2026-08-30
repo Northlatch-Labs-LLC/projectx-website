@@ -50,9 +50,9 @@ export default function FaqPage() {
       question: 'Who decides who wins?',
       answer: (
         <>
-          One depositor per epoch, selected with probability proportional to their share of
+          One depositor per epoch, selected with weight proportional to their share of
           the pool, using Sui&rsquo;s native on-chain randomness. Twice the principal is twice
-          the chance. Deposits become eligible two epochs after they are made, so a deposit
+          the weight. Deposits become eligible two epochs after they are made, so a deposit
           placed immediately before a draw cannot win it.
         </>
       ),
@@ -228,7 +228,7 @@ export default function FaqPage() {
         <SectionHeader
           eyebrow="Free entry"
           title="No deposit is necessary to enter or win"
-          lead="A prize draw that can only be entered by paying is a different kind of promotion, with a different legal character. ProjectX therefore has a free entry route, and it carries the same odds per entry."
+          lead="A prize draw that can only be entered by paying is a different kind of promotion, with a different legal character. ProjectX therefore has a free entry route, and it carries the same weight per entry."
         />
 
         <Card className="mt-10">

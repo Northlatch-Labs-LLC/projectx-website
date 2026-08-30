@@ -133,8 +133,8 @@ export default function ProtocolPage() {
       <Section tone="panel">
         <SectionHeader
           eyebrow="The draw"
-          title="Your chance is your share"
-          lead="Selection is proportional to stake. Twice the principal is twice the chance — never a guarantee, and never at anyone else's expense."
+          title="Your weight is your share"
+          lead="Selection is weighted in proportion to stake. Twice the principal is twice the weight — never a guarantee, and never at anyone else's expense."
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           <DrawDiagram />
@@ -145,7 +145,7 @@ export default function ProtocolPage() {
                 If you are not drawn, your position is exactly what it was: the same
                 principal, withdrawable on demand, entered in the next epoch. The only thing
                 you forgo is the staking yield you would have earned on your own deposit — which
-                is precisely what funds the prize.
+                is what the prize is designed to come from.
               </p>
             </Card>
             <Card>
@@ -224,7 +224,7 @@ export default function ProtocolPage() {
             <>
               {DAPP_URL && (
                 <Button href={DAPP_URL} variant="primary" className="px-5">
-                  Open the Vault
+                  Open the vault
                 </Button>
               )}
               <Button href="/builders#addresses" variant="secondary">

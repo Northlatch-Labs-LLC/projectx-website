@@ -29,7 +29,7 @@ import { EXPLORER } from '@/lib/chain';
 export const metadata: Metadata = {
   title: 'Capture the flag',
   description:
-    'Seven challenges built from ProjectX’s own audit findings, running against a retired mainnet deployment. Real vulnerabilities, real chain, no depositor funds exposed.',
+    'Eight challenges built from ProjectX’s own audit findings, running against a retired mainnet deployment. Real vulnerabilities, real chain, no depositor funds exposed.',
 };
 
 const TONE: Record<Difficulty, { badge: 'prize' | 'accent' | 'gold' | 'danger'; ring: string }> = {
@@ -47,7 +47,7 @@ export default function CtfPage() {
       <PageHeader
         eyebrow="Capture the flag"
         title="Break the old one. Learn the new one."
-        lead="Seven challenges, built from ProjectX’s own audit findings and running against a retired mainnet deployment."
+        lead="Eight challenges, built from ProjectX’s own audit findings and running against a retired mainnet deployment."
         proof="These are not invented puzzles. Each one is a vulnerability that existed in v1.0, was found in review, and was fixed in v1.0.1 — you are reproducing real findings on the real chain."
         art={<CtfArt className="w-full" />}
       >
@@ -174,7 +174,7 @@ export default function CtfPage() {
       <Section id="challenges" tone="panel">
         <SectionHeader
           eyebrow="The board"
-          title="Seven findings, hardest last"
+          title="Eight findings, hardest last"
           lead="Each challenge names the audit finding it reproduces, so you can read the fix after you land it — or before, if you would rather learn than score."
         />
 

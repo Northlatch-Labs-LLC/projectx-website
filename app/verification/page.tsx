@@ -65,7 +65,7 @@ export default function VerificationPage() {
     },
     {
       title: 'Machine-checked proof where the prover reaches',
-      body: 'Money paths proven with the Sui Prover for all inputs in a published domain. Where the prover cannot reach, a deterministic adversarial sweep — labeled measured, not proven. The label is mandatory.',
+      body: 'Money paths proven with the Sui Prover for all inputs in a published domain. Where the prover cannot reach, a deterministic adversarial sweep — labelled measured, not proven. The label is mandatory.',
     },
     {
       title: 'The gates, installed and left running',
