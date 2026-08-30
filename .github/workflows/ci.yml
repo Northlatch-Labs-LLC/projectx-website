@@ -1,0 +1,28 @@
+# Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+#
+# PR-branch CI. Until now this repo had only deploy-on-main: pull requests carried no
+# checks at all, so a type error rode to main and was caught — or not — by the deploy.
+# Weir and the raffle both gate their PRs; this closes the same gap here.
+#
+# Typecheck only, deliberately. `next build` needs the runtime environment (the daemon
+# URL and keys live in Vercel, not here), and Vercel already builds every deploy of main
+# with the real values. Duplicating that with dummies would test the dummies.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
