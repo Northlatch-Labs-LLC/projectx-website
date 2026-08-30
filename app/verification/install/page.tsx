@@ -158,7 +158,9 @@ export default function VerifyInstallPage() {
             {checks.map((check, index) => (
               <Reveal as="li" key={check.title} delay={index * 80}>
                 <div className="panel flex h-full flex-col gap-2.5 p-6">
-                  <h3 className="font-mono text-[0.8125rem] text-px-faint">{check.title}</h3>
+                  {/* h2 for the same reason as the gate cards on /verification: this page's
+                      opening SectionHeader is the document h1, so h3 here skipped a level. */}
+                  <h2 className="font-mono text-[0.8125rem] text-px-faint">{check.title}</h2>
                   <p className="text-base font-semibold text-white">{check.question}</p>
                   <p className="text-[1rem] leading-[1.65] text-px-muted">{check.body}</p>
                 </div>

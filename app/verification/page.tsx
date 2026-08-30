@@ -124,7 +124,12 @@ export default function VerificationPage() {
             {gates.map((gate, index) => (
               <Reveal as="li" key={gate.title} delay={index * 80}>
                 <div className="panel flex h-full flex-col gap-2.5 p-6">
-                  <h3 className="text-base font-semibold text-white">{gate.title}</h3>
+                  {/* h2, not h3. The opening SectionHeader on this page is the document h1 (it
+                      has no PageHeader), so an h3 here skipped a level and left a screen-reader
+                      heading list reading 1 → 3 with nothing between. These five gates ARE the
+                      page's first-level subsections. Base styling is identical for h1–h4 in
+                      globals.css, so this is a semantic change only. */}
+                  <h2 className="text-base font-semibold text-white">{gate.title}</h2>
                   <p className="text-[1rem] leading-[1.65] text-px-muted">{gate.body}</p>
                   <p className="mt-auto w-full border-t border-white/[0.06] pt-3 text-[0.875rem] leading-[1.6] text-px-faint">
                     {gate.edge}
