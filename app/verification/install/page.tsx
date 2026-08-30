@@ -256,10 +256,8 @@ export default function VerifyInstallPage() {
 
           <div className="panel w-full max-w-prose p-6">
             <p className="text-[1rem] leading-[1.65] text-px-muted">
-              {/* The anchor is carried, not restated: /verification owns this sentence and the
-                  operator ruled it there (2026-08-30). Repeating it verbatim keeps the two pages
-                  from drifting into two different numbers — including the exclusions, which
-                  travel with the price rather than after it. */}
+              {/* Deliberately word-for-word with /verification. Two pages that paraphrase the
+                  same price eventually quote two different ones. */}
               <span className="font-semibold text-white">From $1,000.</span> That is the First
               Report: one Move package, all five PVS gates, delivered inside 24 hours as an
               evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It
@@ -268,12 +266,14 @@ export default function VerifyInstallPage() {
               quoted flat, in writing, before work begins.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              <span className="font-semibold text-white">
-                The App on its own is not priced yet.
-              </span>{' '}
-              Billing and metering are deliberately unbuilt until the first service dollar, and we
-              would rather say that than print a number we would have to withdraw. Early access
-              costs nothing and carries no commitment in either direction.
+              <span className="font-semibold text-white">The App is $149 per repository per
+              month</span>, or $1,490 a year. Every pull request gets the five gates and its own
+              evidence bundle, the digest gate included — the one that reads the chain. One public
+              repository is free, permanently, with no card and no expiry.
+            </p>
+            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              Self-serve billing is not open yet, so early access is arranged by email and costs
+              nothing until it is. Nothing here commits you to a subscription.
             </p>
           </div>
 

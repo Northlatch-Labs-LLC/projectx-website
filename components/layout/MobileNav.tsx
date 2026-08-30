@@ -8,6 +8,7 @@ import { Logo } from '@/components/ui/Logo';
 import { Badge, LiveDot } from '@/components/ui/Badge';
 import { ArrowUpRight, Close } from '@/components/ui/Icons';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { ChannelLinks } from '@/components/ui/ChannelLinks';
 import { DAPP_URL, FOOTER_SECTIONS } from '@/lib/links';
 import { NETWORK } from '@/lib/chain';
 
@@ -106,6 +107,13 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
               ))}
             </nav>
           ))}
+
+          {/* The drawer renders FOOTER_SECTIONS, which is pages. The channels are not pages and
+              were therefore unreachable from a phone without landing on /community first. */}
+          <div className="flex flex-col gap-3">
+            <h2 className="label text-px-accent-300">Channels</h2>
+            <ChannelLinks />
+          </div>
 
         </div>
       </div>

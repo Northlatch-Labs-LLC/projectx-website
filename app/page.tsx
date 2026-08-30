@@ -25,38 +25,40 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
  * and explained nowhere; someone who arrived for the vault read its pitch three times without ever
  * being told which product they were reading about.
  *
- *   Hero        the offer, and the one action that completes in this session
- *   Interfaces  the router — four products, four destinations
- *   Social      ── the flagship, first by operator decision (18 Aug 2026): supporting a
- *                  creator without spending anything, explained in full on /social
- *   Names       ── everything about names, including what it costs
- *   Organisers  ── everything about draws, aimed at who actually pays for them
- *   HowItWorks  ── the vault mechanism
- *   Mission     ── the vault argument
- *   Verification ─ the practice behind all of the above, and the tooling direction
- *                  (operator decision, 27 Aug 2026: this page routes buyers, and the buyer's
- *                  last question is always "why should I trust any of it" — this block is the
- *                  answer, placed where that question is actually asked, just before the close)
- *   CtaBand     close
+ *   Hero         the offer — the First Report — and the name search kept below it
+ *   Verification ─ the flagship, stated immediately after the hero promises it
+ *   Interfaces   the router — the other products, and where each one lives
+ *   Social       ── supporting a creator without spending anything, explained on /social
+ *   Organisers   ── everything about draws, aimed at who actually pays for them
+ *   HowItWorks   ── the vault mechanism
+ *   Mission      ── the vault argument
+ *   CtaBand      close
+ *
+ * Verification moved from last to second on the Master's order of 30 August 2026: "Verification is
+ * now the main service promoted on the .dev hub .... Names is not the flagship product."
+ *
+ * It sat last for a defensible reason, recorded here so the move is not mistaken for a correction
+ * of a mistake: on 27 August this page's job was to route a buyer between three products, and the
+ * buyer's last question is "why should I trust any of it", so the answer went where that question
+ * is asked. What changed is not the reasoning but the page's job. Verification is no longer the
+ * reassurance under the products — it is the product, and a section that answers a closing
+ * objection is in the wrong place when it is the thing being sold.
  *
  * The developer section is no longer on this page. It sat between the vault and the close —
  * prime space addressed to an audience that does not pay — on a homepage whose job is to route a
  * buyer. /builders still exists, is still linked from the nav and the footer, and lost nothing.
- *
- * Names before draws before vault is deliberate: it is the order of how quickly each can turn a
- * stranger into revenue, not the order in which they were built.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <InterfacesPreview />
+      <VerificationPractice />
 
+      <InterfacesPreview />
       <Social />
       <Organisers />
       <HowItWorks />
       <Mission />
-      <VerificationPractice />
 
       <div className="mx-auto w-full max-w-content px-5 sm:px-8">
         <Signature />
