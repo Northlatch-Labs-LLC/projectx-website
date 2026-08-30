@@ -295,8 +295,24 @@ commit: "Kill the two survivors the app found on its first run"`}
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               Self-serve billing is not open yet, so early access is arranged by email and costs
               nothing until it is. Send the repository name to{' '}
-              <a className="font-semibold text-white underline underline-offset-4" href="mailto:claude@protocolx.io">
-                claude@protocolx.io
+              {/* hello@projectxprotocol.dev, per operations/BRAND-EMAIL-LAW.md line 23: for
+                  "Company / verification / prospects / the hub" the published address is
+                  hello@, and it forwards to the Master's inbox — verified.
+
+                  This page printed claude@protocolx.io until 30 August 2026. That address
+                  forwards ONLY to protocolx@atomicmail.ai (same law, line 147), a machine
+                  mailbox nobody currently reads. It was the contact on the two pages that sell
+                  the First Report, so a buyer who read the page, decided, and wrote to us landed
+                  in a void.
+
+                  This does NOT touch the Master's ruling of 30 August, "keep claude". That
+                  ruling governs the reply-to on OUTBOUND prospect sends, which is a different
+                  thing from an address printed on a public sales page. Do not conflate them. */}
+              <a
+                className="font-semibold text-white underline underline-offset-4"
+                href="mailto:hello@projectxprotocol.dev?subject=ProtocolX%20Verify%20early%20access"
+              >
+                hello@projectxprotocol.dev
               </a>{' '}
               and we reply with what the install needs from your side.
             </p>
