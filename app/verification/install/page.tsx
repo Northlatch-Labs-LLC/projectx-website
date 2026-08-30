@@ -294,9 +294,21 @@ export default function VerifyInstallPage() {
               name and we reply with what the install needs from your side, then the two of us do
               step 01 together.
             </p>
+            {/* hello@projectxprotocol.dev, per operations/BRAND-EMAIL-LAW.md line 23: the hub's
+                published address for verification and prospects, forwarding to the Master's
+                inbox — verified.
+
+                This button pointed at claude@protocolx.io until 30 August 2026, which forwards
+                ONLY to protocolx@atomicmail.ai (same law, line 147) — a machine mailbox nobody
+                currently reads. It was the buy control on the page that sells the First Report,
+                so the one action this page asks for landed in a void.
+
+                Unrelated to the Master's "keep claude" ruling of the same date: that governs the
+                reply-to on OUTBOUND prospect sends, not an address printed on a public sales
+                page. Do not conflate them. */}
             <a
               className="btn-primary mt-4 inline-flex px-5"
-              href="mailto:claude@protocolx.io?subject=ProtocolX%20Verify%20early%20access"
+              href="mailto:hello@projectxprotocol.dev?subject=ProtocolX%20Verify%20early%20access"
             >
               Send us the repository
             </a>

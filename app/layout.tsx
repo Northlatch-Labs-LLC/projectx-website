@@ -37,8 +37,11 @@ const robotoMono = Roboto_Mono({
  * the Twitter card — so a change had to be made in triplicate and any missed copy would show up on
  * exactly one platform, which is the hardest place to notice it.
  *
- * Social leads by operator decision (18 Aug 2026) — it is the flagship, and the one product a
- * reader can act on without spending anything.
+ * Verification leads, by operator order of 30 August 2026 — "Verification is now the main service
+ * promoted on the .dev hub". It superseded the 18 August decision that put the social platform
+ * first, which is recorded here rather than erased: this sentence is the company's one-line
+ * answer to "what do you sell", and it named three products that are sold elsewhere while
+ * omitting the one sold here.
  *
  * No product count, and the prize vault is not listed. A description is what a visitor can go and
  * do; the vault's contract is live on mainnet but its interface was retired on 25 August 2026, so
@@ -46,7 +49,7 @@ const robotoMono = Roboto_Mono({
  * interface serves it again.
  */
 const SITE_DESCRIPTION =
-  'Software on Sui mainnet where the rules live in a contract, not a policy page: a social platform where supporting a creator never spends your money, .sui names delivered straight to your wallet, and prize draws anyone can re-derive from the chain. Every promise is kept by a contract, not by us.';
+  'Verification for Sui Move: five check runs on every pull request, and a measured report on one package from $1,000 — evidence with a digest you can re-derive without us, never called an audit. Also from Northlatch Labs: a social platform where supporting a creator never spends your money, .sui names, and prize draws anyone can re-derive from the chain.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -62,16 +65,23 @@ export const metadata: Metadata = {
   description:
     SITE_DESCRIPTION,
   applicationName: 'ProjectX Protocol',
+  // Ordered flagship first, indentation regularised, duplicates removed. 'Sui raffle' is gone:
+  // the product has been called Draws since 25 August 2026 and every visitor-facing surface says
+  // so, which made this the one place on the estate still advertising the old name. 'prize vault'
+  // and 'no-loss prize vault' were the same entry written twice.
   keywords: [
+    'Sui Move verification',
+    'Move mutation testing',
+    'Sui smart contract review',
+    'Move formal verification',
+    'GitHub App Sui Move',
     'no-loss creator support',
     'creator platform',
     'no-loss prize vault',
-      'prize vault',
     'prize-linked savings',
-      'Sui raffle',
-      'verifiable draw',
-      'sui names',
-      'SuiNS registrar',
+    'verifiable draw',
+    'sui names',
+    'SuiNS registrar',
     'Sui',
     'SUI staking',
     'DeFi',

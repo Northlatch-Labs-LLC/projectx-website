@@ -13,6 +13,7 @@ import { StackStrip } from '@/components/ui/StackStrip';
 import { PhaseFlow } from '@/components/protocol/PhaseFlow';
 import { LadderDiagram } from '@/components/protocol/LadderDiagram';
 import { DrawDiagram } from '@/components/protocol/DrawDiagram';
+import { Mission } from '@/components/home/Mission';
 import { formatBps, formatDuration, formatSui } from '@/lib/format';
 import { LADDER_DEPTH } from '@/lib/derive';
 import { SNAPSHOT } from '@/lib/snapshot';
@@ -25,7 +26,24 @@ export const metadata: Metadata = {
     'The mechanism in full: the stake ladder, the weighted draw, the oracle-bounded conversion, and the four phases each epoch walks through.',
 };
 
-export default function ProtocolPage() {
+/**
+ * `Mission` is rendered here, not on the home page.
+ *
+ * It moved on 30 August 2026. It is the argument for prize-linked saving — why the mechanism
+ * this page documents is worth having — and it ran on the home page directly beneath
+ * `HowItWorks`, which is the mechanism itself. Two consecutive vault sections on the hub the
+ * Master has ruled the verification hub, the second of them arguing for a product whose
+ * interface was retired in August.
+ *
+ * The component is imported unchanged from components/home/ and its file was not touched. It
+ * keeps that path because it is still the same section, and moving the file would make the
+ * relocation look like a rewrite in every diff that follows. It renders last, after the
+ * mechanism and the caveat, which is the order the argument reads best in: what it does, what
+ * it costs you when it breaks, then why anyone wants it.
+ *
+ * This page is now async because Mission is — it reads the settled-draw count from getStats().
+ */
+export default async function ProtocolPage() {
   const { config } = SNAPSHOT.pool;
 
   return (
@@ -216,6 +234,8 @@ export default function ProtocolPage() {
           </p>
         </Card>
       </Section>
+
+      <Mission />
 
       <Section tone="edge">
         <Callout

@@ -7,7 +7,6 @@ import { InterfacesPreview } from '@/components/home/InterfacesPreview';
 import { Social } from '@/components/home/Social';
 import { Organisers } from '@/components/home/Organisers';
 import { HowItWorks } from '@/components/home/HowItWorks';
-import { Mission } from '@/components/home/Mission';
 import { VerificationPractice } from '@/components/home/VerificationPractice';
 import { CtaBand } from '@/components/home/CtaBand';
 
@@ -30,8 +29,7 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
  *   Interfaces   the router — the other products, and where each one lives
  *   Social       ── supporting a creator without spending anything, explained on /social
  *   Organisers   ── everything about draws, aimed at who actually pays for them
- *   HowItWorks   ── the vault mechanism
- *   Mission      ── the vault argument
+ *   HowItWorks   ── the vault mechanism, with the alpha funding disclosure beside the figures
  *   CtaBand      close
  *
  * Verification moved from last to second on the Master's order of 30 August 2026: "Verification is
@@ -47,6 +45,14 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
  * The developer section is no longer on this page. It sat between the vault and the close —
  * prime space addressed to an audience that does not pay — on a homepage whose job is to route a
  * buyer. /builders still exists, is still linked from the nav and the footer, and lost nothing.
+ *
+ * `Mission` — the vault ARGUMENT, as distinct from the vault mechanism above it — moved to
+ * /protocol on 30 August 2026. It is the same component, rendered unchanged, on the page whose
+ * whole subject it is; nothing was rewritten and nothing was dropped. Two consecutive vault
+ * sections ran back to back here on the hub the Master has ruled the verification hub, and the
+ * second of the two was pure argument for a product whose interface was retired in August. The
+ * mechanism stays, because it carries the live figures and the alpha funding disclosure that go
+ * with them. The argument now sits where a reader who wants it goes looking.
  */
 export default function HomePage() {
   return (
@@ -58,7 +64,6 @@ export default function HomePage() {
       <Social />
       <Organisers />
       <HowItWorks />
-      <Mission />
 
       <div className="mx-auto w-full max-w-content px-5 sm:px-8">
         <Signature />

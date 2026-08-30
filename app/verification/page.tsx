@@ -33,26 +33,59 @@ export const metadata: Metadata = {
  * Nothing that earlier pages retired is removed by this page. It adds; it does not rewrite.
  */
 export default function VerificationPage() {
+  /**
+   * The five gates, each with the condition under which it reports NEUTRAL rather than a verdict.
+   *
+   * Those conditions are written from `engine/ci/gates.sh` and are already stated in the reader's
+   * language on /verification/install. They belong here too: this page is where a prospect decides
+   * whether the standard is serious, and a standard that only describes its happy path is the
+   * weaker document. Two of the five cannot run everywhere, and saying so on the sales page is
+   * cheaper than being found out on the first pull request.
+   */
   const gates = [
     {
       title: 'PVS · build',
       body: 'The package compiles on a machine that has never seen it. No caches, no leftovers, no "works here".',
+      edge: 'Runs everywhere. A clean runner and a pinned Sui CLI, every time.',
     },
     {
       title: 'PVS · digest',
       body: 'The deployed-drift tripwire: source must build byte-for-byte to the digest the chain holds. An accidental edit to deployed code fails the pull request, not the incident review.',
+      edge: 'Needs a recorded digest beside your Move.toml. Without one it reports neutral and says so — it will not claim to have measured a package you never deployed.',
     },
     {
       title: 'PVS · tests',
       body: 'The Move suite runs green — the floor, not the evidence. The gates above and below exist because a green suite alone proves little.',
+      edge: 'Runs everywhere, against the exact commit the pull request proposes.',
     },
     {
       title: 'PVS · pin',
       body: 'The framework dependency cannot move silently. A toolchain that drifts changes what compiles — and what your digest means — without a line of your repository changing.',
+      edge: 'Needs an executable framework-pin script. Without one it reports neutral and names the file it looked for.',
     },
     {
       title: 'PVS · mutation-smoke',
       body: 'A slice of mutation testing on every pull request: guards are deleted on purpose and the suite must notice. A survivor names an invariant nothing tests.',
+      edge: 'Five assertions per pull request. A survivor is a gap in your suite, not a defect in your contract, and the report is checked against a word list so it cannot be promoted into one.',
+    },
+  ];
+
+  /**
+   * The evidence bundle, stated on the page that sells the product rather than only on the page
+   * that installs it. Every line is carried from /verification/install; nothing here is new.
+   */
+  const bundle = [
+    {
+      title: 'A manifest and a report',
+      body: 'What was measured, on which commit, by which engine, with the run log behind every verdict. Counts and verdicts — not adjectives, and not an opinion.',
+    },
+    {
+      title: 'A digest that reproduces',
+      body: 'A digest is taken over the bundle and you can re-derive it without us. That is what makes it something you can hand to a third party rather than something you have to be trusted about.',
+    },
+    {
+      title: 'Never ran does not read as passed',
+      body: 'A gate that never reported is swept to an explicit failure at the end of the run. A silent gate is the one failure mode that would make every other verdict on the page worthless.',
     },
   ];
 
@@ -92,6 +125,9 @@ export default function VerificationPage() {
                 <div className="panel flex h-full flex-col gap-2.5 p-6">
                   <h3 className="text-base font-semibold text-white">{gate.title}</h3>
                   <p className="text-[1rem] leading-[1.65] text-px-muted">{gate.body}</p>
+                  <p className="mt-auto w-full border-t border-white/[0.06] pt-3 text-[0.875rem] leading-[1.6] text-px-faint">
+                    {gate.edge}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -143,6 +179,51 @@ commit: "Kill the two survivors the app found on its first run"`}
             those guards exist for, dead by morning. Every line of that story is on the public
             record of the machines that produced it.
           </p>
+        </div>
+      </Section>
+
+      {/* Added 2026-08-30. The flagship page was 219 lines while /ctf was 310 and /blueprints 315
+          — the thing the company sells was smaller than two developer toys. This section closes
+          part of that gap, and it does it with material that already existed and was already
+          true: every fact below is stated on /verification/install, which is where a reader who
+          has decided goes. A reader who has NOT decided never reaches it, and the artifact is the
+          single strongest thing this product has to say. No new claim, no new number.
+
+          Deliberately not called an audit report. It is a bundle of measurements with a digest. */}
+      <Section>
+        <div className="flex flex-col items-center gap-10">
+          <SectionHeader
+            eyebrow="The artifact"
+            title="What the run leaves behind when the tab is closed"
+            lead="A check run is five coloured rows that live as long as GitHub keeps the page. The bundle is the file someone else can hold: a manifest and a report, with a digest over them that reproduces, written on every run and uploaded with it."
+            proof="This is the difference the product actually turns on. Open-source mutation engines for Move exist and one is already runnable as a pull-request action — what none of them leaves behind is an artifact a funder, an auditor or a buyer can point at and check against a later commit."
+          />
+
+          <ul className="grid w-full gap-4 md:grid-cols-3">
+            {bundle.map((item, index) => (
+              <Reveal as="li" key={item.title} delay={index * 80}>
+                <div className="panel flex h-full flex-col gap-2.5 p-6">
+                  <h3 className="text-base font-semibold text-white">{item.title}</h3>
+                  <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+
+          <div className="panel w-full max-w-prose p-6">
+            <p className="text-[1rem] leading-[1.65] text-px-muted">
+              <span className="font-semibold text-white">
+                What a repository has to do to qualify:
+              </span>{' '}
+              hold a Sui Move package and one file at its root. There is no dashboard to
+              configure and no account to create — <code>.protocolx-verify.json</code> names the
+              directory holding your <code>Move.toml</code>, and that is the whole of it. Two
+              optional files each turn one more gate from neutral into live. With no config file
+              at all the App still answers: all five checks complete neutral carrying setup
+              instructions, because a repository that has not opted in deserves an explanation
+              rather than a red cross.
+            </p>
+          </div>
         </div>
       </Section>
 
@@ -199,10 +280,41 @@ commit: "Kill the two survivors the app found on its first run"`}
               evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It
               is a measurement and not an engagement — public repositories only, no remediation,
               and no claim of independence. Sprints sit above it, scoped to the codebase and
-              quoted flat, in writing, before work begins.{' '}
-              <a className="font-semibold text-white underline underline-offset-4" href="mailto:claude@protocolx.io">
-                claude@protocolx.io
-              </a>
+              quoted flat, in writing, before work begins.
+            </p>
+            {/* The App's price was on /verification/install and nowhere else — so the flagship's
+                own page named the flagship's product and withheld what it costs. Carried here
+                word-for-word from that page, on the estate's standing rule: two pages that
+                paraphrase the same price eventually quote two different ones. */}
+            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <span className="font-semibold text-white">The App is $149 per repository per
+              month</span>, or $1,490 a year. Every pull request gets the five gates and its own
+              evidence bundle, the digest gate included — the one that reads the chain. One public
+              repository is free, permanently, with no card and no expiry.
+            </p>
+            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              Self-serve billing is not open yet, so early access is arranged by email and costs
+              nothing until it is. Send the repository name to{' '}
+              {/* hello@projectxprotocol.dev, per operations/BRAND-EMAIL-LAW.md line 23: for
+                  "Company / verification / prospects / the hub" the published address is
+                  hello@, and it forwards to the Master's inbox — verified.
+
+                  This page printed claude@protocolx.io until 30 August 2026. That address
+                  forwards ONLY to protocolx@atomicmail.ai (same law, line 147), a machine
+                  mailbox nobody currently reads. It was the contact on the two pages that sell
+                  the First Report, so a buyer who read the page, decided, and wrote to us landed
+                  in a void.
+
+                  This does NOT touch the Master's ruling of 30 August, "keep claude". That
+                  ruling governs the reply-to on OUTBOUND prospect sends, which is a different
+                  thing from an address printed on a public sales page. Do not conflate them. */}
+              <a
+                className="font-semibold text-white underline underline-offset-4"
+                href="mailto:hello@projectxprotocol.dev?subject=ProtocolX%20Verify%20early%20access"
+              >
+                hello@projectxprotocol.dev
+              </a>{' '}
+              and we reply with what the install needs from your side.
             </p>
           </div>
 

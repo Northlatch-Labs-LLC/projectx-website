@@ -16,11 +16,100 @@ import { DAPP_URL, RAFFLE_URL } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'FAQ',
   description:
-    'Straight answers on how ProjectX works: what no-loss means, how winners are chosen, what the fees are, how to enter for free, and what can go wrong. The vault contract is live on Sui mainnet; no interface serves it at present.',
+    'Straight answers: what ProtocolX Verify measures and what it costs, why it is not an audit, what no-loss means, how winners are chosen, how to enter for free, and what can go wrong. The vault contract is live on Sui mainnet; no interface serves it at present.',
 };
 
 export default function FaqPage() {
   const { config } = SNAPSHOT.pool;
+
+  const verification = [
+    {
+      question: 'What is ProtocolX Verify?',
+      answer: (
+        <>
+          A GitHub App. Installed on a Sui Move repository, it puts five check runs from the
+          ProtocolX Verification Standard on every pull request — build, digest, tests, pin and
+          mutation-smoke — run by the same engine that measures our own mainnet contracts. The
+          five are described one by one on the{' '}
+          <Link href="/verification" className="text-px-accent underline underline-offset-4">
+            verification page
+          </Link>
+          .
+        </>
+      ),
+    },
+    {
+      question: 'Is that an audit?',
+      answer: (
+        <>
+          No, and it is never called one. An audit is an independent engagement by a third party.
+          What the App produces is measured evidence — verdicts, survivor counts and an evidence
+          bundle whose digest reproduces. Where we verify our own contracts, that is an internal
+          review by the party that wrote the code. Where we verify yours, we are still not your
+          auditors: we are the measured layer below the audit.
+        </>
+      ),
+    },
+    {
+      question: 'What does it cost?',
+      answer: (
+        <>
+          <p>
+            The First Report is from $1,000: one Move package, all five gates, delivered inside
+            24 hours as an evidence bundle whose digest you can re-derive without us, paid in
+            USDC on Sui. Public repositories only, no remediation, and no claim of independence.
+          </p>
+          <p className="mt-3">
+            The App is $149 per repository per month, or $1,490 a year, and one public repository
+            is free permanently — no card, no expiry. Sprints sit above both and are quoted flat,
+            in writing, before work begins.{' '}
+            <Link
+              href="/verification/install"
+              className="text-px-accent underline underline-offset-4"
+            >
+              How to install it
+            </Link>
+            .
+          </p>
+        </>
+      ),
+    },
+    {
+      question: 'Do all five checks run on every repository?',
+      answer: (
+        <>
+          Three always do. PVS · digest needs a recorded digest beside your Move.toml and PVS ·
+          pin needs an executable framework-pin script; without those files each reports neutral
+          and says which file it looked for, rather than claiming to have measured something it
+          did not. A gate that never reported at all is swept to an explicit failure at the end
+          of the run — never ran must not read as passed.
+        </>
+      ),
+    },
+    {
+      question: 'A mutation survived. Is my contract broken?',
+      answer: (
+        <>
+          No. A survivor names an assertion that no test exercises — a gap in your suite, not a
+          defect found in your contract. The report is checked against a word list so it cannot
+          be promoted into one. That distinction is the whole point of the measurement: a passing
+          suite tells you nothing you wrote a test for is broken, and says nothing about what you
+          never tested.
+        </>
+      ),
+    },
+    {
+      question: 'Can I install it today?',
+      answer: (
+        <>
+          Not by yourself yet. The App is installable on one account and is not listed for
+          self-serve installation, so early access is arranged with us by email and costs nothing
+          until self-serve billing opens. That is a statement about the listing, not about the
+          software — it already runs on repositories today.
+        </>
+      ),
+    },
+  ];
 
   const general = [
     {
@@ -200,21 +289,40 @@ export default function FaqPage() {
 
   return (
     <>
+      {/* The title asked what to ask "before you deposit" — a question addressed to a visitor of
+          a vault whose interface was retired in August, on the domain the Master has ruled the
+          verification hub. This page also had no question at all about the thing the company
+          sells: every flagship word on it came from the footer. Both fixed below; not one vault
+          question was removed to do it. */}
       <PageHeader
         eyebrow="FAQ"
-        title="The questions worth asking before you deposit"
-        lead="Including the ones a protocol would usually rather you asked after. The vault's contract is live on Sui mainnet; no interface serves it at present."
+        title="The questions worth asking first"
+        lead="Including the ones a company would usually rather you asked after. Verification is what we sell; the vault, the draws and the names are what we built, and the vault's contract is live on Sui mainnet with no interface serving it at present."
         art={<FaqArt className="w-full" />}
       />
 
+      {/* Verification leads, by operator order of 30 August 2026. Every answer below restates
+          something already published on /verification or /verification/install — the five gates,
+          the neutral conditions, the bundle digest, the two prices, the independence clause.
+          Nothing here is a claim this estate had not already made in writing. */}
       <Section>
-        <SectionHeader eyebrow="Using it" title="How it works in practice" />
+        <SectionHeader
+          eyebrow="Verification"
+          title="What we sell, and what it is not"
+        />
+        <div className="mt-8">
+          <FaqList items={verification} />
+        </div>
+      </Section>
+
+      <Section tone="panel">
+        <SectionHeader eyebrow="Using the vault" title="How it works in practice" />
         <div className="mt-8">
           <FaqList items={general} />
         </div>
       </Section>
 
-      <Section tone="panel">
+      <Section>
         <SectionHeader
           eyebrow="Risk and control"
           title="What can go wrong, and who holds what"

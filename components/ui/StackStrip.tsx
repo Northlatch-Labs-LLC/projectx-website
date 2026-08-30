@@ -105,7 +105,10 @@ export function StackStrip({
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
             <span aria-hidden="true" className="hairline flex-1" />
-            <span className="label whitespace-nowrap">Shipping next</span>
+            {/* Not "Shipping next". Every item under this heading is marked "In selection" and
+                the note at the foot of the list says "Roadmap, not a commitment" — so the
+                heading was the one line in the block promising a date the other two withdrew. */}
+            <span className="label whitespace-nowrap">On the roadmap</span>
             <span aria-hidden="true" className="hairline flex-1" />
           </div>
 

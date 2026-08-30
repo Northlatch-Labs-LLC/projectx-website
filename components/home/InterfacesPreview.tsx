@@ -30,11 +30,22 @@ const LIVE = [
     tone: 'prize' as const,
     Icon: Wallet,
     accent: 'from-px-accent/20 to-px-accent/5 text-px-accent',
+    // The blurb is written in the present tense of the CONTRACT, not of a door.
+    //
+    // It used to open "Save your SUI" and close "you can take it back whenever you like" — a
+    // two-step instruction to a visitor, beside a button `DAPP_URL` had already suppressed and
+    // above a line admitting no interface serves it. The card withheld the control and kept
+    // giving the instruction. This is the same pattern lib/links.ts describes for links: never
+    // advertise a thing that does not answer. Prose is advertising too.
+    //
+    // Nothing is retired here. Every guarantee the old blurb made is still made; it is stated as
+    // a property of a contract on mainnet rather than as a step the reader can take today. Put
+    // the instruction back the moment NEXT_PUBLIC_DAPP_URL is set again.
     blurb:
-      'Save your SUI. Each day the whole pot goes to one depositor, and the draw runs in public. Your deposit is never at stake — only the staking yield it earns is, and you can take it back whenever you like.',
-    note: 'We cover the network fee on your first deposit, so nothing stands between you and starting.',
+      'A vault where the whole day’s staking yield goes to one depositor and the draw runs in public. Principal is never at stake — the contract holds no path that could spend it, and a withdrawal returns it 1:1.',
+    note: 'The contract is live on Sui mainnet. Its interface was retired in August, so there is nothing to deposit into today.',
     legal:
-      'Software developed and licensed by Northlatch Labs LLC. Interface operator and prize sponsor: not yet designated. The vault contract is live on Sui mainnet; no interface serves it at present.',
+      'Software developed and licensed by Northlatch Labs LLC. Interface operator and prize sponsor: not yet designated. When an interface serves it again, this card is where it will be linked.',
     cta: 'Open the vault',
     href: DAPP_URL,
   },
