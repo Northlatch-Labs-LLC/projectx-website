@@ -139,10 +139,15 @@ export function SiteFooter() {
 
             <h2 className="text-gradient-chrome text-title">Verify it yourself</h2>
 
+            {/* The band ships on every route, so its sentence has to be true of the whole site
+                rather than of one product. It named "the package and the pool" — the vault's two
+                objects — as though they were what the site rests on, on pages about verification,
+                Weir and the draws. It now names the record, and the record covers all four. */}
             <p className="body-copy mx-auto max-w-[52ch]">
-              Every claim on this site resolves to an object on {NETWORK}. The package and the
-              pool are named below — open either on a block explorer and read the same state we
-              do. Nothing here asks you to take our word for it.
+              Every claim on this site resolves to an object on {NETWORK}. Four products are
+              deployed, each with its identifier and its upgrade authority published — open any
+              one on a block explorer and read the same state we do. Nothing here asks you to
+              take our word for it.
             </p>
 
             <LiveBadge className="mt-1" />
@@ -152,11 +157,11 @@ export function SiteFooter() {
             {[
               {
                 object: pkg,
-                role: 'The published Move package — every function a depositor can call.',
+                role: 'The published Move package. Bytecode readable on any explorer, without our permission.',
               },
               {
                 object: pool,
-                role: 'The shared pool object — principal, the stake ladder and the prize.',
+                role: 'The shared pool object. Contract live on mainnet; no interface serves it at present.',
               },
             ].map(({ object, role }) => (
               <li
@@ -178,13 +183,13 @@ export function SiteFooter() {
             ))}
           </ul>
 
+          {/* Was /builders#addresses — three sections down a page addressed to integrators. The
+              deployment record has its own route as of 30 August 2026, and this is the link most
+              readers of this band actually want. The old anchor still resolves. */}
           <p className="mt-6 text-center text-[0.875rem] text-px-faint">
-            Every deployed address —{' '}
-            <Link
-              href="/builders#addresses"
-              className="text-px-cyan underline underline-offset-4"
-            >
-              adapter, price feed and validator included
+            Every package and every object —{' '}
+            <Link href="/chain" className="text-px-cyan underline underline-offset-4">
+              the on-chain record, with the upgrade authority for each
             </Link>
             .
           </p>

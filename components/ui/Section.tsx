@@ -35,12 +35,30 @@ export function Section({
   );
 }
 
+/**
+ * `as` exists because /verification had no `<h1>` at all.
+ *
+ * Found 30 August 2026 by counting headings in the prerendered HTML of every route. Sixteen of the
+ * eighteen pages open with `PageHeader`, which renders an `<h1>`. `/verification` and
+ * `/verification/install` do not use it — they open straight into a `Section` — so the two pages
+ * carrying the flagship product shipped with `<h2>` as their highest heading and no document title
+ * in the outline at all.
+ *
+ * That is a WCAG 1.3.1 defect and a practical one: a screen-reader user navigating by heading, or
+ * anyone using a rotor or a heading list, gets no top-level anchor for the page they are on. It is
+ * also the page most likely to be the first thing a buyer reads.
+ *
+ * Default stays `h2`, so every existing call site renders byte-identical markup. Only the opening
+ * header of a page that has no `PageHeader` should pass `as="h1"`, and there must never be two on
+ * one route.
+ */
 export function SectionHeader({
   eyebrow,
   title,
   lead,
   proof,
   align = 'center',
+  as: Heading = 'h2',
   className = '',
 }: {
   eyebrow?: string;
@@ -48,6 +66,7 @@ export function SectionHeader({
   lead?: ReactNode;
   proof?: ReactNode;
   align?: 'left' | 'center';
+  as?: 'h1' | 'h2';
   className?: string;
 }) {
   const centred = align === 'center';
@@ -72,7 +91,7 @@ export function SectionHeader({
         </span>
       ) : null}
 
-      <h2 className="text-gradient-chrome max-w-[20ch] text-title sm:max-w-[26ch]">{title}</h2>
+      <Heading className="text-gradient-chrome max-w-[20ch] text-title sm:max-w-[26ch]">{title}</Heading>
 
       {lead ? <p className={`lead ${centred ? 'mx-auto' : ''}`}>{lead}</p> : null}
 
