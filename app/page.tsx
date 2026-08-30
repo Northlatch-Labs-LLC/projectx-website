@@ -1,5 +1,6 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
 // Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+import type { Metadata } from 'next';
 import { Signature } from '@/components/ui/Signature';
 import { Hero } from '@/components/home/Hero';
 import { InterfacesPreview } from '@/components/home/InterfacesPreview';
@@ -9,6 +10,11 @@ import { HowItWorks } from '@/components/home/HowItWorks';
 import { Mission } from '@/components/home/Mission';
 import { VerificationPractice } from '@/components/home/VerificationPractice';
 import { CtaBand } from '@/components/home/CtaBand';
+
+// The one route that overrides the layout's './' canonical: at the root, Next resolves './'
+// to '/index' — a URL this site does not serve — and the live page shipped that way. Every
+// other route inherits './' and stays self-canonical; see layout.tsx.
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 /**
  * One product per block, in the order a visitor can act on them.

@@ -52,6 +52,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // Every page declares itself canonical. './' resolves against the page's own path — a literal
   // '/' would be inherited by every route and mark them all duplicates of the home page.
+  // The root is the one exception: Next resolves './' there to '/index', a URL that does not
+  // exist, so app/page.tsx overrides with an absolute '/'. Every other route keeps './'.
   alternates: { canonical: './' },
   title: {
     default: 'ProjectX — Protocol built on Sui',
