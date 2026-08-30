@@ -166,10 +166,20 @@ export default function SecurityPage() {
               : 'whose operator is not yet published here'}.
           </p>
 
+          {/* The single reporting section. A second one lived in the card grid at the foot of
+              this page carrying the private-disclosure ask but not the 72-hour commitment; its
+              text has been folded in here, and that card is gone. One heading, one address,
+              every term in one place. */}
           <h2>Reporting a vulnerability</h2>
           <p>
-            Email <a href="mailto:security@projectxprotocol.dev">security@projectxprotocol.dev</a>. We
-            acknowledge within 72 hours. Please do not test against mainnet with real user funds.
+            If you find a defect that affects deployed funds, report it privately to{' '}
+            <a href="mailto:security@projectxprotocol.dev">security@projectxprotocol.dev</a> rather
+            than opening a public issue. We acknowledge within 72 hours. Please do not test against
+            mainnet with real user funds.
+          </p>
+          <p>
+            A report that arrives before an exploit is worth considerably more to us than one that
+            arrives after, and we would rather hear it early and imperfectly than late.
           </p>
 
           <h2>Audits</h2>
@@ -213,7 +223,10 @@ export default function SecurityPage() {
       </Section>
 
       <Section>
-        <div className="grid gap-5 lg:grid-cols-2">
+        {/* This grid held a second "Reporting a vulnerability" card beside the monitoring one.
+            Its text now sits in the single reporting section above, which is the one that
+            carries the 72-hour acknowledgement. */}
+        <div className="grid gap-5">
           <Card>
             <h2 className="text-lg font-semibold text-white">Monitoring what silence hides</h2>
             <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
@@ -222,22 +235,6 @@ export default function SecurityPage() {
               harvests and the Sui epochs elapsed since yield was last realised, and reports
               the state as anomalous once it crosses a threshold — surfaced in the interfaces,
               where it cannot be quietly ignored.
-            </p>
-          </Card>
-
-          <Card>
-            <h2 className="text-lg font-semibold text-white">Reporting a vulnerability</h2>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-              If you find a defect that affects deployed funds, report it privately to{' '}
-              <a
-                href="mailto:security@projectxprotocol.dev"
-                className="text-px-cyan underline underline-offset-4"
-              >
-                security@projectxprotocol.dev
-              </a>{' '}
-              rather than opening a public issue. A report that arrives before an exploit is worth
-              considerably more to us than one that arrives after, and we would rather hear it early
-              and imperfectly than late.
             </p>
           </Card>
         </div>

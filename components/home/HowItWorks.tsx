@@ -11,15 +11,11 @@ import { getStats } from '@/lib/stats';
 import Link from 'next/link';
 
 /**
- * Below these, a volume figure is withheld rather than shown.
+ * Below these thresholds a volume tile is withheld rather than shown.
  *
- * The numbers are true and must stay true, so the fix is never to round one up — it is to choose
- * which to display. "Protected 52 SUI" and "43 savers" are honest, and they tell a first-time
- * visitor that nobody is here, which is an argument against depositing. The guarantee figures argue
- * for it, and they are the actual thesis.
- *
- * Thresholds rather than deletions, so the tiles return on their own when the figures start to
- * flatter, with no code change.
+ * Displayed figures are always the real ones — a figure is never rounded up to clear a floor. The
+ * only choice this makes is which tiles to render. Thresholds rather than removal, so the tiles
+ * return on their own once the figures pass them, with no code change.
  */
 const DISPLAY_FLOOR = { principalSui: 5_000, depositors: 250 };
 

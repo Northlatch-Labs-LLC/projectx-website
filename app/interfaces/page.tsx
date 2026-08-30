@@ -86,9 +86,13 @@ export default function InterfacesPage() {
 
       <Section>
         <SectionHeader
-          eyebrow="Available now"
-          title="Ways to use ProjectX"
-          lead="The reference vault is live on mainnet today, and the door is open for the next one."
+          eyebrow="Ways in"
+          title="Four surfaces, and they are not in the same state"
+          lead={
+            DAPP_URL
+              ? 'Four contracts live on Sui mainnet. The draws and the vault are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed. Know which is which before you click.'
+              : 'Four contracts live on Sui mainnet. The draws are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed; the vault has no interface serving it. Know which is which before you click.'
+          }
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">

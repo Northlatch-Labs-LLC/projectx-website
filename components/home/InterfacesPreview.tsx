@@ -10,19 +10,18 @@ import { DAPP_URL, RAFFLE_URL, SOCIAL_URL } from '@/lib/links';
 /**
  * The four products, then the invitation to build a fifth.
  *
- * Social takes a full-width featured card above the grid — flagship placement, decided by the
- * operator on 18 Aug 2026 — and the remaining four cards keep their 2×2.
+ * Weir takes the full-width card above the grid and the remaining four keep their 2×2. That is a
+ * layout weighting, not a claim of primacy: verification is the estate's flagship and is headlined
+ * separately. Nothing in this section should badge or word itself as the flagship.
  *
- * This section used to be titled "One pool, many front doors", which told a visitor that Names and
- * Raffle were interfaces onto the prize vault. They are not: the raffle is its own contract with
- * its own treasury, and the registrar is a separate business selling SuiNS names. Describing three
- * products as one product with three doors was inaccurate and undersold two of them.
+ * Do not retitle this section "One pool, many front doors". Names and Draws are not interfaces onto
+ * the prize vault — Draws is its own contract with its own treasury, and the registrar is a
+ * separate business selling SuiNS names.
  *
  * Copy leads with what a person gets and what it costs them, because this page is read by people
- * deciding whether to use something, not by engineers auditing it. The mechanism is not hidden --
- * each card keeps the one sentence that says what is guaranteed -- but it comes after the offer,
- * not instead of it. The engineering account lives on /protocol, /security and /builders, which is
- * where a reader who wants it goes looking.
+ * deciding whether to use something. The mechanism is not hidden — each card keeps the one sentence
+ * that says what is guaranteed — but it comes after the offer, not instead of it. The engineering
+ * account lives on /protocol, /security and /builders.
  */
 const LIVE = [
   {

@@ -228,16 +228,14 @@ export default function SocialPage() {
 
       <Section>
         <Callout
-          title="See it running"
+          title="Closed alpha, behind invitation codes"
           actions={
-            <>
-              <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-                Join the waiting list
-              </Button>
-              <Button href={SOCIAL_URL} variant="secondary">
-                Become a creator
-              </Button>
-            </>
+            /* One href, so one control. This carried a second button, "Become a creator",
+               pointing at the same waiting list — two labels promising two different doors
+               and opening the same one. */
+            <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
+              Join the waiting list
+            </Button>
           }
         >
           Creators are live on the platform now, each with a vault on chain — and the door is in

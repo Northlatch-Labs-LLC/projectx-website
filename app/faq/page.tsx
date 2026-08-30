@@ -30,8 +30,8 @@ export default function FaqPage() {
           <p>
             Your principal is never spent. It is delegated to a validator and returned to you
             1:1 whenever you withdraw. The prize is designed to come from the staking yield
-            that principal earns while it sits in the pool — so the most you can lose by
-            playing is the staking yield you would otherwise have earned yourself. In Alpha the
+            that principal earns while it sits in the pool — so what a depositor gives up is
+            that staking yield, which they would otherwise have earned themselves. In Alpha the
             harvester has not yet covered a prize, and every draw so far has been funded by a
             sponsor instead.
           </p>
@@ -167,9 +167,9 @@ export default function FaqPage() {
       answer: (
         <>
           The pot rolls into the next epoch. An epoch with no yield, no eligible depositor or
-          an unusable price feed simply does not settle — deliberately, because aborting
-          would strand the pool in a state from which it could never harvest again. A delayed
-          prize is the failure mode; a lost deposit is not.
+          an unusable price feed does not settle: it rolls over rather than aborting, so the
+          pool stays in a phase the harvest can run from. A delayed prize is the failure mode;
+          a lost deposit is not.
         </>
       ),
     },

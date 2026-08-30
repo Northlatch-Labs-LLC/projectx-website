@@ -29,7 +29,7 @@ import { EXPLORER } from '@/lib/chain';
 export const metadata: Metadata = {
   title: 'Capture the flag',
   description:
-    'Eight challenges built from ProjectX’s own audit findings, running against a retired mainnet deployment. Real vulnerabilities, real chain, no depositor funds exposed.',
+    'Eight challenges built from ProjectX’s own internal review findings, running against a retired mainnet deployment. Real vulnerabilities, real chain, no depositor funds exposed.',
 };
 
 const TONE: Record<Difficulty, { badge: 'prize' | 'accent' | 'gold' | 'danger'; ring: string }> = {
@@ -47,7 +47,7 @@ export default function CtfPage() {
       <PageHeader
         eyebrow="Capture the flag"
         title="Break the old one. Learn the new one."
-        lead="Eight challenges, built from ProjectX’s own audit findings and running against a retired mainnet deployment."
+        lead="Eight challenges, built from ProjectX’s own internal review findings and running against a retired mainnet deployment."
         proof="These are not invented puzzles. Each one is a vulnerability that existed in v1.0, was found in review, and was fixed in v1.0.1 — you are reproducing real findings on the real chain."
         art={<CtfArt className="w-full" />}
       >
@@ -140,10 +140,8 @@ export default function CtfPage() {
               <div className="mt-5 rounded-2xl border border-dashed border-px-gold/30 bg-px-gold/[0.04] p-4">
                 <p className="text-[1rem] leading-[1.65] text-px-muted">
                   <span className="font-semibold text-px-gold">Being finalised.</span> The
-                  retired deployment&rsquo;s identifiers are not published yet. Rather than
-                  print an address and hope it is the right one, this page waits — pointing a
-                  stranger&rsquo;s exploit at the wrong object is the one mistake a CTF cannot
-                  take back.
+                  retired deployment&rsquo;s identifiers are not published yet. They will be
+                  listed here, with links to the explorer, once they are.
                 </p>
               </div>
             )}
@@ -175,7 +173,7 @@ export default function CtfPage() {
         <SectionHeader
           eyebrow="The board"
           title="Eight findings, hardest last"
-          lead="Each challenge names the audit finding it reproduces, so you can read the fix after you land it — or before, if you would rather learn than score."
+          lead="Each challenge names the internal review finding it reproduces, so you can read the fix after you land it — or before, if you would rather learn than score."
         />
 
         <div className="mt-12 flex flex-col gap-12">
