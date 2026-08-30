@@ -126,10 +126,26 @@ commit: "Kill the two survivors the app found on its first run"`}
 
       <Section>
         <div className="flex flex-col items-center gap-12">
+          {/* Rewritten 2026-08-30 because the previous lead could be falsified by any prospect who
+              had asked an auditor for a quote. It asserted a floor of fifteen to forty-five thousand
+              dollars, and that below that line there had been nothing. Both fail against the market
+              as it actually is, filed in operations/company/sui-foundation-research-2026-08-30.md:
+              of eighteen firms serving Sui, exactly one publishes a price at all and it starts near
+              seven thousand — so the fifteen-thousand floor was unsupportable, and quoting a number
+              a buyer can disprove loses the whole page with it. And the layer below is not empty:
+              open-source Move mutation testing exists, is actively maintained, and one of the
+              engines is Sui-only and already runnable as a pull-request action.
+
+              The honest difference is narrower and it survives a hostile reader: those tools leave
+              an exit code and a console log, and nobody produces a shareable, attestable,
+              per-commit artifact for Move. That is what this copy now claims, and it is why the
+              claim is stronger than the one it replaces. Do not reinstate either old sentence —
+              config/claims-banned.json fails the build if they return. */}
           <SectionHeader
             eyebrow="Engagement · verification sprint"
             title="Fixed scope, flat quote, below the audit floor"
-            lead="Audits for small Sui teams start at fifteen to forty-five thousand dollars with weeks of backlog — and below that line there has been nothing. A verification sprint is the layer below: a fixed-scope engagement that leaves four things in your repository."
+            lead="Of the audit firms serving Sui Move, exactly one publishes a price: roughly seven to twelve thousand dollars for a standard review, fifteen to twenty-five with formal verification. The market reference most often quoted for 2026 puts Move audits thirty to forty-five percent above the equivalent EVM work. A verification sprint is the layer below that price — a fixed-scope engagement that leaves four things in your repository."
+            proof="Below that price there is tooling, and this page will not pretend otherwise: open-source mutation engines for Move exist, one of them Sui-only and already runnable as a pull-request action. What none of them leaves behind is an artifact. An exit code and a console log are nothing a funder, an auditor or a buyer can hold, point at, or check against a later commit. There is no shareable, attestable, per-commit record of test quality for Move, and no installable app that speaks it — which is the line this sits on."
           />
 
           <ul className="grid w-full gap-4 md:grid-cols-2">
