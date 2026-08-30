@@ -30,13 +30,19 @@ export default function NotFound() {
         <p className="lead">
           The address you followed does not resolve to anything here.
         </p>
+        {/* The title read "Your deposit is unaffected", which assumes the reader has one. Most
+            people who land on a 404 do not, and the ones who do are not reassured by a broken
+            link. What is true for everyone is that nothing on this site is the system. */}
         <Callout
           className="mt-2 w-full"
-          title="Your deposit is unaffected"
+          title="Nothing here is the system"
           actions={
             <>
               <Button href="/" variant="primary" className="px-5">
                 Back to the home page
+              </Button>
+              <Button href="/verification" variant="secondary">
+                What we measure
               </Button>
               <Button href="/interfaces" variant="secondary">
                 Ways to use ProjectX
@@ -44,8 +50,8 @@ export default function NotFound() {
             </>
           }
         >
-          It lives on chain, not on this website — and it is reachable from any interface,
-          or directly from a terminal.
+          Everything that matters lives on chain, not on this website, and the chain is untroubled
+          by a broken link. Read it from any interface, or directly from a terminal.
         </Callout>
       </div>
     </section>

@@ -72,8 +72,12 @@ export function Logo({ className = '', ns = 'default' }: { className?: string; n
         <span className="text-gradient-chrome text-[1.0625rem] font-semibold tracking-[-0.025em]">
           Project<span className="text-px-accent">X</span>
         </span>
+        {/* "Prize Protocol" was a third name for the house — the nav says ProjectX, the products
+            say ProtocolX Verify, and the wordmark said a third thing, on every page, in the
+            header and the footer. It also named the vault, whose interface was retired in August,
+            as the whole company. This states what is true of everything under the mark. */}
         <span className="mt-1 hidden text-[0.5625rem] font-medium uppercase tracking-[0.26em] text-px-faint sm:block">
-          Prize Protocol
+          Protocol on Sui
         </span>
       </span>
     </span>

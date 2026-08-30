@@ -5,10 +5,10 @@ import { Logo } from '@/components/ui/Logo';
 import { Badge, LiveDot } from '@/components/ui/Badge';
 import { LiveBadge } from '@/components/ui/LiveBadge';
 import { AddressChip } from '@/components/ui/AddressChip';
-import { ArrowUpRight, ShieldCheck } from '@/components/ui/Icons';
+import { ShieldCheck } from '@/components/ui/Icons';
 import { CHAIN_OBJECTS, NETWORK, explorerUrl } from '@/lib/chain';
 import { ChannelLinks } from '@/components/ui/ChannelLinks';
-import { DAPP_URL, FOOTER_SECTIONS } from '@/lib/links';
+import { FOOTER_SECTIONS } from '@/lib/links';
 
 export function SiteFooter() {
   const pkg = CHAIN_OBJECTS.find((object) => object.label === 'Package')!;
@@ -34,32 +34,38 @@ export function SiteFooter() {
       />
 
       <div className="relative mx-auto max-w-content px-5 pt-16 sm:px-8">
+        {/* The band that renders on every route, so it states the flagship.
+
+            It read "Deposit SUI. Win the yield." until 30 August 2026 — the vault's pitch, on all
+            nineteen routes, beside a button that `DAPP_URL` had already suppressed. The control
+            was correctly withheld and the argument for pressing it went on running: a call to
+            action with no door, repeated site-wide, on the domain the Master has ruled the
+            verification hub.
+
+            The vault is not dropped from the footer. Its door is the conditional `Prize vault`
+            entry under Products in FOOTER_SECTIONS, on the same variable and the same reasoning
+            (lib/links.ts) — present the moment an interface serves it, absent while none does.
+            The band carries the thing that is for sale today instead; the vault's own account is
+            on /protocol, which this band still links to. */}
         <div className="ring-gradient relative overflow-hidden rounded-3xl bg-gradient-to-br from-px-accent/[0.09] via-px-cyan/[0.05] to-transparent p-8 md:p-10">
           <div className="flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-12">
             <div className="flex flex-1 flex-col gap-3">
-              <h2 className="text-gradient-chrome max-w-[18ch] text-title">
-                Deposit SUI. Win the yield.
+              <h2 className="text-gradient-chrome max-w-[20ch] text-title">
+                Five gates on every pull request.
               </h2>
               <p className="body-copy max-w-[46ch]">
-                Deposit from 1 SUI, withdraw whenever you like, and enter every draw. Live on{' '}
-                {NETWORK}.
+                ProtocolX Verify runs the checks we run on our own {NETWORK} contracts against
+                yours, and leaves an evidence bundle whose digest you can re-derive without us.
+                Not an audit, and never called one.
               </p>
             </div>
 
             <div className="flex shrink-0 flex-wrap items-center gap-3">
-              {DAPP_URL && (
-                <a
-                  href={DAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-primary px-6 py-3.5"
-                >
-                  Open the vault
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              )}
-              <Link href="/protocol" className="btn-secondary">
-                How it works
+              <Link href="/verification/install" className="btn-primary px-6 py-3.5">
+                Install ProtocolX Verify
+              </Link>
+              <Link href="/verification" className="btn-secondary">
+                What it measures
               </Link>
             </div>
           </div>
@@ -134,9 +140,9 @@ export function SiteFooter() {
             <h2 className="text-gradient-chrome text-title">Verify it yourself</h2>
 
             <p className="body-copy mx-auto max-w-[52ch]">
-              Every claim on this site resolves to an object on {NETWORK}. Open either one on
-              a block explorer and read the same state we do — nothing here asks you to take
-              our word for it.
+              Every claim on this site resolves to an object on {NETWORK}. The package and the
+              pool are named below — open either on a block explorer and read the same state we
+              do. Nothing here asks you to take our word for it.
             </p>
 
             <LiveBadge className="mt-1" />
