@@ -7,11 +7,11 @@ import { Section, SectionHeader } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Callout } from '@/components/ui/Callout';
-import { AddressTable } from '@/components/live/AddressTable';
+import { AddressChip } from '@/components/ui/AddressChip';
 import { Toolkit } from '@/components/builders/Toolkit';
 import { Ideas } from '@/components/builders/Ideas';
 import { Code, Layers, Chart, Book } from '@/components/ui/Icons';
-import { PRIZE_COIN } from '@/lib/chain';
+import { PRIZE_COIN, CHAIN_OBJECTS, explorerUrl } from '@/lib/chain';
 
 export const metadata: Metadata = {
   title: 'Builders',
@@ -20,6 +20,9 @@ export const metadata: Metadata = {
 };
 
 export default function BuildersPage() {
+  const pkg = CHAIN_OBJECTS.find((object) => object.label === 'Package')!;
+  const pool = CHAIN_OBJECTS.find((object) => object.label === 'Pool')!;
+
   const endpoints = [
     {
       method: 'GET',
@@ -163,14 +166,49 @@ export default function BuildersPage() {
         </div>
       </Section>
 
+      {/*
+        The full address table moved to /chain on 30 August 2026 — the deployment record now has a
+        route of its own, in the navigation, on the Master's order that this hub present ProtocolX
+        data. It is rendered there from the same module, once.
+
+        This section KEEPS its id. `#addresses` is linked from the footer band, from /interfaces and
+        from anywhere anyone has ever pasted it, and a fragment cannot be redirected: the hash never
+        reaches the server. So the anchor still lands somewhere that answers the question, with the
+        two identifiers an integrator needs in hand and a link to the rest.
+      */}
       <Section id="addresses">
         <SectionHeader
           eyebrow="Addresses"
           title="Everything you need to index it yourself"
-          lead="Package, pool, treasury, adapter, price feed, DEX pool and validator."
+          lead="The two identifiers every call needs are below. Package, pool, treasury, adapter, price feed, DEX pool and validator — plus every other package this estate has deployed — are on the on-chain record."
         />
-        <div className="mt-10">
-          <AddressTable />
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_1fr]">
+          <Card>
+            <h3 className="text-base font-semibold text-white">The two that matter</h3>
+            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              Everything else is derivable from these. Both open on a block explorer, and reading
+              them depends on nothing of ours.
+            </p>
+            <div className="mt-5 flex flex-col items-start gap-2.5">
+              <AddressChip id={pkg.id} label="package" href={explorerUrl(pkg)} />
+              <AddressChip id={pool.id} label="pool" href={explorerUrl(pool)} />
+            </div>
+          </Card>
+
+          <Card>
+            <h3 className="text-base font-semibold text-white">The complete record</h3>
+            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              All {CHAIN_OBJECTS.length} vault objects, and all four deployed product lineages with
+              the current holder of each upgrade capability, on one page — read from chain rather
+              than transcribed from a specification.
+            </p>
+            <div className="mt-6">
+              <Button href="/chain" variant="secondary" className="px-5">
+                Open the on-chain record
+              </Button>
+            </div>
+          </Card>
         </div>
 
         <Callout
@@ -178,18 +216,19 @@ export default function BuildersPage() {
           title="Permissionless by construction"
           actions={
             <>
-              <Button href="/interfaces" variant="primary" className="px-5">
+              <Button href="/chain" variant="primary" className="px-5">
                 <Book className="h-4 w-4" />
-                Interfaces
+                Every deployed address
               </Button>
-              <Button href="/security" variant="secondary">
-                Security model
+              <Button href="/verification" variant="secondary">
+                Verify your own package
               </Button>
             </>
           }
         >
           No API keys, no allowlist, no partnership call. The pool is a shared object and
-          your integration needs nobody&rsquo;s approval.
+          your integration needs nobody&rsquo;s approval — and the same five gates we run on our
+          own contracts will run on yours.
         </Callout>
       </Section>
     </>

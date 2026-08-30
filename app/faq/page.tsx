@@ -9,20 +9,45 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Callout } from '@/components/ui/Callout';
 import { FaqList } from '@/components/ui/Faq';
-import { SNAPSHOT } from '@/lib/snapshot';
-import { formatBps, formatDuration, formatSui } from '@/lib/format';
-import { DAPP_URL, RAFFLE_URL } from '@/lib/links';
 
 export const metadata: Metadata = {
   title: 'FAQ',
   description:
-    'Straight answers: what ProtocolX Verify measures and what it costs, why it is not an audit, what no-loss means, how winners are chosen, how to enter for free, and what can go wrong. The vault contract is live on Sui mainnet; no interface serves it at present.',
+    'Straight answers about ProtocolX Verify: what the five gates measure, what it costs, why it is not an audit, what your repository needs, what the evidence bundle contains, and what we will not claim. Plus how to enter a draw for free.',
 };
 
+/**
+ * Rewritten 30 August 2026, on the Master's order that this hub stop being the retired vault's
+ * website.
+ *
+ * The page it replaces was the worst content page on the site by a distance: forty rendered
+ * vault-era words against twenty-seven flagship ones, and a whole middle section — "Using the
+ * vault: how it works in practice" — answering how to deposit, what the minimum is, whether gas is
+ * sponsored and when you can withdraw. Every one of those answers was TRUE and none of them was
+ * ANSWERABLE: the vault's interface was retired on 25 August 2026, so the page walked a reader
+ * through a purchase with no door at the end of it.
+ *
+ * The eight vault questions are archived in full at
+ * operations/archive/2026-08-30-hub-vault-sweep/app/faq/page.tsx. They are not lost and they are
+ * not wrong — the mechanism they describe is documented on /protocol, and /ctf is where the vault
+ * now lives on this hub, as the thing you are attacking rather than the thing you are buying. One
+ * question below routes there deliberately, so a reader who arrives holding the word "vault" is
+ * answered rather than stranded.
+ *
+ * EVERY ANSWER HERE RESTATES SOMETHING ALREADY PUBLISHED on /verification or /verification/install
+ * — the five gates, the neutral conditions, the qualifying config, the bundle and its digest, the
+ * two prices, the independence clause. Nothing on this page is a claim this estate had not already
+ * made in writing, and nothing here answers a question the published material does not settle. Two
+ * questions below say "ask us" for exactly that reason; a guess dressed as an answer is the one
+ * thing a page arguing for measurement cannot afford.
+ *
+ * THE AMOE BLOCK IS CARRIED ACROSS VERBATIM and is not touched. It is legal substance — it
+ * promises rules, a sponsor address and an entry weighting at /legal/terms that are not there, and
+ * routes free entry through a DApp that does not exist. Both are held for the Master. Copy down or
+ * rules up is his call, not this page's.
+ */
 export default function FaqPage() {
-  const { config } = SNAPSHOT.pool;
-
-  const verification = [
+  const product = [
     {
       question: 'What is ProtocolX Verify?',
       answer: (
@@ -111,24 +136,27 @@ export default function FaqPage() {
     },
   ];
 
-  const general = [
+  const running = [
     {
-      question: 'So I really can’t lose my money?',
+      question: 'What does my repository actually need?',
       answer: (
         <>
           <p>
-            Your principal is never spent. It is delegated to a validator and returned to you
-            1:1 whenever you withdraw. The prize is designed to come from the staking yield
-            that principal earns while it sits in the pool — so what a depositor gives up is
-            that staking yield, which they would otherwise have earned themselves. In Alpha the
-            harvester has not yet covered a prize, and every draw so far has been funded by a
-            sponsor instead.
+            A Sui Move package — a directory holding a <code>Move.toml</code> that{' '}
+            <code>sui move build</code> and <code>sui move test</code> can run in — and one file at
+            the repository root. <code>.protocolx-verify.json</code> has a single required key,{' '}
+            <code>package</code>, naming the path to that directory. There is no dashboard to
+            configure and no account to create.
           </p>
           <p className="mt-3">
-            It does not mean risk-free. Smart contracts can contain defects, and this one has
-            not been independently audited. See the{' '}
-            <Link href="/security" className="text-px-accent underline underline-offset-4">
-              security model
+            Two optional files each turn one more gate from neutral into live: a{' '}
+            <code>ci-expected-digest</code> beside your Move.toml, and an executable{' '}
+            <code>scripts/check-framework-pin.sh</code> inside the package.{' '}
+            <Link
+              href="/verification/install"
+              className="text-px-accent underline underline-offset-4"
+            >
+              The full requirement, with the config
             </Link>
             .
           </p>
@@ -136,152 +164,164 @@ export default function FaqPage() {
       ),
     },
     {
-      question: 'Who decides who wins?',
+      question: 'What happens if I install it before I have configured anything?',
       answer: (
         <>
-          One depositor per epoch, selected with weight proportional to their share of
-          the pool, using Sui&rsquo;s native on-chain randomness. Twice the principal is twice
-          the weight. Deposits become eligible two epochs after they are made, so a deposit
-          placed immediately before a draw cannot win it.
+          All five checks complete neutral, each carrying its own setup instructions. A repository
+          that has not opted in gets an explanation, never a red cross. This is deliberate: a
+          failing check on a repository that never asked to be measured is a false accusation, and
+          the first thing a new user would learn from it is to distrust the next verdict too.
         </>
       ),
     },
     {
-      question: 'How big is the prize?',
+      question: 'What do I actually receive?',
       answer: (
         <>
-          The entire pool&rsquo;s staking yield for that day, converted to USDC and paid to
-          one depositor. It is real yield rather than an emission or a subsidy, so the prize
-          grows directly with the pool. Every prize ever paid is listed across the{' '}
-          <Link href="/interfaces" className="text-px-accent underline underline-offset-4">
-            interfaces
-          </Link>
-          , each with the transaction that paid it.
+          An evidence bundle: a manifest and a report, with a digest over them, written on every
+          run and uploaded with it. A check run is five coloured rows that live as long as GitHub
+          keeps the page. The bundle is the file someone else can hold — a funder, a counterparty
+          or an auditor — and check against a later commit.
         </>
       ),
     },
     {
-      question: 'When can I withdraw?',
+      question: 'Can I re-derive the digest without you?',
       answer: (
         <>
-          At any time. There is no lock-up, no cooldown and no pause on withdrawals — the
-          contract has no mechanism to prevent one. A{' '}
-          {formatBps(config.liquidityBufferBps)} buffer is kept unstaked so ordinary
-          withdrawals settle immediately; a withdrawal larger than the buffer pulls stake off
-          the ladder to serve you, at the pool&rsquo;s expense rather than yours.
+          Yes, and that is the whole design. A measurement you can only confirm by asking us again
+          is not evidence, it is a reference. The digest reproduces from the bundle&rsquo;s own
+          contents, so the artifact keeps its meaning if we are unreachable, uninterested, or gone.
         </>
       ),
     },
     {
-      question: 'What does it cost?',
+      question: 'Can you measure a private repository?',
       answer: (
         <>
-          <p>
-            Nothing on deposit, and nothing on withdrawing your principal. The protocol takes{' '}
-            {formatBps(config.stakingFeeBps)} of the gross staking yield, and{' '}
-            {formatBps(config.spreadBps)} as a spread on the conversion that pays a prize.
-          </p>
-          <p className="mt-3">
-            Leaving mid-epoch forfeits {formatBps(config.earlyExitFeeBps)} of your pro-rata
-            share of the accrued prize pot. That fee is charged against the pot, never
-            against your principal, which always returns in full.
-          </p>
+          The First Report is public repositories only, and its terms say so. For anything beyond
+          that, ask us rather than reading an answer off this page — it is not something published
+          material settles, and this page will not guess at a commercial term.
         </>
       ),
     },
     {
-      question: 'Do I need SUI to pay for gas?',
+      question: 'How long does a First Report take, and how is it paid?',
       answer: (
         <>
-          Usually not. Deposits and withdrawals can be sponsored, so a first deposit does not
-          require you to already hold SUI for fees. Whether sponsorship is currently
-          available is shown in the vault itself, next to your position.
-        </>
-      ),
-    },
-    {
-      question: 'What is the minimum deposit?',
-      answer: <>{formatSui(config.minDepositMist, 2)} SUI. There is no maximum.</>,
-    },
-    {
-      question: 'Can I put money into the prize itself?',
-      answer: (
-        <>
-          <p>
-            Yes. The pot can be topped up by anyone, permissionlessly, in a single
-            transaction — and several people already have. It is how a young pool gets past
-            the point where its own staking yield can fund a prize worth entering.
-          </p>
-          <p className="mt-3">
-            Be clear about what it is: a donation, not an investment. A contribution cannot be
-            withdrawn, buys no position in the pool, and goes to a depositor drawn the same
-            way as any other epoch.{' '}
-            <Link href="/sponsor" className="text-px-accent underline underline-offset-4">
-              How boosting works
-            </Link>
-            .
-          </p>
+          Inside 24 hours, in USDC on Sui. It covers one Move package and all five gates. It comes
+          with no remediation and no claim of independence — both are stated up front rather than
+          discovered afterwards, because a scope a buyer learns late is a scope they were sold
+          badly.
         </>
       ),
     },
   ];
 
-  const risk = [
+  const honesty = [
     {
-      question: 'Has the contract been audited?',
+      question: 'Has any of this been independently audited?',
       answer: (
         <>
-          No. No third party has reviewed this code, and we will not imply one has. The
-          contract suite passes 75 tests on every build and the no-loss invariant is enforced
-          by the Move type system rather than by runtime checks, which is a real guarantee but
-          not the same thing as a review. The complete threat model, including where the
-          guarantee stops, is on the security page and you can read all of it today.
+          No. No third party has reviewed this code, and we will not imply one has. The contract
+          suite passes 75 tests on every build and the vault&rsquo;s no-loss invariant is enforced
+          by the Move type system rather than by runtime checks, which is a real guarantee and not
+          the same thing as a review. The complete threat model, including where it stops, is on
+          the{' '}
+          <Link href="/security" className="text-px-accent underline underline-offset-4">
+            security page
+          </Link>
+          .
         </>
       ),
     },
     {
-      question: 'Could you run off with it?',
+      question: 'Can I read your source?',
       answer: (
         <>
-          No. No function that accepts the admin capability can reach principal, the liquid
-          balance or any deposit receipt — those types are unreachable from that code path,
-          and that is a compile-time property, not a policy. Admins can pause deposits and
-          adjust parameters within compiled ceilings. They cannot pause withdrawals, and they
-          cannot move your principal.
+          <p>
+            Not today, and the honest version of that answer is worth more than a link. The
+            Northlatch Labs GitHub organisation currently publishes no public repositories. The
+            profile is ours and it resolves, but it opens an empty shelf, and nothing on this site
+            will tell you to go and read a source that is not there.
+          </p>
+          <p className="mt-3">
+            What you can read instead is the chain. Every package we have deployed is listed with
+            its identifier on{' '}
+            <Link href="/chain" className="text-px-accent underline underline-offset-4">
+              the on-chain record
+            </Link>
+            , and published Move bytecode is readable on any explorer without our permission.
+          </p>
         </>
       ),
     },
     {
-      question: 'What if a draw doesn’t happen?',
+      question: 'Who can change your contracts after they are deployed?',
       answer: (
         <>
-          The pot rolls into the next epoch. An epoch with no yield, no eligible depositor or
-          an unusable price feed does not settle: it rolls over rather than aborting, so the
-          pool stays in a phase the harvest can run from. A delayed prize is the failure mode;
-          a lost deposit is not.
+          The holder of each package&rsquo;s UpgradeCap, and every one of those holders is
+          published by name and identifier on{' '}
+          <Link href="/chain" className="text-px-accent underline underline-offset-4">
+            the on-chain record
+          </Link>
+          . On Sui an upgrade cannot change the types of existing objects or remove public
+          functions, but it can add functions and change non-public behaviour. It is the largest
+          trust assumption in the system, which is exactly why it is on a page rather than in a
+          paragraph.
         </>
       ),
     },
     {
-      question: 'What happens if the price oracle is wrong?',
+      question: 'What happens to any of this if you disappear?',
       answer: (
         <>
-          The reading is validated before it is trusted: a non-positive price, a zero mean,
-          a sample older than the freshness window, excessive dispersion between responders
-          or a value outside the permitted band each abort the settlement. A swap that would
-          execute worse than {formatBps(config.maxSlippageBps)} from oracle fair value
-          reverts. There is currently one feed, not several — a known limitation, published
-          on the security page.
+          The contracts keep working. They are objects on Sui with public entry points, and none of
+          them depends on our daemon, our API or this website. An evidence bundle keeps its meaning
+          for the same reason — its digest reproduces from the bundle, not from a server of ours.
         </>
       ),
     },
     {
-      question: 'Can someone steal my spot in the pool?',
+      question: 'I found something. How do I report it?',
       answer: (
         <>
-          No, and that is a feature. The deposit receipt cannot be transferred, sold, lent or
-          wrapped by any external transaction. Nobody can take your position from you —
-          including through a signature you were tricked into giving.
+          Privately, to{' '}
+          <a
+            href="mailto:security@projectxprotocol.dev"
+            className="text-px-accent underline underline-offset-4"
+          >
+            security@projectxprotocol.dev
+          </a>
+          , rather than as a public issue. We acknowledge within 72 hours. A report that arrives
+          before an exploit is worth considerably more to us than one that arrives after, and we
+          would rather hear it early and imperfectly than late.
+        </>
+      ),
+    },
+    {
+      question: 'You keep mentioning a vault. What is it, and can I use it?',
+      answer: (
+        <>
+          <p>
+            A prize pool on Sui mainnet: principal is delegated to a validator and returned 1:1,
+            and the staking yield it earns is awarded to one depositor per epoch instead of split
+            into pennies. The contract is live. Its interface was retired on 25 August 2026, so
+            there is no door to walk through today — the mechanism is real and it is unreachable,
+            and those are different sentences.
+          </p>
+          <p className="mt-3">
+            It is documented in full on{' '}
+            <Link href="/protocol" className="text-px-accent underline underline-offset-4">
+              the mechanism page
+            </Link>
+            , and it is the subject of{' '}
+            <Link href="/ctf" className="text-px-accent underline underline-offset-4">
+              the capture-the-flag range
+            </Link>
+            , where the retired v1.0 deployment is something to attack rather than something to
+            buy.
+          </p>
         </>
       ),
     },
@@ -289,49 +329,53 @@ export default function FaqPage() {
 
   return (
     <>
-      {/* The title asked what to ask "before you deposit" — a question addressed to a visitor of
-          a vault whose interface was retired in August, on the domain the Master has ruled the
-          verification hub. This page also had no question at all about the thing the company
-          sells: every flagship word on it came from the footer. Both fixed below; not one vault
-          question was removed to do it. */}
       <PageHeader
         eyebrow="FAQ"
         title="The questions worth asking first"
-        lead="Including the ones a company would usually rather you asked after. Verification is what we sell; the vault, the draws and the names are what we built, and the vault's contract is live on Sui mainnet with no interface serving it at present."
+        lead="Including the ones a company would usually rather you asked after. Verification is what we sell — five gates on a Sui Move package, measured and never called an audit."
         art={<FaqArt className="w-full" />}
       />
 
-      {/* Verification leads, by operator order of 30 August 2026. Every answer below restates
-          something already published on /verification or /verification/install — the five gates,
-          the neutral conditions, the bundle digest, the two prices, the independence clause.
-          Nothing here is a claim this estate had not already made in writing. */}
       <Section>
-        <SectionHeader
-          eyebrow="Verification"
-          title="What we sell, and what it is not"
-        />
+        <SectionHeader eyebrow="Verification" title="What we sell, and what it is not" />
         <div className="mt-8">
-          <FaqList items={verification} />
+          <FaqList items={product} />
         </div>
       </Section>
 
       <Section tone="panel">
-        <SectionHeader eyebrow="Using the vault" title="How it works in practice" />
+        <SectionHeader
+          eyebrow="In practice"
+          title="Putting it on your repository"
+          lead="What it needs, what it does before you have configured anything, and what you are left holding when the run finishes."
+        />
         <div className="mt-8">
-          <FaqList items={general} />
+          <FaqList items={running} />
         </div>
       </Section>
 
       <Section>
         <SectionHeader
-          eyebrow="Risk and control"
-          title="What can go wrong, and who holds what"
+          eyebrow="What we will not claim"
+          title="The answers that cost us something"
+          lead="A company selling measurement has to be measurable itself. These are the questions where the true answer is the weaker one."
         />
         <div className="mt-8">
-          <FaqList items={risk} />
+          <FaqList items={honesty} />
         </div>
       </Section>
 
+      {/* ───────────────────────────────────────────────────────────────────────────────────────
+          HELD FOR THE MASTER — DO NOT EDIT THIS SECTION.
+
+          Carried across verbatim from the page this file replaces. It is legal substance, not
+          marketing: it promises official rules, a sponsor's address and an entry weighting at
+          /legal/terms that are not published there, and its closing sentence routes free entry
+          "from the DApp" — an interface retired on 25 August 2026.
+
+          Copy down, or rules up. That is the Master's call and nobody else's, and the sweep of
+          30 August 2026 deliberately left it exactly as it was found.
+          ─────────────────────────────────────────────────────────────────────────────────────── */}
       <Section id="amoe">
         <SectionHeader
           eyebrow="Free entry"
@@ -373,32 +417,24 @@ export default function FaqPage() {
       </Section>
 
       <Section tone="edge">
-        {/* This closed by inviting a deposit from 1 SUI. The button beside it is conditional on an
-            interface existing, so with the vault's front end retired the invitation stood on its
-            own with nothing to act on — a call to action is worse than a dead link, because a dead
-            link at least announces itself. */}
+        {/* This closed by inviting a deposit from 1 SUI, then — once the interface was retired —
+            by pointing at the draws, which is a different product from anything this page now
+            answers questions about. It closes on the thing the page is about. */}
         <Callout
-          title={DAPP_URL ? 'Ready when you are' : 'Where this stands'}
+          title="Still deciding?"
           actions={
             <>
-              {DAPP_URL ? (
-                <Button href={DAPP_URL} variant="primary" className="px-5">
-                  Open the vault
-                </Button>
-              ) : (
-                <Button href={RAFFLE_URL} variant="primary" className="px-5">
-                  See the live draws
-                </Button>
-              )}
-              <Button href="/protocol" variant="secondary">
-                How it works
+              <Button href="/verification" variant="primary" className="px-5">
+                What the five gates measure
+              </Button>
+              <Button href="/verification/install" variant="secondary">
+                Install it
               </Button>
             </>
           }
         >
-          {DAPP_URL
-            ? 'Deposit from 1 SUI, withdraw whenever you like, and enter every draw from the moment your deposit becomes eligible.'
-            : 'The vault contract is live on Sui mainnet and everything above describes it accurately. No interface serves it at present, so there is nothing here to deposit into today. The draws are live and open to anyone.'}
+          The measurement is the argument. Read what each gate refuses to accept, then decide
+          whether an evidence bundle you can re-derive without us is worth a thousand dollars.
         </Callout>
       </Section>
     </>

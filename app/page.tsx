@@ -6,7 +6,7 @@ import { Hero } from '@/components/home/Hero';
 import { InterfacesPreview } from '@/components/home/InterfacesPreview';
 import { Social } from '@/components/home/Social';
 import { Organisers } from '@/components/home/Organisers';
-import { HowItWorks } from '@/components/home/HowItWorks';
+import { Provenance } from '@/components/home/Provenance';
 import { VerificationPractice } from '@/components/home/VerificationPractice';
 import { CtaBand } from '@/components/home/CtaBand';
 
@@ -26,10 +26,10 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
  *
  *   Hero         the offer — the First Report — and the name search kept below it
  *   Verification ─ the flagship, stated immediately after the hero promises it
+ *   Provenance   ── the security practice and the on-chain record, with the vault's figures
  *   Interfaces   the router — the other products, and where each one lives
  *   Social       ── supporting a creator without spending anything, explained on /social
  *   Organisers   ── everything about draws, aimed at who actually pays for them
- *   HowItWorks   ── the vault mechanism, with the alpha funding disclosure beside the figures
  *   CtaBand      close
  *
  * Verification moved from last to second on the Master's order of 30 August 2026: "Verification is
@@ -46,24 +46,32 @@ export const metadata: Metadata = { alternates: { canonical: '/' } };
  * prime space addressed to an audience that does not pay — on a homepage whose job is to route a
  * buyer. /builders still exists, is still linked from the nav and the footer, and lost nothing.
  *
- * `Mission` — the vault ARGUMENT, as distinct from the vault mechanism above it — moved to
- * /protocol on 30 August 2026. It is the same component, rendered unchanged, on the page whose
- * whole subject it is; nothing was rewritten and nothing was dropped. Two consecutive vault
- * sections ran back to back here on the hub the Master has ruled the verification hub, and the
- * second of the two was pure argument for a product whose interface was retired in August. The
- * mechanism stays, because it carries the live figures and the alpha funding disclosure that go
- * with them. The argument now sits where a reader who wants it goes looking.
+ * `HowItWorks` — the vault block, "Your deposit is never the prize" — came off this page on
+ * 30 August 2026, in the sweep the Master ordered. It was the last thing on the front door selling
+ * a product whose interface was retired on 25 August: three steps written as an invitation, and a
+ * call to action pointing at /sponsor, which the same sweep retired. Archived complete at
+ * operations/archive/2026-08-30-hub-vault-sweep/components/home/HowItWorks.tsx.
+ *
+ * `Provenance` takes its slot and its figures. It is not a replacement in kind — it answers two of
+ * the four things the Master named that day ("our security steps", "ProtocolX data"), both of
+ * which the front door had no block for at all. The vault's three real figures move into it
+ * unchanged, under a heading that says what they measure and with no button beside them: a record
+ * rather than an invitation. `Mission`, the vault's argument, left /protocol in the same sweep and
+ * is archived beside HowItWorks.
+ *
+ * All four of the Master's asks now have a block on this page: verification (Hero and
+ * VerificationPractice), security and on-chain data (Provenance), social (Social).
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
       <VerificationPractice />
+      <Provenance />
 
       <InterfacesPreview />
       <Social />
       <Organisers />
-      <HowItWorks />
 
       <div className="mx-auto w-full max-w-content px-5 sm:px-8">
         <Signature />

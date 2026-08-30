@@ -165,6 +165,100 @@ export default function CtfPage() {
         </div>
       </Section>
 
+      {/* ───────────────────────────────────────────────────────────────────────────────────────
+          THE VAULT'S HOME ON THIS HUB.
+
+          The Master, 30 August 2026: *"the v1.0.1 will go to the capture the flag section on the
+          hub."* This section is that instruction. Everywhere else on this site the vault stopped
+          being a pitch; here it becomes the subject matter, which is what /ctf was always built on
+          — the board teaches v1.0 and its fixes in v1.0.1, and a player cannot reproduce a finding
+          without knowing what the contract was trying to do in the first place.
+
+          Deliberately a briefing and not a duplicate. Four paragraphs of mechanism, then the two
+          links that carry the detail: /protocol for the full record and /chain for the
+          identifiers. A player who wants the parameters should read them from the page that owns
+          them rather than from a copy here that can drift.
+          ─────────────────────────────────────────────────────────────────────────────────────── */}
+      <Section id="target-contract" tone="panel">
+        <SectionHeader
+          eyebrow="Know the target"
+          title="What the contract was trying to do"
+          lead="Every finding on the board is a way the v1.0 package failed at something specific. Here is what it was attempting, in four moves — because an exploit you cannot explain is a transaction you got lucky with."
+          proof="The mechanism below is v1.0.1's, the fixed version. v1.0 attempted the same four moves and got three of the eight things on this board wrong while doing it."
+        />
+
+        <ol className="mt-10 grid gap-5 md:grid-cols-2">
+          {[
+            {
+              step: '1 · Take',
+              title: 'Principal in, receipt out',
+              body: 'A deposit pays SUI into a shared pool object and receives a receipt — a Move object with key and no store, so no external transaction can transfer, sell, lend or wrap it. The principal total has exactly two writers, deposit and withdraw, and no function taking the admin capability can reach any of it. Several challenges on this board are attempts to find a third writer.',
+            },
+            {
+              step: '2 · Stake',
+              title: 'A ladder, so a harvest is not a liquidation',
+              body: 'Sui only realises staking rewards when a stake is withdrawn, so the pool stakes in tranches of staggered age and rotates one at a time. A liquidity buffer stays unstaked so an ordinary withdrawal never disturbs the ladder, and a larger one pulls from the ladder head regardless of maturity. The rule is that leaving outranks earning — look for the path where it does not.',
+            },
+            {
+              step: '3 · Draw',
+              title: 'One winner, weighted by stake',
+              body: 'Each epoch selects one depositor with weight proportional to share, using Sui native randomness inside a non-public entry function so the value cannot be read and acted on in the same transaction. Ineligible slots are resampled rather than skipped. Eligibility begins two epochs after a deposit — which is precisely what "The late ticket" is about.',
+            },
+            {
+              step: '4 · Settle',
+              title: 'A price checked before a swap is trusted',
+              body: 'The prize is converted to USDC through a DEX pool, floored by an oracle reading that must pass a positive mean, a freshness window and a dispersion bound. The minimum output is pinned into a ticket object Move cannot drop, copy or store, so the transaction cannot complete unless the settlement consumes it. "The settler\u2019s spread" and "Zero means zero" both live in this step.',
+            },
+          ].map((item) => (
+            <li key={item.step} className="panel flex flex-col gap-3 p-6">
+              <p className="font-mono text-sm font-semibold uppercase tracking-wide text-px-cyan">
+                {item.step}
+              </p>
+              <h3 className="text-base font-semibold text-white">{item.title}</h3>
+              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <Card>
+            <h3 className="text-base font-semibold text-white">v1.0 and v1.0.1</h3>
+            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              v1.0 is the retired in-situ deployment this board runs against — drained and migrated
+              when v1.0.1 shipped, and left standing so the code that made these mistakes can still
+              be run. v1.0.1 is the live pool, and it is out of scope on every challenge. Both are
+              the same product at two points in its life, which is the only reason a range like this
+              can be honest: the fixes are published, so the spoiler under each card is checkable
+              rather than a claim.
+            </p>
+          </Card>
+          <Card>
+            <h3 className="text-base font-semibold text-white">Read before you send</h3>
+            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              The full mechanism — every parameter, the four epoch phases, the settlement bounds and
+              the six type-system properties the package relies on — is on{' '}
+              <Link href="/protocol" className="text-px-accent underline underline-offset-4">
+                the mechanism page
+              </Link>
+              . Every identifier you need, including the objects behind the live pool you must not
+              touch, is on{' '}
+              <Link href="/chain" className="text-px-accent underline underline-offset-4">
+                the on-chain record
+              </Link>
+              .
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button href="/protocol" variant="secondary">
+                The mechanism in full
+              </Button>
+              <Button href="/chain" variant="ghost">
+                Identifiers
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </Section>
+
       <div className="mx-auto w-full max-w-content px-5 sm:px-8">
         <Signature />
       </div>

@@ -76,11 +76,16 @@ export default function InterfacesPage() {
 
   return (
     <>
+      {/* Was "One pool. As many front doors as people care to build." — a headline about the
+          vault, on the page that routes a visitor between four products, three of which are not
+          the vault. It also promised the vault as "the first way in" on a hub where it is the one
+          product with no way in at all. The permissionless argument below is unchanged and still
+          about the pool, which is where it belongs; the headline now describes the page. */}
       <PageHeader
         eyebrow="Interfaces"
-        title="One pool. As many front doors as people care to build."
-        lead="ProjectX is infrastructure, not an app. The reference vault is the first way in — by design, not the only one."
-        proof="The pool is a shared object on Sui. Any interface reaching it calls the same public entry points, with the same permissions, as ours."
+        title="Every way to use ProtocolX, and the state each door is in"
+        lead="Four contracts live on Sui mainnet, and they are not equally open. Two sit behind invitation codes, one is open to anyone, and one has no interface serving it. This page says which is which before you click."
+        proof="Nothing here is a privileged surface. Every interface on the pool calls the same public entry points, with the same permissions, as ours would."
         art={<InterfacesArt className="w-full" />}
       />
 
@@ -91,7 +96,7 @@ export default function InterfacesPage() {
           lead={
             DAPP_URL
               ? 'Four contracts live on Sui mainnet. The draws and the vault are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed. Know which is which before you click.'
-              : 'Four contracts live on Sui mainnet. The draws are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed; the vault has no interface serving it. Know which is which before you click.'
+              : 'Four contracts live on Sui mainnet. The draws are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed; the vault has no interface serving it and is documented rather than sold. Know which is which before you click.'
           }
         />
 
@@ -177,19 +182,37 @@ export default function InterfacesPage() {
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">ProjectX Vault</h3>
-                  <Badge tone="prize">Reference</Badge>
+                  {/* "Reference" implied a surface to refer to. Two badges, same reasoning as
+                      Weir's: the contract is live and the door is gone, and dropping either half
+                      misleads. */}
+                  <Badge tone="prize">Contract live</Badge>
+                  <Badge tone="gold">No interface</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
               </div>
             </div>
 
+            {/*
+              This card listed "Deposit, withdraw, watch the draw and see your position. Sponsored
+              gas, so a first deposit needs no SUI for fees" over tags reading Deposit · Withdraw ·
+              Free entry — a feature list for a surface that has not existed since 25 August 2026.
+              The conditional below correctly withheld the button and left the sales copy standing
+              above it, which is the defect this whole sweep is about: the buttons vanished, the
+              pitch did not.
+
+              What it says now is what is true. The contract is live — never write that it is dead
+              — and the two places it is still an active subject on this hub are the mechanism
+              record and the capture-the-flag range. Both are internal links, so this card sends a
+              reader somewhere that answers rather than nowhere.
+            */}
             <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
-              Deposit, withdraw, watch the draw and see your position. Sponsored gas, so a
-              first deposit needs no SUI for fees.
+              A prize pool on Sui mainnet: principal delegated to a validator and returned 1:1,
+              with the staking yield it earns awarded to one depositor per epoch. The contract is
+              live and its interface was retired on 25 August 2026, so there is no door here today.
             </p>
 
             <ul className="flex flex-wrap gap-2">
-              {['Deposit', 'Withdraw', 'Live epoch', 'Winners', 'Free entry'].map((tag) => (
+              {['Contract live', 'No interface', 'Mechanism published', 'CTF target'].map((tag) => (
                 <li
                   key={tag}
                   className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
@@ -198,6 +221,18 @@ export default function InterfacesPage() {
                 </li>
               ))}
             </ul>
+
+            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+              Documented in full on{' '}
+              <Link href="/protocol" className="underline decoration-white/20 underline-offset-4 hover:text-px-muted">
+                /protocol
+              </Link>
+              , with every object listed on{' '}
+              <Link href="/chain" className="underline decoration-white/20 underline-offset-4 hover:text-px-muted">
+                /chain
+              </Link>
+              . The retired v1.0 deployment is the range the capture-the-flag board runs against.
+            </p>
 
             {DAPP_URL ? (
               <a
@@ -210,9 +245,9 @@ export default function InterfacesPage() {
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             ) : (
-              <p className="mt-auto text-[0.8125rem] leading-[1.55] text-px-faint">
-                The vault contract is live on Sui mainnet. No interface serves it at present.
-              </p>
+              <Button href="/ctf" variant="secondary" className="mt-auto w-fit px-5">
+                Attack the retired version
+              </Button>
             )}
           </div>
 
@@ -468,8 +503,13 @@ export default function InterfacesPage() {
           <Card>
             <h3 className="text-base font-semibold text-white">The two addresses that matter</h3>
             <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-              Everything else is derivable from these. Calls need the prize coin as a type
-              argument — omitting it is the most common reason a correct-looking call fails.
+              Everything else is derivable from these, and all seven objects plus every other
+              deployed package are on{' '}
+              <Link href="/chain" className="text-px-accent underline underline-offset-4">
+                the on-chain record
+              </Link>
+              . Calls need the prize coin as a type argument — omitting it is the most common
+              reason a correct-looking call fails.
             </p>
             <div className="mt-5 flex flex-col items-start gap-2.5">
               <AddressChip id={pkg.id} label="package" href={explorerUrl(pkg)} />

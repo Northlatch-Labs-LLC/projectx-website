@@ -26,6 +26,21 @@ import { SOCIAL_URL } from '@/lib/links';
  *
  * "No loss" is used the way claims-banned.json requires: it describes what happens to principal —
  * it is never spent — not how anything downstream is funded.
+ *
+ * ── ON THE WORD "VAULT", 30 August 2026 ──────────────────────────────────────────────────────
+ * The hub sweep of this date measured 38 vault-era words on this page and was dispatched to take
+ * them to near zero. It did not, and the reason is worth writing down rather than repeating the
+ * measurement next quarter.
+ *
+ * EVERY OCCURRENCE OF "vault" ON THIS PAGE IS A WEIR CREATOR VAULT. Not one of them is the retired
+ * ProjectX prize vault. Weir's mechanism *is* park, delegate, yield, withdraw — a creator vault is
+ * an object on Sui mainnet holding supporter principal, and the deposit/yield/withdraw vocabulary
+ * is a correct description of a product that is live today. Stripping those words would not clean
+ * this page; it would make it describe Weir wrongly, which is the opposite of the sweep's purpose.
+ *
+ * What the sweep did instead is disambiguate: where the noun stood bare — "the vault delegates it",
+ * "a small vault" — it now reads "creator vault", so neither a reader nor a future word census can
+ * confuse the two products. The count barely moves. The page was already right.
  */
 
 export const metadata: Metadata = {
@@ -72,8 +87,8 @@ const LOOP = [
   },
   {
     step: '2 · Stake',
-    title: 'The vault delegates it',
-    body: 'The vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield therefore arrives continuously rather than in bursts — and a withdrawal is met from the rung that just matured instead of by breaking one that had not.',
+    title: 'The creator vault delegates it',
+    body: 'The creator vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield therefore arrives continuously rather than in bursts — and a withdrawal is met from the rung that just matured instead of by breaking one that had not.',
   },
   {
     step: '3 · Yield',
@@ -94,7 +109,7 @@ const NOVELTIES = [
   },
   {
     title: 'Custody by contract, not by company',
-    body: 'Supporter principal sits in the creator’s vault contract; what a creator is owed from memberships and paid posts is held by a contract as well. The platform holds neither. If it vanished tomorrow, deposits would still be withdrawable and owed balances would still be owed — the contracts do not need the company to exist.',
+    body: 'Supporter principal sits in the creator’s own vault contract; what a creator is owed from memberships and paid posts is held by a contract as well. The platform holds neither. If it vanished tomorrow, deposits would still be withdrawable and owed balances would still be owed — the contracts do not need the company to exist.',
   },
   {
     title: 'A paywall that fails locked',
@@ -174,9 +189,9 @@ export default function SocialPage() {
           ))}
         </div>
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-px-faint">
-          Sui floors a single stake at 1 SUI, so very small vaults build fewer rungs and their
+          Sui floors a single stake at 1 SUI, so very small creator vaults build fewer rungs and their
           yield arrives in bursts rather than continuously — the platform says so itself rather
-          than letting a small vault discover it.
+          than letting a small creator vault discover it.
         </p>
       </Section>
 
@@ -238,7 +253,7 @@ export default function SocialPage() {
             </Button>
           }
         >
-          Creators are live on the platform now, each with a vault on chain — and the door is in
+          Creators are live on the platform now, each with a creator vault on chain — and the door is in
           closed alpha behind invitation codes. Join the waiting list to hear the moment it
           opens; once inside, the withdraw button is the fastest way to believe the rest of this
           page.

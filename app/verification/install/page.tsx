@@ -147,6 +147,7 @@ export default function VerifyInstallPage() {
       <Section>
         <div className="flex flex-col items-center gap-12">
           <SectionHeader
+            as="h1"
             eyebrow="Product · ProtocolX Verify"
             title="Install it, open a pull request, read the evidence"
             lead="Verify is a GitHub App. Installed on a Sui Move repository, it puts five check runs from the ProtocolX Verification Standard on every pull request — run by the same engine that measures our own mainnet contracts, reported on your commit."

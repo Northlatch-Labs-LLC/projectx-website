@@ -101,62 +101,90 @@ export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? 'https://weir.soci
 // the same Vercel project that served the old host. Never advertise a host that does not answer.
 export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.social';
 
-// RE-MEASURED 2026-08-30, in a browser, at 1024px — the tightest width at which this bar renders
-// at all, since the pill is `hidden` below `lg`. The previous note here put the ceiling at ~630px
-// and these labels at ~545px, and it was conservative in a way that mattered: it was read as
-// forbidding a sixth entry, and "Verification" could not be added without deleting something.
+// RE-MEASURED 2026-08-30 (second pass, hub rebuild), in a browser, at 1024px — the tightest
+// width at which this bar renders at all, since the pill is `hidden` below `lg`.
 //
-// The real figures, hit-tested rather than estimated. The bar is 1009px inside its padding; the
-// logo is 153px and the actions cluster 172px of actual content, both fixed. The centred pill
-// therefore breaks at a measured 637px — confirmed by growing a probe label one step at a time
-// until the bar, the document, or the button's own height overflowed. The six labels below
-// measure 557px, which leaves 80px of headroom at the worst width, with the bar and document
-// both at zero horizontal overflow and the "See draws" button still 128×40 on one line.
+// ⚠️ THE CRITERION MATTERS MORE THAN THE NUMBER, and the first pass of this measurement got it
+// wrong. Growing a probe label and watching for overflow gives a ceiling of ~677px: the document,
+// the header and the row all still report zero horizontal overflow at 675px. That figure is
+// useless, because this pill is a flex container that WRAPS. It never overflows — it silently
+// becomes two rows of links inside a rounded bar, which reads as a layout bug rather than as an
+// overflow, and no scrollWidth check anywhere will catch it.
 //
-// So six is not a ceiling and never was — 637px is. Anyone adding a seventh should re-run that
-// measurement rather than trusting this paragraph, for exactly the reason this paragraph exists.
+// Measured again with the honest predicate — every link's `top` identical, so exactly one line —
+// on the real element, growing a probe one narrow character at a time:
 //
-// Until 11 Aug the desktop bar carried five and `/security`, `/sponsor` and `/community` were
-// reachable *only* through the mobile hamburger, which renders FOOTER_SECTIONS. Three real pages
-// were invisible to anyone on a laptop.
+//     644px  one line     ← last good
+//     646px  TWO LINES    ← breaks
+//
+// So the ceiling is 645px, and the previous note's 637px was very nearly right for the right
+// reason. Fixed figures either side: the bar is 1009px inside its padding, the logo 160px, the
+// "Verify a repo" button 118×40.
+//
+// Measured candidates for the hub rebuild, all at 1024px on the live element:
+//
+//     Verification · Draws · Social · Names · For organisers · Developers        557px  1 line
+//     Verification · Security · On chain · Social · Draws · Developers           526px  1 line  ← shipped
+//     Verification · Security · On chain · Social · Draws · Names · Developers   603px  1 line
+//     …· Draws · Organisers · Developers (7, shortened)                          627px  1 line
+//     …· Draws · For organisers · Developers (7, full label)                     646px  2 LINES
+//
+// The seven-label set that keeps "For organisers" is the one that breaks, by a single pixel over
+// the ceiling. Shortening it to "Organisers" fits at 627px but leaves 18px of headroom, which is
+// not enough to survive a font-metric difference on someone else's machine. The shipped set
+// leaves 119px.
+//
+// Anyone changing this bar must re-run the measurement WITH THE LINE-COUNT PREDICATE, for exactly
+// the reason this paragraph exists. Checking for overflow will tell you a broken bar is fine.
 /**
- * The primary navigation, ordered by how quickly a visitor can become revenue.
+ * The primary navigation of a verification hub.
  *
- * It used to be How it works · Security · Sponsor · Builders · Community · CTF — six links, five of
- * which serve developers and sponsors, and none of which reached a thing anyone can buy. Two of the
- * three products had no entry in their own company's navigation, and the organiser — the highest
- * value customer on the estate — could only be reached by knowing the raffle subdomain existed and
- * then finding the third link inside it.
+ * Rebuilt 30 August 2026 on the Master's order: *"We need to present our verification, our
+ * security steps. We need to present via social, and we need to present ProtocolX data."* Those
+ * four are now four of the six entries, and five of the six are pages on THIS site rather than
+ * links off it — which is the difference between a hub and a link farm. The bar previously sent a
+ * visitor off-domain on three of its six entries.
  *
- * Everything the old nav carried still exists; it now lives under Developers, which is what it was.
+ * What changed, and the reasoning for each:
+ *
+ *   + Security    — existed, was reachable only through the footer and the mobile drawer.
+ *   + On chain    — new route. The deployment record had no surface of its own; it was three
+ *                   sections down /builders and inside a caveat on /security.
+ *   ~ Social      — was an external link straight to weir.social, which skipped this hub's own
+ *                   page about Weir entirely. It now opens /social, which presents the product and
+ *                   then links out. "Present via social" is a job this site does, not one it
+ *                   delegates by hyperlink.
+ *   − Names       — off the bar, kept in the footer's Products block. It is the weakest entry on
+ *                   merit: the registrar sits behind Weir's closed alpha, and /interfaces already
+ *                   says in its own words that suins.io needs no invitation and costs less.
+ *   − For organisers — off the bar, kept in the footer's Products block. This one is a genuine
+ *                   loss and it is recorded as one: it was deliberately restored to the bar on
+ *                   30 August 2026 as the raffle's highest-value customer. It is out because the
+ *                   arithmetic above leaves no room for it — the seven-label set measures 646px
+ *                   against a 645px ceiling. It is a ranked trade, not an oversight, and it is
+ *                   flagged for the Master rather than made quietly.
+ *
+ * Everything the old bar carried is still one click from every page on the site.
  */
 export const NAV_LINKS = [
   // Verification leads, by operator order (30 Aug 2026: "Verification is now the main service
-  // promoted on the .dev hub .... Names is not the flagship product"). It is the only entry that
-  // is a page on THIS site rather than a link off it, which is the point — this domain is the
-  // verification hub, and the other three surfaces are products it vouches for.
+  // promoted on the .dev hub .... Names is not the flagship product").
   { href: '/verification', label: 'Verification' },
+  // "our security steps" — the Master, 30 Aug 2026.
+  { href: '/security', label: 'Security' },
+  // "we need to present ProtocolX data" — the Master, same order. /chain is that surface.
+  { href: '/chain', label: 'On chain' },
+  // Internal on purpose; see the note above. /social links out to weir.social from the page.
+  { href: '/social', label: 'Social' },
   { href: RAFFLE_URL, label: 'Draws', external: true },
-  { href: SOCIAL_URL, label: 'Social', external: true },
-  // Names keeps its place and loses the lead. Same order-of-revenue reasoning as before; what
-  // changed is that a name is no longer the fastest thing a stranger can buy here, because the
-  // registrar is behind Weir's closed alpha and the First Report is not.
-  { href: NAMES_URL, label: 'Names', external: true },
-  // Present only while an interface serves it. The vault's front end was retired on 25 August
-  // 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in the top
-  // nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set again.
-  ...(DAPP_URL ? ([{ href: DAPP_URL, label: 'Vault', external: true }] as const) : []),
-  // /organiser/apply, not /organiser. The console at /organiser is allowlisted — the contract
-  // aborts with `EOrganiserNotAllowed` for any address that has not been admitted — and it
-  // renders the full creation form to a disconnected visitor before it says so. /organiser/apply
-  // opens with "Apply to run competitions" and the admission steps, which is what this label
-  // promises. See components/home/Organisers.tsx.
+  // Present only while an interface serves the vault. The vault's front end was retired on
+  // 25 August 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in
+  // the top nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set.
   //
-  // This entry was accidentally dropped when Verification was added on 30 August 2026 and put
-  // straight back the same hour. Nothing about the ruling called for removing it, the bar has the
-  // room (see the measurement above), and losing it would have taken the highest-value customer
-  // on the raffle off the top nav as a side effect of promoting a different product.
-  { href: `${RAFFLE_URL}/organiser/apply`, label: 'For organisers', external: true },
+  // Kept through the hub rebuild. It costs nothing while DAPP_URL is null, and the measurement
+  // above has 119px of headroom — enough for the 62px this label adds if a vault interface ever
+  // serves again.
+  ...(DAPP_URL ? ([{ href: DAPP_URL, label: 'Vault', external: true }] as const) : []),
   { href: '/builders', label: 'Developers' },
 ] as const;
 
@@ -223,13 +251,27 @@ export const FOOTER_SECTIONS: {
       ...(DAPP_URL ? [{ label: 'Prize vault', href: DAPP_URL, external: true }] : []),
     ],
   },
+  /*
+   * "Boost the prize" pointed at /sponsor and is gone from this block — the Master's order of
+   * 30 August 2026, "There is no sponsor, there is no prize." The route is archived under
+   * operations/archive/2026-08-30-hub-vault-sweep/ and 308s to /protocol, so any copy of that URL
+   * still in the wild lands on the record of the contract rather than on a 404.
+   *
+   * "Deployed addresses" pointed three sections down /builders. It now names the route that
+   * exists for it. The old anchor still resolves — /builders keeps its #addresses section and
+   * hands off to /chain — so no shared link breaks either way.
+   *
+   * Capture the flag moved up from Developers, because the vault moved into it: /ctf is where the
+   * vault's mechanism now lives on this hub, as the subject matter of the range rather than as a
+   * pitch. It sits beside the mechanism page it belongs to.
+   */
   {
     title: 'Protocol',
     links: [
       { label: 'How it works', href: '/protocol' },
       { label: 'Security', href: '/security' },
-      { label: 'Deployed addresses', href: '/builders#addresses' },
-      { label: 'Boost the prize', href: '/sponsor' },
+      { label: 'On chain', href: '/chain' },
+      { label: 'Capture the flag', href: '/ctf' },
     ],
   },
   {
@@ -238,8 +280,8 @@ export const FOOTER_SECTIONS: {
       { label: 'Build on ProjectX', href: '/builders' },
       { label: 'Protocol API', href: '/builders#api' },
       { label: 'Blueprints', href: '/blueprints' },
+      { label: 'Every interface', href: '/interfaces' },
       { label: 'Ship an interface', href: '/interfaces#build' },
-      { label: 'Capture the flag', href: '/ctf' },
     ],
   },
   {

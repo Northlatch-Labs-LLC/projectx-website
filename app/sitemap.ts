@@ -29,8 +29,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ['/interfaces', 0.9, 'weekly'],
     ['/blueprints', 0.8, 'weekly'],
     ['/ctf', 0.8, 'weekly'],
-    ['/sponsor', 0.6, 'monthly'],
-    ['/security', 0.7, 'monthly'],
+    // /sponsor was here. It is retired and 308s to /protocol (see next.config.mjs), and a
+    // sitemap must never advertise a URL that redirects — it asks a crawler to spend a fetch
+    // learning something this file already knows.
+    ['/security', 0.8, 'monthly'],
+    // The deployment record's own surface, added 30 August 2026. Weighted with /security rather
+    // than with the developer pages: "check it yourself" is the argument this hub is making, and
+    // /chain is where that argument resolves to identifiers.
+    ['/chain', 0.8, 'monthly'],
     ['/builders', 0.6, 'monthly'],
     ['/faq', 0.6, 'monthly'],
     ['/community', 0.4, 'monthly'],

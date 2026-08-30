@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
 // Built-by: @projectx.sui /|\ · Co-authored-by: Claude
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { ProtocolArt } from '@/components/ui/PageArt';
 import { Section, SectionHeader } from '@/components/ui/Section';
@@ -13,49 +14,138 @@ import { StackStrip } from '@/components/ui/StackStrip';
 import { PhaseFlow } from '@/components/protocol/PhaseFlow';
 import { LadderDiagram } from '@/components/protocol/LadderDiagram';
 import { DrawDiagram } from '@/components/protocol/DrawDiagram';
-import { Mission } from '@/components/home/Mission';
+import { Warning } from '@/components/ui/Icons';
 import { formatBps, formatDuration, formatSui } from '@/lib/format';
 import { LADDER_DEPTH } from '@/lib/derive';
 import { SNAPSHOT } from '@/lib/snapshot';
 
-import { DAPP_URL } from '@/lib/links';
-
 export const metadata: Metadata = {
   title: 'How it works',
   description:
-    'The mechanism in full: the stake ladder, the weighted draw, the oracle-bounded conversion, and the four phases each epoch walks through.',
+    'The prize vault contract in full: the stake ladder, the weighted draw, the oracle-bounded conversion, the four phases of an epoch, and the type-system properties that bound all of it. Live on Sui mainnet; no interface serves it at present.',
 };
 
 /**
- * `Mission` is rendered here, not on the home page.
+ * Re-registered 30 August 2026 from a pitch into a record.
  *
- * It moved on 30 August 2026. It is the argument for prize-linked saving — why the mechanism
- * this page documents is worth having — and it ran on the home page directly beneath
- * `HowItWorks`, which is the mechanism itself. Two consecutive vault sections on the hub the
- * Master has ruled the verification hub, the second of them arguing for a product whose
- * interface was retired in August.
+ * The Master: *"the v1.0.1 will go to the capture the flag section on the hub."* This page is what
+ * that instruction needs to be true. /ctf teaches v1.0 and v1.0.1 and cannot do it without the
+ * mechanism, so the mechanism survives here — as the contract under test, and nowhere else on this
+ * hub as a thing to buy.
  *
- * The component is imported unchanged from components/home/ and its file was not touched. It
- * keeps that path because it is still the same section, and moving the file would make the
- * relocation look like a rewrite in every diff that follows. It renders last, after the
- * mechanism and the caveat, which is the order the argument reads best in: what it does, what
- * it costs you when it breaks, then why anyone wants it.
+ * WHAT CHANGED IS THE REGISTER, NOT THE FACTS. Every parameter, phase, diagram, bound and caveat is
+ * the same and comes from the same modules. What is gone is the second person: the page opened
+ * "A prize built from staking yield, on a deposit that never leaves your control" and went on to
+ * tell a reader that *their* right to leave outranks the pool's yield — a purchase argument
+ * addressed to someone who cannot make the purchase, because the interface was retired on 25 August
+ * 2026. It now describes a contract instead of courting a depositor.
  *
- * This page is now async because Mission is — it reads the settled-draw count from getStats().
+ * IT MUST NEVER SAY THE VAULT IS DEAD. It is not. The contract is live on Sui mainnet, its objects
+ * are listed on /chain, and `sponsor_prize` is still a public entry function. It is real and it is
+ * unreachable, and those are different sentences.
+ *
+ * WHAT ARRIVED, all of it verbatim from /security, because these are properties of THIS contract
+ * rather than of the company:
+ *   · the six type-system defences,
+ *   · the oracle-validation and third-party-liveness scope items,
+ *   · the zero-yield monitoring note.
+ *
+ * WHAT LEFT: `<Mission />` — "People save more when saving is exciting". It is the ARGUMENT FOR
+ * prize-linked saving, which is the one thing a record must not carry. Archived complete at
+ * operations/archive/2026-08-30-hub-vault-sweep/components/home/Mission.tsx; no route imports it.
+ * The page is synchronous again as a result — Mission was the only async dependency on it.
  */
-export default async function ProtocolPage() {
+export default function ProtocolPage() {
   const { config } = SNAPSHOT.pool;
+
+  /* Moved from /security on 30 August 2026, unchanged. These are compile-time properties of the
+     vault package, so they belong beside the mechanism they bound rather than on a page about the
+     company's practice. */
+  const defences = [
+    {
+      title: 'Principal is unreachable from admin code',
+      body: 'No function taking the admin capability can reach the liquid balance, the staked principal, the total, or any deposit receipt. This is not a permission check that could be misconfigured or forgotten — those types are not in scope for that code path, and the compiler is what enforces it.',
+    },
+    {
+      title: 'Total principal has exactly two writers',
+      body: 'It increases in deposit, by exactly the coin paid in, and decreases in withdraw, by exactly the receipt principal. No other function writes it, and the test suite asserts the invariant after every operation.',
+    },
+    {
+      title: 'Withdrawals have no guard to abuse',
+      body: 'Deposits can be paused. Withdrawals cannot: there is no pause flag, cooldown or rate limit on the withdrawal path, and its absence is asserted directly in the tests so it cannot be reintroduced quietly.',
+    },
+    {
+      title: 'Positions cannot be moved by anyone',
+      body: 'The deposit receipt has key without store. It cannot be transferred, sold, lent or wrapped by any external transaction, which removes an entire class of position-stealing exploit rather than defending against it.',
+    },
+    {
+      title: 'The draw cannot be ground',
+      body: 'Randomness is drawn from Sui’s native source inside a non-public entry function, so the value cannot be observed and acted upon in the same transaction. Ineligible slots are resampled rather than skipped, keeping the distribution exactly proportional to stake.',
+    },
+    {
+      title: 'The settlement swap is floored on chain',
+      body: 'The price is read and a minimum output pinned into a ticket object that Move cannot drop, copy or store — so the transaction cannot complete unless the settlement consumes it in the same block. An execution below the floor reverts the swap with it.',
+    },
+  ];
+
+  /* Also from /security, unchanged: the two out-of-scope items that are facts about this
+     contract's settlement path rather than about the estate's practice. */
+  const bounds = [
+    {
+      title: 'Oracle validation',
+      body: 'Settlement bounds every conversion with a Switchboard aggregator, validated hard: a non-positive price, a zero mean, a sample older than the freshness window, responder dispersion or a value outside the permitted band each abort the settlement outright. Multi-feed redundancy is on the roadmap.',
+    },
+    {
+      title: 'Third-party liveness',
+      body: 'Settlement needs an oracle gateway and a DEX pool to be reachable. When they are not, the epoch does not settle and the pot rolls forward. That is the designed outcome and it costs liveness, not principal.',
+    },
+  ];
 
   return (
     <>
       <PageHeader
-        eyebrow="How it works"
-        title="A prize built from staking yield, on a deposit that never leaves your control"
-        lead="Principal is delegated to a validator and returned 1:1. The yield that principal earns is pooled, and each epoch the whole pot goes to one depositor instead of a fraction of it to everyone. That is the design; in Alpha the harvester has not yet covered a prize, and sponsors have funded every draw settled so far."
+        eyebrow="Prize Vault · the mechanism"
+        title="How the prize vault works, in full"
+        lead={`Principal is delegated to a validator and returned 1:1. The yield that principal earns is pooled, and each epoch the whole pot goes to one depositor instead of a fraction of it to everyone. That is the design; in Alpha the harvester has not yet covered a prize, and sponsors funded every draw settled so far.`}
+        proof="This page is a record of a deployed contract, not an offer. It is also the technical appendix to the capture-the-flag range, which runs against the retired v1.0 of the package described here."
         art={<ProtocolArt className="w-full" />}
       >
         <Badge tone="neutral">Sui mainnet</Badge>
+        <Badge tone="gold">No interface serves it</Badge>
       </PageHeader>
+
+      {/* The status statement, first thing, before any mechanism. A reader who arrives from a
+          two-year-old link deserves to know where they stand before they read three screens about
+          a deposit flow. Worded to say what is true twice over: the contract is live, the door is
+          gone. Neither half may be dropped. */}
+      <Section>
+        <Card className="border-px-gold/40">
+          <div className="flex gap-4">
+            <Warning className="mt-0.5 h-6 w-6 shrink-0 text-px-gold" />
+            <div className="flex flex-col gap-3">
+              <h2 className="text-lg font-semibold text-white">Where this stands today</h2>
+              <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+                The vault&rsquo;s contract is live on Sui mainnet and everything on this page
+                describes it accurately. Its interface was retired on 25 August 2026, so there is
+                nothing here to deposit into today. The package, the pool, the treasury and every
+                other object are listed with their identifiers on{' '}
+                <Link href="/chain" className="text-px-accent underline underline-offset-4">
+                  the on-chain record
+                </Link>
+                , and can be read on a block explorer without our permission or our participation.
+              </p>
+              <p className="text-[0.95rem] leading-relaxed text-px-text">
+                Where the vault is still an active subject on this hub is{' '}
+                <Link href="/ctf" className="text-px-accent underline underline-offset-4">
+                  the capture-the-flag range
+                </Link>
+                : eight challenges built from real findings in v1.0, each fixed in v1.0.1, run
+                against the retired deployment. This page is the appendix a player reads first.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </Section>
 
       <Section>
         <SectionHeader
@@ -128,8 +218,9 @@ export default async function ProtocolPage() {
               <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
                 A {formatBps(config.liquidityBufferBps)} buffer stays liquid, so an ordinary
                 withdrawal never has to disturb the ladder. A withdrawal larger than the
-                buffer pulls from the ladder head immediately and regardless of maturity —
-                your right to leave outranks the pool&rsquo;s yield, every time, by design.
+                buffer pulls from the ladder head immediately and regardless of maturity — a
+                depositor&rsquo;s right to leave outranks the pool&rsquo;s yield, every time, by
+                design.
               </p>
             </Card>
             <Card>
@@ -151,7 +242,7 @@ export default async function ProtocolPage() {
       <Section tone="panel">
         <SectionHeader
           eyebrow="The draw"
-          title="Your weight is your share"
+          title="Weight is share"
           lead="Selection is weighted in proportion to stake. Twice the principal is twice the weight — never a guarantee, and never at anyone else's expense."
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
@@ -160,18 +251,18 @@ export default async function ProtocolPage() {
             <Card>
               <h3 className="text-base font-semibold text-white">Losing costs nothing</h3>
               <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-                If you are not drawn, your position is exactly what it was: the same
+                A depositor who is not drawn holds exactly what they held before: the same
                 principal, withdrawable on demand, entered in the next epoch. The only thing
-                you forgo is the staking yield you would have earned on your own deposit — which
-                is what the prize is designed to come from.
+                forgone is the staking yield that deposit would have earned on its own — which is
+                what the prize is designed to come from.
               </p>
             </Card>
             <Card>
               <h3 className="text-base font-semibold text-white">
-                The receipt cannot be taken from you
+                The receipt cannot be taken from its holder
               </h3>
               <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-                Your deposit receipt is a Move object with{' '}
+                A deposit receipt is a Move object with{' '}
                 <code className="rounded bg-black/50 px-1.5 py-0.5 font-mono text-[0.85em] text-px-accent-200">
                   key
                 </code>{' '}
@@ -235,26 +326,71 @@ export default async function ProtocolPage() {
         </Card>
       </Section>
 
-      <Mission />
+      {/* Moved here from /security on 30 August 2026, verbatim. These are compile-time properties
+          of this package. They read as a sales argument on a page about the company and as a
+          specification on a page about the contract, which is the whole reason for the move. */}
+      <Section tone="panel">
+        <SectionHeader
+          eyebrow="Defences"
+          title="Six properties, each enforced by structure rather than policy"
+          lead="A protective measure that depends on an operator behaving correctly is a promise. These are not that — each one is a consequence of how the Move package is typed, and the compiler is what enforces it."
+          proof="Relocated from the security page on 30 August 2026, unchanged. They are properties of this contract rather than of the company that wrote it, and they belong beside the mechanism they bound."
+        />
+        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+          {defences.map((item) => (
+            <li key={item.title} className="panel flex flex-col gap-3 p-6">
+              <h3 className="text-base font-semibold text-white">{item.title}</h3>
+              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section>
+        <SectionHeader
+          eyebrow="Where it stops"
+          title="What the contract does not control"
+          lead="The guarantees above end at the package boundary. Two things outside it can stop an epoch settling, and neither of them can reach principal."
+        />
+        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+          {bounds.map((item) => (
+            <li key={item.title} className="panel flex gap-4 border-px-gold/20 p-6">
+              <Warning className="mt-0.5 h-5 w-5 shrink-0 text-px-gold" />
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-white">{item.title}</h3>
+                <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <Card className="mt-6">
+          <h3 className="text-base font-semibold text-white">Monitoring what silence hides</h3>
+          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            A protocol can fail by doing nothing, and a dashboard showing green is not evidence
+            that anything happened. The pool counts consecutive zero-yield harvests and the Sui
+            epochs elapsed since yield was last realised, and reports the state as anomalous once
+            it crosses a threshold — emitted on chain, where it cannot be quietly ignored.
+          </p>
+        </Card>
+      </Section>
 
       <Section tone="edge">
         <Callout
           title="Every claim here resolves to an object on Sui"
           actions={
             <>
-              {DAPP_URL && (
-                <Button href={DAPP_URL} variant="primary" className="px-5">
-                  Open the vault
-                </Button>
-              )}
-              <Button href="/builders#addresses" variant="secondary">
-                Deployed addresses
+              <Button href="/ctf" variant="primary" className="px-5">
+                Attack the retired version
+              </Button>
+              <Button href="/chain" variant="secondary">
+                The on-chain record
               </Button>
             </>
           }
         >
           Open the package, the pool, the treasury or the price feed on a block explorer and
-          read the same state this page describes.
+          read the same state this page describes. Nothing about doing that depends on us.
         </Callout>
       </Section>
     </>
