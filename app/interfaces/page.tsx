@@ -19,6 +19,37 @@ export const metadata: Metadata = {
   title: 'Interfaces',
   description:
     'Every way to use ProjectX. The reference vault is one of them — anyone can build another, with no permission and no revenue share.',
+  // A dedicated card, because this is the router. Someone who meets this link has not yet chosen a
+  // product, and the site-wide generated card argues the vault's invariant — an answer to a
+  // question they have not asked yet. The card's whole job is orientation: four products and the
+  // state of each door, legible in about two seconds.
+  //
+  // It prints projectxprotocol.dev and nothing else, even though this page routes to protocolx.io
+  // and weir.social. A card is the face of the page it sits on, not of the destinations that page
+  // links to; a reader who sees one domain in the unfurl and lands on another has been misled by
+  // the preview, however accurate each half was on its own.
+  //
+  // The state chips are deliberately more conservative than the badges rendered below. Weir and
+  // Names both route into the Weir closed alpha — lib/links.ts records weir.social/names answering
+  // 307 to the waiting list — and the vault has had no interface since 25 August 2026 while its
+  // contract stays live. A card that showed any of them as more open than it is would be a promise
+  // the estate cannot keep, made in the one place nobody can correct it. The token launcher is
+  // absent for the same reason it is absent from the page: its panel renders only when
+  // LAUNCHER_URL is set, and that variable is fail-closed until a subdomain resolves.
+  openGraph: {
+    images: [
+      {
+        url: '/og/interfaces.png',
+        width: 1200,
+        height: 630,
+        alt: 'Every way to use ProjectX — Weir (closed alpha), ProjectX Raffle (live on mainnet), ProjectX Names (closed alpha), ProjectX Vault (contract live, no interface)',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/interfaces.png'],
+  },
 };
 
 export default function InterfacesPage() {
