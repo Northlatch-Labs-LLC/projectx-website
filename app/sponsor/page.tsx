@@ -15,6 +15,34 @@ export const metadata: Metadata = {
   title: 'Boost the prize',
   description:
     'Anyone can add SUI to the prize. It is a gift, not an investment — you cannot get it back, and it goes to a saver rather than to us.',
+  // A dedicated card, because this page is the one that asks for money. An ask that unfurls with
+  // a generic protocol card makes the reader work out what they are being asked for, and the
+  // terms are the whole point here: a sponsorship is not an investment, the sponsor's address
+  // lands on the on-chain receipt, and the money goes to a depositor rather than to us. Stating
+  // those on the card is not a softener — it is what makes the ask legitimate before it is opened.
+  //
+  // The suggested minimum is deliberately not on the card. This page calls it guidance rather
+  // than a hard limit, and a figure whose qualifier cannot travel with it becomes a floor the
+  // moment it is screenshotted.
+  //
+  // The status line says there is no interface and the route is a direct contract call. The vault
+  // has had no front end since 25 August 2026, the button on this page is conditional on one
+  // existing, and a card promising a place to click would send sponsors somewhere that is not
+  // there — the same defect the conditional below already guards against in the page body.
+  openGraph: {
+    images: [
+      {
+        url: '/og/sponsor.png',
+        width: 1200,
+        height: 630,
+        alt: 'Put your name on tomorrow’s prize — not an investment, your address on the receipt, goes to a saver not to us; no interface, direct contract call',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/sponsor.png'],
+  },
 };
 
 export default function SponsorPage() {
