@@ -11,10 +11,8 @@ export const metadata: Metadata = {
   title: 'Verification',
   description:
     'ProtocolX Verify: the verification gates we run on our own mainnet contracts, installable on yours — and fixed-scope verification sprints for Sui Move teams, priced below the audit floor.',
-  // A dedicated card, not the site-wide one: this page's link travels inside prospects' own
-  // chats when a verification pitch is being discussed, and the card is the product's face
-  // there. The asset states the five gates and no prices — pricing stays where it is quoted,
-  // in writing, per engagement.
+  // A dedicated card rather than the site-wide generated one. The asset states the five gates
+  // and carries NO price: prices change and a static card cannot be corrected once shared.
   openGraph: {
     images: [{ url: '/og/verification.png', width: 1200, height: 630, alt: 'ProtocolX Verify — the five PVS check runs' }],
   },
@@ -36,11 +34,10 @@ export default function VerificationPage() {
   /**
    * The five gates, each with the condition under which it reports NEUTRAL rather than a verdict.
    *
-   * Those conditions are written from `engine/ci/gates.sh` and are already stated in the reader's
-   * language on /verification/install. They belong here too: this page is where a prospect decides
-   * whether the standard is serious, and a standard that only describes its happy path is the
-   * weaker document. Two of the five cannot run everywhere, and saying so on the sales page is
-   * cheaper than being found out on the first pull request.
+   * Those conditions are written from `engine/ci/gates.sh` and are also stated, in the reader's
+   * language, on /verification/install. Two of the five cannot run everywhere, and both pages
+   * must say so — a page that describes only the happy path misleads by omission, and the reader
+   * discovers it on their first pull request.
    */
   const gates = [
     {
@@ -139,12 +136,8 @@ export default function VerificationPage() {
             ))}
           </ul>
 
-          {/* The exit this page did not have.
-              Everything above states the product; the only control on the page was a mailto at
-              the bottom of the engagement section, which turns every ready reader into a
-              conversation somebody has to have. /verification/install is the other door: what the
-              checks measure in the reader's own terms, the config file they need, and one control
-              to press. The prices, the anchor and the card on this page are untouched. */}
+          {/* The route to /verification/install, which carries the config file and a control to
+              press. Without it the only control on this page is a mailto. */}
           <Callout
             className="w-full"
             title="Ready to put the checks on your own pull requests?"
@@ -188,14 +181,10 @@ commit: "Kill the two survivors the app found on its first run"`}
         </div>
       </Section>
 
-      {/* Added 2026-08-30. The flagship page was 219 lines while /ctf was 310 and /blueprints 315
-          — the thing the company sells was smaller than two developer toys. This section closes
-          part of that gap, and it does it with material that already existed and was already
-          true: every fact below is stated on /verification/install, which is where a reader who
-          has decided goes. A reader who has NOT decided never reaches it, and the artifact is the
-          single strongest thing this product has to say. No new claim, no new number.
+      {/* Every fact in this section is also stated on /verification/install. It carries no claim
+          and no number that is not already published there.
 
-          Deliberately not called an audit report. It is a bundle of measurements with a digest. */}
+          It must never be called an audit report. It is a bundle of measurements with a digest. */}
       <Section>
         <div className="flex flex-col items-center gap-10">
           <SectionHeader
@@ -235,21 +224,20 @@ commit: "Kill the two survivors the app found on its first run"`}
 
       <Section>
         <div className="flex flex-col items-center gap-12">
-          {/* Rewritten 2026-08-30 because the previous lead could be falsified by any prospect who
-              had asked an auditor for a quote. It asserted a floor of fifteen to forty-five thousand
-              dollars, and that below that line there had been nothing. Both fail against the market
-              as it actually is, filed in operations/company/sui-foundation-research-2026-08-30.md:
-              of eighteen firms serving Sui, exactly one publishes a price at all and it starts near
-              seven thousand — so the fifteen-thousand floor was unsupportable, and quoting a number
-              a buyer can disprove loses the whole page with it. And the layer below is not empty:
-              open-source Move mutation testing exists, is actively maintained, and one of the
-              engines is Sui-only and already runnable as a pull-request action.
+          {/* TWO CLAIMS ARE BANNED IN THIS LEAD and config/claims-banned.json fails the build if
+              either returns.
 
-              The honest difference is narrower and it survives a hostile reader: those tools leave
-              an exit code and a console log, and nobody produces a shareable, attestable,
-              per-commit artifact for Move. That is what this copy now claims, and it is why the
-              claim is stronger than the one it replaces. Do not reinstate either old sentence —
-              config/claims-banned.json fails the build if they return. */}
+              Do not assert an audit price floor of fifteen to forty-five thousand dollars: of
+              eighteen firms serving Sui, exactly one publishes a price at all and it starts near
+              seven thousand, so the figure is falsifiable by any reader who has asked for a quote.
+
+              Do not say the layer below the audit is empty: open-source Move mutation testing
+              exists, is actively maintained, and one engine is Sui-only and already runnable as a
+              pull-request action.
+
+              The defensible claim is narrower and survives a hostile reader: those tools leave an
+              exit code and a console log, and nobody produces a shareable, attestable, per-commit
+              artifact for Move. That is what this copy claims. */}
           <SectionHeader
             eyebrow="Engagement · verification sprint"
             title="Fixed scope, flat quote, below the audit floor"
@@ -288,10 +276,8 @@ commit: "Kill the two survivors the app found on its first run"`}
               and no claim of independence. Sprints sit above it, scoped to the codebase and
               quoted flat, in writing, before work begins.
             </p>
-            {/* The App's price was on /verification/install and nowhere else — so the flagship's
-                own page named the flagship's product and withheld what it costs. Carried here
-                word-for-word from that page, on the estate's standing rule: two pages that
-                paraphrase the same price eventually quote two different ones. */}
+            {/* Word-for-word with /verification/install. Two pages that paraphrase the same price
+                eventually quote two different ones. */}
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               <span className="font-semibold text-white">The App is $149 per repository per
               month</span>, or $1,490 a year. Every pull request gets the five gates and its own
@@ -301,19 +287,14 @@ commit: "Kill the two survivors the app found on its first run"`}
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               Self-serve billing is not open yet, so early access is arranged by email and costs
               nothing until it is. Send the repository name to{' '}
-              {/* hello@projectxprotocol.dev, per operations/BRAND-EMAIL-LAW.md line 23: for
-                  "Company / verification / prospects / the hub" the published address is
-                  hello@, and it forwards to the Master's inbox — verified.
+              {/* MUST be hello@projectxprotocol.dev: it is the published address for
+                  verification enquiries and it reaches a monitored inbox — verified.
 
-                  This page printed claude@protocolx.io until 30 August 2026. That address
-                  forwards ONLY to protocolx@atomicmail.ai (same law, line 147), a machine
-                  mailbox nobody currently reads. It was the contact on the two pages that sell
-                  the First Report, so a buyer who read the page, decided, and wrote to us landed
-                  in a void.
-
-                  This does NOT touch the Master's ruling of 30 August, "keep claude". That
-                  ruling governs the reply-to on OUTBOUND prospect sends, which is a different
-                  thing from an address printed on a public sales page. Do not conflate them. */}
+                  Do not point this at claude@protocolx.io. That address forwards only to
+                  protocolx@atomicmail.ai, a machine mailbox nobody reads, so a reader who wrote
+                  to it would land in a void. Any address printed on a public page must resolve to
+                  an inbox somebody reads; that is a different question from which address
+                  outbound mail uses as its reply-to. */}
               <a
                 className="font-semibold text-white underline underline-offset-4"
                 href="mailto:hello@projectxprotocol.dev?subject=ProtocolX%20Verify%20early%20access"

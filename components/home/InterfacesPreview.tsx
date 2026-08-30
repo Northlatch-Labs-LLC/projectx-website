@@ -11,17 +11,14 @@ import { DAPP_URL, RAFFLE_URL, SOCIAL_URL } from '@/lib/links';
  * The four products, then the invitation to build a fifth.
  *
  * Weir takes the full-width card above the grid and the remaining four keep their 2×2. That is a
- * layout weighting, not a claim of primacy: verification is the estate's flagship and is headlined
- * separately. Nothing in this section should badge or word itself as the flagship.
+ * layout weighting only — no card in this section may badge or word itself as primary.
  *
- * Do not retitle this section "One pool, many front doors". Names and Draws are not interfaces onto
- * the prize vault — Draws is its own contract with its own treasury, and the registrar is a
+ * Do not retitle this section "One pool, many front doors". Names and Draws are not interfaces
+ * onto the prize vault — Draws is its own contract with its own treasury, and the registrar is a
  * separate business selling SuiNS names.
  *
- * Copy leads with what a person gets and what it costs them, because this page is read by people
- * deciding whether to use something. The mechanism is not hidden — each card keeps the one sentence
- * that says what is guaranteed — but it comes after the offer, not instead of it. The engineering
- * account lives on /protocol, /security and /builders.
+ * Each card keeps the one sentence that says what its contract guarantees. The full engineering
+ * account belongs on /protocol, /security and /builders, not here.
  */
 const LIVE = [
   {
