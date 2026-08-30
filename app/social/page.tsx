@@ -27,55 +27,42 @@ import { SOCIAL_URL } from '@/lib/links';
  * "No loss" is used the way claims-banned.json requires: it describes what happens to principal —
  * it is never spent — not how anything downstream is funded.
  *
- * ── ON THE WORD "VAULT", 30 August 2026 ──────────────────────────────────────────────────────
- * The hub sweep of this date measured 38 vault-era words on this page and was dispatched to take
- * them to near zero. It did not, and the reason is worth writing down rather than repeating the
- * measurement next quarter.
- *
+ * ── ON THE WORD "VAULT" ──────────────────────────────────────────────────────────────────────
  * EVERY OCCURRENCE OF "vault" ON THIS PAGE IS A WEIR CREATOR VAULT. Not one of them is the retired
  * ProjectX prize vault. Weir's mechanism *is* park, delegate, yield, withdraw — a creator vault is
  * an object on Sui mainnet holding supporter principal, and the deposit/yield/withdraw vocabulary
- * is a correct description of a product that is live today. Stripping those words would not clean
- * this page; it would make it describe Weir wrongly, which is the opposite of the sweep's purpose.
+ * correctly describes a product that is live today.
  *
- * What the sweep did instead is disambiguate: where the noun stood bare — "the vault delegates it",
- * "a small vault" — it now reads "creator vault", so neither a reader nor a future word census can
- * confuse the two products. The count barely moves. The page was already right.
+ * DO NOT STRIP THESE WORDS. A search-and-replace that treats them as retired prize-vault language
+ * would make this page describe Weir wrongly. Where the noun would otherwise stand bare it reads
+ * "creator vault", so neither a reader nor a word count can confuse the two products.
  */
 
 export const metadata: Metadata = {
   title: 'Support a creator',
   description:
     'The social platform where supporting a creator never spends your money: park SUI in a creator’s vault, the staking yield goes to them, and your deposit stays withdrawable in full — enforced by contract, not policy.',
-  // A dedicated card, on the same reasoning /verification carries one: this is the flagship
-  // product's page and its link is the one most often pasted somewhere a reader decides in two
-  // seconds whether to open it. The site-wide generated card argues the vault's invariant, which
-  // is a different product and the wrong first sentence for this page.
+  // A dedicated card rather than the site-wide generated one, which argues the prize vault's
+  // invariant — a different product, and the wrong first sentence for this page.
   //
-  // The card is ProtocolX's, not Weir's, and deliberately so. This page is a ProtocolX-site page
-  // ABOUT Weir — it is not a Weir surface — so the asset carries the ProtocolX emblem and gradient
-  // and prints projectxprotocol.dev. Weir's crest and its teal-night palette are absent on purpose:
-  // borrowing a product's face onto another brand's page is the crossing the estate does not make,
-  // and an unfurl showing Weir's identity over a projectxprotocol.dev link would misattribute both.
+  // The card is ProtocolX's, not Weir's. This is a ProtocolX-site page ABOUT Weir, not a Weir
+  // surface, so the asset carries the ProtocolX emblem and gradient and prints
+  // projectxprotocol.dev. Weir's crest and teal-night palette must stay off it: an unfurl showing
+  // Weir's identity over a projectxprotocol.dev link misattributes both.
   //
-  // Its four pills restate this page's own guarantees — deposit never spent, yield to the creator,
-  // withdraw any time, enforced by contract — with no yield figure on the card. The arithmetic
-  // below is honest precisely because it is qualified, and a card cannot carry the qualification.
-  // The page header carried a green "Live" badge until 30 August 2026, beside a proof line
-  // opening "Live on Sui mainnet". Both were true of the CONTRACTS and neither was true of the
-  // DOOR: weir.social 307s every visitor to a waiting list. A reader met an invitation in the
-  // header and the closed-alpha section six screens later, and the header is what they act on.
+  // Its four pills restate this page's own guarantees — deposit never spent, yield to the
+  // creator, withdraw any time, enforced by contract — and carry NO yield figure. The arithmetic
+  // below is honest only because it is qualified, and a card cannot carry the qualification.
   //
-  // Also cut here: a sentence offering supporters a share of the yield. Weir's own Creator Terms
-  // §3.3 forbid implying a supporter gains financially, and that clause was live on this site.
-  // The mechanism is unchanged; we simply may not advertise it, and the ban is ours.
-  //
-  // The vault, deposit and yield language on this page is NOT retired-ProtocolX copy and must not
-  // be swept as such. Weir's product genuinely is a staking vault. A word census cannot tell the
-  // live mechanism from the retired one, and stripping these would describe Weir wrongly.
-  //
+  // The card must not read as an invitation. weir.social 307s every visitor to a waiting list, so
   // "Weir · Sui mainnet · closed alpha" is the status line: the contracts are live, the door is
-  // not open, and the card must not read as an invitation the product cannot honour.
+  // not open. Do not badge this page "Live" without the closed-alpha half beside it.
+  //
+  // No sentence here may offer supporters a share of the yield. Weir's Creator Terms §3.3 forbid
+  // implying a supporter gains financially.
+  //
+  // The vault, deposit and yield language on this page is NOT retired prize-vault copy and must
+  // not be swept as such — see the note at the top of this file.
   openGraph: {
     images: [
       {
@@ -258,9 +245,9 @@ export default function SocialPage() {
         <Callout
           title="Closed alpha, behind invitation codes"
           actions={
-            /* One href, so one control. This carried a second button, "Become a creator",
-               pointing at the same waiting list — two labels promising two different doors
-               and opening the same one. */
+            /* One href, so one control. Do not add a second button here: every route into Weir
+               currently resolves to the same waiting list, and two labels for one destination
+               promise two doors that do not exist. */
             <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
               Join the waiting list
             </Button>

@@ -30,14 +30,12 @@ export function Badge({
 /**
  * The status dot. It pulses only while something is actually live.
  *
- * The ring used to run unconditionally, which made it decoration wearing the costume of a status
- * light: the page could show a pulsing green dot beside the word "Live" while the reader was
- * looking at figures served from a baked snapshot because the feed was unreachable. A visitor has
- * no way to tell those two states apart, and this project's whole argument is that an outage and
- * an observation must never look the same.
+ * The ring must never run unconditionally. Run unconditionally it is decoration in the costume
+ * of a status light: a pulsing green dot beside the word "Live" while the figures beside it come
+ * from the baked snapshot, with nothing distinguishing the two states.
  *
- * `pulsing` is therefore a required decision at every call site rather than a default. Motion is
- * the signal here — a still dot means the data behind it is not live.
+ * `pulsing` is therefore a required prop at every call site rather than a default. Motion is the
+ * signal — a still dot means the data behind it is not live.
  */
 export function LiveDot({
   tone = 'prize',

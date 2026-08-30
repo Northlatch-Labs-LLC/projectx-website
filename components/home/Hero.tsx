@@ -8,24 +8,14 @@ import { DAPP_URL, RAFFLE_URL } from '@/lib/links';
 import { priceSentence } from '@/lib/suins-pricing';
 
 /**
- * Headline on one side, the thing to do on the other.
+ * Headline on one side, the offer panel on the other.
  *
- * The offer in that panel was a name until 30 August 2026, when the Master ruled verification the
- * main service promoted on this hub and Names explicitly not the flagship. The panel now leads
- * with the First Report and keeps the name search below the divider — demoted, not withdrawn.
- * Nothing was deleted to make room: NameSearch is the same component, unchanged.
+ * The pool figures are not in this component. They render in `Provenance`, which is what they
+ * measure, and they carry a DISPLAY_FLOOR threshold there — do not restate a depositor count
+ * anywhere on this page.
  *
- * The right half used to hold an illustrated trophy ringed by floating labels — "no loss to date",
- * "daily draw", "withdraw anytime", "someone wins tonight". Six phrases orbiting a cup, none of
- * them clickable, all of them competing with the one control on the page that takes money. The
- * offer now occupies that space instead: the sentence, the search, and the two other products.
- *
- * The pool figures that used to sit under this have moved to the vault section, which is what they
- * measure. A depositor count is not a fact about the company, and reading it beside a name search
- * asked the visitor to hold two unrelated products in mind at once.
- *
- * The grid backdrop went with them. Aurora and the top glow stay — they are the site's ground, not
- * an illustration.
+ * Aurora and the top glow are the site's ground, not an illustration; the grid backdrop that
+ * used to sit behind the right half is gone.
  */
 export function Hero() {
   return (
@@ -49,14 +39,13 @@ export function Hero() {
             <span className="text-gradient-accent">so you don’t find out how.</span>
           </h1>
 
-          {/* Task-mandated disclosure, in body weight and above the fold at every width. */}
+          {/* Required disclosure. Body weight, and above the fold at every width. */}
           <p className="max-w-[52ch] text-[0.9375rem] leading-relaxed text-px-faint">
             Experimental, unaudited software. Not a bank, not a savings product, not investment
             advice.
           </p>
         </div>
 
-        {/* The offer, in the space the illustration used to occupy. */}
         <div className="panel flex w-full min-w-0 flex-col gap-5 p-6 sm:p-8">
           <p className="text-lg leading-relaxed text-px-muted">
             <span className="font-semibold text-white">Start with the proof.</span> ProtocolX
@@ -86,11 +75,7 @@ export function Hero() {
           </div>
 
           <div className="mt-1 border-t border-white/[0.07] pt-5">
-            {/* Names lost the lead here on the Master's order of 30 August 2026 — "Names is not
-                the flagship product" — and kept the search. The control is unchanged and still
-                works; what changed is that it is now one of the ways to start rather than the
-                only one on offer, which is also the truer statement: the registrar sits behind
-                Weir's closed alpha, and the First Report does not. */}
+            {/* The name search, below the divider. The control itself is unchanged. */}
             <p className="label mb-3">Or start somewhere else</p>
 
             <p className="mb-3 text-[0.9375rem] leading-relaxed text-px-faint">

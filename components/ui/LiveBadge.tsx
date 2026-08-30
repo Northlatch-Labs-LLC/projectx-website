@@ -7,11 +7,9 @@ import { getStats } from '@/lib/stats';
 /**
  * The network badge, reporting whether the figures beside it are actually live.
  *
- * Four copies of this badge previously read "Live on mainnet" beside a pulsing green dot, always,
- * whatever the protocol API had done. When that API is unreachable the page falls back to a baked
- * snapshot — the numbers stay honest and dated, but the badge kept insisting the feed was live, so
- * a visitor had no way to tell a working day from an outage. The one thing this site sells is that
- * an outage and an observation never look the same, and its own status light broke that rule.
+ * When the protocol API is unreachable the page falls back to the baked snapshot. This badge must
+ * report which of the two the figures beside it came from — a badge hardcoded to "Live on mainnet"
+ * leaves a reader unable to tell an outage from an observation.
  *
  * Live: green, pulsing, named network. Not live: gold, still, and dated. The motion is the signal
  * — a dot that has stopped means the reading behind it has stopped too.

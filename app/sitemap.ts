@@ -7,18 +7,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   /**
-   * Every route this site serves, or the ones that are missing are invisible.
+   * Every route this site serves. A route missing from this list is invisible to a crawler, and
+   * nothing else in the build reports the omission — the page renders, its links work, and the
+   * only symptom is traffic that never arrives. `/verification` shipped absent from here and
+   * stayed that way undetected.
    *
-   * `/verification` shipped without an entry here and stayed that way — the one page on the site
-   * that quotes a price and asks for an engagement was the one page absent from the document
-   * search engines read to find pages. Nothing was broken and nothing complained, which is how it
-   * survived: the page rendered, the links worked, and the only symptom was traffic that never
-   * arrived. It is listed now, above the developer pages, because it is the page most likely to
-   * turn a reader into revenue.
-   *
-   * `/verification/install` is listed beside it at the same priority. It is the conversion page
-   * for the GitHub App and it is not linked from the navigation, so a crawler reaches it through
-   * exactly two routes: this file, and the call to action on /verification.
+   * `/verification/install` is not linked from the navigation at all, so a crawler reaches it
+   * through exactly two routes: this file, and the call to action on /verification.
    */
   const routes: [string, number, MetadataRoute.Sitemap[number]['changeFrequency']][] = [
     ['', 1, 'daily'],
@@ -33,9 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // sitemap must never advertise a URL that redirects — it asks a crawler to spend a fetch
     // learning something this file already knows.
     ['/security', 0.8, 'monthly'],
-    // The deployment record's own surface, added 30 August 2026. Weighted with /security rather
-    // than with the developer pages: "check it yourself" is the argument this hub is making, and
-    // /chain is where that argument resolves to identifiers.
+    // The deployment record's own surface. Weighted with /security, not the developer pages.
     ['/chain', 0.8, 'monthly'],
     ['/builders', 0.6, 'monthly'],
     ['/faq', 0.6, 'monthly'],

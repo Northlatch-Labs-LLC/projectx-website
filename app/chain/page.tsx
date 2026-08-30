@@ -25,25 +25,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * The estate's on-chain record, given a surface of its own.
+ * The on-chain deployment record.
  *
- * The Master, 30 August 2026: *"we need to present ProtocolX data ... what is deployed, on which
- * network, with every id resolvable on an explorer."*
+ * This page renders material that `/builders#addresses` and `/security` also render, from the
+ * same modules. Nothing was moved out of those pages; each still renders its own.
  *
- * This existed already and it was scattered. `lib/chain.ts` held seven objects rendered only at
- * `/builders#addresses`, three sections down a page addressed to integrators;
- * `lib/security-chain-read.ts` held the upgrade-authority table for all four products and rendered
- * only inside `/security`, framed as a caveat about the vault. Neither was reachable by anyone who
- * simply wanted to know what this company has deployed.
- *
- * Nothing on this page is new information and nothing was moved out of the pages above — both
- * still render their own material. What is new is that the record has a name, a route and a place
- * in the navigation, which is what makes "check it yourself" an instruction rather than a slogan.
- *
- * Every identifier here comes from a module, never from prose typed into this file. `chain.ts` is
- * the deployment record, `security-chain-read.ts` is a dated chain read that renders "not yet
- * published" rather than a guess for anything it could not verify, and `ctf.ts` carries the
- * retired v1.0 range. If a value is wrong it is wrong in one place.
+ * INVARIANT: every identifier here comes from a module, never from prose typed into this file.
+ * `chain.ts` is the deployment record, `security-chain-read.ts` is a dated chain read that
+ * renders "not yet published" rather than a guess for anything it could not verify, and `ctf.ts`
+ * carries the retired v1.0 range. If a value is wrong it is wrong in one place.
  */
 export default function ChainPage() {
   const ctfPublished = isCtfConfigured();

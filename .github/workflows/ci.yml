@@ -1,8 +1,7 @@
 # Built-by: @projectx.sui /|\ · Co-authored-by: Claude
 #
-# PR-branch CI. Until now this repo had only deploy-on-main: pull requests carried no
-# checks at all, so a type error rode to main and was caught — or not — by the deploy.
-# Weir and the raffle both gate their PRs; this closes the same gap here.
+# PR-branch CI. Without it this repo has only deploy-on-main, so a type error rides to
+# main and is caught — or not — by the deploy.
 #
 # Typecheck only, deliberately. `next build` needs the runtime environment (the daemon
 # URL and keys live in Vercel, not here), and Vercel already builds every deploy of main

@@ -16,7 +16,7 @@
     "background-image and have no computed colour to read. Those were measured in a browser against",
     "the darkest stop of each gradient - hero headline 7.56, section eyebrow 11.79, primary CTA label",
     "7.23 - and the darkest stop is recorded here as a literal so a palette change still moves it.",
-    "A full render-time sweep is P2-14 and needs a browser in CI."
+    "A full render-time sweep would need a browser in CI and is not implemented."
   ],
   "themes": ["default", "green"],
   "pairs": [

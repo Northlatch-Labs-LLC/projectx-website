@@ -7,11 +7,9 @@ import { NextResponse } from 'next/server';
  *
  * # What this deliberately does NOT do
  *
- * It does not send the visitor an email. The estate's standing law is that nothing mails a real
- * recipient without the operator's explicit go, and a double-opt-in confirmation is a real email.
- * So this route records the address into the contact platform with `CONSENT` set to
- * `pending-doi` — a state the campaign machinery treats as unsendable — and the confirmation
- * flow fires only when campaigns are activated by the operator's word. A list built this way is
+ * It sends no mail of any kind, the double-opt-in confirmation included. It records the address
+ * into the contact platform with `CONSENT` set to `pending-doi` — a state the campaign machinery
+ * treats as unsendable — and nothing on this route can transition it. A list built this way is
  * slower to become sendable and impossible to have mailed anyone by accident.
  *
  * # Failure discipline

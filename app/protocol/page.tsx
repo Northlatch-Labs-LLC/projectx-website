@@ -26,41 +26,22 @@ export const metadata: Metadata = {
 };
 
 /**
- * Re-registered 30 August 2026 from a pitch into a record.
+ * The record of the prize-vault contract: parameters, phases, diagrams, bounds and caveats, all
+ * read from the same modules that feed /chain and /ctf.
  *
- * The Master: *"the v1.0.1 will go to the capture the flag section on the hub."* This page is what
- * that instruction needs to be true. /ctf teaches v1.0 and v1.0.1 and cannot do it without the
- * mechanism, so the mechanism survives here — as the contract under test, and nowhere else on this
- * hub as a thing to buy.
+ * IT MUST NEVER SAY THE VAULT IS DEAD. It is not. The contract is live on Sui mainnet, its
+ * objects are listed on /chain, and `sponsor_prize` is still a public entry function. What was
+ * retired on 25 August 2026 is the interface. It is real and it is unreachable, and those are
+ * different sentences.
  *
- * WHAT CHANGED IS THE REGISTER, NOT THE FACTS. Every parameter, phase, diagram, bound and caveat is
- * the same and comes from the same modules. What is gone is the second person: the page opened
- * "A prize built from staking yield, on a deposit that never leaves your control" and went on to
- * tell a reader that *their* right to leave outranks the pool's yield — a purchase argument
- * addressed to someone who cannot make the purchase, because the interface was retired on 25 August
- * 2026. It now describes a contract instead of courting a depositor.
- *
- * IT MUST NEVER SAY THE VAULT IS DEAD. It is not. The contract is live on Sui mainnet, its objects
- * are listed on /chain, and `sponsor_prize` is still a public entry function. It is real and it is
- * unreachable, and those are different sentences.
- *
- * WHAT ARRIVED, all of it verbatim from /security, because these are properties of THIS contract
- * rather than of the company:
- *   · the six type-system defences,
- *   · the oracle-validation and third-party-liveness scope items,
- *   · the zero-yield monitoring note.
- *
- * WHAT LEFT: `<Mission />` — "People save more when saving is exciting". It is the ARGUMENT FOR
- * prize-linked saving, which is the one thing a record must not carry. Archived complete at
- * operations/archive/2026-08-30-hub-vault-sweep/components/home/Mission.tsx; no route imports it.
- * The page is synchronous again as a result — Mission was the only async dependency on it.
+ * This page describes a contract; it must not address a depositor in the second person, because
+ * there is no interface through which a reader can act on it.
  */
 export default function ProtocolPage() {
   const { config } = SNAPSHOT.pool;
 
-  /* Moved from /security on 30 August 2026, unchanged. These are compile-time properties of the
-     vault package, so they belong beside the mechanism they bound rather than on a page about the
-     company's practice. */
+  /* Compile-time properties of the vault package, stated beside the mechanism they bound.
+     Rendered only here; /security links across rather than duplicating them. */
   const defences = [
     {
       title: 'Principal is unreachable from admin code',
@@ -88,8 +69,8 @@ export default function ProtocolPage() {
     },
   ];
 
-  /* Also from /security, unchanged: the two out-of-scope items that are facts about this
-     contract's settlement path rather than about the estate's practice. */
+  /* Out-of-scope items that are facts about this contract's settlement path. Rendered only
+     here, for the same reason as `defences` above. */
   const bounds = [
     {
       title: 'Oracle validation',
@@ -114,10 +95,9 @@ export default function ProtocolPage() {
         <Badge tone="gold">No interface serves it</Badge>
       </PageHeader>
 
-      {/* The status statement, first thing, before any mechanism. A reader who arrives from a
-          two-year-old link deserves to know where they stand before they read three screens about
-          a deposit flow. Worded to say what is true twice over: the contract is live, the door is
-          gone. Neither half may be dropped. */}
+      {/* The status statement, first thing, before any mechanism — a reader arriving from an old
+          link must know where they stand before three screens about a deposit flow. It states two
+          facts: the contract is live, and no interface serves it. Neither half may be dropped. */}
       <Section>
         <Card className="border-px-gold/40">
           <div className="flex gap-4">
@@ -326,9 +306,8 @@ export default function ProtocolPage() {
         </Card>
       </Section>
 
-      {/* Moved here from /security on 30 August 2026, verbatim. These are compile-time properties
-          of this package. They read as a sales argument on a page about the company and as a
-          specification on a page about the contract, which is the whole reason for the move. */}
+      {/* Compile-time properties of this package. Rendered here and not on /security — one
+          source, one render. */}
       <Section tone="panel">
         <SectionHeader
           eyebrow="Defences"

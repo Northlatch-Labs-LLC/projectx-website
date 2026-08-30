@@ -3,11 +3,10 @@
 /**
  * Recorded chain read for the /security "Security and control" table.
  *
- * RULE (migration Task 10): every object ID on the security page is either read from Sui mainnet at
- * build time, or copied from THIS file, which records a dated chain read. Nothing here comes from
- * memory, from a document, or from the migration spec — except the Weir row, which the operator
- * directed be trusted from the spec as-is and is marked `source: 'spec'` so it is never mistaken
- * for a fresh read.
+ * RULE: every object ID on the security page is either read from Sui mainnet at build time, or
+ * copied from THIS file, which records a dated chain read. Nothing here comes from memory or from
+ * a document — except the Weir row, which is marked `source: 'spec'` so it is never mistaken for
+ * a fresh read.
  *
  * Refreshed 2026-08-30 via `rpc-mainnet.suiscan.xyz` (`sui_multiGetObjects` on each UpgradeCap,
  * `suix_getOwnedObjects` on the multisig to enumerate its caps): all three prior rows re-verified
@@ -15,7 +14,7 @@
  * lineage — upgraded to v2 on 2026-08-27 — added from the same read.
  *
  * How the chain rows were obtained on the original date (Sui mainnet, `fullnode.mainnet.sui.io`,
- * via the `sui` CLI — grpcurl was not available on the build host):
+ * via the `sui` CLI):
  *   1. read each lineage's origin package object → its publish transaction (`prevTx`);
  *   2. read that transaction's object changes → the created `0x2::package::UpgradeCap`;
  *   3. read that UpgradeCap object → its `version` (upgrades applied), `package` (latest package
@@ -43,7 +42,7 @@ export interface PackageControl {
   upgradeCapHolder: string;
   /** Free-text note for other capabilities. */
   other: string;
-  /** 'chain' rows were read on SECURITY_READ_AT; 'spec' rows are trusted from the migration spec. */
+  /** 'chain' rows were read on SECURITY_READ_AT; 'spec' rows are trusted from a spec, not read. */
   source: 'chain' | 'spec';
 }
 

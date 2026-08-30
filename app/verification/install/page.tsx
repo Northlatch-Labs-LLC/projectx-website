@@ -31,15 +31,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * The conversion page for ProtocolX Verify — the one that has to work without us in the room.
+ * The install page for ProtocolX Verify: what the checks measure in the reader's own terms, the
+ * four steps, the exact file a repository needs, and one control to press.
  *
- * /verification sells the engagement: it states the standard, quotes the first-night record and
- * carries the sprint anchor. It ends, though, in an email address, which makes every reader who
- * was ready to act into a conversation we have to have. This page is the other door: what the
- * checks measure in the reader's own terms, the honest four steps, the exact file their
- * repository needs, and a control to press that says exactly what pressing it does.
- *
- * Three disciplines govern what it may say, and each has already cost this estate something:
+ * Three claim disciplines govern what this page may say:
  *
  *   1. **Never "audited".** Not of our own work and not of anyone's. What the App produces is
  *      measured evidence — verdicts, counts, a bundle with a reproducible digest — and the word
@@ -47,29 +42,21 @@ export const metadata: Metadata = {
  *      at the foot of this page is the same paragraph /verification carries, in full, not linked.
  *
  *   2. **No price the thing being described does not have.** The entry anchor is the First
- *      Report at $1,000 — a measurement of one public Move package, ruled live by the operator
- *      2026-08-30 ("bless the thousand"), terms in
- *      operations/company/first-report-sku-2026-08-30.md. It supersedes the $3,500 sprint anchor
- *      this note carried until that date. Sprints still sit above it and are still quoted per
- *      engagement, so no sprint figure is printed on this page. Because the anchor now buys a
- *      measurement rather than an engagement, the copy below has to carry the exclusions with the
- *      price — public repositories only, no remediation, not an audit — or the number promises
- *      something the SKU does not.
+ *      Report at $1,000, which buys a measurement of one public Move package rather than an
+ *      engagement — so the copy below must carry the exclusions beside the price (public
+ *      repositories only, no remediation, not an audit) or the number promises more than it
+ *      covers. Sprints are quoted per engagement, so no sprint figure is printed here.
  *
- *      The App tier still has no price: billing and metering are deliberately unbuilt until the
- *      first service dollar (protocolx-verify/README.md, road 2). Printing a number here to make
- *      the page feel finished would be a number we would later have to withdraw, and a withdrawn
- *      price is worth less than no price. And when the App does get a price, that price is the
- *      App's alone: the GitHub Action is licensed BUSL-1.1 and is free to run in a customer's own
- *      CI on their own code, public or private. Presenting the hosted service's monthly figure as
- *      the Action's price is an error a prior notice has already made once, and it must not be
- *      made on this page.
+ *      The App tier has no price: billing and metering are unbuilt. Printing a number here would
+ *      be one we later had to withdraw, and a withdrawn price is worth less than no price. When
+ *      the App is priced, that price is the App's alone — the GitHub Action is licensed BUSL-1.1
+ *      and is free to run in a customer's own CI on their own code, public or private. Do not
+ *      present the hosted service's monthly figure as the Action's price.
  *
- *   3. **No claim of general availability.** app/REGISTRATION.md station 3 sets "Where can this
- *      app be installed" to *Only on this account*, and the status ledger lists multi-tenancy
- *      beyond this org as not built. So the App is genuinely not self-serve today, and the page
- *      says early access and means it. When the Owner flips that setting and the App is listed,
- *      the honest change to this page is a public install button — not a rewrite of the claims.
+ *   3. **No claim of general availability.** The App is installable on one account only and
+ *      multi-tenancy beyond this org is not built, so it is genuinely not self-serve and the page
+ *      says early access. When that setting changes and the App is listed, the honest change here
+ *      is a public install button — not a rewrite of the claims.
  *
  * The five gate descriptions are written from `engine/ci/gates.sh`, not from the marketing copy,
  * which is why two of them say when they will report neutral. `digest` runs only where a
@@ -297,18 +284,14 @@ export default function VerifyInstallPage() {
               name and we reply with what the install needs from your side, then the two of us do
               step 01 together.
             </p>
-            {/* hello@projectxprotocol.dev, per operations/BRAND-EMAIL-LAW.md line 23: the hub's
-                published address for verification and prospects, forwarding to the Master's
-                inbox — verified.
+            {/* MUST be hello@projectxprotocol.dev: it is the published address for verification
+                enquiries and it reaches a monitored inbox — verified.
 
-                This button pointed at claude@protocolx.io until 30 August 2026, which forwards
-                ONLY to protocolx@atomicmail.ai (same law, line 147) — a machine mailbox nobody
-                currently reads. It was the buy control on the page that sells the First Report,
-                so the one action this page asks for landed in a void.
-
-                Unrelated to the Master's "keep claude" ruling of the same date: that governs the
-                reply-to on OUTBOUND prospect sends, not an address printed on a public sales
-                page. Do not conflate them. */}
+                Do not point this at claude@protocolx.io. That address forwards only to
+                protocolx@atomicmail.ai, a machine mailbox nobody reads, so a reader who pressed
+                this control would land in a void. Any address printed on a public page must
+                resolve to an inbox somebody reads; that is a different question from which
+                address outbound mail uses as its reply-to. */}
             <a
               className="btn-primary mt-4 inline-flex px-5"
               href="mailto:hello@projectxprotocol.dev?subject=ProtocolX%20Verify%20early%20access"

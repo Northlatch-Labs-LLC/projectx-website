@@ -133,32 +133,18 @@ export function SiteHeader() {
             <ThemeToggle />
           </span>
 
-          {/* The bar's one button points at whichever door the site is promoting, and that has
-              now moved three times: the vault, then a name, and now the measurement. Each move
-              was made because the previous premise expired, not because the previous reasoning
-              was bad — the vault lost its interface, and the registrar moved behind Weir's closed
-              alpha, which is how the estate's most-clicked control came to walk every visitor on
-              every page into a waiting list.
+          {/* The bar's one button. It targets an internal route, so it is a next/link rather
+              than an anchor with a target, and it carries no external-link arrow.
 
-              Verification is the promoted service on this hub from 30 August 2026, and the nav
-              and the footer both lead with it. A header CTA still pointing at the draws would have
-              contradicted both, on the one control most people press.
+              The label must state what the click does and must stay true at all times — a label
+              tied to a transient state ("See draws", true only mid-window) or to a capability the
+              site does not have (self-serve install) goes stale without anything reporting it.
 
-              The label says what the click does. "Verify a repo" survives whether or not a
-              particular draw is mid-window, which "See draws" did, and which "Install Verify"
-              would not while self-serve installs are arranged by email.
-
-              This is now an internal route, so it is a next/link and not an anchor with a target —
-              the arrow that meant "opens elsewhere" goes with it, because it no longer does.
-
-              Draws are not hidden: they keep their nav entry and their footer entry, and this
-              button returns to them the day that is the door worth promoting.
-
-              Measured before it shipped, not estimated, at the three widths this bar has
-              historically broken at. "Verify a repo" renders on one line at 40px inside a 64px
-              bar at every one: 102px at 320px, 126px at 375px, 142px at 1024px alongside the
-              six-label nav — bar overflow 0 and document overflow 0 in all three. It is 14px
-              wider than the label it replaces, and the narrowest case keeps ~200px of slack. */}
+              MEASURED, not estimated, at the three widths this bar has historically broken at.
+              "Verify a repo" renders on one line at 40px inside a 64px bar at every one: 102px at
+              320px, 126px at 375px, 142px at 1024px alongside the six-label nav — bar overflow 0
+              and document overflow 0 in all three. The narrowest case keeps ~200px of slack.
+              Re-measure at all three before changing this label. */}
           <Link
             href="/verification"
             className="btn-primary whitespace-nowrap px-3 py-2.5 text-sm sm:px-5"

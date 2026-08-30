@@ -19,23 +19,22 @@ export const metadata: Metadata = {
   title: 'Interfaces',
   description:
     'Every way to use ProjectX. The reference vault is one of them — anyone can build another, with no permission and no revenue share.',
-  // A dedicated card, because this is the router. Someone who meets this link has not yet chosen a
-  // product, and the site-wide generated card argues the vault's invariant — an answer to a
-  // question they have not asked yet. The card's whole job is orientation: four products and the
-  // state of each door, legible in about two seconds.
+  // A dedicated card rather than the site-wide generated one.
   //
   // It prints projectxprotocol.dev and nothing else, even though this page routes to protocolx.io
   // and weir.social. A card is the face of the page it sits on, not of the destinations that page
   // links to; a reader who sees one domain in the unfurl and lands on another has been misled by
   // the preview, however accurate each half was on its own.
   //
-  // The state chips say what the panels below say: Weir and Names are live on mainnet with their
-  // door in closed alpha, and the vault's contract is live with no interface serving it since
-  // 25 August 2026. The chips read "Closed alpha" because a card has room for one state and the
-  // door is the fact a reader acts on — an unfurl that showed any product as more open than it is
-  // would be a promise the estate cannot keep, made in the one place nobody can correct it. The
-  // token launcher is absent for the same reason it is absent from the page: its panel renders
-  // only when LAUNCHER_URL is set, and that variable is fail-closed until a subdomain resolves.
+  // The state chips must say what the panels below say: Weir and Names are live on mainnet with
+  // their door in closed alpha, and the vault's contract is live with no interface serving it
+  // since 25 August 2026. A card has room for one state, so the chips name the door — the fact a
+  // reader acts on. This asset is static, so a chip that overstates a product's availability
+  // cannot be corrected by a later render.
+  //
+  // The token launcher is absent for the same reason it is absent from the page: its panel
+  // renders only when LAUNCHER_URL is set, and that variable is fail-closed until a subdomain
+  // resolves.
   openGraph: {
     images: [
       {
@@ -76,11 +75,6 @@ export default function InterfacesPage() {
 
   return (
     <>
-      {/* Was "One pool. As many front doors as people care to build." — a headline about the
-          vault, on the page that routes a visitor between four products, three of which are not
-          the vault. It also promised the vault as "the first way in" on a hub where it is the one
-          product with no way in at all. The permissionless argument below is unchanged and still
-          about the pool, which is where it belongs; the headline now describes the page. */}
       <PageHeader
         eyebrow="Interfaces"
         title="Every way to use ProtocolX, and the state each door is in"
@@ -108,16 +102,12 @@ export default function InterfacesPage() {
               </span>
               <div className="flex flex-col gap-1">
                 {/*
-                  Two badges, because there are two facts and dropping either one misleads.
-                  The contracts are live on Sui mainnet — creators have vaults, and the chain says
-                  so — while entry is invitation-only. Badging this "Live" alone sent a reader to a
-                  waiting list they were never warned about; badging it "Closed alpha" alone would
-                  deny a deployment that has taken real transactions. The page carries both.
+                  Two badges, because there are two facts and dropping either one misleads: the
+                  contracts are live on Sui mainnet, and entry is invitation-only. "Live" alone
+                  sends a reader to an unannounced waiting list; "Closed alpha" alone denies a
+                  deployment that has taken real transactions.
 
-                  Named Weir, not "ProjectX Social". lib/links.ts records the rename on 25 August
-                  2026 — the product is Weir at its own domain, and social.protocolx.io was
-                  scaffolding since retired — and /social has headed it Weir throughout. This
-                  heading simply outlived the rename.
+                  Named Weir, not "ProjectX Social" — see SOCIAL_URL in lib/links.ts.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">Weir</h3>
@@ -158,11 +148,6 @@ export default function InterfacesPage() {
               .
             </p>
 
-            {/*
-              The button says what the click does. It read "Open Social" and landed on a waiting
-              list, which is the one thing a call to action must never do — a visitor who is told
-              a product is live and then meets a wall learns to distrust the next badge too.
-            */}
             <a
               href={SOCIAL_URL}
               target="_blank"
@@ -182,9 +167,8 @@ export default function InterfacesPage() {
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">ProjectX Vault</h3>
-                  {/* "Reference" implied a surface to refer to. Two badges, same reasoning as
-                      Weir's: the contract is live and the door is gone, and dropping either half
-                      misleads. */}
+                  {/* Two badges, same reasoning as Weir's: the contract is live and no
+                      interface serves it. Dropping either half misleads. */}
                   <Badge tone="prize">Contract live</Badge>
                   <Badge tone="gold">No interface</Badge>
                 </div>
@@ -193,17 +177,10 @@ export default function InterfacesPage() {
             </div>
 
             {/*
-              This card listed "Deposit, withdraw, watch the draw and see your position. Sponsored
-              gas, so a first deposit needs no SUI for fees" over tags reading Deposit · Withdraw ·
-              Free entry — a feature list for a surface that has not existed since 25 August 2026.
-              The conditional below correctly withheld the button and left the sales copy standing
-              above it, which is the defect this whole sweep is about: the buttons vanished, the
-              pitch did not.
-
-              What it says now is what is true. The contract is live — never write that it is dead
-              — and the two places it is still an active subject on this hub are the mechanism
-              record and the capture-the-flag range. Both are internal links, so this card sends a
-              reader somewhere that answers rather than nowhere.
+              NEVER WRITE THAT THIS CONTRACT IS DEAD. It is live on Sui mainnet; what was retired
+              on 25 August 2026 is the interface serving it. This card must describe the contract
+              and must not describe an action a reader can take, because the conditional below
+              withholds the button and there is no door behind it.
             */}
             <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
               A prize pool on Sui mainnet: principal delegated to a validator and returned 1:1,
@@ -307,9 +284,8 @@ export default function InterfacesPage() {
               </span>
               <div className="flex flex-col gap-1">
                 {/*
-                  Same two facts as Weir, and for the same reason: the registrar is live on
-                  mainnet and has taken real revenue on chain, but it moved into Weir, so its door
-                  is Weir's door and Weir's door is invitation-only. lib/links.ts records
+                  Same two facts as Weir: the registrar is live on mainnet, and its door is
+                  Weir's door, which is invitation-only. NAMES_URL in lib/links.ts records
                   weir.social/names answering 307 to the waiting list while the alpha is closed.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
@@ -347,12 +323,6 @@ export default function InterfacesPage() {
               needs no invitation and is the way to register a name today.
             </p>
 
-            {/*
-              "Register a name" promised a registration that the closed alpha cannot currently
-              deliver. The button now names the waiting list, and the line above names suins.io —
-              a reader who wants a .sui name tonight should leave with a way to get one, even
-              when the way is not ours.
-            */}
             <a
               href={NAMES_URL}
               target="_blank"

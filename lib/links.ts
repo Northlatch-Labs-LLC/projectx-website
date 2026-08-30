@@ -101,7 +101,7 @@ export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? 'https://weir.soci
 // the same Vercel project that served the old host. Never advertise a host that does not answer.
 export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.social';
 
-// RE-MEASURED 2026-08-30 (second pass, hub rebuild), in a browser, at 1024px — the tightest
+// RE-MEASURED 2026-08-30 (second pass), in a browser, at 1024px — the tightest
 // width at which this bar renders at all, since the pill is `hidden` below `lg`.
 //
 // ⚠️ THE CRITERION MATTERS MORE THAN THE NUMBER, and the first pass of this measurement got it
@@ -121,7 +121,7 @@ export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.so
 // reason. Fixed figures either side: the bar is 1009px inside its padding, the logo 160px, the
 // "Verify a repo" button 118×40.
 //
-// Measured candidates for the hub rebuild, all at 1024px on the live element:
+// Measured candidates, all at 1024px on the live element:
 //
 //     Verification · Draws · Social · Names · For organisers · Developers        557px  1 line
 //     Verification · Security · On chain · Social · Draws · Developers           526px  1 line  ← shipped
@@ -137,42 +137,19 @@ export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.so
 // Anyone changing this bar must re-run the measurement WITH THE LINE-COUNT PREDICATE, for exactly
 // the reason this paragraph exists. Checking for overflow will tell you a broken bar is fine.
 /**
- * The primary navigation of a verification hub.
+ * The site's primary navigation.
  *
- * Rebuilt 30 August 2026 on the Master's order: *"We need to present our verification, our
- * security steps. We need to present via social, and we need to present ProtocolX data."* Those
- * four are now four of the six entries, and five of the six are pages on THIS site rather than
- * links off it — which is the difference between a hub and a link farm. The bar previously sent a
- * visitor off-domain on three of its six entries.
+ * Five of the six entries are routes on THIS site; only `Draws` leaves the origin. `Names` and
+ * `For organisers` are not on the bar and are kept in the footer's Products block — the
+ * seven-label set that keeps `For organisers` measures 646px against the 645px ceiling
+ * measured above, so it does not fit on one line.
  *
- * What changed, and the reasoning for each:
- *
- *   + Security    — existed, was reachable only through the footer and the mobile drawer.
- *   + On chain    — new route. The deployment record had no surface of its own; it was three
- *                   sections down /builders and inside a caveat on /security.
- *   ~ Social      — was an external link straight to weir.social, which skipped this hub's own
- *                   page about Weir entirely. It now opens /social, which presents the product and
- *                   then links out. "Present via social" is a job this site does, not one it
- *                   delegates by hyperlink.
- *   − Names       — off the bar, kept in the footer's Products block. It is the weakest entry on
- *                   merit: the registrar sits behind Weir's closed alpha, and /interfaces already
- *                   says in its own words that suins.io needs no invitation and costs less.
- *   − For organisers — off the bar, kept in the footer's Products block. This one is a genuine
- *                   loss and it is recorded as one: it was deliberately restored to the bar on
- *                   30 August 2026 as the raffle's highest-value customer. It is out because the
- *                   arithmetic above leaves no room for it — the seven-label set measures 646px
- *                   against a 645px ceiling. It is a ranked trade, not an oversight, and it is
- *                   flagged for the Master rather than made quietly.
- *
- * Everything the old bar carried is still one click from every page on the site.
+ * Every entry the bar does not carry is still reachable in one click from the footer on every
+ * page.
  */
 export const NAV_LINKS = [
-  // Verification leads, by operator order (30 Aug 2026: "Verification is now the main service
-  // promoted on the .dev hub .... Names is not the flagship product").
   { href: '/verification', label: 'Verification' },
-  // "our security steps" — the Master, 30 Aug 2026.
   { href: '/security', label: 'Security' },
-  // "we need to present ProtocolX data" — the Master, same order. /chain is that surface.
   { href: '/chain', label: 'On chain' },
   // Internal on purpose; see the note above. /social links out to weir.social from the page.
   { href: '/social', label: 'Social' },
@@ -181,35 +158,24 @@ export const NAV_LINKS = [
   // 25 August 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in
   // the top nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set.
   //
-  // Kept through the hub rebuild. It costs nothing while DAPP_URL is null, and the measurement
-  // above has 119px of headroom — enough for the 62px this label adds if a vault interface ever
-  // serves again.
+  // It costs nothing while DAPP_URL is null, and the measurement above has 119px of headroom —
+  // enough for the 62px this label adds if a vault interface ever serves again.
   ...(DAPP_URL ? ([{ href: DAPP_URL, label: 'Vault', external: true }] as const) : []),
   { href: '/builders', label: 'Developers' },
 ] as const;
 
 /**
- * The estate's public channels, stated once and rendered everywhere.
+ * The public channel list, declared once and rendered everywhere (footer, mobile drawer,
+ * /community).
  *
- * These were on /community and nowhere else, which meant the canonical list of "these accounts
- * are ours and nothing else is" sat three clicks from the front door on a site whose whole
- * argument is that you should not have to take anyone's word for anything. An impersonation
- * defence that is hard to reach is not a defence.
+ * Every entry was verified answering before it was added here. The GitHub organisation
+ * currently publishes ZERO public repositories, so that link opens an empty profile — do not
+ * write a "read the source" claim beside it until a repository is published there.
  *
- * `@protocolx_io` leads because it is the account that carries the draws and the pinned launch
- * thread (29 August 2026); `@ProjectX_Sui` is the estate's own voice. Both verified first-hand —
- * posts from each are recorded in operations/campaign-log.md with their status ids.
- *
- * GitHub is the organisation profile, verified answering 200 on 30 August 2026. It is listed on
- * the Master's order of the same date. Note honestly: the organisation currently publishes ZERO
- * public repositories, so this link opens an empty shelf until `protocolx-verify` is published
- * (see operations/company/publication-plan-2026-08-30.md). The link is not wrong — the profile is
- * real and it is ours — but anyone adding a "read the source" claim beside it before that
- * publication lands would be writing a promise the page cannot keep.
- *
- * Whatever is added here must also be added to /community, which states in its own words that
- * "if a channel is not listed here, it is not ours" and calls its list canonical. Two lists that
- * disagree is worse than one list — the shorter one starts reading as the impersonation.
+ * INVARIANT: whatever is added here must also be added to /community, which states in its own
+ * words that "if a channel is not listed here, it is not ours" and calls its list canonical.
+ * Two lists that disagree is worse than one list — the shorter one starts reading as the
+ * impersonation.
  */
 export const CHANNELS = [
   { label: 'X · @protocolx_io', short: '@protocolx_io', href: 'https://x.com/protocolx_io', icon: 'x' },
@@ -221,24 +187,11 @@ export const FOOTER_SECTIONS: {
   title: string;
   links: { label: string; href: string; external?: boolean }[];
 }[] = [
-  /*
-   * Products first.
-   *
-   * The footer opened with the protocol and gave its largest block — seven links — to developers,
-   * while the three things anyone can actually buy had no section at all. On a page being read by
-   * someone deciding whether to put their competition licence next to this software, a quarter of
-   * the footer was addressed to people who will never pay.
-   *
-   * Nothing was removed. Blueprints, the CTF, build ideas and the API all still exist and are all
-   * still one click away; they sit under Developers now instead of leading.
-   */
   {
     title: 'Products',
     links: [
-      // Verification leads the footer for the same reason it leads the nav (operator order,
-      // 30 Aug 2026). Two entries rather than one: the page states the offer, /verification/install
-      // is the door — and a reader who has already decided should not have to read the pitch again
-      // to find the control.
+      // Two entries rather than one: /verification states the offer, /verification/install is
+      // the control. /verification/install is linked from nowhere else in the navigation.
       { label: 'Verify a Move package', href: '/verification' },
       { label: 'Install ProtocolX Verify', href: '/verification/install' },
       { label: 'Support a creator', href: SOCIAL_URL, external: true },
@@ -252,18 +205,12 @@ export const FOOTER_SECTIONS: {
     ],
   },
   /*
-   * "Boost the prize" pointed at /sponsor and is gone from this block — the Master's order of
-   * 30 August 2026, "There is no sponsor, there is no prize." The route is archived under
-   * operations/archive/2026-08-30-hub-vault-sweep/ and 308s to /protocol, so any copy of that URL
-   * still in the wild lands on the record of the contract rather than on a 404.
+   * `/sponsor` is retired and is not linked from here. It 308s to /protocol (next.config.mjs),
+   * so any copy of that URL still in the wild lands on a page rather than on a 404.
    *
-   * "Deployed addresses" pointed three sections down /builders. It now names the route that
-   * exists for it. The old anchor still resolves — /builders keeps its #addresses section and
-   * hands off to /chain — so no shared link breaks either way.
-   *
-   * Capture the flag moved up from Developers, because the vault moved into it: /ctf is where the
-   * vault's mechanism now lives on this hub, as the subject matter of the range rather than as a
-   * pitch. It sits beside the mechanism page it belongs to.
+   * `On chain` names /chain rather than the older /builders#addresses anchor. That anchor still
+   * resolves — /builders keeps its #addresses section and hands off to /chain — so no shared
+   * link breaks either way.
    */
   {
     title: 'Protocol',

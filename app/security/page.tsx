@@ -25,29 +25,17 @@ export const metadata: Metadata = {
 };
 
 /**
- * Re-registered 30 August 2026, on the Master's order: this page must be *"about our verification
- * practice and threat model, not the vault's no-loss guarantee."*
+ * This company's verification practice and threat model.
  *
- * It opened "Why your deposit is safe" — a sentence addressed to a depositor, about a product
- * whose interface was retired on 25 August 2026, on the page a verification buyer opens to decide
- * whether this company is competent. Six of its nine sections argued the vault's invariant.
- *
- * WHAT MOVED, AND WHERE — nothing was deleted:
- *   · The six type-system defences ("Principal is unreachable from admin code" and the rest) are
- *     properties of the vault CONTRACT. They moved to /protocol, which is the record of that
- *     contract, and they moved verbatim.
- *   · The zero-yield monitoring card moved with them, for the same reason.
- *   · Two of the four out-of-scope items — oracle validation and third-party liveness — are
- *     settlement facts about that same contract and went to /protocol too.
- *   · The upgrade-authority TABLE moved to /chain, which is the deployment record's own surface.
- *     The interpretation stays here, because "who can upgrade this" is a threat-model question and
- *     /chain is a data page. One table, one source, rendered once.
- *
- * WHAT ARRIVED: the practice itself. What this company does to its own code before that code holds
- * anyone's money — which is the thing the flagship sells, and which this page did not mention.
+ * SINGLE SOURCE, split by subject. Properties of the vault CONTRACT — the six type-system
+ * defences, the zero-yield monitoring card, and the oracle-validation and third-party-liveness
+ * scope items — are rendered on /protocol, not here. The upgrade-authority TABLE is rendered on
+ * /chain; only its interpretation stays here, because "who can upgrade this" is a threat-model
+ * question and /chain is a data page. Do not duplicate any of them onto this page.
  *
  * Every claim below is already published on /verification, /verification/install or /chain. The
- * independence clause is repeated rather than softened: no third party has reviewed any of this.
+ * independence clause is stated in full and must not be softened: no third party has reviewed
+ * any of this code.
  */
 export default function SecurityPage() {
   const practice = [
@@ -176,9 +164,9 @@ export default function SecurityPage() {
             assumption in the system and is why the holders are published.
           </p>
           <p>
-            {/* The table itself lives on /chain as of 30 August 2026. It is the deployment record,
-                and the deployment record now has a page. Rendering it in two places from one module
-                would not drift, but it would ask a reader to work out which copy is canonical. */}
+            {/* The table itself is rendered on /chain. Rendering it in two places from one
+                module would not drift, but it would ask a reader to work out which copy is
+                canonical. */}
             All {SECURITY_PACKAGES.length} lineages — Weir, Names, the Prize Vault and Draws — are
             listed with their package identifier, their upgrade count and the current holder of
             each capability on{' '}
@@ -196,10 +184,9 @@ export default function SecurityPage() {
               : 'whose operator is not yet published here'}.
           </p>
 
-          {/* The single reporting section. A second one lived in the card grid at the foot of
-              this page carrying the private-disclosure ask but not the 72-hour commitment; its
-              text was folded in here, and that card is gone. One heading, one address, every
-              term in one place. */}
+          {/* The single reporting section: one heading, one address, every term in one place.
+              Do not add a second disclosure block elsewhere on this page — the last one stated
+              the private-disclosure ask without the 72-hour commitment. */}
           <h2>Reporting a vulnerability</h2>
           <p>
             If you find a defect that affects deployed funds, report it privately to{' '}

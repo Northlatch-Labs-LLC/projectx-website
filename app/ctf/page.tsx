@@ -166,18 +166,13 @@ export default function CtfPage() {
       </Section>
 
       {/* ───────────────────────────────────────────────────────────────────────────────────────
-          THE VAULT'S HOME ON THIS HUB.
-
-          The Master, 30 August 2026: *"the v1.0.1 will go to the capture the flag section on the
-          hub."* This section is that instruction. Everywhere else on this site the vault stopped
-          being a pitch; here it becomes the subject matter, which is what /ctf was always built on
-          — the board teaches v1.0 and its fixes in v1.0.1, and a player cannot reproduce a finding
-          without knowing what the contract was trying to do in the first place.
+          The board teaches v1.0 and its fixes in v1.0.1, so it states the mechanism under test:
+          a player cannot reproduce a finding without knowing what the contract was trying to do.
 
           Deliberately a briefing and not a duplicate. Four paragraphs of mechanism, then the two
           links that carry the detail: /protocol for the full record and /chain for the
-          identifiers. A player who wants the parameters should read them from the page that owns
-          them rather than from a copy here that can drift.
+          identifiers. Parameters must be read from the page that owns them rather than copied
+          here, where the copy can drift.
           ─────────────────────────────────────────────────────────────────────────────────────── */}
       <Section id="target-contract" tone="panel">
         <SectionHeader

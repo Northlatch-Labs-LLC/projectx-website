@@ -65,11 +65,10 @@
      * repeated thirteen times is one somebody will eventually mistype by a digit, and nothing
      * would catch it.
      *
-     * The scale and the names come from the August design plate's MOTION.md. The *values* are this
-     * site's own: the plate specifies 260ms and 420ms for base and slow, and this site has always
-     * used 300 and 500. Adopting the plate's numbers would have retimed every transition on a live
-     * site as a side effect of a renaming, so the vocabulary is borrowed and the feel is not
-     * touched. --duration-reveal matches the plate at 700ms because it already did.
+     * The names are borrowed from an external motion scale; the *values* are this site's own.
+     * That scale specifies 260ms and 420ms for base and slow, and this site has always used 300
+     * and 500 — adopting its numbers would have retimed every transition on a live site as a
+     * side effect of a renaming. --duration-reveal is 700ms in both.
      *
      * instant and fast have no caller yet. They are the two steps this scale was missing — press
      * feedback and hover tint currently share the 300ms used for layout moves, which is why hover

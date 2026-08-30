@@ -36,17 +36,12 @@ export function Section({
 }
 
 /**
- * `as` exists because /verification had no `<h1>` at all.
+ * `as` exists because a route that does not use `PageHeader` has no `<h1>`.
  *
- * Found 30 August 2026 by counting headings in the prerendered HTML of every route. Sixteen of the
- * eighteen pages open with `PageHeader`, which renders an `<h1>`. `/verification` and
- * `/verification/install` do not use it — they open straight into a `Section` — so the two pages
- * carrying the flagship product shipped with `<h2>` as their highest heading and no document title
- * in the outline at all.
- *
- * That is a WCAG 1.3.1 defect and a practical one: a screen-reader user navigating by heading, or
- * anyone using a rotor or a heading list, gets no top-level anchor for the page they are on. It is
- * also the page most likely to be the first thing a buyer reads.
+ * Sixteen of the eighteen routes open with `PageHeader`, which renders an `<h1>`. `/verification`
+ * and `/verification/install` open straight into a `Section`, so both shipped with `<h2>` as their
+ * highest heading and no top-level entry in the document outline — a WCAG 1.3.1 defect, and a
+ * practical one for anyone navigating by heading, rotor or heading list.
  *
  * Default stays `h2`, so every existing call site renders byte-identical markup. Only the opening
  * header of a page that has no `PageHeader` should pass `as="h1"`, and there must never be two on

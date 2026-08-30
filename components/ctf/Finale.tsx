@@ -5,16 +5,14 @@ import { Signature } from '@/components/ui/Signature';
 import { ArrowUpRight } from '@/components/ui/Icons';
 
 /**
- * Two claims here were corrected on 2026-08-30, both for the same reason: they said more than the
- * estate can evidence.
+ * Two constraints on the copy in this component.
  *
- * Point 01 opened "Six of these are patterns" over a board of eight challenges, and no field in
- * lib/ctf.ts marks which six. A count nobody can check from the data is a count that drifts the
- * next time a challenge is added, so the numeral is gone rather than re-guessed.
+ * Point 01 states no count of how many challenges are patterns. No field in lib/ctf.ts marks
+ * which ones are, so a numeral here cannot be checked against the data and drifts the next time
+ * a challenge is added.
  *
- * The sign-off said readers could see "what a professional review actually said", which implies an
- * independent audit exists. /security states plainly that no independent audit has been completed.
- * The findings are real and published — they are ours.
+ * The sign-off must not imply an independent review exists. /security states plainly that no
+ * independent audit has been completed; the findings are real, published, and ours.
  */
 export function Finale() {
   const points = [
