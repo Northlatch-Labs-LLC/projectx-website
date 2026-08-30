@@ -64,6 +64,19 @@
       "fixedIn": "2e4d74e"
     },
     {
+      "id": "audit-floor-fifteen-thousand",
+      "severity": "error",
+      "patterns": [
+        "start at fifteen to forty-five thousand dollars",
+        "fifteen to forty-five thousand dollars",
+        "below that line there has been nothing",
+        "the layer below the audit shouldn't be empty"
+      ],
+      "why": "Two unsupportable claims in one sentence on a page that asks to be checked. Of eighteen firms serving Sui, exactly one publishes a price and it starts near seven thousand for a standard review - so a fifteen-thousand floor is falsifiable by any prospect who has asked for a quote. And the layer below is not empty: open-source Move mutation testing exists, is actively maintained, and one engine is Sui-only and already ships as a pull-request action. Sourced in operations/company/sui-foundation-research-2026-08-30.md.",
+      "instead": "Quote the only published audit prices there are, and claim the difference that survives a hostile reader: the existing tools leave an exit code and a console log, and nobody produces a shareable, attestable, per-commit assurance artifact for Move.",
+      "fixedIn": "69bec8b"
+    },
+    {
       "id": "launcher-advertised",
       "severity": "error",
       "patterns": ["launch.projectxprotocol.dev", "launch.protocolx.io"],
