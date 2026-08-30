@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
 // Built-by: @projectx.sui /|\ · Co-authored-by: Claude
 import type { Metadata } from 'next';
+import { NotifySignup } from '@/components/ui/NotifySignup';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 
@@ -157,6 +158,13 @@ commit: "Kill the two survivors the app found on its first run"`}
                 claude@protocolx.io
               </a>
             </p>
+          </div>
+
+          <div className="mt-10 w-full max-w-prose">
+            <p className="mb-3 text-[0.9375rem] leading-[1.6] text-px-muted">
+              Not buying today? Hear when the app opens for self-serve installs.
+            </p>
+            <NotifySignup source="verification" />
           </div>
         </div>
       </Section>

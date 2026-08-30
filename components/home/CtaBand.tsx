@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
 // Built-by: @projectx.sui /|\ · Co-authored-by: Claude
 import { Button } from '@/components/ui/Button';
+import { NotifySignup } from '@/components/ui/NotifySignup';
 import { AuroraBackdrop, GlowBackdrop } from '@/components/ui/Backdrop';
 import { Signature } from '@/components/ui/Signature';
 import { ArrowUpRight } from '@/components/ui/Icons';
@@ -52,6 +53,13 @@ export function CtaBand() {
               Open the vault
             </Button>
           )}
+        </div>
+
+        {/* The one thing a visitor who is not ready to transact can still leave behind: a way to
+            be told when something ships. Below the buttons, because acting now beats subscribing;
+            present at all, because until it was, every not-today visitor left without a trace. */}
+        <div className="mt-6 flex w-full flex-col items-center">
+          <NotifySignup source="home" />
         </div>
       </div>
     </section>
