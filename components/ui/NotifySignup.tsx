@@ -13,6 +13,14 @@ import { useState } from 'react';
  * already-on-it, because "your second signup failed" reads as "you are not on it"), and a
  * failure that says whether retrying is worth it. A 503 from the route means this deployment
  * has no list wired; the form says so instead of pretending.
+ *
+ * `cta` is optional and changes the label alone. /verification/install sits beside a second
+ * control — an email that gets a repository installed — and on that page the form has to say
+ * which of the two it is, or a reader presses the wrong one and waits for a reply that this
+ * component never promised to send. Everything else is deliberately fixed: same route, same list,
+ * same consent line, same double-opt-in. A second capture path would be a second place for
+ * consent to be got wrong, and the sentence under the field is the only promise this site makes
+ * to every address it holds.
  */
 
 type Phase =
@@ -21,7 +29,13 @@ type Phase =
   | { at: 'done'; already: boolean }
   | { at: 'failed'; message: string };
 
-export function NotifySignup({ source }: { source: 'home' | 'verification' }) {
+export function NotifySignup({
+  source,
+  cta = 'Tell me what ships',
+}: {
+  source: 'home' | 'verification' | 'install';
+  cta?: string;
+}) {
   const [email, setEmail] = useState('');
   const [phase, setPhase] = useState<Phase>({ at: 'idle' });
 
@@ -83,7 +97,7 @@ export function NotifySignup({ source }: { source: 'home' | 'verification' }) {
           disabled={!plausible || phase.at === 'sending'}
           className="btn-primary shrink-0 px-5 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {phase.at === 'sending' ? 'Adding…' : 'Tell me what ships'}
+          {phase.at === 'sending' ? 'Adding…' : cta}
         </button>
       </div>
       <p className="mt-2 text-xs text-px-faint">
