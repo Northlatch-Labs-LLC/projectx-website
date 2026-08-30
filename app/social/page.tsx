@@ -202,7 +202,7 @@ export default function SocialPage() {
           actions={
             <>
               <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-                Explore creators
+                Join the waiting list
               </Button>
               <Button href={SOCIAL_URL} variant="secondary">
                 Become a creator
@@ -210,9 +210,10 @@ export default function SocialPage() {
             </>
           }
         >
-          Creators are live on the platform now, each with a vault on chain. Read their feeds,
-          park something small, take it back out — the withdraw button is the fastest way to
-          believe the rest of this page.
+          Creators are live on the platform now, each with a vault on chain — and the door is in
+          closed alpha behind invitation codes. Join the waiting list to hear the moment it
+          opens; once inside, the withdraw button is the fastest way to believe the rest of this
+          page.
         </Callout>
       </Section>
     </>

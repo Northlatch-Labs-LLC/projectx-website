@@ -35,14 +35,20 @@ export default function CommunityPage() {
 
         <Callout tone="lit" className="mt-10">
           <p>
-            <strong>ProjectX runs no social channels.</strong> There is no official GitHub, X or
-            Discord account. Anything claiming to be one is not ours, and nobody from ProjectX
-            will ever contact you first, ask for a seed phrase, or ask you to sign a transaction.
+            <strong>These three X accounts are ours, and nothing else is.</strong>{' '}
+            <a href="https://x.com/protocolx_io" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@protocolx_io</a>{' '}
+            (the draws — launched 29 August 2026),{' '}
+            <a href="https://x.com/ProjectX_Sui" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@ProjectX_Sui</a>{' '}
+            (the estate) and{' '}
+            <a href="https://x.com/weirsocial" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@weirsocial</a>{' '}
+            (Weir, in its own voice). There is no Discord and no Telegram. Any account not named
+            on this page is not ours, and nobody from ProjectX will ever contact you first, ask
+            for a seed phrase, or ask you to sign a transaction.
           </p>
           <p className="mt-3">
-            What the protocol does is public on chain, and every figure on this site resolves to
-            an object you can open yourself. That is the channel — the rest can wait until there
-            is something real behind it.
+            The channels announce; the chain proves. Every figure on this site still resolves to
+            an object you can open yourself, and nothing said in a channel outranks what the
+            contract shows.
           </p>
         </Callout>
 

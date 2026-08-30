@@ -63,12 +63,16 @@ export function Social() {
           </p>
           <div className="mt-2 flex flex-wrap gap-2.5">
             <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-              Explore creators
+              Join the waiting list
             </Button>
             <Button href="/social" variant="ghost">
               How it works
             </Button>
           </div>
+          <p className="text-xs text-px-muted">
+            Weir is in closed alpha behind invitation codes. The waiting list is how you hear the
+            moment the door opens.
+          </p>
         </div>
 
         <div className="self-start">

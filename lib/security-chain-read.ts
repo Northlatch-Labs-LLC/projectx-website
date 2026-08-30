@@ -9,8 +9,13 @@
  * directed be trusted from the spec as-is and is marked `source: 'spec'` so it is never mistaken
  * for a fresh read.
  *
- * How the chain rows were obtained on the date below (Sui mainnet, `fullnode.mainnet.sui.io`, via
- * the `sui` CLI — grpcurl was not available on the build host):
+ * Refreshed 2026-08-30 via `rpc-mainnet.suiscan.xyz` (`sui_multiGetObjects` on each UpgradeCap,
+ * `suix_getOwnedObjects` on the multisig to enumerate its caps): all three prior rows re-verified
+ * unchanged (Weir row included — verified against chain in that pass), and the registrar
+ * lineage — upgraded to v2 on 2026-08-27 — added from the same read.
+ *
+ * How the chain rows were obtained on the original date (Sui mainnet, `fullnode.mainnet.sui.io`,
+ * via the `sui` CLI — grpcurl was not available on the build host):
  *   1. read each lineage's origin package object → its publish transaction (`prevTx`);
  *   2. read that transaction's object changes → the created `0x2::package::UpgradeCap`;
  *   3. read that UpgradeCap object → its `version` (upgrades applied), `package` (latest package
@@ -21,7 +26,7 @@
  * guess.
  */
 
-export const SECURITY_READ_AT = '2026-08-26' as const;
+export const SECURITY_READ_AT = '2026-08-30' as const;
 export const SECURITY_NETWORK = 'Sui mainnet' as const;
 
 export interface PackageControl {
@@ -51,6 +56,16 @@ export const SECURITY_PACKAGES: PackageControl[] = [
     upgradeCapId: '0x895e20c44aed9c884be8dffa42c93d93653b47e86cd3a12d919998d9b1eaed08',
     upgradeCapHolder: '2-of-3 multisig 0x00e734d5…11605',
     other: 'PlatformCap, Publisher, Display — not yet published',
+    source: 'chain',
+  },
+  {
+    product: 'Names (registrar_v1 v2)',
+    packageId: '0x53ebb0e73d8c0c958ee04b8410715c007a45fe58ef85887ab647ac254e0ca2f3',
+    packageOrigin: '0xb219fbdc681e8e39405b809baa7ec36009329ed88871aab2fc9c62b13eefa10b',
+    version: '2',
+    upgradeCapId: '0xacdebc676198eefff8dd456823441e5f13c1f988f0434c9d9dc342d816f2933b',
+    upgradeCapHolder: '2-of-3 multisig 0x00e734d5…11605',
+    other: 'RegistrarCap — see custody note in the data room',
     source: 'chain',
   },
   {
