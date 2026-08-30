@@ -73,9 +73,15 @@ export function VerificationPractice() {
           </>
         }
       >
+        {/* Was "because the layer below the audit shouldn't be empty", corrected 2026-08-30 with
+            the verification page's lead and for the same reason: the layer is not empty. Open-source
+            Move mutation testing exists and is maintained
+            (operations/company/sui-foundation-research-2026-08-30.md). What it does not produce is
+            evidence anyone can carry, and that is the claim worth making. */}
         The harnesses, the staging network, and the proving practice were built for our own
         contracts first. We are shaping them into tools any Sui team can run — because the layer
-        below the audit shouldn’t be empty.
+        below the audit should leave evidence you can hand to someone, and today it leaves a
+        console log.
       </Callout>
     </Section>
   );
