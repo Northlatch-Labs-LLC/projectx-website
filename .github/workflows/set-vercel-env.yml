@@ -1,0 +1,48 @@
+# Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+#
+# Push runtime configuration into Vercel, from the one place that already holds the deploy token.
+# Same shape as weir's workflow of the same name, for the same reason: the values are repository
+# secrets, the token that writes them is a repository secret, and nothing is ever committed or
+# echoed. Manual dispatch only — configuration moves when somebody decides it moves.
+name: Set Vercel env
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Which Vercel environment to write
+        required: true
+        default: production
+        type: choice
+        options: [production, preview]
+
+permissions:
+  contents: read
+
+jobs:
+  set:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write the signup-capture configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          TARGET: ${{ inputs.target }}
+        run: |
+          set -euo pipefail
+          api="https://api.vercel.com/v10/projects/${VERCEL_PROJECT_ID}/env?teamId=${VERCEL_ORG_ID}&upsert=true"
+          for name in BREVO_API_KEY; do
+            value="${!name}"
+            if [ -z "$value" ]; then echo "::error::$name is empty — refusing to write a blank secret"; exit 1; fi
+            code=$(curl -sS -o /tmp/resp.json -w '%{http_code}' -X POST "$api" \
+              -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              -d "$(jq -nc --arg k "$name" --arg v "$value" --arg t "$TARGET" \
+                    '{key:$k, value:$v, type:"encrypted", target:[$t]}')")
+            if [ "$code" != "200" ] && [ "$code" != "201" ]; then
+              echo "::error::$name failed with HTTP $code"; jq -r '.error.message // .' /tmp/resp.json; exit 1
+            fi
+            echo "$name → set for $TARGET"
+          done
