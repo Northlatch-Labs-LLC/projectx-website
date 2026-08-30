@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   // links to; a reader who sees one domain in the unfurl and lands on another has been misled by
   // the preview, however accurate each half was on its own.
   //
-  // The state chips are deliberately more conservative than the badges rendered below. Weir and
-  // Names both route into the Weir closed alpha — lib/links.ts records weir.social/names answering
-  // 307 to the waiting list — and the vault has had no interface since 25 August 2026 while its
-  // contract stays live. A card that showed any of them as more open than it is would be a promise
-  // the estate cannot keep, made in the one place nobody can correct it. The token launcher is
-  // absent for the same reason it is absent from the page: its panel renders only when
-  // LAUNCHER_URL is set, and that variable is fail-closed until a subdomain resolves.
+  // The state chips say what the panels below say: Weir and Names are live on mainnet with their
+  // door in closed alpha, and the vault's contract is live with no interface serving it since
+  // 25 August 2026. The chips read "Closed alpha" because a card has room for one state and the
+  // door is the fact a reader acts on — an unfurl that showed any product as more open than it is
+  // would be a promise the estate cannot keep, made in the one place nobody can correct it. The
+  // token launcher is absent for the same reason it is absent from the page: its panel renders
+  // only when LAUNCHER_URL is set, and that variable is fail-closed until a subdomain resolves.
   openGraph: {
     images: [
       {
@@ -98,9 +98,22 @@ export default function InterfacesPage() {
                 <Sparkle className="h-6 w-6" />
               </span>
               <div className="flex flex-col gap-1">
+                {/*
+                  Two badges, because there are two facts and dropping either one misleads.
+                  The contracts are live on Sui mainnet — creators have vaults, and the chain says
+                  so — while entry is invitation-only. Badging this "Live" alone sent a reader to a
+                  waiting list they were never warned about; badging it "Closed alpha" alone would
+                  deny a deployment that has taken real transactions. The page carries both.
+
+                  Named Weir, not "ProjectX Social". lib/links.ts records the rename on 25 August
+                  2026 — the product is Weir at its own domain, and social.protocolx.io was
+                  scaffolding since retired — and /social has headed it Weir throughout. This
+                  heading simply outlived the rename.
+                */}
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">ProjectX Social</h3>
+                  <h3 className="text-xl font-semibold text-white">Weir</h3>
                   <Badge tone="prize">Live</Badge>
+                  <Badge tone="accent">Closed alpha</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
               </div>
@@ -127,20 +140,27 @@ export default function InterfacesPage() {
 
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
               Live on Sui mainnet. Each creator has a vault on chain; what a creator is owed is
-              held by a contract, not by the platform. Explained in full on{' '}
+              held by a contract, not by the platform. Entry is in closed alpha behind invitation
+              codes, so this link opens the waiting list rather than the platform. Explained in
+              full on{' '}
               <Link href="/social" className="underline decoration-white/20 underline-offset-4 hover:text-px-muted">
                 /social
               </Link>
               .
             </p>
 
+            {/*
+              The button says what the click does. It read "Open Social" and landed on a waiting
+              list, which is the one thing a call to action must never do — a visitor who is told
+              a product is live and then meets a wall learns to distrust the next badge too.
+            */}
             <a
               href={SOCIAL_URL}
               target="_blank"
               rel="noreferrer"
               className="btn-primary mt-auto w-fit px-5"
             >
-              Open Social
+              Join the waiting list
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -247,9 +267,16 @@ export default function InterfacesPage() {
                 <LinkIcon className="h-6 w-6" />
               </span>
               <div className="flex flex-col gap-1">
+                {/*
+                  Same two facts as Weir, and for the same reason: the registrar is live on
+                  mainnet and has taken real revenue on chain, but it moved into Weir, so its door
+                  is Weir's door and Weir's door is invitation-only. lib/links.ts records
+                  weir.social/names answering 307 to the waiting list while the alpha is closed.
+                */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">ProjectX Names</h3>
                   <Badge tone="gold">Live</Badge>
+                  <Badge tone="accent">Closed alpha</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
               </div>
@@ -277,15 +304,23 @@ export default function InterfacesPage() {
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
               Live on Sui mainnet. SuiNS&rsquo;s registration fee plus a ProjectX service fee for the
               interface &mdash; registering directly at suins.io is always available and costs less.
+              The registrar moved into Weir, so this link opens the same waiting list; suins.io
+              needs no invitation and is the way to register a name today.
             </p>
 
+            {/*
+              "Register a name" promised a registration that the closed alpha cannot currently
+              deliver. The button now names the waiting list, and the line above names suins.io —
+              a reader who wants a .sui name tonight should leave with a way to get one, even
+              when the way is not ours.
+            */}
             <a
               href={NAMES_URL}
               target="_blank"
               rel="noreferrer"
               className="btn-primary mt-auto w-fit px-5"
             >
-              Register a name
+              Join the waiting list
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
