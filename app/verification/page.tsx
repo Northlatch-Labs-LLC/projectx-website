@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { NotifySignup } from '@/components/ui/NotifySignup';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
+import { Callout } from '@/components/ui/Callout';
+import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Verification',
@@ -94,6 +96,26 @@ export default function VerificationPage() {
               </Reveal>
             ))}
           </ul>
+
+          {/* The exit this page did not have.
+              Everything above states the product; the only control on the page was a mailto at
+              the bottom of the engagement section, which turns every ready reader into a
+              conversation somebody has to have. /verification/install is the other door: what the
+              checks measure in the reader's own terms, the config file they need, and one control
+              to press. The prices, the anchor and the card on this page are untouched. */}
+          <Callout
+            className="w-full"
+            title="Ready to put the checks on your own pull requests?"
+            actions={
+              <Button href="/verification/install" variant="primary" className="px-5">
+                Install ProtocolX Verify
+              </Button>
+            }
+          >
+            What each check measures on your repository, the four steps from install to evidence,
+            the exact config file it reads, and how to get it installed while the App is in early
+            access.
+          </Callout>
         </div>
       </Section>
 

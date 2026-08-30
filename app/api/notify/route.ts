@@ -30,7 +30,20 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /** Brevo list #3 — "ProtocolX — launch announcements (DOI only)", created 2026-08-30. */
 const LIST_ID = 3;
 
-const SOURCES = new Set(['home', 'verification']);
+/**
+ * Which page an address came from, recorded as the `SOURCE` attribute on the contact.
+ *
+ * It is an allowlist rather than a passthrough because `SOURCE` is written into the contact
+ * platform unvalidated otherwise, and a segment built on a free-text field is a segment that
+ * silently splits the day a page ships with a typo in its prop.
+ *
+ * `install` is /verification/install — a reader asking for the GitHub App on a named repository,
+ * which is a different intent from `verification` (a reader who wants to hear when it opens) and
+ * a different one again from `home`. Same route, same list, same double-opt-in: a second endpoint
+ * would be a second place for the consent discipline in the header to be got wrong, and this one
+ * only ever needed one more allowed string.
+ */
+const SOURCES = new Set(['home', 'verification', 'install']);
 
 export async function POST(request: Request) {
   const key = (process.env['BREVO_API_KEY'] ?? '').trim();

@@ -6,8 +6,24 @@ import { SITE_URL } from '@/lib/links';
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
+  /**
+   * Every route this site serves, or the ones that are missing are invisible.
+   *
+   * `/verification` shipped without an entry here and stayed that way — the one page on the site
+   * that quotes a price and asks for an engagement was the one page absent from the document
+   * search engines read to find pages. Nothing was broken and nothing complained, which is how it
+   * survived: the page rendered, the links worked, and the only symptom was traffic that never
+   * arrived. It is listed now, above the developer pages, because it is the page most likely to
+   * turn a reader into revenue.
+   *
+   * `/verification/install` is listed beside it at the same priority. It is the conversion page
+   * for the GitHub App and it is not linked from the navigation, so a crawler reaches it through
+   * exactly two routes: this file, and the call to action on /verification.
+   */
   const routes: [string, number, MetadataRoute.Sitemap[number]['changeFrequency']][] = [
     ['', 1, 'daily'],
+    ['/verification', 0.9, 'weekly'],
+    ['/verification/install', 0.9, 'weekly'],
     ['/social', 0.9, 'monthly'],
     ['/protocol', 0.9, 'monthly'],
     ['/interfaces', 0.9, 'weekly'],
