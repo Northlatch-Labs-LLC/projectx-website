@@ -10,6 +10,11 @@ import { priceSentence } from '@/lib/suins-pricing';
 /**
  * Headline on one side, the thing to do on the other.
  *
+ * The offer in that panel was a name until 30 August 2026, when the Master ruled verification the
+ * main service promoted on this hub and Names explicitly not the flagship. The panel now leads
+ * with the First Report and keeps the name search below the divider — demoted, not withdrawn.
+ * Nothing was deleted to make room: NameSearch is the same component, unchanged.
+ *
  * The right half used to hold an illustrated trophy ringed by floating labels — "no loss to date",
  * "daily draw", "withdraw anytime", "someone wins tonight". Six phrases orbiting a cup, none of
  * them clickable, all of them competing with the one control on the page that takes money. The
@@ -39,9 +44,9 @@ export function Hero() {
           {/* The space before <br /> is deliberate. Without it the accessible name concatenates
               to "proofand none of it" — a screen reader says one word. */}
           <h1 className="text-hero">
-            Your money, your name, your proof{' '}
+            We break our own contracts{' '}
             <br />
-            <span className="text-gradient-accent">and none of it needs trusting us.</span>
+            <span className="text-gradient-accent">so you don’t find out how.</span>
           </h1>
 
           {/* Task-mandated disclosure, in body weight and above the fold at every width. */}
@@ -54,16 +59,48 @@ export function Hero() {
         {/* The offer, in the space the illustration used to occupy. */}
         <div className="panel flex w-full min-w-0 flex-col gap-5 p-6 sm:p-8">
           <p className="text-lg leading-relaxed text-px-muted">
-            <span className="font-semibold text-white">Start with a name.</span> A{' '}
-            <code>.sui</code> name replaces the sixty-four characters of your wallet address with
-            something a person can type. It costs {priceSentence()} and arrives in one transaction.
+            <span className="font-semibold text-white">Start with the proof.</span> ProtocolX
+            Verify runs five checks on a Sui Move package — it compiles clean on a machine that
+            has never seen it, it still matches the digest the chain holds, the suite is green,
+            the toolchain cannot drift, and guards deleted on purpose are noticed.
           </p>
 
-          <NameSearch />
+          <p className="text-[0.9375rem] leading-relaxed text-px-muted">
+            <span className="font-semibold text-white">From $1,000.</span> One package, all five
+            gates, delivered inside 24 hours as an evidence bundle whose digest you can re-derive
+            without us. It is a measurement and not an audit, and it is never called one.
+          </p>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button href="/verification" variant="primary" className="flex-1 justify-center">
+              What it measures
+            </Button>
+            <Button
+              href="/verification/install"
+              variant="secondary"
+              showExternalIcon={false}
+              className="flex-1 justify-center"
+            >
+              Install it
+            </Button>
+          </div>
 
           <div className="mt-1 border-t border-white/[0.07] pt-5">
+            {/* Names lost the lead here on the Master's order of 30 August 2026 — "Names is not
+                the flagship product" — and kept the search. The control is unchanged and still
+                works; what changed is that it is now one of the ways to start rather than the
+                only one on offer, which is also the truer statement: the registrar sits behind
+                Weir's closed alpha, and the First Report does not. */}
             <p className="label mb-3">Or start somewhere else</p>
-            <div className="flex flex-col gap-3 sm:flex-row">
+
+            <p className="mb-3 text-[0.9375rem] leading-relaxed text-px-faint">
+              A <code>.sui</code> name replaces the sixty-four characters of your wallet address
+              with something a person can type — {priceSentence()}, one transaction.
+            </p>
+
+            <NameSearch />
+
+            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
               <Button
                 // /organiser/apply, not /organiser — the console refuses any wallet not on the
                 // platform allowlist, and shows a full creation form before saying so. See the

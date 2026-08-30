@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Logo } from '@/components/ui/Logo';
-import { Menu, ArrowUpRight } from '@/components/ui/Icons';
+import { Menu } from '@/components/ui/Icons';
 import { MobileNav } from './MobileNav';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { NAV_LINKS, RAFFLE_URL } from '@/lib/links';
+import { NAV_LINKS } from '@/lib/links';
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -133,69 +133,38 @@ export function SiteHeader() {
             <ThemeToggle />
           </span>
 
-          {/* This button points at whichever door is actually open, and that has now moved twice.
-              It sent everyone to the vault first — the slowest product to produce a penny, and the
-              one that asks for a deposit before it gives anything back. It was then pointed at a
-              name, on the reasoning that a name was the only thing a stranger could buy in the
-              session they arrived in. That reasoning was sound and is no longer true: the
-              registrar moved into Weir, Weir is in closed alpha, and lib/links.ts records
-              weir.social/names answering 307 to a waiting list. The premise expired without the
-              button noticing, which is how the estate's most-clicked control came to walk every
-              visitor on every page into a wall.
+          {/* The bar's one button points at whichever door the site is promoting, and that has
+              now moved three times: the vault, then a name, and now the measurement. Each move
+              was made because the previous premise expired, not because the previous reasoning
+              was bad — the vault lost its interface, and the registrar moved behind Weir's closed
+              alpha, which is how the estate's most-clicked control came to walk every visitor on
+              every page into a waiting list.
 
-              The draws are the door that is open tonight. They are live on mainnet, they take an
-              entry from someone who arrived a minute ago, and they are where the launch thread is
-              already sending people. So the header offers that, and the label says what the click
-              does rather than what we would like it to do — "See draws" stays true whether or not
-              a particular competition is mid-window, where "Enter a draw" would not.
+              Verification is the promoted service on this hub from 30 August 2026, and the nav
+              and the footer both lead with it. A header CTA still pointing at the draws would have
+              contradicted both, on the one control most people press.
 
-              Names is not hidden: it keeps its place in the nav beside Social, where a label is a
-              destination rather than a promise. This button returns to it the day the alpha opens,
-              and the test for that day is this comment's own premise — can a stranger who arrived
-              in this session actually get a name. */}
-          {/* whitespace-nowrap is the fix, not the padding. At 375px the label wrapped to two lines
-              inside the button, which made it 80px tall inside a 64px bar — it hung out of the
-              header rather than sitting in it. Keeping the label on one line and trimming the
-              horizontal padding on small screens leaves it comfortably between the logo and the
-              menu button. */}
-          {/* That earlier note is still true and still load-bearing: `whitespace-nowrap` is what
-              keeps this label on one line, and removing it would bring the vertical overflow back.
-              What it got wrong was the closing claim. The label was never left "comfortably between
-              the logo and the menu button" — it was left overflowing them horizontally instead, and
-              the padding trim it credits bought about eight pixels against a shortfall of seventy.
-              The two bugs are the same bug seen on two axes: a bar asked to carry more than it has
-              room for. The vertical half was fixed here in the button; the horizontal half could
-              only ever be fixed in the layout above, and now has been. The padding on this button
-              is no longer holding anything up. */}
-          <a
-            href={RAFFLE_URL}
-            target="_blank"
-            rel="noreferrer"
+              The label says what the click does. "Verify a repo" survives whether or not a
+              particular draw is mid-window, which "See draws" did, and which "Install Verify"
+              would not while self-serve installs are arranged by email.
+
+              This is now an internal route, so it is a next/link and not an anchor with a target —
+              the arrow that meant "opens elsewhere" goes with it, because it no longer does.
+
+              Draws are not hidden: they keep their nav entry and their footer entry, and this
+              button returns to them the day that is the door worth promoting.
+
+              Measured before it shipped, not estimated, at the three widths this bar has
+              historically broken at. "Verify a repo" renders on one line at 40px inside a 64px
+              bar at every one: 102px at 320px, 126px at 375px, 142px at 1024px alongside the
+              six-label nav — bar overflow 0 and document overflow 0 in all three. It is 14px
+              wider than the label it replaces, and the narrowest case keeps ~200px of slack. */}
+          <Link
+            href="/verification"
             className="btn-primary whitespace-nowrap px-3 py-2.5 text-sm sm:px-5"
           >
-            See draws
-            {/* The arrow says "this opens elsewhere", and it costs 24px — the glyph and its gutter.
-                With the layout above fixed, that 24px is the difference at exactly one class of
-                screen: at 320px the bar needs 328px to seat the logo, this button and the menu
-                button, so the arrow is what has to give. The label is what the control is; the arrow
-                is only what it hints, and nothing the arrow carries is lost, because `target`
-                and the opens-elsewhere behaviour do not depend on it.
-
-                328px was measured, not chosen — it was the exact floor of this bar with the arrow in
-                it, for the label it was measured against. That label was "Claim a name"; this bar now
-                reads "See draws", which is 24px narrower, so the exact floor with the arrow has moved
-                to 288px and this rule is deliberately left 40px conservative rather than retuned. It
-                is a merged guarantee, the only screens affected are 289–328px, and no device the
-                estate sees is in that band — a verified threshold is not worth re-cutting to reclaim
-                an arrow nobody is looking at. It is also deliberately not a named breakpoint: `sm`
-                would strip the arrow from every phone to serve the few that need it.
-
-                Re-measured after the rebase, with this label: with the arrow hidden the bar stops
-                overflowing at 264px and carries its full 20px of padding from 284px up; with the arrow
-                shown its floor is 288px, which leaves 72px of slack at 360px and 87px at 375px. No
-                current phone comes near any of these numbers. */}
-            <ArrowUpRight className="h-4 w-4 shrink-0 max-[328px]:hidden" />
-          </a>
+            Verify a repo
+          </Link>
 
           <button
             type="button"

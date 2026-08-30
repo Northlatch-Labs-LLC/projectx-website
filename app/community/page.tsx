@@ -41,7 +41,9 @@ export default function CommunityPage() {
             <a href="https://x.com/ProjectX_Sui" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@ProjectX_Sui</a>{' '}
             (the estate) and{' '}
             <a href="https://x.com/weirsocial" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@weirsocial</a>{' '}
-            (Weir, in its own voice). There is no Discord and no Telegram. Any account not named
+            (Weir, in its own voice). Our code lives at{' '}
+            <a href="https://github.com/Northlatch-Labs-LLC" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">github.com/Northlatch-Labs-LLC</a>{' '}
+            and nowhere else. There is no Discord and no Telegram. Any account not named
             on this page is not ours, and nobody from ProjectX will ever contact you first, ask
             for a seed phrase, or ask you to sign a transaction.
           </p>

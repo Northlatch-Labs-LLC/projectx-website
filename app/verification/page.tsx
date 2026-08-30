@@ -191,15 +191,9 @@ commit: "Kill the two survivors the app found on its first run"`}
               audit you will ever buy.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              {/* The entry anchor, re-cut 2026-08-30. The operator ruled the First Report live
-                  at $1,000 — his word, verbatim, "bless the thousand" — and it replaces the
-                  $3,500 sprint anchor this paragraph carried until that date. Terms in
-                  operations/company/first-report-sku-2026-08-30.md. The superseded figure is not
-                  restated here: the ladder is unchanged and sprints still sit above the First
-                  Report, but every exact sprint figure belongs where it always belonged, quoted
-                  in writing per engagement. The paragraph now has to describe a measurement
-                  rather than an engagement, which is why the exclusions are stated in it and not
-                  left to be asked for. */}
+              {/* The entry anchor. It describes a measurement, not an engagement, which is why
+                  the exclusions are stated here rather than left to be asked for. Exact sprint
+                  figures are quoted in writing per engagement and deliberately not printed. */}
               <span className="font-semibold text-white">From $1,000.</span> That is the First
               Report: one Move package, all five PVS gates, delivered inside 24 hours as an
               evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It

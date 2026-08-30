@@ -17,12 +17,18 @@ export function CtaBand() {
         <Signature width="short" className="mb-2" />
 
         {/* The close used to be vault-only — "Keep your SUI, play with the yield", one button, to
-            the slowest of the three. It is the last thing on a page that now spends three sections
-            on three products, so it offers all three and leads with the one that completes today. */}
+            the slowest of the three. It then led with a name, on the reasoning that a name was the
+            one thing a stranger could complete in the session they arrived in.
+            
+            It leads with the measurement now, on the Master's order of 30 August 2026. The old
+            reasoning did not survive its own premise: the registrar sits behind Weir's closed
+            alpha, so a name is no longer the thing that completes today — and the First Report is,
+            inside 24 hours, for a figure a protocol lead can approve without a meeting. Every
+            other door this band opened is still on it. */}
         <h2 className="text-gradient-chrome max-w-2xl text-display">
-          Start with a name.
+          Get the measurement.
           <br />
-          <span className="text-gradient-accent">It takes one transaction.</span>
+          <span className="text-gradient-accent">Then decide who to trust.</span>
         </h2>
 
         {/*
@@ -36,12 +42,16 @@ export function CtaBand() {
           API answered or not, and it gets stronger as the count grows rather than weaker.
         */}
         <p className="lead mx-auto text-center">
-          Every deposit ever made has come back in full. That is enforced by the contract, not by
-          our conduct — the vault has no function that can spend your principal.
+          Five gates on one Move package, from $1,000, delivered inside 24 hours as an evidence
+          bundle whose digest you can re-derive without us. It is a measurement, not an audit, and
+          we will never call it one.
         </p>
 
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Button href={NAMES_URL} variant="primary" showExternalIcon={false} className="px-7">
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button href="/verification" variant="primary" className="px-7">
+            See what it measures
+          </Button>
+          <Button href={NAMES_URL} variant="secondary" showExternalIcon={false}>
             Claim a .sui name
             <ArrowUpRight className="h-4 w-4" />
           </Button>

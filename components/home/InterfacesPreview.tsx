@@ -81,7 +81,6 @@ export function InterfacesPreview() {
             <div className="flex flex-wrap items-center gap-3">
               <h3 className="text-xl font-semibold text-white">Weir</h3>
               <Badge tone="prize">Live</Badge>
-              <Badge tone="gold">Flagship</Badge>
             </div>
             <p className="text-[0.8125rem] font-medium uppercase tracking-wide text-px-faint">
               Operated by Northlatch Labs LLC under its own terms.

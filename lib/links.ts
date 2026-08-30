@@ -101,9 +101,20 @@ export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? 'https://weir.soci
 // the same Vercel project that served the old host. Never advertise a host that does not answer.
 export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.social';
 
-// Six is the ceiling, not a preference: the centred pill has ~630px between the logo and the
-// actions at max-w-content, and these six measure ~545px. A seventh overflows the header rather
-// than wrapping — measured in the browser, not estimated.
+// RE-MEASURED 2026-08-30, in a browser, at 1024px — the tightest width at which this bar renders
+// at all, since the pill is `hidden` below `lg`. The previous note here put the ceiling at ~630px
+// and these labels at ~545px, and it was conservative in a way that mattered: it was read as
+// forbidding a sixth entry, and "Verification" could not be added without deleting something.
+//
+// The real figures, hit-tested rather than estimated. The bar is 1009px inside its padding; the
+// logo is 153px and the actions cluster 172px of actual content, both fixed. The centred pill
+// therefore breaks at a measured 637px — confirmed by growing a probe label one step at a time
+// until the bar, the document, or the button's own height overflowed. The six labels below
+// measure 557px, which leaves 80px of headroom at the worst width, with the bar and document
+// both at zero horizontal overflow and the "See draws" button still 128×40 on one line.
+//
+// So six is not a ceiling and never was — 637px is. Anyone adding a seventh should re-run that
+// measurement rather than trusting this paragraph, for exactly the reason this paragraph exists.
 //
 // Until 11 Aug the desktop bar carried five and `/security`, `/sponsor` and `/community` were
 // reachable *only* through the mobile hamburger, which renders FOOTER_SECTIONS. Three real pages
@@ -120,13 +131,17 @@ export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.so
  * Everything the old nav carried still exists; it now lives under Developers, which is what it was.
  */
 export const NAV_LINKS = [
-  // Social leads by operator decision (18 Aug 2026): it is the flagship of the estate, and the
-  // one product a visitor can act on without spending anything. The rest keep the
-  // revenue-speed order. This is the sixth link — the measured ceiling — and "Social" is
-  // shorter than four of the six labels the bar carried before the ceiling was measured.
-  { href: SOCIAL_URL, label: 'Social', external: true },
-  { href: NAMES_URL, label: 'Names', external: true },
+  // Verification leads, by operator order (30 Aug 2026: "Verification is now the main service
+  // promoted on the .dev hub .... Names is not the flagship product"). It is the only entry that
+  // is a page on THIS site rather than a link off it, which is the point — this domain is the
+  // verification hub, and the other three surfaces are products it vouches for.
+  { href: '/verification', label: 'Verification' },
   { href: RAFFLE_URL, label: 'Draws', external: true },
+  { href: SOCIAL_URL, label: 'Social', external: true },
+  // Names keeps its place and loses the lead. Same order-of-revenue reasoning as before; what
+  // changed is that a name is no longer the fastest thing a stranger can buy here, because the
+  // registrar is behind Weir's closed alpha and the First Report is not.
+  { href: NAMES_URL, label: 'Names', external: true },
   // Present only while an interface serves it. The vault's front end was retired on 25 August
   // 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in the top
   // nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set again.
@@ -136,8 +151,42 @@ export const NAV_LINKS = [
   // renders the full creation form to a disconnected visitor before it says so. /organiser/apply
   // opens with "Apply to run competitions" and the admission steps, which is what this label
   // promises. See components/home/Organisers.tsx.
+  //
+  // This entry was accidentally dropped when Verification was added on 30 August 2026 and put
+  // straight back the same hour. Nothing about the ruling called for removing it, the bar has the
+  // room (see the measurement above), and losing it would have taken the highest-value customer
+  // on the raffle off the top nav as a side effect of promoting a different product.
   { href: `${RAFFLE_URL}/organiser/apply`, label: 'For organisers', external: true },
   { href: '/builders', label: 'Developers' },
+] as const;
+
+/**
+ * The estate's public channels, stated once and rendered everywhere.
+ *
+ * These were on /community and nowhere else, which meant the canonical list of "these accounts
+ * are ours and nothing else is" sat three clicks from the front door on a site whose whole
+ * argument is that you should not have to take anyone's word for anything. An impersonation
+ * defence that is hard to reach is not a defence.
+ *
+ * `@protocolx_io` leads because it is the account that carries the draws and the pinned launch
+ * thread (29 August 2026); `@ProjectX_Sui` is the estate's own voice. Both verified first-hand —
+ * posts from each are recorded in operations/campaign-log.md with their status ids.
+ *
+ * GitHub is the organisation profile, verified answering 200 on 30 August 2026. It is listed on
+ * the Master's order of the same date. Note honestly: the organisation currently publishes ZERO
+ * public repositories, so this link opens an empty shelf until `protocolx-verify` is published
+ * (see operations/company/publication-plan-2026-08-30.md). The link is not wrong — the profile is
+ * real and it is ours — but anyone adding a "read the source" claim beside it before that
+ * publication lands would be writing a promise the page cannot keep.
+ *
+ * Whatever is added here must also be added to /community, which states in its own words that
+ * "if a channel is not listed here, it is not ours" and calls its list canonical. Two lists that
+ * disagree is worse than one list — the shorter one starts reading as the impersonation.
+ */
+export const CHANNELS = [
+  { label: 'X · @protocolx_io', short: '@protocolx_io', href: 'https://x.com/protocolx_io', icon: 'x' },
+  { label: 'X · @ProjectX_Sui', short: '@ProjectX_Sui', href: 'https://x.com/ProjectX_Sui', icon: 'x' },
+  { label: 'GitHub · Northlatch Labs', short: 'GitHub', href: 'https://github.com/Northlatch-Labs-LLC', icon: 'github' },
 ] as const;
 
 export const FOOTER_SECTIONS: {
@@ -158,6 +207,12 @@ export const FOOTER_SECTIONS: {
   {
     title: 'Products',
     links: [
+      // Verification leads the footer for the same reason it leads the nav (operator order,
+      // 30 Aug 2026). Two entries rather than one: the page states the offer, /verification/install
+      // is the door — and a reader who has already decided should not have to read the pitch again
+      // to find the control.
+      { label: 'Verify a Move package', href: '/verification' },
+      { label: 'Install ProtocolX Verify', href: '/verification/install' },
       { label: 'Support a creator', href: SOCIAL_URL, external: true },
       { label: 'Register a .sui name', href: NAMES_URL, external: true },
       { label: 'Live competitions', href: RAFFLE_URL, external: true },

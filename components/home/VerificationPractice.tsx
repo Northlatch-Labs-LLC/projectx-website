@@ -10,8 +10,11 @@ import { Reveal } from '@/components/ui/Reveal';
  *
  * Every claim here is a measurement that has already happened on this estate's own contracts:
  * the mutation ledgers, the 60,000-entrant staging runs, the Sui Prover transcript for the
- * registrar's money path. Nothing is offered for sale and nothing is called an audit — the
- * security page carries the independence clause and this section does not soften it.
+ * registrar's money path. Nothing here is called an audit — the security page carries the
+ * independence clause and this section does not soften it.
+ *
+ * It used to add "nothing is offered for sale". That is no longer true and the section now says
+ * so: this is the flagship, it sits second on the homepage, and the price is on the face of it.
  */
 export function VerificationPractice() {
   const layers = [
@@ -38,9 +41,9 @@ export function VerificationPractice() {
     <Section>
       <div className="flex flex-col items-center gap-12">
         <SectionHeader
-          eyebrow="Practice · verification engineering"
-          title="We break our own contracts so you don’t find out how"
-          lead="Everything here holds other people’s money, so nothing ships on a green checkmark alone. Every suite is measured by mutation, every lifecycle is staged at production scale on a private network, and the money paths are being proven — not argued — one contract at a time."
+          eyebrow="The flagship · ProtocolX Verify"
+          title="The three measurements, and what each one refuses to accept"
+          lead="Everything here holds other people’s money, so nothing ships on a green checkmark alone. Every suite is measured by mutation, every lifecycle is staged at production scale on a private network, and the money paths are being proven — not argued — one contract at a time. These are the tools you are buying, and they were built on our own contracts first."
           proof="No external audit has been completed, and this page will never pretend otherwise. What it offers instead is numbers: survivor counts, gas tables, and proof transcripts, published as they land."
         />
 
@@ -61,27 +64,28 @@ export function VerificationPractice() {
 
       <Callout
         className="mt-12"
-        title="The tools are becoming products"
+        title="These tools are the product"
         actions={
           <>
-            <Button href="/security" variant="primary" className="px-5">
-              The evidence, in public
+            <Button href="/verification" variant="primary" className="px-5">
+              What the five gates measure
             </Button>
-            <Button href="/builders" variant="secondary">
-              Build with us
+            <Button href="/verification/install" variant="secondary">
+              Install it on your repository
+            </Button>
+            <Button href="/security" variant="secondary">
+              The evidence, in public
             </Button>
           </>
         }
       >
-        {/* Was "because the layer below the audit shouldn't be empty", corrected 2026-08-30 with
-            the verification page's lead and for the same reason: the layer is not empty. Open-source
-            Move mutation testing exists and is maintained
-            (operations/company/sui-foundation-research-2026-08-30.md). What it does not produce is
-            evidence anyone can carry, and that is the claim worth making. */}
-        The harnesses, the staging network, and the proving practice were built for our own
-        contracts first. We are shaping them into tools any Sui team can run — because the layer
-        below the audit should leave evidence you can hand to someone, and today it leaves a
-        console log.
+        {/* Deliberately not "the layer below the audit is empty": open-source Move mutation
+            testing exists and is maintained. What it does not produce is evidence anyone can
+            carry, and that is the claim worth making. */}
+        The harnesses, the staging network and the proving practice were built for our own
+        contracts first. They now run on other people’s: five gates on every pull request, or a
+        single measured report on one package from $1,000 — because the layer below the audit
+        should leave evidence you can hand to someone, and today it leaves a console log.
       </Callout>
     </Section>
   );

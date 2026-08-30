@@ -7,6 +7,7 @@ import { LiveBadge } from '@/components/ui/LiveBadge';
 import { AddressChip } from '@/components/ui/AddressChip';
 import { ArrowUpRight, ShieldCheck } from '@/components/ui/Icons';
 import { CHAIN_OBJECTS, NETWORK, explorerUrl } from '@/lib/chain';
+import { ChannelLinks } from '@/components/ui/ChannelLinks';
 import { DAPP_URL, FOOTER_SECTIONS } from '@/lib/links';
 
 export function SiteFooter() {
@@ -76,6 +77,14 @@ export function SiteFooter() {
               page. Public, permanent, and checkable by anyone — including you.
             </p>
             <LiveBadge className="w-fit" />
+
+            {/* The channels, on every page rather than only on /community.
+                That page calls its list canonical and tells visitors any account not on it is not
+                ours — a defence that only works if a visitor being impersonated can reach it
+                without already knowing it exists. The footer is where they look. /community keeps
+                the full statement and the impersonation warning; this is the shortcut to it, and
+                both render from CHANNELS so they cannot drift apart. */}
+            <ChannelLinks className="mt-1" />
 
           </div>
 
