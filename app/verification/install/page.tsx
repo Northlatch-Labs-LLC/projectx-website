@@ -46,11 +46,24 @@ export const metadata: Metadata = {
  *      audit describes an independent engagement that has not happened. The independence clause
  *      at the foot of this page is the same paragraph /verification carries, in full, not linked.
  *
- *   2. **No price the App does not have.** Sprints start at $3,500 and that anchor belongs to the
- *      engagement. The App tier has no price: billing and metering are deliberately unbuilt until
- *      the first service dollar (protocolx-verify/README.md, road 2). Printing a number here to
- *      make the page feel finished would be a number we would later have to withdraw, and a
- *      withdrawn price is worth less than no price.
+ *   2. **No price the thing being described does not have.** The entry anchor is the First
+ *      Report at $1,000 — a measurement of one public Move package, ruled live by the operator
+ *      2026-08-30 ("bless the thousand"), terms in
+ *      operations/company/first-report-sku-2026-08-30.md. It supersedes the $3,500 sprint anchor
+ *      this note carried until that date. Sprints still sit above it and are still quoted per
+ *      engagement, so no sprint figure is printed on this page. Because the anchor now buys a
+ *      measurement rather than an engagement, the copy below has to carry the exclusions with the
+ *      price — public repositories only, no remediation, not an audit — or the number promises
+ *      something the SKU does not.
+ *
+ *      The App tier still has no price: billing and metering are deliberately unbuilt until the
+ *      first service dollar (protocolx-verify/README.md, road 2). Printing a number here to make
+ *      the page feel finished would be a number we would later have to withdraw, and a withdrawn
+ *      price is worth less than no price. And when the App does get a price, that price is the
+ *      App's alone: the GitHub Action is licensed BUSL-1.1 and is free to run in a customer's own
+ *      CI on their own code, public or private. Presenting the hosted service's monthly figure as
+ *      the Action's price is an error a prior notice has already made once, and it must not be
+ *      made on this page.
  *
  *   3. **No claim of general availability.** app/REGISTRATION.md station 3 sets "Where can this
  *      app be installed" to *Only on this account*, and the status ledger lists multi-tenancy
@@ -237,20 +250,22 @@ export default function VerifyInstallPage() {
         <div className="flex flex-col items-center gap-10">
           <SectionHeader
             eyebrow="What it costs"
-            title="The sprint has a number. The App does not have one yet."
+            title="The measurement has a number. The App does not have one yet."
             lead="Two things are being sold here and only one of them is priced, so this page prices one of them."
           />
 
           <div className="panel w-full max-w-prose p-6">
             <p className="text-[1rem] leading-[1.65] text-px-muted">
               {/* The anchor is carried, not restated: /verification owns this sentence and the
-                  operator approved it there (2026-08-30). Repeating it verbatim keeps the two
-                  pages from drifting into two different numbers. */}
-              <span className="font-semibold text-white">Sprints start at $3,500.</span> That is
-              the fixed-scope engagement — the mutation report, the staged lifecycle, the proof
-              where the prover reaches, and the gates installed and left running in your
-              repository. Larger codebases are scoped custom, and every engagement is quoted flat,
-              in writing, before work begins.
+                  operator ruled it there (2026-08-30). Repeating it verbatim keeps the two pages
+                  from drifting into two different numbers — including the exclusions, which
+                  travel with the price rather than after it. */}
+              <span className="font-semibold text-white">From $1,000.</span> That is the First
+              Report: one Move package, all five PVS gates, delivered inside 24 hours as an
+              evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It
+              is a measurement and not an engagement — public repositories only, no remediation,
+              and no claim of independence. Sprints sit above it, scoped to the codebase and
+              quoted flat, in writing, before work begins.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               <span className="font-semibold text-white">
