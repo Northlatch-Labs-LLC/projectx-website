@@ -32,6 +32,36 @@ export const metadata: Metadata = {
   title: 'Support a creator',
   description:
     'The social platform where supporting a creator never spends your money: park SUI in a creator’s vault, the staking yield goes to them, and your deposit stays withdrawable in full — enforced by contract, not policy.',
+  // A dedicated card, on the same reasoning /verification carries one: this is the flagship
+  // product's page and its link is the one most often pasted somewhere a reader decides in two
+  // seconds whether to open it. The site-wide generated card argues the vault's invariant, which
+  // is a different product and the wrong first sentence for this page.
+  //
+  // The card is ProtocolX's, not Weir's, and deliberately so. This page is a ProtocolX-site page
+  // ABOUT Weir — it is not a Weir surface — so the asset carries the ProtocolX emblem and gradient
+  // and prints projectxprotocol.dev. Weir's crest and its teal-night palette are absent on purpose:
+  // borrowing a product's face onto another brand's page is the crossing the estate does not make,
+  // and an unfurl showing Weir's identity over a projectxprotocol.dev link would misattribute both.
+  //
+  // Its four pills restate this page's own guarantees — deposit never spent, yield to the creator,
+  // withdraw any time, enforced by contract — with no yield figure on the card. The arithmetic
+  // below is honest precisely because it is qualified, and a card cannot carry the qualification.
+  // "Weir · Sui mainnet · closed alpha" is the status line: the contracts are live, the door is
+  // not open, and the card must not read as an invitation the product cannot honour.
+  openGraph: {
+    images: [
+      {
+        url: '/og/social.png',
+        width: 1200,
+        height: 630,
+        alt: 'Support a creator without spending anything — deposit never spent, yield to the creator, withdraw any time, enforced by contract',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/social.png'],
+  },
 };
 
 const LOOP = [
