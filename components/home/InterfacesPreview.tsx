@@ -26,7 +26,11 @@ import { DAPP_URL, RAFFLE_URL, SOCIAL_URL } from '@/lib/links';
 const LIVE = [
   {
     title: 'ProjectX Vault',
-    badge: 'Reference',
+    // "Reference" implied a surface to refer to. Every other badge in this grid states the state
+    // of the DOOR — Live, Closed alpha — so this one does too, and the blurb's first clause
+    // carries the other half: the contract is live. /interfaces has room for two badges and shows
+    // both; a single slot has to pick the fact a visitor acts on.
+    badge: 'No interface',
     tone: 'prize' as const,
     Icon: Wallet,
     accent: 'from-px-accent/20 to-px-accent/5 text-px-accent',
@@ -41,13 +45,25 @@ const LIVE = [
     // Nothing is retired here. Every guarantee the old blurb made is still made; it is stated as
     // a property of a contract on mainnet rather than as a step the reader can take today. Put
     // the instruction back the moment NEXT_PUBLIC_DAPP_URL is set again.
+    // Rewritten 30 August 2026 in the hub sweep. The previous blurb still opened by describing
+    // what a depositor gets — "the whole day's staking yield goes to one depositor", "a withdrawal
+    // returns it 1:1" — which is an offer, on the front door, for the one product with no way in.
+    // The note underneath already admitted as much, so the card argued with itself.
+    //
+    // It reads as a record now: what the contract is, that it is live, and where it is still a
+    // live subject on this hub. Nothing is retired and nothing says the vault is dead — the
+    // guarantee is still stated, on /protocol, which is where a reader who wants it now goes.
     blurb:
-      'A vault where the whole day’s staking yield goes to one depositor and the draw runs in public. Principal is never at stake — the contract holds no path that could spend it, and a withdrawal returns it 1:1.',
-    note: 'The contract is live on Sui mainnet. Its interface was retired in August, so there is nothing to deposit into today.',
+      'A prize pool on Sui mainnet: principal delegated to a validator and returned 1:1, with the staking yield awarded to one depositor per epoch. Documented in full rather than sold — its interface was retired on 25 August 2026.',
+    note: 'Where it is still an active subject here is the capture-the-flag range, which runs against the retired v1.0 deployment.',
     legal:
-      'Software developed and licensed by Northlatch Labs LLC. Interface operator and prize sponsor: not yet designated. When an interface serves it again, this card is where it will be linked.',
+      'Software developed and licensed by Northlatch Labs LLC. Interface operator not designated. When an interface serves it again, this card is where it will be linked.',
     cta: 'Open the vault',
     href: DAPP_URL,
+    // Where the card points while DAPP_URL is null. Without this the card rendered its note and
+    // no control at all, which on a grid of four is read as a broken tile rather than as a
+    // deliberate absence.
+    fallback: { label: 'Attack the retired version', href: '/ctf' },
   },
   {
     title: 'ProjectX Draws',
@@ -121,7 +137,7 @@ export function InterfacesPreview() {
           </div>
         </Reveal>
 
-        {LIVE.map(({ title, badge, tone, Icon, accent, blurb, note, legal, cta, href }, index) => (
+        {LIVE.map(({ title, badge, tone, Icon, accent, blurb, note, legal, cta, href, fallback }, index) => (
           <Reveal key={title} delay={index * 90}>
             <div className="panel panel-hover flex h-full flex-col gap-4 p-7">
               <span
@@ -146,11 +162,21 @@ export function InterfacesPreview() {
                   {cta}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
+              ) : fallback ? (
+                // A product whose interface has been retired keeps its card and loses its OUTBOUND
+                // button. Rendering the CTA against a null href would produce a link to the current
+                // page, and pointing it at whatever now occupies the old address is how "Open the
+                // vault" came to send people to the raffle.
+                //
+                // It gets an internal control instead, added 30 August 2026. The card previously
+                // ended on a flat "No interface serves this at present" — true, and a dead end on a
+                // grid where every other tile leads somewhere. The fallback goes to a page about
+                // this same contract, which is the honest place to send someone who was interested
+                // enough to read four lines about it.
+                <Button href={fallback.href} variant="secondary" className="mt-auto w-fit px-5">
+                  {fallback.label}
+                </Button>
               ) : (
-                // A product whose interface has been retired keeps its card and loses its button.
-                // Rendering the CTA against a null href would produce a link to the current page,
-                // and pointing it at whatever now occupies the old address is how "Open the vault"
-                // came to send people to the raffle.
                 <p className="mt-auto text-[0.8125rem] leading-[1.55] text-px-faint">
                   No interface serves this at present.
                 </p>
