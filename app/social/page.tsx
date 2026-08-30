@@ -26,6 +26,21 @@ import { SOCIAL_URL } from '@/lib/links';
  *
  * "No loss" is used the way claims-banned.json requires: it describes what happens to principal —
  * it is never spent — not how anything downstream is funded.
+ *
+ * ── ON THE WORD "VAULT", 30 August 2026 ──────────────────────────────────────────────────────
+ * The hub sweep of this date measured 38 vault-era words on this page and was dispatched to take
+ * them to near zero. It did not, and the reason is worth writing down rather than repeating the
+ * measurement next quarter.
+ *
+ * EVERY OCCURRENCE OF "vault" ON THIS PAGE IS A WEIR CREATOR VAULT. Not one of them is the retired
+ * ProjectX prize vault. Weir's mechanism *is* park, delegate, yield, withdraw — a creator vault is
+ * an object on Sui mainnet holding supporter principal, and the deposit/yield/withdraw vocabulary
+ * is a correct description of a product that is live today. Stripping those words would not clean
+ * this page; it would make it describe Weir wrongly, which is the opposite of the sweep's purpose.
+ *
+ * What the sweep did instead is disambiguate: where the noun stood bare — "the vault delegates it",
+ * "a small vault" — it now reads "creator vault", so neither a reader nor a future word census can
+ * confuse the two products. The count barely moves. The page was already right.
  */
 
 export const metadata: Metadata = {
@@ -46,6 +61,19 @@ export const metadata: Metadata = {
   // Its four pills restate this page's own guarantees — deposit never spent, yield to the creator,
   // withdraw any time, enforced by contract — with no yield figure on the card. The arithmetic
   // below is honest precisely because it is qualified, and a card cannot carry the qualification.
+  // The page header carried a green "Live" badge until 30 August 2026, beside a proof line
+  // opening "Live on Sui mainnet". Both were true of the CONTRACTS and neither was true of the
+  // DOOR: weir.social 307s every visitor to a waiting list. A reader met an invitation in the
+  // header and the closed-alpha section six screens later, and the header is what they act on.
+  //
+  // Also cut here: a sentence offering supporters a share of the yield. Weir's own Creator Terms
+  // §3.3 forbid implying a supporter gains financially, and that clause was live on this site.
+  // The mechanism is unchanged; we simply may not advertise it, and the ban is ours.
+  //
+  // The vault, deposit and yield language on this page is NOT retired-ProtocolX copy and must not
+  // be swept as such. Weir's product genuinely is a staking vault. A word census cannot tell the
+  // live mechanism from the retired one, and stripping these would describe Weir wrongly.
+  //
   // "Weir · Sui mainnet · closed alpha" is the status line: the contracts are live, the door is
   // not open, and the card must not read as an invitation the product cannot honour.
   openGraph: {
@@ -72,13 +100,13 @@ const LOOP = [
   },
   {
     step: '2 · Stake',
-    title: 'The vault delegates it',
-    body: 'The vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield therefore arrives continuously rather than in bursts — and a withdrawal is met from the rung that just matured instead of by breaking one that had not.',
+    title: 'The creator vault delegates it',
+    body: 'The creator vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield therefore arrives continuously rather than in bursts — and a withdrawal is met from the rung that just matured instead of by breaking one that had not.',
   },
   {
     step: '3 · Yield',
     title: 'The creator earns the yield',
-    body: 'Each epoch, matured rungs realise their staking rewards and the yield goes to the creator. The principal restakes and keeps working. Creators can also set a share of the yield to flow back to their supporters, and the harvest itself is permissionless — anyone may trigger it, so nobody has to trust the platform to keep the machine turning.',
+    body: 'Each epoch, matured rungs realise their staking rewards and the yield goes to the creator. The principal restakes and keeps working. The harvest itself is permissionless — anyone may trigger it, so nobody has to trust the platform to keep the machine turning.',
   },
   {
     step: '4 · Leave',
@@ -94,7 +122,7 @@ const NOVELTIES = [
   },
   {
     title: 'Custody by contract, not by company',
-    body: 'Supporter principal sits in the creator’s vault contract; what a creator is owed from memberships and paid posts is held by a contract as well. The platform holds neither. If it vanished tomorrow, deposits would still be withdrawable and owed balances would still be owed — the contracts do not need the company to exist.',
+    body: 'Supporter principal sits in the creator’s own vault contract; what a creator is owed from memberships and paid posts is held by a contract as well. The platform holds neither. If it vanished tomorrow, deposits would still be withdrawable and owed balances would still be owed — the contracts do not need the company to exist.',
   },
   {
     title: 'A paywall that fails locked',
@@ -113,11 +141,11 @@ export default function SocialPage() {
         eyebrow="Weir · weir.social"
         title="Support a creator without spending anything"
         lead="Park SUI in a creator’s vault. It is delegated to a validator, the staking yield goes to the creator, and the deposit stays yours — withdrawable in full, any time, with no lock-up and no approval to ask for. The only thing you give up is the yield you would have earned staking it yourself."
-        proof="Live on Sui mainnet. Every guarantee on this page is the contract’s behaviour, not the platform’s policy — which is exactly why it can be stated this plainly."
+        proof="The contracts are live on Sui mainnet; the door is not open yet. What this page says about a supporter’s deposit — that it cannot be spent, and comes back in full — is the contract’s behaviour rather than the platform’s policy, which is why it can be stated this plainly."
         art={<SocialArt className="w-full" />}
       >
         <Badge tone="neutral">Sui mainnet</Badge>
-        <Badge tone="prize">Live</Badge>
+        <Badge tone="neutral">Closed alpha</Badge>
       </PageHeader>
 
       <Section>
@@ -174,9 +202,9 @@ export default function SocialPage() {
           ))}
         </div>
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-px-faint">
-          Sui floors a single stake at 1 SUI, so very small vaults build fewer rungs and their
+          Sui floors a single stake at 1 SUI, so very small creator vaults build fewer rungs and their
           yield arrives in bursts rather than continuously — the platform says so itself rather
-          than letting a small vault discover it.
+          than letting a small creator vault discover it.
         </p>
       </Section>
 
@@ -238,7 +266,7 @@ export default function SocialPage() {
             </Button>
           }
         >
-          Creators are live on the platform now, each with a vault on chain — and the door is in
+          Creators are live on the platform now, each with a creator vault on chain — and the door is in
           closed alpha behind invitation codes. Join the waiting list to hear the moment it
           opens; once inside, the withdraw button is the fastest way to believe the rest of this
           page.
