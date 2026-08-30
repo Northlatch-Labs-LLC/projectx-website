@@ -142,11 +142,11 @@ export default function FaqPage() {
       question: 'Has the contract been audited?',
       answer: (
         <>
-          The contract suite passes 75 tests on every build and the no-loss invariant is
-          enforced by the Move type system rather than by runtime checks — a stronger
-          guarantee than a review alone provides. A published independent review is the next
-          milestone, and the complete threat model is already on GitHub for anyone who wants
-          to read it today.
+          No. No third party has reviewed this code, and we will not imply one has. The
+          contract suite passes 75 tests on every build and the no-loss invariant is enforced
+          by the Move type system rather than by runtime checks, which is a real guarantee but
+          not the same thing as a review. The complete threat model, including where the
+          guarantee stops, is on the security page and you can read all of it today.
         </>
       ),
     },

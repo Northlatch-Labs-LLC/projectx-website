@@ -53,8 +53,8 @@ export default function SecurityPage() {
 
   const scope = [
     {
-      title: 'Independent review in progress',
-      body: 'The contract suite passes 75 tests and the no-loss invariant is enforced by the compiler. A published third-party review is the next milestone, and the two areas flagged for it — the randomness analysis and the admin-isolation argument — are documented in full on GitHub for anyone who wants to read them first.',
+      title: 'No independent review has been completed',
+      body: 'The contract suite passes 75 tests and the no-loss invariant is enforced by the compiler. No third party has reviewed this code, and nothing on this site should be read as saying otherwise. The two areas that most need one — the randomness analysis and the admin-isolation argument — are set out on this page rather than left for a reviewer to find.',
     },
     {
       title: 'Oracle validation',
@@ -75,7 +75,7 @@ export default function SecurityPage() {
       <PageHeader
         eyebrow="Security"
         title="Why your deposit is safe"
-        lead="The no-loss guarantee is structural. It is enforced by the Move type system at compile time, not promised in documentation — and the full threat model is published for review."
+        lead="The no-loss guarantee is structural. It is enforced by the Move type system at compile time, not promised in documentation — and the threat model, including where the guarantee stops, is on this page."
         art={<SecurityArt className="w-full" />}
       >
         <Badge tone="prize">
@@ -84,7 +84,7 @@ export default function SecurityPage() {
         </Badge>
         <Badge tone="accent">
           <ShieldCheck className="h-3.5 w-3.5" />
-          Full threat model published
+          Threat model on this page
         </Badge>
       </PageHeader>
 
@@ -197,7 +197,7 @@ export default function SecurityPage() {
         <SectionHeader
           eyebrow="Out of scope"
           title="The perimeter of the guarantee"
-          lead="A guarantee is only as good as its stated boundary. Here is exactly where ours sits — published in full, and tracked openly on GitHub."
+          lead="A guarantee is only as good as its stated boundary. Here is exactly where ours sits, in full, on the page rather than behind a link."
         />
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
           {scope.map((item) => (
