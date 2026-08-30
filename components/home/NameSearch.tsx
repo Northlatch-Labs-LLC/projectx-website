@@ -8,12 +8,11 @@ import { NAMES_URL } from '@/lib/links';
 import { priceSentence } from '@/lib/suins-pricing';
 
 /**
- * The only thing on this homepage a stranger can act on in the session they arrive in.
+ * A .sui name in one transaction, handed straight to the registrar.
  *
- * Every other path here asks the visitor to leave first and transact later — read the protocol
- * page, open the vault, deposit, wait a day. A name costs ten dollars, takes one transaction, and
- * is the single interaction on the estate that turns a curious visitor into revenue immediately.
- * So it goes in the hero rather than in a card seventy percent down the page.
+ * The registrar is behind Weir's closed alpha, so this is not the fastest purchase on the estate
+ * and this component must not be written or placed as if it were — see lib/links.ts, where the
+ * navigation records the same ordering.
  *
  * What it does NOT do is claim availability. That needs a read from SuiNS, and this site has no
  * chain client — inventing an "available!" here would be a lie that costs the buyer a signature

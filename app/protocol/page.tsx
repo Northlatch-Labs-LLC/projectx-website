@@ -14,6 +14,7 @@ import { PhaseFlow } from '@/components/protocol/PhaseFlow';
 import { LadderDiagram } from '@/components/protocol/LadderDiagram';
 import { DrawDiagram } from '@/components/protocol/DrawDiagram';
 import { formatBps, formatDuration, formatSui } from '@/lib/format';
+import { LADDER_DEPTH } from '@/lib/derive';
 import { SNAPSHOT } from '@/lib/snapshot';
 
 import { DAPP_URL } from '@/lib/links';
@@ -42,7 +43,7 @@ export default function ProtocolPage() {
         <SectionHeader
           eyebrow="Parameters"
           title="The settings it runs on"
-          lead="These are the settings the pool runs on today."
+          lead="Four numbers decide how the pool behaves: how long an epoch lasts, the smallest deposit it accepts, how much it holds back unstaked, and how long a tranche must age before it is rotated."
           proof="Governance can adjust these within compiled ceilings. Any interface reads the current values live from the ProjectX API."
         />
         <div className="mt-10 grid gap-6 rounded-3xl border border-white/[0.06] bg-gradient-to-b from-px-elevated/60 to-px-panel/50 p-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -87,11 +88,10 @@ export default function ProtocolPage() {
           </h3>
           <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
             An epoch that closes with no yield, no depositors or no draw weight rolls over
-            rather than aborting — the prize carries into the next epoch. This is deliberate:
-            an abort would leave the pool stuck in a phase from which the harvest that
-            creates a prize can never run. If the conversion cannot be made within the
-            slippage bound, or the price feed is stale, settlement simply does not happen
-            this epoch. In none of these paths is principal touched.
+            rather than aborting — the prize carries into the next epoch, and the pool stays
+            in a phase the harvest can run from. If the conversion cannot be made within the
+            slippage bound, or the price feed is stale, settlement does not happen this
+            epoch. In none of these paths is principal touched.
           </p>
         </Card>
       </Section>
@@ -100,7 +100,7 @@ export default function ProtocolPage() {
         <SectionHeader
           eyebrow="Where the yield comes from"
           title="A ladder, not a lump"
-          lead="Sui staking rewards accrue per epoch and are only realised when a stake is withdrawn. Staking everything as one position would mean unstaking everything to harvest — so the pool stakes in tranches of staggered age."
+          lead={`Sui staking rewards accrue per epoch and are only realised when a stake is withdrawn. Staking everything as one position would mean unstaking everything to harvest — so the pool stakes in ${LADDER_DEPTH} tranches of staggered age.`}
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           <LadderDiagram />
@@ -119,8 +119,8 @@ export default function ProtocolPage() {
                 Yield is real, and it takes time
               </h3>
               <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-                A tranche must sit for six complete Sui epochs before it is rotated and its
-                rewards realised. On a young pool, or one being actively tested with
+                A tranche must sit for {formatDuration(config.maturityPeriodMs)} before it is
+                rotated and its rewards realised. On a young pool, or one being actively tested with
                 withdrawals, harvests can legitimately return zero for a while. The protocol
                 tracks consecutive zero-yield harvests and flags the anomaly rather than
                 quietly reporting health.

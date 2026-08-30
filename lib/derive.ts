@@ -4,6 +4,20 @@ import type { SettlementRecord } from './types';
 
 export const SUGGESTED_MIN_CONTRIBUTION_SUI = 0.1;
 
+/**
+ * Depth of the stake ladder — the number of tranches of staggered age the pool stakes in.
+ *
+ * This was typed as the word "six" into prose on /blueprints and separately as a default argument
+ * in LadderDiagram, two copies neither of which knew about the other. Both now read from here.
+ *
+ * It is a constant rather than a config read because the pool config carries no tranche count.
+ * Tranche MATURITY does come from config — `maturityPeriodMs`, rendered through
+ * `formatDuration` — and every surface quoting it must read it from there rather than restating
+ * it in epochs, which is how /protocol and /blueprints came to say "six complete Sui epochs"
+ * beside a parameter tile rendering the same field as seven days.
+ */
+export const LADDER_DEPTH = 6;
+
 export function totalPaidToWinners(settlements: SettlementRecord[]): bigint {
   return settlements.reduce((sum, record) => sum + BigInt(record.winnerPayout || '0'), 0n);
 }

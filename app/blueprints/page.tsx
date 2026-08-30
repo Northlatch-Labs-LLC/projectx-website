@@ -12,6 +12,9 @@ import { Badge } from '@/components/ui/Badge';
 import { Reveal } from '@/components/ui/Reveal';
 import { Warning } from '@/components/ui/Icons';
 import { BLUEPRINTS } from '@/lib/blueprints';
+import { LADDER_DEPTH } from '@/lib/derive';
+import { formatBps, formatDuration } from '@/lib/format';
+import { SNAPSHOT } from '@/lib/snapshot';
 
 export const metadata: Metadata = {
   title: 'Blueprints',
@@ -20,6 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function BlueprintsPage() {
+  // The header above promises every figure on this page is derived from the protocol's published
+  // parameters. The ladder paragraphs below used to type them out instead.
+  const { config } = SNAPSHOT.pool;
   const published = BLUEPRINTS.filter((b) => b.status === 'Published');
   const upcoming = BLUEPRINTS.filter((b) => b.status !== 'Published');
 
@@ -57,15 +63,16 @@ export default function BlueprintsPage() {
             title="Exits reset the thing that earns the prize"
           >
             <p>
-              Principal is staked in six tranches of staggered age. A tranche has to sit for
-              six complete Sui epochs before it is rotated and its rewards realised — that is
-              where the prize comes from.
+              Principal is staked in {LADDER_DEPTH} tranches of staggered age. A tranche has to
+              sit for {formatDuration(config.maturityPeriodMs)} before it is rotated and its
+              rewards realised — that is where the prize comes from.
             </p>
             <p>
-              A <strong>10% liquidity buffer</strong> stays unstaked so ordinary withdrawals
-              never touch the ladder. But a withdrawal larger than the buffer pulls tranches
-              off the ladder head <em>regardless of maturity</em>, and a tranche pulled at age
-              four realises nothing. Its clock starts again from zero.
+              A <strong>{formatBps(config.liquidityBufferBps)} liquidity buffer</strong> stays
+              unstaked so ordinary withdrawals never touch the ladder. But a withdrawal larger
+              than the buffer pulls tranches off the ladder head <em>regardless of maturity</em>,
+              and a tranche pulled before it matures realises nothing. Its clock starts again
+              from zero.
             </p>
             <p>
               This is not hypothetical. It is the documented reason this pool ran with zero
@@ -113,7 +120,7 @@ export default function BlueprintsPage() {
             <Formula
               label="What the fee has to clear"
               body="fee ≥ r · E[T] · amount + σ-premium"
-              note="r is your cost of capital per epoch, E[T] the expected hold time to the next rotation — bounded above by the six-epoch ladder depth — and the premium covers the variance in T, not its mean."
+              note={`r is your cost of capital per epoch, E[T] the expected hold time to the next rotation — bounded above by the ${LADDER_DEPTH}-epoch ladder depth — and the premium covers the variance in T, not its mean.`}
             />
 
             <p>

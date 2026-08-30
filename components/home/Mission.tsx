@@ -26,9 +26,8 @@ export async function Mission() {
   return (
     <Section>
       <div className="flex flex-col items-center gap-12">
-        {/* Sat directly under a section whose title was "A prize draw where nobody loses" — two
-            near-identical headlines about the same product, back to back. This one keeps the
-            argument for prize-linked saving; the one above keeps the mechanism. */}
+        {/* This header carries the argument for prize-linked saving; the section above it carries
+            the mechanism. Keep the two distinct — they sit back to back. */}
         <SectionHeader
           eyebrow="Vault · why prize savings"
           title="People save more when saving is exciting"
@@ -37,13 +36,8 @@ export async function Mission() {
         />
 
         {/* The trophy and its orbiting labels — "no loss to date", "daily draw", "withdraw anytime",
-            "the draw runs in public". They used to fill half the hero, opposite a name search, where
-            every one of those phrases was about a product the visitor was not being shown. Here
-            they sit against the argument they actually illustrate.
-
-            That last label read "someone wins tonight" until 2026-08-30. It contradicted
-            /disclaimer, which states an epoch can settle with no prize — so the hero promised a
-            winner the legal page refuses to. The replacement claims only what the chain does. */}
+            "the draw runs in public". Each label must claim only what the chain does: /disclaimer
+            states an epoch can settle with no prize, so nothing here may promise a winner. */}
         <HeroStage className="w-full max-w-2xl" />
 
         <ul className="grid w-full gap-4 sm:grid-cols-2">
