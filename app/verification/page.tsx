@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   title: 'Verification',
   description:
     'ProtocolX Verify: the verification gates we run on our own mainnet contracts, installable on yours — and fixed-scope verification sprints for Sui Move teams, priced below the audit floor.',
+  // A dedicated card, not the site-wide one: this page's link travels inside prospects' own
+  // chats when a verification pitch is being discussed, and the card is the product's face
+  // there. The asset states the five gates and no prices — pricing stays where it is quoted,
+  // in writing, per engagement.
+  openGraph: {
+    images: [{ url: '/og/verification.png', width: 1200, height: 630, alt: 'ProtocolX Verify — the five PVS check runs' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/verification.png'],
+  },
 };
 
 /**
