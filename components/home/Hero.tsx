@@ -37,9 +37,9 @@ export function Hero() {
           <LiveBadge />
 
           {/* The space before <br /> is deliberate. Without it the accessible name concatenates
-              to "oddsand none of it" — a screen reader says one word. */}
+              to "proofand none of it" — a screen reader says one word. */}
           <h1 className="text-hero">
-            Your money, your name, your odds{' '}
+            Your money, your name, your proof{' '}
             <br />
             <span className="text-gradient-accent">and none of it needs trusting us.</span>
           </h1>

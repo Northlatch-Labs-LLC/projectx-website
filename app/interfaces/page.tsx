@@ -18,7 +18,7 @@ import { AddressChip } from '@/components/ui/AddressChip';
 export const metadata: Metadata = {
   title: 'Interfaces',
   description:
-    'Every way to use ProjectX. The vault we run is one of them — anyone can build another, with no permission and no revenue share.',
+    'Every way to use ProjectX. The reference vault is one of them — anyone can build another, with no permission and no revenue share.',
 };
 
 export default function InterfacesPage() {
@@ -48,7 +48,7 @@ export default function InterfacesPage() {
       <PageHeader
         eyebrow="Interfaces"
         title="One pool. As many front doors as people care to build."
-        lead="ProjectX is infrastructure, not an app. The vault we operate is the first way in — by design, not the only one."
+        lead="ProjectX is infrastructure, not an app. The reference vault is the first way in — by design, not the only one."
         proof="The pool is a shared object on Sui. Any interface reaching it calls the same public entry points, with the same permissions, as ours."
         art={<InterfacesArt className="w-full" />}
       />
@@ -151,7 +151,7 @@ export default function InterfacesPage() {
                 rel="noreferrer"
                 className="btn-primary mt-auto w-fit px-5"
               >
-                Open the Vault
+                Open the vault
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             ) : (
@@ -168,7 +168,7 @@ export default function InterfacesPage() {
               </span>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">ProjectX Raffle</h3>
+                  <h3 className="text-xl font-semibold text-white">ProjectX Draws</h3>
                   <Badge tone="gold">Live</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
@@ -205,7 +205,7 @@ export default function InterfacesPage() {
               rel="noreferrer"
               className="btn-primary mt-auto w-fit px-5"
             >
-              Open the Raffle
+              Open the draws
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -303,7 +303,7 @@ export default function InterfacesPage() {
                 rel="noreferrer"
                 className="btn-primary mt-auto w-fit px-5"
               >
-                Open the Launcher
+                Open the launcher
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

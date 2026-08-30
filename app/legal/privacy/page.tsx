@@ -18,16 +18,35 @@ export default function LegalPrivacyPage() {
       <PageHeader
         eyebrow="Legal"
         title="Privacy Policy"
-        lead="Effective 24 August 2026. This policy covers the documentation site projectxprotocol.dev only."
+        lead="Effective 30 August 2026. This policy covers the documentation site projectxprotocol.dev only."
         art={<LegalArt className="w-full" />}
       />
+
+      {/* WHY THIS SECTION MOVED, 30 August 2026.
+          Until this date the policy below said the Site "does not collect names, emails or wallet
+          addresses unless you send us one by email". That stopped being true the moment the
+          announcement capture shipped on 2026-08-30: components/ui/NotifySignup.tsx renders on the
+          home page (components/home/CtaBand.tsx) and on /verification, and posts to
+          app/api/notify/route.ts, which writes the address to a Brevo contact list. A policy that
+          denies a collection the site is running is the one defect a regulator can screenshot, so
+          section 1 now describes that route field by field, from the code.
+
+          THE RULE THIS ESTABLISHES: the capture and this policy move together. If
+          app/api/notify/route.ts changes what it stores, where it sends it, or the consent state it
+          writes, section 1, section 2 (basis), section 3 (processors) and section 5 (retention)
+          change in the same commit — not the next one. Adding a second capture point anywhere on
+          the Site is the same obligation.
+
+          Written strictly from the code as it stands: email, source page and timestamp, consent
+          recorded as `pending-doi`, nothing mailed before a double opt-in. Nothing here describes a
+          practice the estate does not have. */}
 
       <Section width="prose">
         <LegalNav current="/legal/privacy" />
 
         <div className="prose-px">
           <p>
-            <strong>Effective date:</strong> 24 August 2026
+            <strong>Effective date:</strong> 30 August 2026
             <br />
             <strong>Controller:</strong> Northlatch Labs LLC, a Wyoming limited liability company
             (Wyoming Filing ID 2026-002064040), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming
@@ -44,16 +63,34 @@ export default function LegalPrivacyPage() {
 
           <h2>1. What we collect</h2>
           <p>
-            The Site is a documentation site. It does not have accounts, does not connect to
-            wallets, and does not collect names, emails or wallet addresses unless you send us one by
-            email.
+            The Site has no accounts and does not connect to wallets. It collects no names and no
+            wallet addresses. It asks you for one piece of personal data and only one: an email
+            address, and only if you choose to type it into the announcement form.
           </p>
           <p>
-            We process: <strong>technical data</strong> — IP address, approximate location derived
-            from it, browser and device type, referring page, pages viewed, timestamps — collected
-            by our hosting and network providers (Vercel, Cloudflare) and by privacy-preserving
-            analytics that does not use cookies and does not track you across sites; and{' '}
-            <strong>correspondence</strong> — anything you send to our email addresses.
+            <strong>The announcement list.</strong> The form appears in two places — the home page
+            and <a href="/verification">/verification</a>. Submitting it sends your address to an
+            endpoint on this Site, which records it in a contact list we hold with{' '}
+            <strong>Brevo</strong> (Sendinblue SAS, France). What is stored is your email address,
+            which of the two pages you submitted it from, the time you submitted it, and a consent
+            flag set to <em>pending</em>. Nothing else — no name, no IP address, no wallet address
+            is attached to it.
+          </p>
+          <p>
+            Your address stays in that pending state until you confirm it. The only message that can
+            reach you before you confirm is a single double opt-in email asking you to; if you do
+            not answer it, nothing further is ever sent. Every message we do send carries a
+            one-click unsubscribe link, and unsubscribing or emailing the address in section 10
+            removes you from the list. We use the list for announcements about what ships. We do not
+            use it for anything else, and we do not pass it to anyone other than Brevo, who process
+            it on our instructions.
+          </p>
+          <p>
+            We also process: <strong>technical data</strong> — IP address, approximate location
+            derived from it, browser and device type, referring page, pages viewed, timestamps —
+            collected by our hosting and network providers (Vercel, Cloudflare) and by
+            privacy-preserving analytics that does not use cookies and does not track you across
+            sites; and <strong>correspondence</strong> — anything you send to our email addresses.
           </p>
           <p>
             We do not use advertising cookies, do not sell personal data, and do not share it for
@@ -63,14 +100,19 @@ export default function LegalPrivacyPage() {
           <h2>2. Why, and on what basis</h2>
           <p>
             Operating and securing the Site, preventing abuse, and understanding aggregate usage:
-            legitimate interests (Art. 6(1)(f) GDPR). Responding to your messages: legitimate
-            interests and, where relevant, contract. Complying with law: legal obligation.
+            legitimate interests (Art. 6(1)(f) GDPR). Sending you the announcements you asked for:
+            your consent (Art. 6(1)(a) GDPR), given by submitting the form and confirmed by the
+            double opt-in, and withdrawable at any time without affecting anything sent before you
+            withdrew it. Responding to your messages: legitimate interests and, where relevant,
+            contract. Complying with law: legal obligation.
           </p>
 
           <h2>3. Sharing</h2>
           <p>
-            Our infrastructure providers (Vercel, Cloudflare, analytics provider) process data on
-            our instructions under data-processing agreements. We disclose data to authorities where
+            Our infrastructure providers (Vercel, Cloudflare, analytics provider) and our email
+            provider (Brevo — Sendinblue SAS, France) process data on our instructions under
+            data-processing agreements. We do not sell the announcement list, rent it, or share it
+            with anyone else. We disclose data to authorities where
             legally required. If the Site or the ProjectX intellectual property is transferred to a
             successor entity, correspondence and logs may transfer with it under this policy.
           </p>
@@ -85,7 +127,9 @@ export default function LegalPrivacyPage() {
           <h2>5. Retention</h2>
           <p>
             Server and security logs: 90 days. Aggregated analytics: 14 months. Correspondence: 3
-            years.
+            years. Announcement list: until you unsubscribe or ask us to remove you, after which the
+            address is deleted from the list; an address left in the pending state without
+            confirmation is deleted after 12 months.
           </p>
 
           <h2>6. Your rights</h2>
@@ -106,7 +150,11 @@ export default function LegalPrivacyPage() {
           <h2>9. Changes</h2>
           <p>
             We post changes here with a new effective date; material changes take effect 15 days
-            after posting.
+            after posting. <strong>30 August 2026:</strong> section 1 was rewritten to describe the
+            announcement email list, which the previous version of this policy did not mention.
+            Sections 2, 3 and 5 were updated to match. That change takes effect immediately, because
+            it corrects a description of processing that was already happening rather than
+            authorising anything new.
           </p>
 
           <h2>10. Contact</h2>

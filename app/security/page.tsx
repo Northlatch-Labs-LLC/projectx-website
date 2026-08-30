@@ -256,7 +256,7 @@ export default function SecurityPage() {
             </>
           }
         >
-          Seven challenges built from real findings, running against a retired mainnet
+          Eight challenges built from real findings, running against a retired mainnet
           deployment — the fastest way to see exactly what the invariant covers.
         </Callout>
       </Section>

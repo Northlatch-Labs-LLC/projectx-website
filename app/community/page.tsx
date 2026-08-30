@@ -101,7 +101,7 @@ export default function CommunityPage() {
               </Button>
               {DAPP_URL && (
                 <Button href={DAPP_URL} variant="secondary">
-                  Open the Vault
+                  Open the vault
                 </Button>
               )}
             </>

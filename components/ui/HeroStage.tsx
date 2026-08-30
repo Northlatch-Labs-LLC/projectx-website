@@ -74,7 +74,7 @@ const TAGS: Tag[] = [
     wideOnly: true,
   },
   {
-    text: 'someone wins tonight',
+    text: 'the draw runs in public',
     at: { bottom: '9%', right: '6%' },
     tone: 'prize',
     depth: 0.9,
