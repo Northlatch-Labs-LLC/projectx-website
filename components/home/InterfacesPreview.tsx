@@ -102,7 +102,7 @@ export function InterfacesPreview() {
                 rel="noreferrer"
                 className="btn-primary w-fit px-5"
               >
-                Explore creators
+                Join the waiting list
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Button href="/social" variant="ghost">
