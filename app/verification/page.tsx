@@ -153,7 +153,13 @@ commit: "Kill the two survivors the app found on its first run"`}
               audit you will ever buy.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              Engagements are quoted flat, in writing, before work begins.{' '}
+              {/* The anchor and only the anchor, by the operator's ruling (2026-08-30): it tells
+                  a small team the door is open to them and a large one that this is real work —
+                  and it keeps every exact figure where it belongs, quoted in writing per
+                  engagement. */}
+              <span className="font-semibold text-white">Sprints start at $3,500.</span> Larger
+              codebases are scoped custom. Every engagement is quoted flat, in writing, before
+              work begins.{' '}
               <a className="font-semibold text-white underline underline-offset-4" href="mailto:claude@protocolx.io">
                 claude@protocolx.io
               </a>
