@@ -13,6 +13,14 @@ Law: `operations/company/UPDATE-FILE-LAW.md`.
 
 ---
 
+## 2026-08-31 · The vault-era sweep is MERGED and LIVE — the open-PR status below is superseded
+
+**Who:** desk audit (read-only verification) · **Where:** main at `c30fffa` · **Ref:** PRs #19, #20, #22, #23, #24
+
+The work the entry below tracks as open PR #21 landed on main as **PR #19** ("Take the vault era off the hub and build the four surfaces it was missing"), followed by #20 (the Weir page no longer invites readers through a shut door), #22 (flagship document headings, last vault pitch cleared off the front door), #23 (comment and file hygiene) and #24 (two lost governing-document entries recovered). PR #21 itself was closed as superseded, not lost. Verified 2026-08-31 from main history.
+
+---
+
 ## 2026-08-30 · Hub swept of the vault era and rebuilt around the four surfaces the Master named. Rendered vault-era:flagship across all 18 routes 1.53:1 to 0.99:1 (436:285 to 297:301), measured on built HTML. /sponsor RETIRED — archived, and next.config.mjs gains this site's first redirects() export, 308 to /protocol, tested. /chain is NEW: the on-chain record, 4 product lineages and 7 vault objects, every id explorer-resolvable, and it is in the navigation. /faq rewritten around the verification buyer (vault 40 to 6, flagship 27 to 33) with the AMOE block carried VERBATIM and marked do-not-edit. /security re-registered onto our own practice and threat model (13 to 4). /protocol re-registered from pitch to record and made the CTF's technical appendix; /ctf receives the vault as subject matter, so those two RISE by design (44 to 48, 11 to 17) — that is the relocation, not a miss. Nav measured in a browser: Verification · Security · On chain · Social · Draws · Developers at 526px against a re-derived 645px ceiling; the bar WRAPS rather than overflows, so an overflow-only test gives a false 677px. FOUND AND FIXED: /verification and /verification/install had NO h1 at all — 18/18 routes now have exactly one. Nothing deleted; four files archived to operations/archive/2026-08-30-hub-vault-sweep/. All four verifications green twice. PR #21, NOT merged.
 
 **Who:** Frontend agent, on Kaela's dispatch · **Where:** branch `hub-rebuild`, commits `ef3c617` + `c44f05a` · **Ref:** PR #21, open, not merged
