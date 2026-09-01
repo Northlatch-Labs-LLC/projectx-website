@@ -256,10 +256,22 @@ export default function VerifyInstallPage() {
               quoted flat, in writing, before work begins.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              <span className="font-semibold text-white">The App is $149 per repository per
-              month</span>, or $1,490 a year. Every pull request gets the five gates and its own
+              <span className="font-semibold text-white">The App is $249 per repository per
+              month</span>, or $2,490 a year. Every pull request gets the five gates and its own
               evidence bundle, the digest gate included — the one that reads the chain. One public
               repository is free, permanently, with no card and no expiry.
+            </p>
+            {/* The founding price is $149 because $149 is what this page published before the
+                list price was set. Raising a printed number and letting the people who read it
+                discover the increase on an invoice is how a verification product loses the only
+                thing it sells. The first three repositories keep it, and "for as long as it runs"
+                is a commitment, not a promotion — it does not expire and there is no review date.
+                If this offer is ever withdrawn, it is withdrawn for NEW repositories only. */}
+            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <span className="font-semibold text-white">The first three repositories are $149,
+              and keep that price for as long as the app runs on them.</span> That is the figure
+              this page carried before the list price was set, and anyone who read it then is
+              held to it, not to the new number.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               Self-serve billing is not open yet, so early access is arranged by email and costs

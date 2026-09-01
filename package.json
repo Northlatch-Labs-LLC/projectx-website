@@ -12,7 +12,7 @@
     "check": "npm run typecheck && npm test && npm run guardrails && npm run verify",
     "guardrails": "python3 scripts/guardrails.py",
     "test": "node --test \"lib/**/*.test.ts\"",
-    "verify": "node scripts/verify-contrast.mjs && node scripts/verify-claims.mjs && node scripts/verify-no-private-hosts.mjs && node scripts/verify-retired-hosts.mjs && node scripts/verify-suins-prices.mjs"
+    "verify": "node scripts/verify-contrast.mjs && node scripts/verify-claims.mjs && node scripts/verify-no-private-hosts.mjs && node scripts/verify-retired-hosts.mjs && node scripts/verify-suins-prices.mjs && node scripts/verify-verify-pricing.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
