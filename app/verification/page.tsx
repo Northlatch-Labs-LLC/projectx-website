@@ -296,6 +296,21 @@ commit: "Kill the two survivors the app found on its first run"`}
               this page carried before the list price was set, and anyone who read it then is
               held to it, not to the new number.
             </p>
+            {/* Said here because it is said on the public GitHub App listing, and two surfaces
+                that describe the same product must not disagree. The Additional Use Grant in
+                LICENSE permits running the engine in your own CI, for your own organisation, at
+                no charge and with no separate agreement. A buyer who discovers that themselves
+                concludes we hid it; a buyer told it up front concludes we are the kind of vendor
+                that says the inconvenient thing. We sell verifiability, so it is the only
+                position available to us. */}
+            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <span className="font-semibold text-white">The engine is source-available and you
+              may run it in your own CI at no charge.</span> The licence grants that in writing,
+              for your own organisation, with no separate agreement. What the subscription buys is
+              the hosted App: the runs, the check runs on your pull requests, the retained
+              evidence bundles, and the digest gate that reads the chain — none of which you have
+              to stand up or keep running yourself.
+            </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               Self-serve billing is not open yet, so early access is arranged by email and costs
               nothing until it is. Send the repository name to{' '}
