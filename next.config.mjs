@@ -36,6 +36,52 @@ const nextConfig = {
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=()' },
+          // Report-Only, not enforced. Finding M in work/reports/2026-09-03-security-estate-
+          // sweep.md: this hub serves no CSP at all. Enforcing sight-unseen risks a silent
+          // breakage of the one inline script below or the inline `style={{}}` props used
+          // throughout the component tree, on a site with no browser-side error monitoring.
+          //
+          // Report-Only for one week (from the date this shipped — see UPDATE.md) surfaces those
+          // breaks as reports instead of outages. Only after a week of clean reports does this
+          // become an enforced `Content-Security-Policy` header.
+          //
+          // The app has no nonce or 'strict-dynamic' plumbing (no middleware, no per-request
+          // header injection) — adding one is a bigger change than this pass. Two things stand in
+          // for it instead:
+          //   - the one build-time-fixed inline script in app/layout.tsx (the pre-paint theme
+          //     stamp) is allow-listed by its exact SHA-256 hash, not by 'unsafe-inline';
+          //   - 'unsafe-inline' stays only on style-src, because React's `style={{...}}` props
+          //     set the DOM `style` attribute directly and there is no per-element hash for that;
+          //     style-src cannot cause script execution, so scoping the weaker exception to it
+          //     alone still lets script-src stay hash-only.
+          //
+          // Every host below is a real page load — read from app/layout.tsx (next/font
+          // self-hosts, so no fonts.googleapis.com), @vercel/analytics' Next integration (same-
+          // origin /_vercel/insights/script.js and /_vercel/insights/insights, confirmed by
+          // reading node_modules/@vercel/analytics/dist/next/index.js — no third-party host),
+          // components/ui/NotifySignup.tsx (posts to same-origin /api/notify), and the public/
+          // and public/og/ local image files. No page fetches suiscan.xyz, api.brevo.com or
+          // fullnode.mainnet.sui.io client-side — those hosts appear only as anchor hrefs and
+          // server-side route handlers, so they need no connect-src entry.
+          {
+            key: 'Content-Security-Policy-Report-Only',
+            value: [
+              "default-src 'self'",
+              // sha256 of the exact inline script in app/layout.tsx that stamps the saved
+              // accent before first paint. Recompute and update this hash if that script's
+              // literal text ever changes.
+              "script-src 'self' 'sha256-GMXZAA4WKc4yDaoZ47EtRUWxVa5p+uEdWX5KeStVtfM='",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data:",
+              "font-src 'self'",
+              "connect-src 'self'",
+              "object-src 'none'",
+              "base-uri 'none'",
+              "form-action 'self'",
+              "frame-ancestors 'none'",
+              'upgrade-insecure-requests',
+            ].join('; '),
+          },
         ],
       },
     ];
