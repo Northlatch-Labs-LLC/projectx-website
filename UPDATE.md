@@ -13,6 +13,21 @@ Law: `operations/company/UPDATE-FILE-LAW.md`.
 
 ---
 
+## 2026-09-04 · Security sweep: this file's convention corrected going forward
+
+Every entry above and below this one stands as written; law here is never edited, only
+superseded by a newer entry, and this is that entry. The estate's security desk swept every
+repository this company holds for material meant to stay on the local machine and found, among
+entries in this file, a decision quoted word for word and the paths of internal documents named
+directly. Neither belongs in a file whose only job is telling the next reader what changed, why,
+and what was verified.
+
+GOING FORWARD: an entry may state that a decision was made and by whom in role terms, never quote
+the decision's exact wording, and never name the path of an internal report, state file or desk
+tool. Where the fact of a decision matters to the next reader, it is stated as a fact, not as a
+quotation or a path. Findings sit on this repository's own `security/eyes-only` branch; the estate
+sweep's own report is a desk document and is not named here on purpose.
+
 ## 2026-09-03 · MERGED, PUSHED, DEPLOYED. Main is `21d1f8c` (merge of `truth/projectxprotocol-dev` 695b53e). `npm run check` on main after the merge: exit 0 (typecheck, 6/6 tests, guardrails, six verify scripts; the pricing check reports both pages agree at $249/mo, $2490/yr, founding $149 — the "two App prices" the ledger flagged were the monthly price and the founding price, not a disagreement). Pushed to GitHub. Deployed from this laptop by `vercel pull` / `vercel build --prod` / `vercel deploy --prebuilt --prod` with the project's identifiers in the environment (the checkout is not linked), aliased to https://projectxprotocol.dev; live read afterwards: /security names `weir-protocol` twice and no longer says the company publishes no public repository. The Actions deploy path has been dead since 2026-09-02; this is the first laptop deploy of this site. The one-merge-a-week rhythm was broken tonight on the owner's explicit word to ship everything that was ready. Supersedes the "staged, unmerged" entry below.
 
 ## 2026-09-03 · Branch `truth/projectxprotocol-dev` staged, unmerged — the Master's truth-pass order
