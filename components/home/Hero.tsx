@@ -56,8 +56,9 @@ export function Hero() {
 
           <p className="text-[0.9375rem] leading-relaxed text-px-muted">
             <span className="font-semibold text-white">From $1,000.</span> One package, all five
-            gates, delivered inside 24 hours as an evidence bundle whose digest you can re-derive
-            without us. It is a measurement and not an audit, and it is never called one.
+            gates, returned as an evidence bundle whose digest you can re-derive without us.
+            Turnaround is agreed in writing when you order; none has been delivered yet. It is a
+            measurement and not an audit, and it is never called one.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -80,7 +81,9 @@ export function Hero() {
 
             <p className="mb-3 text-[0.9375rem] leading-relaxed text-px-faint">
               A <code>.sui</code> name replaces the sixty-four characters of your wallet address
-              with something a person can type — {priceSentence()}, one transaction.
+              with something a person can type — {priceSentence()}, one transaction. Registration
+              through Weir is behind the waitlist while the alpha is closed; suins.io registers a
+              name today.
             </p>
 
             <NameSearch />

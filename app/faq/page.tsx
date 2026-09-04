@@ -60,13 +60,14 @@ export default function FaqPage() {
       answer: (
         <>
           <p>
-            The First Report is from $1,000: one Move package, all five gates, delivered inside
-            24 hours as an evidence bundle whose digest you can re-derive without us, paid in
-            USDC on Sui. Public repositories only, no remediation, and no claim of independence.
+            The First Report is from $1,000: one Move package, all five gates, returned as an
+            evidence bundle whose digest you can re-derive without us, paid in USDC on Sui.
+            Turnaround is agreed in writing when you order; none has been delivered yet. Public
+            repositories only, no remediation, and no claim of independence.
           </p>
           <p className="mt-3">
             The App is $149 per repository per month, or $1,490 a year, and one public repository
-            is free permanently — no card, no expiry. Sprints sit above both and are quoted flat,
+            is free permanently — no expiry. Sprints sit above both and are quoted flat,
             in writing, before work begins.{' '}
             <Link
               href="/verification/install"
@@ -203,11 +204,11 @@ export default function FaqPage() {
       question: 'Has any of this been independently audited?',
       answer: (
         <>
-          No. No third party has reviewed this code, and we will not imply one has. The contract
-          suite passes 75 tests on every build and the vault&rsquo;s no-loss invariant is enforced
-          by the Move type system rather than by runtime checks, which is a real guarantee and not
-          the same thing as a review. The complete threat model, including where it stops, is on
-          the{' '}
+          No. No third party has reviewed this code, and we will not imply one has. On this
+          laptop&rsquo;s last run (3 September 2026) the protocol package passed 75 Move tests and
+          the vault package 170, and the vault&rsquo;s no-loss invariant is enforced by the Move
+          type system rather than by runtime checks, which is a real guarantee and not the same
+          thing as a review. The complete threat model, including where it stops, is on the{' '}
           <Link href="/security" className="text-px-accent underline underline-offset-4">
             security page
           </Link>
@@ -220,10 +221,9 @@ export default function FaqPage() {
       answer: (
         <>
           <p>
-            Not today, and the honest version of that answer is worth more than a link. The
-            Northlatch Labs GitHub organisation currently publishes no public repositories. The
-            profile is ours and it resolves, but it opens an empty shelf, and nothing on this site
-            will tell you to go and read a source that is not there.
+            Some of it. github.com/Northlatch-Labs-LLC/weir-protocol carries the Weir contracts
+            (BUSL-1.1) and six libraries (Apache-2.0). The vault, draws, names and the
+            verification engine are not published; their bytecode is readable on any explorer.
           </p>
           <p className="mt-3">
             What you can read instead is the chain. Every package we have deployed is listed with
@@ -273,7 +273,7 @@ export default function FaqPage() {
           >
             security@projectxprotocol.dev
           </a>
-          , rather than as a public issue. We acknowledge within 72 hours. A report that arrives
+          , rather than as a public issue. We aim to acknowledge within 72 hours. A report that arrives
           before an exploit is worth considerably more to us than one that arrives after, and we
           would rather hear it early and imperfectly than late.
         </>

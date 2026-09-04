@@ -11,17 +11,23 @@ const SHIPPING = [
   {
     icon: <Chart className="h-5 w-5" />,
     name: 'Read API',
-    body: 'Pool state, settlements, treasury and events over plain HTTP. No key, no allowlist.',
+    body: 'Pool state, settlements, treasury and events over plain HTTP. No key, no allowlist. Documented; not served today.',
+    badge: 'Not served today',
+    tone: 'neutral' as const,
   },
   {
     icon: <Code className="h-5 w-5" />,
     name: 'On-chain events',
     body: 'Every deposit, draw, fee and payout is emitted. Index it and depend on nothing of ours.',
+    badge: 'Live',
+    tone: 'prize' as const,
   },
   {
     icon: <Book className="h-5 w-5" />,
     name: 'Published addresses',
     body: 'Package, pool, treasury, adapter, price feed and validator — all listed below.',
+    badge: 'Live',
+    tone: 'prize' as const,
   },
 ];
 
@@ -69,7 +75,7 @@ export function Toolkit() {
       />
 
       <div className="mt-12 flex flex-col gap-3">
-        <span className="label">Available now</span>
+        <span className="label">What ships in the package</span>
         <ul className="grid gap-4 md:grid-cols-3">
           {SHIPPING.map((tool, index) => (
             <Reveal as="li" key={tool.name} delay={index * 70}>
@@ -78,8 +84,8 @@ export function Toolkit() {
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-prize/20 to-px-prize/5 text-px-prize">
                     {tool.icon}
                   </span>
-                  <Badge tone="prize" className="ml-auto">
-                    Live
+                  <Badge tone={tool.tone} className="ml-auto">
+                    {tool.badge}
                   </Badge>
                 </div>
                 <h3 className="text-base font-semibold text-white">{tool.name}</h3>

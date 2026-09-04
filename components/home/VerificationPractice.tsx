@@ -17,18 +17,18 @@ export function VerificationPractice() {
       title: 'Mutation testing',
       body: 'A passing suite is not evidence. We delete each guard on purpose and prove the tests notice — the ones that survive are named in public, not averaged away.',
       detail:
-        'Three contracts measured this way. Every harness verifies its own restore byte-for-byte.',
+        'Three contracts measured this way; the ledgers are not published yet.',
     },
     {
       title: 'Full-scale staging',
-      body: 'Before code faces real money it faces a private network: 60,000 funded wallets, 60,000 real transactions, the whole lifecycle — and the escrow must come out at exactly zero.',
+      body: 'Before code faces real money it is staged on a private network with funded wallets and real gas, and the escrow must come out at zero. The run logs are not published yet.',
       detail:
         'Real gas per phase, measured, including the last buy costing the same as the first.',
     },
     {
       title: 'Machine-checked proof',
       body: 'Tests sample inputs; a prover exhausts them. The registrar’s money path is proven with the Sui Prover: every mist of a payment ends in the treasury or back in your change.',
-      detail: 'Proven for all inputs in a declared domain — the domain is published with the proof.',
+      detail: 'Proven for all inputs in a declared domain. The spec is not published yet.',
     },
   ];
 
@@ -38,7 +38,7 @@ export function VerificationPractice() {
         <SectionHeader
           eyebrow="The flagship · ProtocolX Verify"
           title="The three measurements, and what each one refuses to accept"
-          lead="Everything here holds other people’s money, so nothing ships on a green checkmark alone. Every suite is measured by mutation, every lifecycle is staged at production scale on a private network, and the money paths are being proven — not argued — one contract at a time. These are the tools you are buying, and they were built on our own contracts first."
+          lead="Everything here holds other people’s money, so nothing ships on a green checkmark alone. Three of our contracts are measured by mutation, one lifecycle was staged on a private network, and one money path — the registrar’s — is proven with the Sui Prover. The rest is not, and this page does not say otherwise. These are the tools you are buying, and they were built on our own contracts first."
           proof="No external audit has been completed, and this page will never pretend otherwise. What it offers instead is numbers: survivor counts, gas tables, and proof transcripts, published as they land."
         />
 
@@ -78,9 +78,10 @@ export function VerificationPractice() {
             exists and is maintained. The defensible claim is narrower — it produces no evidence
             a reader can carry. */}
         The harnesses, the staging network and the proving practice were built for our own
-        contracts first. They now run on other people’s: five gates on every pull request, or a
-        single measured report on one package from $1,000 — because the layer below the audit
-        should leave evidence you can hand to someone, and today it leaves a console log.
+        contracts first. They can run on yours: the App is in early access on request, and a
+        single measured report is offered, priced on the verification page — because the layer
+        below the audit should leave evidence you can hand to someone, and today it leaves a
+        console log.
       </Callout>
     </Section>
   );

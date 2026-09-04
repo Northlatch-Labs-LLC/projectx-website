@@ -249,17 +249,18 @@ export default function VerifyInstallPage() {
               {/* Deliberately word-for-word with /verification. Two pages that paraphrase the
                   same price eventually quote two different ones. */}
               <span className="font-semibold text-white">From $1,000.</span> That is the First
-              Report: one Move package, all five PVS gates, delivered inside 24 hours as an
-              evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It
-              is a measurement and not an engagement — public repositories only, no remediation,
-              and no claim of independence. Sprints sit above it, scoped to the codebase and
-              quoted flat, in writing, before work begins.
+              Report: one Move package, all five PVS gates, returned as an evidence bundle whose
+              digest you can re-derive without us, paid in USDC on Sui. Turnaround is agreed in
+              writing when you order; none has been delivered yet. It is a measurement and not an
+              engagement — public repositories only, no remediation, and no claim of independence.
+              Sprints sit above it, scoped to the codebase and quoted flat, in writing, before work
+              begins.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               <span className="font-semibold text-white">The App is $249 per repository per
               month</span>, or $2,490 a year. Every pull request gets the five gates and its own
               evidence bundle, the digest gate included — the one that reads the chain. One public
-              repository is free, permanently, with no card and no expiry.
+              repository is free, permanently, with no expiry.
             </p>
             {/* The founding price is $149 because $149 is what this page published before the
                 list price was set. Raising a printed number and letting the people who read it

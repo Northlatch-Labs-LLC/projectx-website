@@ -49,13 +49,13 @@ export interface PackageControl {
 export const SECURITY_PACKAGES: PackageControl[] = [
   {
     product: 'Weir (projectx_social)',
-    packageId: '0xc5c8…d404d (original) / 0xfa7e…3694 (v3)',
+    packageId: '0xc5c8…d404d (original) / 0xdc6dbb96…2884b5 (v5)',
     packageOrigin: null,
-    version: '3',
+    version: '5',
     upgradeCapId: '0x895e20c44aed9c884be8dffa42c93d93653b47e86cd3a12d919998d9b1eaed08',
     upgradeCapHolder: '2-of-3 multisig 0x00e734d5…11605',
-    other: 'PlatformCap, Publisher, Display — not yet published',
-    source: 'chain',
+    other: 'PlatformCap, Publisher, Display — not yet published. Package id and version from weir/UPDATE.md (2026-09-02) and /api/deployment, not from a fresh multiGetObjects read on SECURITY_READ_AT.',
+    source: 'spec',
   },
   {
     product: 'Names (registrar_v1 v2)',

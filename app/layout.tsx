@@ -41,7 +41,7 @@ const robotoMono = Roboto_Mono({
  * nothing to click; add it back when an interface serves it again.
  */
 const SITE_DESCRIPTION =
-  'Verification for Sui Move: five check runs on every pull request, and a measured report on one package from $1,000 — evidence with a digest you can re-derive without us, never called an audit. Also from Northlatch Labs: a social platform where supporting a creator never spends your money, .sui names, and prize draws anyone can re-derive from the chain.';
+  'Verification for Sui Move — five check runs on a pull request, in early access — and a measured report on one package. Also from Northlatch Labs: Weir, a creator network on Sui in closed alpha, and draw software anyone can re-derive.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -13,6 +13,84 @@ Law: `operations/company/UPDATE-FILE-LAW.md`.
 
 ---
 
+## 2026-09-03 · Branch `truth/projectxprotocol-dev` staged, unmerged — the Master's truth-pass order
+
+**Who:** engineering agent on the chief technology officer's dispatch, under the Master's order
+2026-09-03 ("present that we are less and be more, than present more and be less") · **Where:**
+branch `truth/projectxprotocol-dev`, created from `main` at `b641fd1` · **Ref:**
+`work/reports/2026-09-03-product-truth-pass-claim-ledger.md` §6–§7; rows 83–220 of the CSV beside
+it; full detail in `work/reports/2026-09-03-engineering-truth-branches-hub-and-readmes.md`.
+
+21 files, staged with `git add`, not committed. In outline: the site description and the Hero
+"From $1,000" line drop the unverified "delivered inside 24 hours" promise for "turnaround agreed
+in writing when you order; none has been delivered yet" (rows 83, 87, 108, 121, faq); the .sui
+name search now says registration through Weir is behind the waitlist and points at suins.io (row
+88); the three measurement claims on the home page and `/security` are scoped to what has
+actually been measured — three contracts by mutation, one lifecycle staged, one money path proven
+— instead of "every suite" and "every lifecycle" (rows 89–93, 171–172); the pool record on the
+home page and `/ctf` carries its read date in the heading rather than only in a badge (rows 97,
+165); Weir's card and meta descriptions across the site now say "closed alpha" (rows 99, 131);
+the Draws and Interfaces cards say one proving draw has settled and no competition is open today,
+rather than describing draws in the present tense as though one were running (rows 102, 153);
+the Read API moves from "Available now · Live" to "Documented; not served at present" on
+`/builders` and `/interfaces` (rows 103, 156, 190–192); "no card" is struck from the three
+pricing paragraphs that carried fiat wording, on `/verification`, `/install` and `/faq`, with no
+digit changed anywhere (rows 122, 128, 198); the GitHub-organisation sentence on `/security` and
+`/faq` is corrected from "publishes no public repositories" to naming `weir-protocol`, public
+since 2026-09-02 (rows 179, 201); the multisig-custody sentence on `/security` is now derived by
+filtering the same table it describes — three of four caps, not two — so it cannot drift from the
+table again (row 174); the Weir row in `lib/security-chain-read.ts` is corrected from v3 to v5 and
+marked `source: 'spec'`, citing `weir/UPDATE.md` rather than claiming a fresh chain read (row
+184); and the `/blueprints`, `/builders` and home-page "one system a week" / "one complete system
+per week" cadence claims are replaced with "complete designs on top of ProtocolX", since one has
+been published and five are outlined (rows 158–159, 195).
+
+**A fact-check that overturned the ledger's own suggested text.** Ledger row 162/196 said to make
+`/builders` and `/blueprints` agree on event names by using `Deposited`/`Withdrawn` on both pages.
+Reading the actual deployed contract (`usdc_prize_factory.move`, both the `V1.0.1-Public` and
+`projectx-enterprise-core` copies on this laptop) shows the emitted events are `DepositMade` and
+`WithdrawalMade` — `/blueprints` already had this right, `/builders` had it backwards. `/builders`
+was corrected to match the contract, not the ledger's suggested wording.
+
+**Not changed, and why.** No price figure was touched anywhere. `/faq` still reads $149/mo and
+$1,490/yr while `/verification` and `/install` read $249/mo and $2,490/yr with $149 founding — the
+same disagreement the ledger found, listed for the Master rather than resolved by this branch
+(ledger open question 1). `app/faq/page.tsx:256-262` (AMOE) and `app/disclaimer/page.tsx` were not
+edited — legal text, held for the Master. The stake-ladder "6 tranches / 7 days / 85.7% of
+available yield" figures on `/protocol` and `/blueprints` were left alone: they are already
+code-derived from `LADDER_DEPTH` and `config.maturityPeriodMs`, not hardcoded prose, and whether
+that constant matches the actual on-chain ladder is the open protocol question the ledger names,
+not a copy defect. The `OKXEarn · 0% commission` validator note in `components/ui/StackStrip.tsx`
+was left unchanged — the ledger's "as last read" qualifier does not fit the compact strip without
+a design pass. Not re-read tonight: the Names, Prize Vault and Draws UpgradeCaps in
+`lib/security-chain-read.ts` (only the Weir row was corrected, from the ledger's own dated
+evidence, not a fresh chain read).
+
+**Verified.** `npm run typecheck` clean. `npm run check` (typecheck, tests, guardrails, the six
+verify scripts) exit 0: 6/6 tests pass; guardrails `no new violations (22 accepted, pre-existing)`;
+`verify-claims.mjs` clean across 83 files (no banned claim reintroduced); `verify-verify-pricing.mjs`
+still reports `OK — both pages agree: $249/mo, $2490/yr, founding $149` (untouched by this branch).
+
+**Claims changed: approximately 40** across the rows named above. Unmerged. Nothing pushed,
+committed or deployed.
+
+---
+
+## 2026-09-03 · Gate run on this laptop, recorded in the estate ledger; main at `b641fd1`, clean
+
+**Who:** engineering agent on the chief technology officer's dispatch · **Where:** `main` at `b641fd1`, 0 dirty files, `main...origin/main` per the local ref (not fetched) · **Ref:** `work/state/gate-runs.json` id `projectx-website`; report `work/reports/2026-09-03-engineering-gates-for-every-solution.md`
+
+`npm run check` (typecheck, tests, guardrails, the six verify scripts), 7 seconds, exit 0:
+
+- `tsc --noEmit` clean.
+- `node --test "lib/**/*.test.ts"` → `tests 6 · pass 6 · fail 0`.
+- `python3 scripts/guardrails.py` → `no new violations (22 accepted, pre-existing)`.
+- verify → `30 contrast pair(s) meet WCAG across 2 theme(s)`; `7 claim rule(s) clean across 83 file(s)`; `no private or loopback addresses in 82 shipped file(s)`; `2 purged host(s) unlinked, LAUNCHER_URL fail-closed`; `SuiNS price mirror matches chain — 3 tier(s) compared` (the public endpoint answered, so this was a real comparison, not a SKIP); `verify pricing: OK — both pages agree: $249/mo, $2490/yr, founding $149`.
+
+**Result: pass.** Not run: `npm ci` (node_modules already present, not refreshed) and `next build` (CI deliberately does not build either; the runtime values live in Vercel).
+
+---
+
 ## 2026-08-31 · The vault-era sweep is MERGED and LIVE — the open-PR status below is superseded
 
 **Who:** desk audit (read-only verification) · **Where:** main at `c30fffa` · **Ref:** PRs #19, #20, #22, #23, #24

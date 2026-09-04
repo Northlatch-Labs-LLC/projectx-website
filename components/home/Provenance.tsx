@@ -50,9 +50,10 @@ export async function Provenance() {
             <h3 className="text-xl font-semibold text-white">Our security steps</h3>
             <p className="mt-3 text-[1.0625rem] leading-[1.65] text-px-muted">
               Six things that happen before a contract sees mainnet — five of them check runs that
-              fail a pull request, and one a private network of 60,000 funded wallets whose escrow
-              has to come out at exactly zero. Alongside them: who holds the upgrade authority over
-              every package, how to report a defect, and where the guarantees stop.
+              fail a pull request, and one a private network with funded wallets and real gas
+              whose escrow has to come out at exactly zero. The run logs are not published yet.
+              Alongside them: who holds the upgrade authority over every package, how to report a
+              defect, and where the guarantees stop.
             </p>
             <p className="mt-4 text-[0.875rem] leading-[1.6] text-px-faint">
               No third party has reviewed any of this code, and the page says so in its own words
@@ -94,7 +95,11 @@ export async function Provenance() {
       {/* Under a heading that says what they measure. No call to action beside them: the vault's
           interface was retired on 25 August 2026 and there is nothing to press. */}
       <div className="mt-12">
-        <p className="label mb-5 text-center">The vault&rsquo;s record so far</p>
+        <p className="label mb-5 text-center">
+          {STATS.live
+            ? 'The vault’s record so far'
+            : `The vault’s record to ${STATS.capturedOn}, the last read`}
+        </p>
         <dl className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-x-6 gap-y-7 border-y border-white/[0.07] py-8 sm:grid-cols-3">
           {figures.map((f) => (
             <div key={f.label} className="flex flex-col items-center gap-1.5 text-center">
@@ -113,7 +118,8 @@ export async function Provenance() {
         </dl>
         <p className="mx-auto mt-5 max-w-2xl text-center text-[0.9375rem] leading-[1.6] text-px-faint">
           The vault&rsquo;s contract is live on Sui mainnet and no interface serves it at present.
-          Every draw settled so far was funded by a sponsor rather than by pooled yield, and each
+          {STATS.live ? '' : ' The pool has held no deposits since this was last read.'} Every
+          draw settled so far was funded by a sponsor rather than by pooled yield, and each
           funding transaction is on chain.{' '}
           <Link href="/protocol" className="text-px-accent underline underline-offset-4">
             How the mechanism works

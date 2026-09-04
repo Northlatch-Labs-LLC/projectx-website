@@ -38,6 +38,14 @@ export const metadata: Metadata = {
  * any of this code.
  */
 export default function SecurityPage() {
+  // Counted, not typed in: how many of the four upgrade caps this multisig actually holds. The
+  // sentence below used to say "two" while the table it points at showed three (Weir, Names and
+  // Draws all held by 0x00e734d5…11605, in full or truncated form) — this derives the count so
+  // the prose cannot drift from the table again.
+  const multisigCount = SECURITY_PACKAGES.filter((p) =>
+    p.upgradeCapHolder.includes('00e734d5'),
+  ).length;
+
   const practice = [
     {
       title: 'Five gates, on our own pull requests first',
@@ -49,11 +57,11 @@ export default function SecurityPage() {
     },
     {
       title: 'Staged at production scale before mainnet',
-      body: 'Before code faces real money it faces a private network: 60,000 funded wallets, 60,000 real transactions, the whole lifecycle — and the escrow must come out at exactly zero. A conservation check that passes on ten transactions has told you nothing about ten thousand.',
+      body: 'Before code faces real money it is staged on a private network with funded wallets and real gas, the whole lifecycle — and the escrow must come out at exactly zero. The run logs are not published yet. A conservation check that passes on ten transactions has told you nothing about ten thousand.',
     },
     {
       title: 'Money paths proven, not argued',
-      body: 'Tests sample inputs; a prover exhausts them. The registrar’s money path is proven with the Sui Prover: every mist of a payment ends in the treasury or back in your change. This is being applied one contract at a time and the ones it has not reached yet are not described as though it has.',
+      body: 'Tests sample inputs; a prover exhausts them. The registrar’s money path is proven with the Sui Prover: every mist of a payment ends in the treasury or back in your change. The spec is not published yet. This is being applied one contract at a time and the ones it has not reached yet are not described as though it has.',
     },
     {
       title: 'Deployed drift is a tripwire, not a review item',
@@ -68,7 +76,7 @@ export default function SecurityPage() {
   const scope = [
     {
       title: 'No independent review has been completed',
-      body: 'No third party has reviewed this code, and nothing on this site should be read as saying otherwise. The contract suite passes 75 tests and the vault’s no-loss invariant is enforced by the compiler — both real, neither a review. The two areas that most need one, the randomness analysis and the admin-isolation argument, are published rather than left for a reviewer to find.',
+      body: 'No third party has reviewed this code, and nothing on this site should be read as saying otherwise. On this laptop’s last run (3 September 2026) the protocol package passed 75 Move tests and the vault package 170, and the vault’s no-loss invariant is enforced by the compiler — both real, neither a review. The two areas that most need one, the randomness analysis and the admin-isolation argument, are published rather than left for a reviewer to find.',
     },
     {
       title: 'A measurement is not an audit, and we are not your auditors',
@@ -84,7 +92,7 @@ export default function SecurityPage() {
     },
     {
       title: 'The source is not published, and we will not pretend it is',
-      body: 'The Northlatch Labs GitHub organisation currently publishes no public repositories. Published Move bytecode is readable on any explorer, which is a genuine and checkable thing — but it is not the same as reading the source, and no page here will tell you to go and read one that is not there.',
+      body: 'The Northlatch Labs GitHub organisation publishes one repository, weir-protocol — the Weir contracts and six libraries. The vault, draws, names and the verification engine are not published; their bytecode is readable on any explorer, which is a genuine and checkable thing — but it is not the same as reading the source.',
     },
     {
       title: 'Legal compliance is not a protocol property',
@@ -116,7 +124,7 @@ export default function SecurityPage() {
           eyebrow="The practice"
           title="Six things that happen before a contract sees mainnet"
           lead="These are not policies anyone promises to follow. Five of the six are check runs that fail a pull request, and the sixth is a staging network that has to balance to zero."
-          proof="This is the same standard ProtocolX Verify installs on a customer's repository. We are not selling a process we do not run — we are listing the one we already had."
+          proof="This is the same standard ProtocolX Verify installs on a repository — ours today, yours on request. We are not selling a process we do not run — we are listing the one we already had."
         />
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
           {practice.map((item) => (
@@ -170,7 +178,7 @@ export default function SecurityPage() {
             All {SECURITY_PACKAGES.length} lineages — Weir, Names, the Prize Vault and Draws — are
             listed with their package identifier, their upgrade count and the current holder of
             each capability on{' '}
-            <Link href="/chain">the on-chain record</Link>. Two of the four are held by a 2-of-3
+            <Link href="/chain">the on-chain record</Link>. {['Zero', 'One', 'Two', 'Three', 'Four'][multisigCount]} of the {SECURITY_PACKAGES.length} are held by a 2-of-3
             multisig; the record says which, and gives the capability&rsquo;s own object id so you
             can read its owner yourself rather than take that sentence on trust.
           </p>
@@ -191,8 +199,8 @@ export default function SecurityPage() {
           <p>
             If you find a defect that affects deployed funds, report it privately to{' '}
             <a href="mailto:security@projectxprotocol.dev">security@projectxprotocol.dev</a> rather
-            than opening a public issue. We acknowledge within 72 hours. Please do not test against
-            mainnet with real user funds.
+            than opening a public issue. We aim to acknowledge within 72 hours. Please do not test
+            against mainnet with real user funds.
           </p>
           <p>
             A report that arrives before an exploit is worth considerably more to us than one that

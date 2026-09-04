@@ -30,9 +30,9 @@ export function CtaBand() {
           or not the API answered.
         */}
         <p className="lead mx-auto text-center">
-          Five gates on one Move package, from $1,000, delivered inside 24 hours as an evidence
-          bundle whose digest you can re-derive without us. It is a measurement, not an audit, and
-          we will never call it one.
+          Five gates on one Move package, from $1,000, returned as an evidence bundle whose digest
+          you can re-derive without us. Turnaround is agreed in writing when you order. It is a
+          measurement, not an audit, and we will never call it one.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

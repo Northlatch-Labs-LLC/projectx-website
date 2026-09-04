@@ -89,19 +89,19 @@ export default function VerificationPage() {
   const sprint = [
     {
       title: 'A mutation report with a survivor register',
-      body: 'One mutation derived per assert in your sources, every survivor named with a reason — real gap, structurally untestable, or defensive no-op. Counts, not adjectives.',
+      body: 'Offered, not yet delivered to a client: one mutation derived per assert in your sources, every survivor named with a reason — real gap, structurally untestable, or defensive no-op. Counts, not adjectives.',
     },
     {
       title: 'A staged lifecycle at production scale',
-      body: 'Your contract’s whole life run against a private network with real wallets, real transactions and real gas, at the scale production claims to support — conservation checked from chain state, not from the driver’s bookkeeping.',
+      body: 'Offered, not yet delivered to a client: your contract’s whole life run against a private network with real wallets, real transactions and real gas, at the scale production claims to support — conservation checked from chain state, not from the driver’s bookkeeping.',
     },
     {
       title: 'Machine-checked proof where the prover reaches',
-      body: 'Money paths proven with the Sui Prover for all inputs in a published domain. Where the prover cannot reach, a deterministic adversarial sweep — labelled measured, not proven. The label is mandatory.',
+      body: 'Offered, not yet delivered to a client: money paths proven with the Sui Prover for all inputs in a domain we publish with the proof. Where the prover cannot reach, a deterministic adversarial sweep — labelled measured, not proven. The label is mandatory.',
     },
     {
       title: 'The gates, installed and left running',
-      body: 'The engagement ends with the check runs above live on your repository. The harness, the staging driver and the findings register stay in your repo. We leave tools, not slideware.',
+      body: 'Offered, not yet delivered to a client: the engagement ends with the check runs above live on your repository. The harness, the staging driver and the findings register stay in your repo. We leave tools, not slideware.',
     },
   ];
 
@@ -113,8 +113,8 @@ export default function VerificationPage() {
             as="h1"
             eyebrow="Product · ProtocolX Verify"
             title="The gates we run on our own money, installable on your repository"
-            lead="Verify is a GitHub App: install it on a Sui Move repository and every pull request receives five check runs from the ProtocolX Verification Standard — run by the same engine that measures our own mainnet contracts."
-            proof="This is not an audit and is never called one. It is measured evidence — survivor counts, gas tables, proof transcripts — produced by tools with public runs of record, priced below the audit floor, and designed to make your eventual audit shorter and cheaper."
+            lead="Verify is a GitHub App, in early access: install it on a Sui Move repository and every pull request receives five check runs from the ProtocolX Verification Standard — run by the same engine that measures our own mainnet contracts."
+            proof="This is not an audit and is never called one. It is measured evidence — survivor counts, gas tables, proof transcripts — produced by tools whose runs of record are ours; the public repository carries the Weir libraries and contracts, and the verification engine is not published yet. Meant to make your eventual audit shorter and cheaper."
           />
 
           <ul className="grid w-full gap-4 md:grid-cols-3">
@@ -159,7 +159,7 @@ export default function VerificationPage() {
           <SectionHeader
             eyebrow="The first-night record"
             title="On its first complete run, it found what nothing was testing"
-            lead="2026-08-29, on our own live mainnet contract — the account module that guards creator identities. Five mutations from a derived set of ninety-eight:"
+            lead="29 August 2026, on our own live mainnet contract — the account module that guards creator identities. Five mutations from a derived set of ninety-eight:"
           />
           <pre className="panel w-full overflow-x-auto p-6 font-mono text-[0.85rem] leading-[1.8] text-px-muted">
             {`killed    account.move:145
@@ -175,8 +175,8 @@ commit: "Kill the two survivors the app found on its first run"`}
           <p className="max-w-prose text-center text-[1rem] leading-[1.65] text-px-muted">
             An ownership guard and a registry-consistency guard, both live on mainnet, both
             untested — found by the app, closed by two tests that construct exactly the attacks
-            those guards exist for, dead by morning. Every line of that story is on the public
-            record of the machines that produced it.
+            those guards exist for, dead by morning. The run log is on a private repository; the
+            two tests that closed it are in the public contracts.
           </p>
         </div>
       </Section>
@@ -191,7 +191,7 @@ commit: "Kill the two survivors the app found on its first run"`}
             eyebrow="The artifact"
             title="What the run leaves behind when the tab is closed"
             lead="A check run is five coloured rows that live as long as GitHub keeps the page. The bundle is the file someone else can hold: a manifest and a report, with a digest over them that reproduces, written on every run and uploaded with it."
-            proof="This is the difference the product actually turns on. Open-source mutation engines for Move exist and one is already runnable as a pull-request action — what none of them leaves behind is an artifact a funder, an auditor or a buyer can point at and check against a later commit."
+            proof="This is the difference the product actually turns on. As far as we have found, open-source mutation engines for Move exist and one is already runnable as a pull-request action — what none of them leaves behind is an artifact a funder, an auditor or a buyer can point at and check against a later commit."
           />
 
           <ul className="grid w-full gap-4 md:grid-cols-3">
@@ -241,7 +241,7 @@ commit: "Kill the two survivors the app found on its first run"`}
           <SectionHeader
             eyebrow="Engagement · verification sprint"
             title="Fixed scope, flat quote, below the audit floor"
-            lead="Of the audit firms serving Sui Move, exactly one publishes a price: roughly seven to twelve thousand dollars for a standard review, fifteen to twenty-five with formal verification. The market reference most often quoted for 2026 puts Move audits thirty to forty-five percent above the equivalent EVM work. A verification sprint is the layer below that price — a fixed-scope engagement that leaves four things in your repository."
+            lead="Of the audit firms serving Sui Move, exactly one publishes a price: roughly seven to twelve thousand dollars for a standard review, fifteen to twenty-five with formal verification. By our own count, not independently sourced, Move audits in 2026 run thirty to forty-five percent above the equivalent EVM work. A verification sprint is the layer below that price — a fixed-scope engagement that leaves four things in your repository."
             proof="Below that price there is tooling, and this page will not pretend otherwise: open-source mutation engines for Move exist, one of them Sui-only and already runnable as a pull-request action. What none of them leaves behind is an artifact. An exit code and a console log are nothing a funder, an auditor or a buyer can hold, point at, or check against a later commit. There is no shareable, attestable, per-commit record of test quality for Move, and no installable app that speaks it — which is the line this sits on."
           />
 
@@ -270,11 +270,12 @@ commit: "Kill the two survivors the app found on its first run"`}
                   the exclusions are stated here rather than left to be asked for. Exact sprint
                   figures are quoted in writing per engagement and deliberately not printed. */}
               <span className="font-semibold text-white">From $1,000.</span> That is the First
-              Report: one Move package, all five PVS gates, delivered inside 24 hours as an
-              evidence bundle whose digest you can re-derive without us, paid in USDC on Sui. It
-              is a measurement and not an engagement — public repositories only, no remediation,
-              and no claim of independence. Sprints sit above it, scoped to the codebase and
-              quoted flat, in writing, before work begins.
+              Report: one Move package, all five PVS gates, returned as an evidence bundle whose
+              digest you can re-derive without us, paid in USDC on Sui. Turnaround is agreed in
+              writing when you order; none has been delivered yet. It is a measurement and not an
+              engagement — public repositories only, no remediation, and no claim of independence.
+              Sprints sit above it, scoped to the codebase and quoted flat, in writing, before work
+              begins.
             </p>
             {/* Word-for-word with /verification/install. Two pages that paraphrase the same price
                 eventually quote two different ones. */}
@@ -282,7 +283,7 @@ commit: "Kill the two survivors the app found on its first run"`}
               <span className="font-semibold text-white">The App is $249 per repository per
               month</span>, or $2,490 a year. Every pull request gets the five gates and its own
               evidence bundle, the digest gate included — the one that reads the chain. One public
-              repository is free, permanently, with no card and no expiry.
+              repository is free, permanently, with no expiry.
             </p>
             {/* The founding price is $149 because $149 is what this page published before the
                 list price was set. Raising a printed number and letting the people who read it
@@ -304,12 +305,11 @@ commit: "Kill the two survivors the app found on its first run"`}
                 that says the inconvenient thing. We sell verifiability, so it is the only
                 position available to us. */}
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              <span className="font-semibold text-white">The engine is source-available and you
-              may run it in your own CI at no charge.</span> The licence grants that in writing,
-              for your own organisation, with no separate agreement. What the subscription buys is
-              the hosted App: the runs, the check runs on your pull requests, the retained
-              evidence bundles, and the digest gate that reads the chain — none of which you have
-              to stand up or keep running yourself.
+              <span className="font-semibold text-white">The engine is licensed BUSL-1.1 with
+              self-hosting permitted.</span> The repository is not public yet — ask and we send
+              it. What the subscription buys is the hosted App: the runs, the check runs on your
+              pull requests, the retained evidence bundles, and the digest gate that reads the
+              chain — none of which you have to stand up or keep running yourself.
             </p>
             <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
               Self-serve billing is not open yet, so early access is arranged by email and costs
