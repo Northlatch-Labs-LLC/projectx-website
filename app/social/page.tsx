@@ -41,7 +41,7 @@ import { SOCIAL_URL } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'Support a creator',
   description:
-    'The social platform where supporting a creator never spends your money: park SUI in a creator’s vault, the staking yield goes to them, and your deposit stays withdrawable in full — enforced by contract, not policy.',
+    'The social platform where supporting a creator never spends your money: park SUI in a creator’s vault, the staking yield goes to them, and your deposit stays withdrawable in full — enforced by contract, not policy. Closed alpha.',
   // A dedicated card rather than the site-wide generated one, which argues the prize vault's
   // invariant — a different product, and the wrong first sentence for this page.
   //
@@ -88,7 +88,7 @@ const LOOP = [
   {
     step: '2 · Stake',
     title: 'The creator vault delegates it',
-    body: 'The creator vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield therefore arrives continuously rather than in bursts — and a withdrawal is met from the rung that just matured instead of by breaking one that had not.',
+    body: 'The creator vault delegates the pooled deposits to a validator as a ladder of staggered stakes, one rung maturing each epoch. Yield arrives continuously once the ladder has enough rungs; with today’s small vaults it arrives in bursts. A withdrawal is met from the rung that just matured instead of by breaking one that had not.',
   },
   {
     step: '3 · Yield',
@@ -232,10 +232,9 @@ export default function SocialPage() {
             </h3>
             <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
               Staking yield is small — generating a given monthly amount takes parked principal
-              several hundred times that amount, and the platform says exactly that on its own
-              feed. Free support is what converts the people who will never pay into a broad base
-              that does not churn. The living comes from memberships and paid posts, where the
-              platform’s cut is 2.9% today.
+              several hundred times that amount. Free support is what converts the people who
+              will never pay into a broad base that does not churn. The living comes from
+              memberships and paid posts, where the platform’s cut is 2.9% today.
             </p>
           </Card>
         </div>

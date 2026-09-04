@@ -9,6 +9,7 @@ import { ShieldCheck } from '@/components/ui/Icons';
 import { CHAIN_OBJECTS, NETWORK, explorerUrl } from '@/lib/chain';
 import { ChannelLinks } from '@/components/ui/ChannelLinks';
 import { FOOTER_SECTIONS } from '@/lib/links';
+import { SECURITY_READ_AT } from '@/lib/security-chain-read';
 
 export function SiteFooter() {
   const pkg = CHAIN_OBJECTS.find((object) => object.label === 'Package')!;
@@ -43,12 +44,12 @@ export function SiteFooter() {
           <div className="flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-12">
             <div className="flex flex-1 flex-col gap-3">
               <h2 className="text-gradient-chrome max-w-[20ch] text-title">
-                Five gates on every pull request.
+                Five gates on a pull request, in early access.
               </h2>
               <p className="body-copy max-w-[46ch]">
-                ProtocolX Verify runs the checks we run on our own {NETWORK} contracts against
-                yours, and leaves an evidence bundle whose digest you can re-derive without us.
-                Not an audit, and never called one.
+                ProtocolX Verify runs the checks we run on our own {NETWORK} contracts on a
+                repository we install it on with you, and leaves an evidence bundle whose digest
+                you can re-derive without us. Not an audit, and never called one.
               </p>
             </div>
 
@@ -129,10 +130,9 @@ export function SiteFooter() {
             {/* This sentence renders on every route, so it must be true of the whole site
                 rather than of one product. Do not name a single package or object here. */}
             <p className="body-copy mx-auto max-w-[52ch]">
-              Every claim on this site resolves to an object on {NETWORK}. Four products are
-              deployed, each with its identifier and its upgrade authority published — open any
-              one on a block explorer and read the same state we do. Nothing here asks you to
-              take our word for it.
+              Every identifier on this site opens on a block explorer. Four products are
+              deployed; each is listed with its identifier and its upgrade authority as last read
+              ({SECURITY_READ_AT}). Nothing here asks you to take our word for it.
             </p>
 
             <LiveBadge className="mt-1" />

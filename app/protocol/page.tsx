@@ -74,7 +74,7 @@ export default function ProtocolPage() {
   const bounds = [
     {
       title: 'Oracle validation',
-      body: 'Settlement bounds every conversion with a Switchboard aggregator, validated hard: a non-positive price, a zero mean, a sample older than the freshness window, responder dispersion or a value outside the permitted band each abort the settlement outright. Multi-feed redundancy is on the roadmap.',
+      body: 'Settlement bounds every conversion with a Switchboard aggregator, validated hard: a non-positive price, a zero mean, a sample older than the freshness window, responder dispersion or a value outside the permitted band each abort the settlement outright. There is one price feed. A second is not built.',
     },
     {
       title: 'Third-party liveness',
@@ -132,7 +132,7 @@ export default function ProtocolPage() {
           eyebrow="Parameters"
           title="The settings it runs on"
           lead="Four numbers decide how the pool behaves: how long an epoch lasts, the smallest deposit it accepts, how much it holds back unstaked, and how long a tranche must age before it is rotated."
-          proof="Governance can adjust these within compiled ceilings. Any interface reads the current values live from the ProjectX API."
+          proof="Governance can adjust these within compiled ceilings. Any interface can read the current values from the pool object on chain; this page shows them as last read."
         />
         <div className="mt-10 grid gap-6 rounded-3xl border border-white/[0.06] bg-gradient-to-b from-px-elevated/60 to-px-panel/50 p-6 sm:grid-cols-2 lg:grid-cols-4">
           <StatTile
@@ -299,9 +299,9 @@ export default function ProtocolPage() {
           <h3 className="text-base font-semibold text-white">The honest caveat</h3>
           <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
             Settlement depends on two external systems — one price feed and one DEX pool.
-            There is no feed redundancy today; it is a known limitation and it is on the
-            roadmap. The failure mode is a delayed prize, not a lost deposit: if either
-            system is unavailable, the epoch does not settle and the pot rolls forward.
+            There is one price feed. A second is not built. The failure mode is a delayed
+            prize, not a lost deposit: if either system is unavailable, the epoch does not
+            settle and the pot rolls forward.
           </p>
         </Card>
       </Section>

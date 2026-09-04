@@ -12,6 +12,7 @@ import { Toolkit } from '@/components/builders/Toolkit';
 import { Ideas } from '@/components/builders/Ideas';
 import { Code, Layers, Chart, Book } from '@/components/ui/Icons';
 import { PRIZE_COIN, CHAIN_OBJECTS, explorerUrl } from '@/lib/chain';
+import { getStats } from '@/lib/stats';
 
 export const metadata: Metadata = {
   title: 'Builders',
@@ -19,7 +20,8 @@ export const metadata: Metadata = {
     'Integrate with ProjectX: the read API, the on-chain entry points, the event stream and every deployed address on Sui mainnet.',
 };
 
-export default function BuildersPage() {
+export default async function BuildersPage() {
+  const STATS = await getStats();
   const pkg = CHAIN_OBJECTS.find((object) => object.label === 'Package')!;
   const pool = CHAIN_OBJECTS.find((object) => object.label === 'Pool')!;
 
@@ -52,8 +54,8 @@ export default function BuildersPage() {
   ];
 
   const events = [
-    ['Deposited', 'Principal entered the pool and a receipt was issued.'],
-    ['Withdrawn', 'Principal left the pool, 1:1, with any early-exit fee itemised.'],
+    ['DepositMade', 'Principal entered the pool and a receipt was issued.'],
+    ['WithdrawalMade', 'Principal left the pool, 1:1, with any early-exit fee itemised.'],
     ['PrizeFunded', 'The prize pot for an epoch increased, with the resulting balance.'],
     ['WinnerSelected', 'A draw completed and pinned the winner for settlement.'],
     ['PrizeSettled', 'The prize was converted and paid, with the realised rate.'],
@@ -64,7 +66,11 @@ export default function BuildersPage() {
       <PageHeader
         eyebrow="Builders"
         title="Read the protocol directly"
-        lead="Everything this website displays comes from a public read API and from events the contract emits. There is no privileged data path — you can rebuild every page here from the same sources."
+        lead={
+          STATS.live
+            ? 'Everything this website displays comes from a public read API and from events the contract emits. There is no privileged data path — you can rebuild every page here from the same sources.'
+            : `Everything this website displays about the pool was read from the chain or from our read API, last on ${STATS.capturedOn}. The API is not served at present; the events are.`
+        }
         proof="No API keys, no allowlist, no partnership call. The pool is a shared object on Sui and your interface calls the same entry points ours does."
         art={<BuildersArt className="w-full" />}
       />
@@ -77,7 +83,7 @@ export default function BuildersPage() {
         <SectionHeader
           eyebrow="Read API"
           title="Five endpoints"
-          lead="JSON over HTTP. Amounts are decimal strings of base units — mist for SUI, six-decimal units for USDC — so nothing is lost to floating point in transit."
+          lead="JSON over HTTP. Amounts are decimal strings of base units — mist for SUI, six-decimal units for USDC — so nothing is lost to floating point in transit. Documented; not served at present."
         />
 
         <ul className="mt-10 flex flex-col gap-3">

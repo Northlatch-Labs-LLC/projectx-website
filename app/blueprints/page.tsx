@@ -19,7 +19,7 @@ import { SNAPSHOT } from '@/lib/snapshot';
 export const metadata: Metadata = {
   title: 'Blueprints',
   description:
-    'One buildable system on top of ProjectX every week — with the mathematics worked through, a revenue model, and the failure modes named.',
+    'Complete designs on top of ProtocolX — with the mathematics worked through, a revenue model, and the failure modes named.',
 };
 
 export default function BlueprintsPage() {
@@ -33,7 +33,7 @@ export default function BlueprintsPage() {
     <>
       <PageHeader
         eyebrow="Blueprints"
-        title="One system worth building, every week"
+        title="Complete designs on top of ProtocolX"
         lead="Not app ideas. Complete designs — the mechanism, the mathematics, what it earns, and what breaks it."
         proof="Every figure below is derived from the protocol's published parameters. If governance moves one, the arithmetic moves with it and the blueprint says which."
         art={<BlueprintsArt className="w-full" />}
@@ -75,7 +75,7 @@ export default function BlueprintsPage() {
               from zero.
             </p>
             <p>
-              This is not hypothetical. It is the documented reason this pool ran with zero
+              This is not hypothetical. In our own logs, it is the reason this pool ran with zero
               realised yield through its early epochs: continuous withdrawal traffic kept the
               ladder permanently immature. <strong>Exit traffic is the yield engine&rsquo;s
               main adversary</strong>, and nothing in the protocol currently absorbs it.

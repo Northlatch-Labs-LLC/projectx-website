@@ -79,8 +79,8 @@ export default function CommunityPage() {
             eyebrow="Proof"
             icon={<Chart className="h-5 w-5" />}
           >
-            Every interface reads the pool directly — the invariant, the ledger, the oracle
-            and every settled epoch, straight from the chain.
+            The pool is readable on chain — package, pool, treasury — without any interface of
+            ours.
           </LinkCard>
           <LinkCard
             href="/builders"

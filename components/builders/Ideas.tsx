@@ -31,7 +31,7 @@ const GROUPS = [
     ideas: [
       {
         name: 'A mini app',
-        body: 'Deposit from inside a social feed. The whole flow is two calls and sponsored gas means a first-timer needs no SUI.',
+        body: 'Deposit from inside a social feed. The whole flow is two calls and, with sponsored gas, a first-timer would need no SUI.',
       },
       {
         name: 'A savings goal app',
@@ -71,7 +71,7 @@ export function Ideas() {
         eyebrow="Ideas"
         title="Nine things nobody has built yet"
         lead="A prize pool is a primitive, not a product. Here is what that actually means — none of these is the vault we run, and all of them are possible with what is published today."
-        proof="Want one of these designed properly rather than named? That is what the blueprint series is for — one complete system per week, mathematics included."
+        proof="Want one of these designed properly rather than named? That is what the blueprint series is for — complete designs, mathematics included."
       />
 
       <div className="mt-12 flex flex-col gap-10">

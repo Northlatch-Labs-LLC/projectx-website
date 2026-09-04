@@ -18,7 +18,7 @@ import { AddressChip } from '@/components/ui/AddressChip';
 export const metadata: Metadata = {
   title: 'Interfaces',
   description:
-    'Every way to use ProjectX. The reference vault is one of them — anyone can build another, with no permission and no revenue share.',
+    'Every way to use ProtocolX, and the state each door is in. The vault has no interface today.',
   // A dedicated card rather than the site-wide generated one.
   //
   // It prints projectxprotocol.dev and nothing else, even though this page routes to protocolx.io
@@ -262,8 +262,9 @@ export default function InterfacesPage() {
             </ul>
 
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
-              Live on Sui mainnet. ProjectX provides the draw software — the promoter holds the
-              prize and runs the competition in their own name.
+              Live on Sui mainnet; one proving draw has settled, and no competition is open today.
+              ProjectX provides the draw software — the promoter holds the prize and runs the
+              competition in their own name.
             </p>
 
             <a
@@ -391,11 +392,12 @@ export default function InterfacesPage() {
             <h3 className="text-xl font-semibold text-white">Your interface here</h3>
             <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
               The pool is permissionless and the integration surface is complete. Ship an
-              interface and it is listed here, under your name, with the same billing as ours.
+              interface and tell us; we will list it here under your name. None has been built
+              yet.
             </p>
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
-              A read API, a full event stream and every deployed address are documented and
-              ready to build against today.
+              The on-chain events and every deployed address are documented. The HTTP read API is
+              not served at present.
             </p>
             <Button href="/builders" variant="secondary" className="mt-auto px-5">
               Start building

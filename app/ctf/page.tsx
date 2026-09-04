@@ -25,6 +25,7 @@ import {
   type Difficulty,
 } from '@/lib/ctf';
 import { EXPLORER } from '@/lib/chain';
+import { getStats } from '@/lib/stats';
 
 export const metadata: Metadata = {
   title: 'Capture the flag',
@@ -39,8 +40,9 @@ const TONE: Record<Difficulty, { badge: 'prize' | 'accent' | 'gold' | 'danger'; 
   Capstone: { badge: 'danger', ring: 'border-px-danger/30' },
 };
 
-export default function CtfPage() {
+export default async function CtfPage() {
   const configured = isCtfConfigured();
+  const STATS = await getStats();
 
   return (
     <>
@@ -102,8 +104,11 @@ export default function CtfPage() {
               <div className="flex flex-col gap-3 rounded-2xl border border-px-danger/25 bg-px-danger/[0.04] p-5">
                 <span className="label text-px-danger">Never a target</span>
                 <p className="text-[1rem] leading-[1.65] text-px-muted">
-                  The live v1.0.1 pool holds real deposits. If you find something there, it is
-                  a real vulnerability — report it privately through{' '}
+                  {STATS.live
+                    ? 'The live v1.0.1 pool holds real deposits.'
+                    : `The live v1.0.1 pool is out of scope. It holds no deposits today (read ${STATS.capturedOn}) and a small prize balance.`}{' '}
+                  If you find something there, it is
+                  a real vulnerability all the same — report it privately through{' '}
                   <Link href="/security" className="text-px-accent underline underline-offset-4">
                     the disclosure route
                   </Link>
