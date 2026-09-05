@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import { LADDER_DEPTH } from '@/lib/derive';
 
 export function LadderDiagram({ depth = LADDER_DEPTH }: { depth?: number }) {

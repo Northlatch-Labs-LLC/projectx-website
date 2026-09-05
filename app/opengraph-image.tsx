@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import { ImageResponse } from 'next/og';
 
 export const alt = 'ProjectX — Protocol built on Sui. A prize vault, verifiable prize draws, and .sui names.';

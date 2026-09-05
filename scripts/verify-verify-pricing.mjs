@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Kaela <kaela@projectxprotocol.dev>
+// Built-by: @projectx.sui · Co-authored-by: Kaela <kaela@projectxprotocol.dev>
 /**
  * Fail when the two pages that quote ProtocolX Verify's price stop agreeing.
  *

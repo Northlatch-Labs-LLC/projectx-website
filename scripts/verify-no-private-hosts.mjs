@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 /**
  * Fail when shipped source carries an address that only worked before this went to the cloud.
  *

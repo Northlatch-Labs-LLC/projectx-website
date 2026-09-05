@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 export function HeroScene({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 560 520" fill="none" aria-hidden="true" className={className}>

@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 type ArtProps = { className?: string };
 
 // SVG ids are document-global, so every def is namespaced per scene. Two scenes on one page

@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import { Badge, LiveDot } from '@/components/ui/Badge';
 import { NETWORK } from '@/lib/chain';
 import { getStats } from '@/lib/stats';
