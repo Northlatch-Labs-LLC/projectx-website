@@ -13,6 +13,10 @@ Law: `operations/company/UPDATE-FILE-LAW.md`.
 
 ---
 
+## 2026-09-05 · The `/|\` glyph removed from every file header; main is `7b52502`, pushed
+
+On the owner's ruling of 2026-09-05 the three-character glyph after `@projectx.sui` in every `Built-by` header line is gone; the attribution stays. Scraped copies of these files rendered it as runs of escaped backslashes. One sed over every tracked text file, only header lines changed, `git grep` for the glyph returns nothing tracked. Landed on main by fast-forward from `chore/drop-the-mark` and pushed to GitHub; no deploy, because no rendered byte changed. The commit trailer is now `Built-by: @projectx.sui` then `Co-authored-by: Kaela <kaela@projectxprotocol.dev>`.
+
 ## 2026-09-03 · MERGED, PUSHED, DEPLOYED. Main is `21d1f8c` (merge of `truth/projectxprotocol-dev` 695b53e). `npm run check` on main after the merge: exit 0 (typecheck, 6/6 tests, guardrails, six verify scripts; the pricing check reports both pages agree at $249/mo, $2490/yr, founding $149 — the "two App prices" the ledger flagged were the monthly price and the founding price, not a disagreement). Pushed to GitHub. Deployed from this laptop by `vercel pull` / `vercel build --prod` / `vercel deploy --prebuilt --prod` with the project's identifiers in the environment (the checkout is not linked), aliased to https://projectxprotocol.dev; live read afterwards: /security names `weir-protocol` twice and no longer says the company publishes no public repository. The Actions deploy path has been dead since 2026-09-02; this is the first laptop deploy of this site. The one-merge-a-week rhythm was broken tonight on the owner's explicit word to ship everything that was ready. Supersedes the "staged, unmerged" entry below.
 
 ## 2026-09-03 · Branch `truth/projectxprotocol-dev` staged, unmerged — the Master's truth-pass order
