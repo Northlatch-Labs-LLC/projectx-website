@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import { LiveBadge } from '@/components/ui/LiveBadge';
 import { Button } from '@/components/ui/Button';
 import { AuroraBackdrop, GlowBackdrop } from '@/components/ui/Backdrop';

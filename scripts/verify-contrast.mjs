@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 /**
  * Fail when a text/background pair drops below its WCAG contrast requirement.
  *

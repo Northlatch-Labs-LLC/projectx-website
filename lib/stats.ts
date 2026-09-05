@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import { SNAPSHOT } from './snapshot';
 import { largestPrize, totalPaidToWinners, uniqueWinners } from './derive';
 import { formatCount, formatSui, formatUsdc } from './format';

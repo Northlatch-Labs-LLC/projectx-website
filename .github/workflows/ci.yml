@@ -1,4 +1,4 @@
-# Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+# Built-by: @projectx.sui · Co-authored-by: Claude
 #
 # PR-branch CI. Without it this repo has only deploy-on-main, so a type error rides to
 # main and is caught — or not — by the deploy.
