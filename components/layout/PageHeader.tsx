@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import type { ReactNode } from 'react';
 import { AuroraBackdrop, GlowBackdrop, GridBackdrop } from '@/components/ui/Backdrop';
 
@@ -24,14 +24,21 @@ export function PageHeader({
       <AuroraBackdrop />
       <GlowBackdrop tone="accent" position="top" />
 
-      <div className="mx-auto flex max-w-content flex-col items-center px-5 pb-16 pt-14 text-center sm:px-8 md:pb-20 md:pt-16">
-        {art ? (
-          <div className="mb-3 w-full max-w-[17rem] animate-drift sm:max-w-[21rem] lg:max-w-[27rem] xl:max-w-[32rem]">
-            {art}
-          </div>
-        ) : null}
-
-        <div className="flex flex-col items-center gap-5">
+      {/*
+        Left to right, not center-stacked (the brand ruling). The text column runs down the left
+        edge, the same way the hub home's own Hero does (components/home/Hero.tsx): a two-column
+        grid at lg and up, headline on one side, art on the other; a single left-aligned column
+        below lg, where the grid has no second track and the items stack in source order — text
+        first, art after it, never a centred pile.
+      */}
+      <div
+        className={
+          art
+            ? 'mx-auto grid max-w-content items-center gap-10 px-5 pb-16 pt-14 sm:px-8 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-16'
+            : 'mx-auto flex max-w-content flex-col items-start px-5 pb-16 pt-14 sm:px-8 md:pb-20 md:pt-16'
+        }
+      >
+        <div className="flex min-w-0 flex-col items-start gap-5">
           <span className="flex items-center gap-3">
             <span
               aria-hidden="true"
@@ -47,12 +54,18 @@ export function PageHeader({
           </span>
 
           <h1 className="text-gradient-chrome max-w-[22ch] text-display">{title}</h1>
-          {lead ? <p className="lead mx-auto">{lead}</p> : null}
-          {proof ? <p className="proof proof-centered">{proof}</p> : null}
+          {lead ? <p className="lead">{lead}</p> : null}
+          {proof ? <p className="proof mt-1 border-l-2 border-px-accent/30 pl-4">{proof}</p> : null}
           {children ? (
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-3">{children}</div>
+            <div className="mt-2 flex flex-wrap items-center gap-3">{children}</div>
           ) : null}
         </div>
+
+        {art ? (
+          <div className="w-full min-w-0 max-w-[17rem] animate-drift justify-self-center sm:max-w-[21rem] lg:max-w-[27rem] xl:max-w-[32rem]">
+            {art}
+          </div>
+        ) : null}
       </div>
 
       <span

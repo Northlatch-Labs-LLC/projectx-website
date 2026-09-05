@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: 'Security',
   description:
-    'How ProtocolX secures what it ships: the measurements every contract passes before it touches money, who holds the upgrade authority over each deployed package, how to report a vulnerability, and exactly where the guarantees stop.',
+    'What a contract must pass before it touches money, who holds upgrade authority over each package, how to report a vulnerability, and where the guarantees stop.',
 };
 
 /**

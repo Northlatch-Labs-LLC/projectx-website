@@ -1,5 +1,5 @@
 // Copyright (c) 2026 Northlatch Labs LLC. All rights reserved.
-// Built-by: @projectx.sui /|\ · Co-authored-by: Claude
+// Built-by: @projectx.sui · Co-authored-by: Claude
 import type { Metadata } from 'next';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { SocialArt } from '@/components/ui/PageArt';
@@ -41,7 +41,7 @@ import { SOCIAL_URL } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'Support a creator',
   description:
-    'The social platform where supporting a creator never spends your money: park SUI in a creator’s vault, the staking yield goes to them, and your deposit stays withdrawable in full — enforced by contract, not policy. Closed alpha.',
+    'Support a creator without spending money: park SUI in a creator’s vault, yield goes to them, deposit stays fully withdrawable by contract. Closed alpha.',
   // A dedicated card rather than the site-wide generated one, which argues the prize vault's
   // invariant — a different product, and the wrong first sentence for this page.
   //
