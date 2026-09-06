@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/Button';
 export const metadata: Metadata = {
   title: 'Verification',
   description:
-    'ProtocolX Verify: the verification gates we run on our own mainnet contracts, installable on yours — and fixed-scope verification sprints for Sui Move teams, priced below the audit floor.',
+    'ProtocolX Verify: gates we run on our own mainnet contracts, installable on yours — plus fixed-scope sprints for Sui Move teams, priced below the audit floor.',
   // A dedicated card rather than the site-wide generated one. The asset states the five gates
   // and carries NO price: prices change and a static card cannot be corrected once shared.
   openGraph: {

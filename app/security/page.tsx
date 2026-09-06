@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: 'Security',
   description:
-    'How ProtocolX secures what it ships: the measurements every contract passes before it touches money, who holds the upgrade authority over each deployed package, how to report a vulnerability, and exactly where the guarantees stop.',
+    'What a contract must pass before it touches money, who holds upgrade authority over each package, how to report a vulnerability, and where the guarantees stop.',
 };
 
 /**

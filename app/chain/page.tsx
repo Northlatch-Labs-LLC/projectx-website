@@ -21,7 +21,7 @@ import { TARGET, OUT_OF_SCOPE_LIVE_POOL, isCtfConfigured } from '@/lib/ctf';
 export const metadata: Metadata = {
   title: 'On chain',
   description:
-    'Every ProtocolX package and object deployed on Sui mainnet, with the identifier and the explorer link for each — and who holds the upgrade authority over every one of them.',
+    'Every ProtocolX package and object on Sui mainnet, with the identifier and explorer link for each, and who holds upgrade authority over each.',
 };
 
 /**
