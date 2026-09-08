@@ -41,7 +41,7 @@ import { SOCIAL_URL } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'Support a creator',
   description:
-    'Support a creator without spending money: park SUI in a creator’s vault, yield goes to them, deposit stays fully withdrawable by contract. Closed alpha.',
+    'Support a creator without spending money: park SUI in a creator’s vault, yield goes to them, deposit stays fully withdrawable by contract. Open now, no invitation needed.',
   // A dedicated card rather than the site-wide generated one, which argues the prize vault's
   // invariant — a different product, and the wrong first sentence for this page.
   //
@@ -54,9 +54,10 @@ export const metadata: Metadata = {
   // creator, withdraw any time, enforced by contract — and carry NO yield figure. The arithmetic
   // below is honest only because it is qualified, and a card cannot carry the qualification.
   //
-  // The card must not read as an invitation. weir.social 307s every visitor to a waiting list, so
-  // "Weir · Sui mainnet · closed alpha" is the status line: the contracts are live, the door is
-  // not open. Do not badge this page "Live" without the closed-alpha half beside it.
+  // Was "Weir · Sui mainnet · closed alpha" until weir.social/join was verified, 8 September
+  // 2026, serving registration directly — no invitation code, no waiting-list redirect. The
+  // static card at /og/social.png still shows the old chips (rendered 30 August 2026) and needs
+  // regenerating; the alt text below is left matching the actual pixels until it is.
   //
   // No sentence here may offer supporters a share of the yield. Weir's Creator Terms §3.3 forbid
   // implying a supporter gains financially.
@@ -128,11 +129,11 @@ export default function SocialPage() {
         eyebrow="Weir · weir.social"
         title="Support a creator without spending anything"
         lead="Park SUI in a creator’s vault. It is delegated to a validator, the staking yield goes to the creator, and the deposit stays yours — withdrawable in full, any time, with no lock-up and no approval to ask for. The only thing you give up is the yield you would have earned staking it yourself."
-        proof="The contracts are live on Sui mainnet; the door is not open yet. What this page says about a supporter’s deposit — that it cannot be spent, and comes back in full — is the contract’s behaviour rather than the platform’s policy, which is why it can be stated this plainly."
+        proof="The contracts are live on Sui mainnet, and the door is open. What this page says about a supporter’s deposit — that it cannot be spent, and comes back in full — is the contract’s behaviour rather than the platform’s policy, which is why it can be stated this plainly."
         art={<SocialArt className="w-full" />}
       >
         <Badge tone="neutral">Sui mainnet</Badge>
-        <Badge tone="neutral">Closed alpha</Badge>
+        <Badge tone="neutral">Open</Badge>
       </PageHeader>
 
       <Section>
@@ -242,20 +243,18 @@ export default function SocialPage() {
 
       <Section>
         <Callout
-          title="Closed alpha, behind invitation codes"
+          title="Open — no invitation needed"
           actions={
-            /* One href, so one control. Do not add a second button here: every route into Weir
-               currently resolves to the same waiting list, and two labels for one destination
-               promise two doors that do not exist. */
+            /* One href, so one control: weir.social/join was verified serving registration
+               directly, 8 September 2026 — no invitation code, no waiting-list redirect. */
             <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-              Join the waiting list
+              Support a creator
             </Button>
           }
         >
-          Creators are live on the platform now, each with a creator vault on chain — and the door is in
-          closed alpha behind invitation codes. Join the waiting list to hear the moment it
-          opens; once inside, the withdraw button is the fastest way to believe the rest of this
-          page.
+          Creators are live on the platform now, each with a creator vault on chain, and the door
+          is open: a Google account or a wallet gets you in. The withdraw button is the fastest
+          way to believe the rest of this page.
         </Callout>
       </Section>
     </>

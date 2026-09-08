@@ -103,7 +103,7 @@ export function InterfacesPreview() {
             </span>
             <div className="flex flex-wrap items-center gap-3">
               <h3 className="text-xl font-semibold text-white">Weir</h3>
-              <Badge tone="prize">Live · closed alpha</Badge>
+              <Badge tone="prize">Live · open</Badge>
             </div>
             <p className="text-[0.8125rem] font-medium uppercase tracking-wide text-px-faint">
               Operated by Northlatch Labs LLC under its own terms.
@@ -115,8 +115,7 @@ export function InterfacesPreview() {
             </p>
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
               Subscriptions and paid posts settle on chain too, so what a creator is owed is held
-              by a contract, not by the platform. Name registration through Weir returns when the
-              alpha opens.
+              by a contract, not by the platform. Name registration through Weir is open too.
             </p>
             <div className="mt-auto flex flex-wrap gap-2.5">
               <a
@@ -125,7 +124,7 @@ export function InterfacesPreview() {
                 rel="noreferrer"
                 className="btn-primary w-fit px-5"
               >
-                Join the waiting list
+                Create your account
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Button href="/social" variant="ghost">

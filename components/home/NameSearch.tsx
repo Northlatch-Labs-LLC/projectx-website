@@ -10,8 +10,9 @@ import { priceSentence } from '@/lib/suins-pricing';
 /**
  * A .sui name in one transaction, handed straight to the registrar.
  *
- * The registrar is behind Weir's closed alpha, so this control cannot complete a registration
- * today and must not be written or placed as if it could — it hands off to a waiting list.
+ * Weir's registrar was behind a closed alpha; weir.social/names was verified serving registration
+ * directly, no invitation code, 8 September 2026, so this control now hands off to the live
+ * registration page rather than a waiting list.
  *
  * What it does NOT do is claim availability. That needs a read from SuiNS, and this site has no
  * chain client — inventing an "available!" here would be a lie that costs the buyer a signature

@@ -82,8 +82,8 @@ export function Hero() {
             <p className="mb-3 text-[0.9375rem] leading-relaxed text-px-faint">
               A <code>.sui</code> name replaces the sixty-four characters of your wallet address
               with something a person can type — {priceSentence()}, one transaction. Registration
-              through Weir is behind the waitlist while the alpha is closed; suins.io registers a
-              name today.
+              through Weir is open now, no invitation needed; suins.io registers a name today too,
+              and costs less.
             </p>
 
             <NameSearch />

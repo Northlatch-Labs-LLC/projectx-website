@@ -26,11 +26,17 @@ export const metadata: Metadata = {
   // links to; a reader who sees one domain in the unfurl and lands on another has been misled by
   // the preview, however accurate each half was on its own.
   //
-  // The state chips must say what the panels below say: Weir and Names are live on mainnet with
-  // their door in closed alpha, and the vault's contract is live with no interface serving it
-  // since 25 August 2026. A card has room for one state, so the chips name the door — the fact a
-  // reader acts on. This asset is static, so a chip that overstates a product's availability
-  // cannot be corrected by a later render.
+  // The state chips must say what the panels below say: Weir and Names are live on mainnet and
+  // OPEN — weir.social/join and weir.social/names were verified serving registration directly, no
+  // invitation code, 8 September 2026 — and the vault's contract is live with no interface serving
+  // it since 25 August 2026. A card has room for one state, so the chips name the door — the fact a
+  // reader acts on. This asset is static, so a chip that overstates OR understates a product's
+  // availability cannot be corrected by a later render.
+  //
+  // The alt text below still reads "closed alpha" because the PNG's own baked-in pixels do — it
+  // was rendered 30 August 2026, before the door opened, and describing pixels that no longer
+  // exist is worse than describing the ones that do. Regenerate /public/og/interfaces.png (and
+  // /public/og/social.png, same fact) with "Open" chips, then fix this string to match.
   //
   // The token launcher is absent for the same reason it is absent from the page: its panel
   // renders only when LAUNCHER_URL is set, and that variable is fail-closed until a subdomain
@@ -78,7 +84,7 @@ export default function InterfacesPage() {
       <PageHeader
         eyebrow="Interfaces"
         title="Every way to use ProtocolX, and the state each door is in"
-        lead="Four contracts live on Sui mainnet, and they are not equally open. Two sit behind invitation codes, one is open to anyone, and one has no interface serving it. This page says which is which before you click."
+        lead="Four contracts live on Sui mainnet, and they are not equally open. Three are open to anyone, and one has no interface serving it. This page says which is which before you click."
         proof="Nothing here is a privileged surface. Every interface on the pool calls the same public entry points, with the same permissions, as ours would."
         art={<InterfacesArt className="w-full" />}
       />
@@ -89,8 +95,8 @@ export default function InterfacesPage() {
           title="Four surfaces, and they are not in the same state"
           lead={
             DAPP_URL
-              ? 'Four contracts live on Sui mainnet. The draws and the vault are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed. Know which is which before you click.'
-              : 'Four contracts live on Sui mainnet. The draws are open to anyone; Weir and Names sit behind invitation codes while the alpha is closed; the vault has no interface serving it and is documented rather than sold. Know which is which before you click.'
+              ? 'Four contracts live on Sui mainnet, and every interface is open to anyone. Know which is which before you click.'
+              : 'Four contracts live on Sui mainnet. The draws, Weir and Names are open to anyone; the vault has no interface serving it and is documented rather than sold. Know which is which before you click.'
           }
         />
 
@@ -103,16 +109,20 @@ export default function InterfacesPage() {
               <div className="flex flex-col gap-1">
                 {/*
                   Two badges, because there are two facts and dropping either one misleads: the
-                  contracts are live on Sui mainnet, and entry is invitation-only. "Live" alone
-                  sends a reader to an unannounced waiting list; "Closed alpha" alone denies a
-                  deployment that has taken real transactions.
+                  contracts are live on Sui mainnet, and registration is open to anyone. "Live"
+                  alone doesn't say a reader can act on it; "Open" alone doesn't say the contracts
+                  have taken real transactions.
+
+                  Was "Closed alpha" until weir.social/join was verified, 8 September 2026,
+                  serving registration directly with no invitation code and no waiting-list
+                  redirect. Re-check before reverting.
 
                   Named Weir, not "ProjectX Social" — see SOCIAL_URL in lib/links.ts.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">Weir</h3>
                   <Badge tone="prize">Live</Badge>
-                  <Badge tone="accent">Closed alpha</Badge>
+                  <Badge tone="accent">Open</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
               </div>
@@ -139,8 +149,8 @@ export default function InterfacesPage() {
 
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
               Live on Sui mainnet. Each creator has a vault on chain; what a creator is owed is
-              held by a contract, not by the platform. Entry is in closed alpha behind invitation
-              codes, so this link opens the waiting list rather than the platform. Explained in
+              held by a contract, not by the platform. Registration is open to anyone with a
+              Google account or a wallet, so this link opens the platform directly. Explained in
               full on{' '}
               <Link href="/social" className="underline decoration-white/20 underline-offset-4 hover:text-px-muted">
                 /social
@@ -154,7 +164,7 @@ export default function InterfacesPage() {
               rel="noreferrer"
               className="btn-primary mt-auto w-fit px-5"
             >
-              Join the waiting list
+              Create your account
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -286,13 +296,14 @@ export default function InterfacesPage() {
               <div className="flex flex-col gap-1">
                 {/*
                   Same two facts as Weir: the registrar is live on mainnet, and its door is
-                  Weir's door, which is invitation-only. NAMES_URL in lib/links.ts records
-                  weir.social/names answering 307 to the waiting list while the alpha is closed.
+                  Weir's door, which is open to anyone. weir.social/names was verified serving
+                  the registration page directly, 8 September 2026 — no redirect to a waiting
+                  list, no invitation code.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <h3 className="text-xl font-semibold text-white">ProjectX Names</h3>
                   <Badge tone="gold">Live</Badge>
-                  <Badge tone="accent">Closed alpha</Badge>
+                  <Badge tone="accent">Open</Badge>
                 </div>
                 <span className="text-xs text-px-faint">By ProjectX</span>
               </div>
@@ -320,8 +331,8 @@ export default function InterfacesPage() {
             <p className="text-[0.875rem] leading-[1.6] text-px-faint">
               Live on Sui mainnet. SuiNS&rsquo;s registration fee plus a ProjectX service fee for the
               interface &mdash; registering directly at suins.io is always available and costs less.
-              The registrar moved into Weir, so this link opens the same waiting list; suins.io
-              needs no invitation and is the way to register a name today.
+              The registrar moved into Weir, so this link opens the Names page directly; suins.io
+              is still the cheaper way to register a name today.
             </p>
 
             <a
@@ -330,7 +341,7 @@ export default function InterfacesPage() {
               rel="noreferrer"
               className="btn-primary mt-auto w-fit px-5"
             >
-              Join the waiting list
+              Register a name
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
