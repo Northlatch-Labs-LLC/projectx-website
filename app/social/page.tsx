@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   // below is honest only because it is qualified, and a card cannot carry the qualification.
   //
   // Was "Weir · Sui mainnet · closed alpha" until weir.social/join was verified, 8 September
-  // 2026, serving registration directly — no invitation code, no waiting-list redirect. The
-  // static card at /og/social.png still shows the old chips (rendered 30 August 2026) and needs
-  // regenerating; the alt text below is left matching the actual pixels until it is.
+  // 2026, serving registration directly — no invitation code, no waiting-list redirect. Card
+  // regenerated the same day by scripts/gen-static-og.mjs, which now reads "Weir · Sui mainnet ·
+  // open"; re-run that script if this status changes again.
   //
   // No sentence here may offer supporters a share of the yield. Weir's Creator Terms §3.3 forbid
   // implying a supporter gains financially.

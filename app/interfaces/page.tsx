@@ -33,10 +33,10 @@ export const metadata: Metadata = {
   // reader acts on. This asset is static, so a chip that overstates OR understates a product's
   // availability cannot be corrected by a later render.
   //
-  // The alt text below still reads "closed alpha" because the PNG's own baked-in pixels do — it
-  // was rendered 30 August 2026, before the door opened, and describing pixels that no longer
-  // exist is worse than describing the ones that do. Regenerate /public/og/interfaces.png (and
-  // /public/og/social.png, same fact) with "Open" chips, then fix this string to match.
+  // Regenerated 8 September 2026 by scripts/gen-static-og.mjs — the same next/og (Satori) renderer
+  // app/opengraph-image.tsx already uses, run once and saved as a static file rather than wired up
+  // as a per-request route (see that script's own header comment for why this pair stayed static).
+  // Re-run it and update the alt text below whenever a chip on this page changes again.
   //
   // The token launcher is absent for the same reason it is absent from the page: its panel
   // renders only when LAUNCHER_URL is set, and that variable is fail-closed until a subdomain
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: '/og/interfaces.png',
         width: 1200,
         height: 630,
-        alt: 'Every way to use ProjectX — Weir (closed alpha), ProjectX Draws (live on mainnet), ProjectX Names (closed alpha), ProjectX Vault (contract live, no interface)',
+        alt: 'Every way to use ProjectX — Weir (open), ProjectX Draws (live on mainnet), ProjectX Names (open), ProjectX Vault (contract live, no interface)',
       },
     ],
   },
