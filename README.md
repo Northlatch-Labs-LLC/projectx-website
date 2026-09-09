@@ -2,6 +2,8 @@
 
 The public presentation site for **ProjectX**, the no-loss prize pool on Sui mainnet.
 
+Built and operated by **Northlatch Labs LLC**. Private repository.
+
 It is a **marketing site and nothing else**. It has no wallet code, cannot request a
 signature, cannot build a transaction, and does not call the protocol at request time. Live
 state — your position, the current pot, the epoch clock, the settlement ledger — belongs in
@@ -137,3 +139,17 @@ secrets.
 ```bash
 docker build -t projectx-website --build-arg NEXT_PUBLIC_DAPP_URL=https://app.example --build-arg NEXT_PUBLIC_SITE_URL=https://example .
 ```
+
+## Licence
+
+Copyright © 2026 Northlatch Labs LLC. All rights reserved.
+
+**Proprietary — no licence is granted.** No right to use, copy, modify, merge, publish, distribute,
+sublicense or sell any part of this software is granted by its publication here, and viewing this
+repository grants no licence, express or implied.
+
+For licensing enquiries, contact Northlatch Labs LLC.
+
+---
+
+**Northlatch Labs LLC** — [weir.social](https://weir.social) · [protocolx.io](https://protocolx.io)
