@@ -49,50 +49,50 @@ export default function SecurityPage() {
   const practice = [
     {
       title: 'Five gates, on our own pull requests first',
-      body: 'Build, digest, tests, pin and mutation-smoke — the ProtocolX Verification Standard runs against our own Sui mainnet contracts, by the same engine we sell. The product is not a thing we built for customers and then adopted; it is the instrument we built for ourselves and then listed.',
+      body: 'Build, digest, tests, pin and mutation-smoke. The ProtocolX Verification Standard runs against Northlatch Labs’ own Sui mainnet contracts, by the same engine it sells.',
     },
     {
       title: 'A passing suite is not evidence',
-      body: 'Mutation testing deletes each guard on purpose and proves the tests notice. The ones that survive name an assertion nothing exercises. Survivors are published as counts rather than averaged into a score, because a percentage is the format in which an uncomfortable number goes missing.',
+      body: 'Mutation testing deletes each guard on purpose and proves the tests notice. A survivor names an assertion nothing exercises. Survivors are published as counts, never averaged into a score.',
     },
     {
       title: 'Staged at production scale before mainnet',
-      body: 'Before code faces real money it is staged on a private network with funded wallets and real gas, the whole lifecycle — and the escrow must come out at exactly zero. The run logs are not published yet. A conservation check that passes on ten transactions has told you nothing about ten thousand.',
+      body: 'Before code faces real money, the whole lifecycle runs on a private network with funded wallets and real gas, and the escrow must come out at exactly zero. The run logs are not published.',
     },
     {
       title: 'Money paths proven, not argued',
-      body: 'Tests sample inputs; a prover exhausts them. The registrar’s money path is proven with the Sui Prover: every mist of a payment ends in the treasury or back in your change. The spec is not published yet. This is being applied one contract at a time and the ones it has not reached yet are not described as though it has.',
+      body: 'Tests sample inputs; a prover exhausts them. The registrar’s money path is proven with the Sui Prover: every mist of a payment ends in the treasury or back in your change. The spec is not published, and contracts the prover has not reached are not described as proven.',
     },
     {
       title: 'Deployed drift is a tripwire, not a review item',
-      body: 'A recorded digest beside the source means a build that no longer matches the chain fails a check rather than waiting for someone to notice. The gap between "what we audited" and "what is deployed" is where a great many incidents actually live.',
+      body: 'A recorded digest beside the source means a build that no longer matches the chain fails a check rather than waiting for someone to notice. The gap between reviewed code and deployed code is where incidents live.',
     },
     {
       title: 'A gate that did not run is a failure',
-      body: 'Any check that never reported is swept to an explicit failure at the end of the run. Never ran must not read as passed — a silent gate is worse than a red one, because it looks like the good outcome.',
+      body: 'Any check that never reported is swept to an explicit failure at the end of the run. Never ran must not read as passed.',
     },
   ];
 
   const scope = [
     {
       title: 'No independent review has been completed',
-      body: 'No third party has reviewed this code, and nothing on this site should be read as saying otherwise. On this laptop’s last run (3 September 2026) the protocol package passed 75 Move tests and the vault package 170, and the vault’s no-loss invariant is enforced by the compiler — both real, neither a review. The two areas that most need one, the randomness analysis and the admin-isolation argument, are published rather than left for a reviewer to find.',
+      body: 'No third party has reviewed this code. On the last local run (3 September 2026) the protocol package passed 75 Move tests and the vault package 170, and the vault’s no-loss invariant is enforced by the compiler. Neither of those is a review.',
     },
     {
-      title: 'A measurement is not an audit, and we are not your auditors',
-      body: 'What ProtocolX Verify produces is measured evidence: verdicts, survivor counts and a bundle whose digest reproduces. Where we measure our own contracts we are the party that wrote the code. Where we measure yours we are the layer below your audit, not a substitute for it, and no report of ours will ever be worded as one.',
+      title: 'A measurement is not an audit',
+      body: 'What ProtocolX Verify produces is measured evidence: verdicts, survivor counts and a bundle whose digest reproduces. Northlatch Labs wrote the contracts it measures here. Where it measures yours, it is the layer below your audit, not a substitute for it.',
     },
     {
       title: 'A survivor is a gap in a suite, not a defect in a contract',
-      body: 'Mutation-smoke names assertions no test exercises. It does not find vulnerabilities and does not claim to. The report is checked against a word list so that a survivor cannot be promoted into a finding by whoever writes the summary — including by us.',
+      body: 'Mutation-smoke names assertions no test exercises. It does not find vulnerabilities. The report is checked against a word list so a survivor cannot be promoted into a finding by whoever writes the summary.',
     },
     {
       title: 'The upgrade authority is real and it is the largest assumption here',
-      body: 'Every deployed package has a holder who can publish a new version of it. Sui prevents an upgrade from changing existing object types or removing public functions; it does not prevent new functions or changed non-public behaviour. Each holder is named on the on-chain record rather than described in general terms.',
+      body: 'Every deployed package has a holder who can publish a new version of it. Sui prevents an upgrade from changing existing object types or removing public functions; new functions and changed non-public behaviour are permitted. Each holder is named on the on-chain record.',
     },
     {
-      title: 'The source is not published, and we will not pretend it is',
-      body: 'The Northlatch Labs GitHub organisation publishes one repository, weir-protocol — the Weir contracts and six libraries. The vault, draws, names and the verification engine are not published; their bytecode is readable on any explorer, which is a genuine and checkable thing — but it is not the same as reading the source.',
+      title: 'The source is not published',
+      body: 'The Northlatch Labs GitHub organisation publishes one repository, weir-protocol: the Weir contracts and six libraries. The vault, draws, names and the verification engine are not published. Their bytecode is readable on any explorer, which is not the same as reading the source.',
     },
     {
       title: 'Legal compliance is not a protocol property',
@@ -104,8 +104,8 @@ export default function SecurityPage() {
     <>
       <PageHeader
         eyebrow="Security"
-        title="What we do to our own code before it holds anyone's money"
-        lead="Everything on this estate settles real value on Sui mainnet, so nothing ships on a green checkmark alone. This page is the practice that stands behind that — the measurements, who holds the upgrade authority over every deployed package, how to report a defect, and exactly where the guarantees stop."
+        title="What every contract passes before it holds anyone's money"
+        lead="Everything on this estate settles real value on Sui mainnet, so nothing ships on a green checkmark. This page carries the measurements, who holds upgrade authority over each deployed package, how to report a defect, and where the guarantees stop."
         art={<SecurityArt className="w-full" />}
       >
         <Badge tone="prize">
@@ -123,14 +123,14 @@ export default function SecurityPage() {
         <SectionHeader
           eyebrow="The practice"
           title="Six things that happen before a contract sees mainnet"
-          lead="These are not policies anyone promises to follow. Five of the six are check runs that fail a pull request, and the sixth is a staging network that has to balance to zero."
-          proof="This is the same standard ProtocolX Verify installs on a repository — ours today, yours on request. We are not selling a process we do not run — we are listing the one we already had."
+          lead="Five of the six are check runs that fail a pull request. The sixth is a staging network that has to balance to zero."
+          proof="This is the same standard ProtocolX Verify installs on a repository: Northlatch Labs' own today, yours on request."
         />
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
           {practice.map((item) => (
             <li key={item.title} className="panel flex flex-col gap-3 p-6">
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="text-body text-px-muted">{item.body}</p>
             </li>
           ))}
         </ul>
@@ -167,9 +167,9 @@ export default function SecurityPage() {
           <p>
             The holder of a package&rsquo;s UpgradeCap can publish a new version of that package. On
             Sui an upgrade cannot change the types of existing objects or remove public functions,
-            but it can add functions and change the behaviour of existing non-public logic. Any
-            upgrade is a public, on-chain transaction visible to anyone. This is the largest trust
-            assumption in the system and is why the holders are published.
+            but it can add functions and change non-public logic. Every upgrade is a public,
+            on-chain transaction. This is the largest trust assumption here, which is why the
+            holders are published.
           </p>
           <p>
             {/* The table itself is rendered on /chain. Rendering it in two places from one
@@ -179,8 +179,8 @@ export default function SecurityPage() {
             listed with their package identifier, their upgrade count and the current holder of
             each capability on{' '}
             <Link href="/chain">the on-chain record</Link>. {['Zero', 'One', 'Two', 'Three', 'Four'][multisigCount]} of the {SECURITY_PACKAGES.length} are held by a 2-of-3
-            multisig; the record says which, and gives the capability&rsquo;s own object id so you
-            can read its owner yourself rather than take that sentence on trust.
+            multisig. The record says which, and gives each capability&rsquo;s object id so you can
+            read its owner yourself.
           </p>
 
           <h2>zkLogin</h2>
@@ -203,8 +203,8 @@ export default function SecurityPage() {
             against mainnet with real user funds.
           </p>
           <p>
-            A report that arrives before an exploit is worth considerably more to us than one that
-            arrives after, and we would rather hear it early and imperfectly than late.
+            A report that arrives before an exploit is worth more than one that arrives after.
+            Early and imperfect beats late.
           </p>
 
           <h2>Audits</h2>
@@ -216,34 +216,33 @@ export default function SecurityPage() {
         <SectionHeader
           eyebrow="Out of scope"
           title="The perimeter of the guarantee"
-          lead="A guarantee is only as good as its stated boundary. Here is exactly where ours sits, in full, on the page rather than behind a link."
+          lead="A guarantee is only as good as its stated boundary. Here is where this one stops, in full, on the page rather than behind a link."
         />
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
           {scope.map((item) => (
             <li key={item.title} className="panel flex gap-4 border-px-gold/20 p-6">
               <Warning className="mt-0.5 h-5 w-5 shrink-0 text-px-gold" />
               <div className="flex flex-col gap-2">
-                <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+                <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+                <p className="text-body text-px-muted">{item.body}</p>
               </div>
             </li>
           ))}
         </ul>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-subhead font-semibold text-white">
             The contract-level guarantees, and where they are written down
           </h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-            The vault contract&rsquo;s own defences — principal unreachable from admin code, the two
-            writers on the principal total, the absence of any guard on the withdrawal path, the
-            non-transferable receipt, the ungrindable draw and the on-chain settlement floor — are
-            properties of that contract rather than of this company, and they are set out on{' '}
+          <p className="mt-3 text-body text-px-muted">
+            The vault contract&rsquo;s six defences — from principal unreachable by admin code to
+            the on-chain settlement floor — are properties of that contract rather than of this
+            company. They are set out on{' '}
             <Link href="/protocol" className="text-px-accent underline underline-offset-4">
               the mechanism page
             </Link>{' '}
             alongside the oracle and liveness limits that bound them. The contract is live on Sui
-            mainnet and no interface serves it at present.
+            mainnet and no interface serves it.
           </p>
         </Card>
       </Section>

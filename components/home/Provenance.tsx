@@ -47,15 +47,15 @@ export async function Provenance() {
             <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-prize/20 to-px-prize/5 text-px-prize">
               <ShieldCheck className="h-5 w-5" />
             </span>
-            <h3 className="text-xl font-semibold text-white">Our security steps</h3>
-            <p className="mt-3 text-[1.0625rem] leading-[1.65] text-px-muted">
+            <h3 className="text-heading font-semibold text-white">Our security steps</h3>
+            <p className="mt-3 text-body text-px-muted">
               Six things that happen before a contract sees mainnet — five of them check runs that
               fail a pull request, and one a private network with funded wallets and real gas
               whose escrow has to come out at exactly zero. The run logs are not published yet.
               Alongside them: who holds the upgrade authority over every package, how to report a
               defect, and where the guarantees stop.
             </p>
-            <p className="mt-4 text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="mt-4 text-meta text-px-faint">
               No third party has reviewed any of this code, and the page says so in its own words
               rather than leaving you to notice.
             </p>
@@ -72,14 +72,14 @@ export async function Provenance() {
             <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
               <Code className="h-5 w-5" />
             </span>
-            <h3 className="text-xl font-semibold text-white">ProtocolX on chain</h3>
-            <p className="mt-3 text-[1.0625rem] leading-[1.65] text-px-muted">
+            <h3 className="text-heading font-semibold text-white">ProtocolX on chain</h3>
+            <p className="mt-3 text-body text-px-muted">
               Weir, Names, Draws and the Prize Vault, each a published Move package on{' '}
               {NETWORK} with its identifier, its upgrade count and the current holder of its
               upgrade capability — plus the {CHAIN_OBJECTS.length} objects the vault pool is made
               of, down to the validator and the price feed.
             </p>
-            <p className="mt-4 text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="mt-4 text-meta text-px-faint">
               Every one of them opens on a block explorer. Reading them does not depend on this
               website being up, on our API answering, or on us existing.
             </p>
@@ -107,16 +107,16 @@ export async function Provenance() {
               <dd className="flex items-baseline gap-1">
                 <AnimatedNumber
                   value={f.value}
-                  className={`font-mono text-2xl font-semibold tabular-nums ${
-                    f.tone === 'prize' ? 'text-px-prize' : 'text-white'
+                  className={`font-mono text-heading font-semibold tabular-nums ${
+ f.tone === 'prize' ? 'text-px-prize' : 'text-white'
                   }`}
                 />
-                {f.unit ? <span className="text-xs text-px-faint">{f.unit}</span> : null}
+                {f.unit ? <span className="text-meta text-px-faint">{f.unit}</span> : null}
               </dd>
             </div>
           ))}
         </dl>
-        <p className="mx-auto mt-5 max-w-2xl text-center text-[0.9375rem] leading-[1.6] text-px-faint">
+        <p className="mx-auto mt-5 max-w-2xl text-center text-meta text-px-faint">
           The vault&rsquo;s contract is live on Sui mainnet and no interface serves it at present.
           {STATS.live ? '' : ' The pool has held no deposits since this was last read.'} Every
           draw settled so far was funded by a sponsor rather than by pooled yield, and each

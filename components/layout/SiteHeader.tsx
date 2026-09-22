@@ -39,13 +39,13 @@ export function SiteHeader() {
       <div
         aria-hidden="true"
         className={`absolute inset-0 -z-10 transition-all duration-500 ${
-          lifted ? 'bg-px-bg/72 backdrop-blur-xl backdrop-saturate-150' : 'bg-transparent'
+ lifted ? 'bg-px-bg/72 backdrop-blur-xl backdrop-saturate-150' : 'bg-transparent'
         }`}
       />
       <div
         aria-hidden="true"
         className={`absolute inset-x-0 bottom-0 -z-10 h-px transition-opacity duration-500 ${
-          lifted ? 'opacity-100' : 'opacity-0'
+ lifted ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
           background:
@@ -147,7 +147,7 @@ export function SiteHeader() {
               Re-measure at all three before changing this label. */}
           <Link
             href="/verification"
-            className="btn-primary whitespace-nowrap px-3 py-2.5 text-sm sm:px-5"
+            className="btn-primary whitespace-nowrap px-3 py-2.5 text-meta sm:px-5"
           >
             Verify a repo
           </Link>

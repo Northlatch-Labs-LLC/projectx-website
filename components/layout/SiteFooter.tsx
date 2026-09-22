@@ -69,7 +69,7 @@ export function SiteFooter() {
             <Logo ns="footer" />
             {/* No product count and no product list. This paragraph renders on every page, so
                 an enumeration here goes stale silently when a surface is added or retired. */}
-            <p className="max-w-[34ch] text-[1rem] leading-[1.65] text-px-muted">
+            <p className="max-w-[34ch] text-body text-px-muted">
               Software built on Sui, where the rules live in a contract rather than in a policy
               page. Public, permanent, and checkable by anyone — including you.
             </p>
@@ -98,7 +98,7 @@ export function SiteFooter() {
                   <li key={`${section.title}-${link.label}`}>
                     <Link
                       href={link.href}
-                      className="group inline-flex items-center gap-1.5 text-[0.9375rem] text-px-muted transition-colors duration-300 hover:text-white"
+                      className="group inline-flex items-center gap-1.5 text-meta text-px-muted transition-colors duration-300 hover:text-white"
                     >
                       <span
                         aria-hidden="true"
@@ -154,10 +154,10 @@ export function SiteFooter() {
                 className="ring-gradient flex flex-col gap-3 rounded-2xl bg-black/30 p-5 sm:flex-row sm:items-center sm:gap-6"
               >
                 <div className="flex min-w-0 flex-col gap-1 text-left">
-                  <span className="font-display text-[1.0625rem] font-medium text-white">
+                  <span className="font-display text-body font-medium text-white">
                     {object.label}
                   </span>
-                  <span className="text-[0.875rem] leading-[1.55] text-px-faint">{role}</span>
+                  <span className="text-meta text-px-faint">{role}</span>
                 </div>
                 <AddressChip
                   id={object.id}
@@ -169,7 +169,7 @@ export function SiteFooter() {
           </ul>
 
           {/* /chain rather than the older /builders#addresses anchor, which still resolves. */}
-          <p className="mt-6 text-center text-[0.875rem] text-px-faint">
+          <p className="mt-6 text-center text-meta text-px-faint">
             Every package and every object —{' '}
             <Link href="/chain" className="text-px-cyan underline underline-offset-4">
               the on-chain record, with the upgrade authority for each
@@ -181,7 +181,7 @@ export function SiteFooter() {
         {/* Publisher imprint. Northlatch Labs LLC is the named publisher of this site; it develops
             and licenses the protocol software and does not operate the vault, run any draw, sponsor
             any prize, or hold user funds. See /disclaimer and /legal/terms. */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/[0.06] py-8 text-[0.875rem] leading-[1.6] text-px-faint">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/[0.06] py-8 text-meta text-px-faint">
           <p className="max-w-[70ch]">
             Published by{' '}
             <span className="text-px-muted">Northlatch Labs LLC</span> · Casper, Wyoming ·{' '}

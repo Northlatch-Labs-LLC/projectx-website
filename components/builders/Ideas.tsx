@@ -79,8 +79,8 @@ export function Ideas() {
           <div key={group.title} className="flex flex-col gap-5">
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <h3
-                className={`text-lg font-semibold ${
-                  group.tone === 'prize'
+                className={`text-subhead font-semibold ${
+ group.tone === 'prize'
                     ? 'text-px-prize'
                     : group.tone === 'gold'
                       ? 'text-px-gold'
@@ -89,15 +89,15 @@ export function Ideas() {
               >
                 {group.title}
               </h3>
-              <span className="text-sm text-px-faint">{group.note}</span>
+              <span className="text-meta text-px-faint">{group.note}</span>
               <span aria-hidden="true" className="hairline hidden flex-1 sm:block" />
             </div>
 
             <ul className="grid gap-4 md:grid-cols-3">
               {group.ideas.map((idea) => (
                 <li key={idea.name} className="panel panel-hover flex flex-col gap-2.5 p-6">
-                  <h4 className="text-base font-semibold text-white">{idea.name}</h4>
-                  <p className="text-[1rem] leading-[1.65] text-px-muted">{idea.body}</p>
+                  <h4 className="text-subhead font-semibold text-white">{idea.name}</h4>
+                  <p className="text-body text-px-muted">{idea.body}</p>
                 </li>
               ))}
             </ul>

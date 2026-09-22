@@ -18,7 +18,7 @@ export function Callout({
   return (
     <div
       className={`relative overflow-hidden rounded-3xl ${
-        tone === 'lit'
+ tone === 'lit'
           ? 'ring-gradient bg-gradient-to-br from-px-accent/[0.07] via-px-cyan/[0.04] to-transparent'
           : 'border border-white/[0.06] bg-white/[0.02]'
       } ${className}`}
@@ -33,7 +33,7 @@ export function Callout({
       <div className="relative flex flex-col items-center gap-6 p-6 text-center md:p-9">
         <div className="flex flex-col items-center gap-2.5">
           {title ? (
-            <h3 className="text-xl font-semibold text-white">{title}</h3>
+            <h3 className="text-heading font-semibold text-white">{title}</h3>
           ) : null}
           {children ? (
             <div className="body-copy mx-auto">{children}</div>

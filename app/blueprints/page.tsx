@@ -44,7 +44,7 @@ export default function BlueprintsPage() {
 
       <Section>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-mono text-5xl font-semibold text-px-accent/30">01</span>
+          <span className="font-mono text-heading font-semibold text-px-accent/30">01</span>
           <div className="flex flex-col gap-1">
             <span className="label text-px-accent-300">Blueprint · published</span>
             <h2 className="text-title text-white">The liquidity underwriter</h2>
@@ -75,10 +75,9 @@ export default function BlueprintsPage() {
               from zero.
             </p>
             <p>
-              This is not hypothetical. In our own logs, it is the reason this pool ran with zero
-              realised yield through its early epochs: continuous withdrawal traffic kept the
-              ladder permanently immature. <strong>Exit traffic is the yield engine&rsquo;s
-              main adversary</strong>, and nothing in the protocol currently absorbs it.
+              This pool ran with zero realised yield through its early epochs: continuous
+              withdrawal traffic kept the ladder permanently immature. <strong>Exit traffic is the
+              yield engine&rsquo;s main adversary</strong>, and nothing in the protocol absorbs it.
             </p>
           </Block>
 
@@ -124,11 +123,9 @@ export default function BlueprintsPage() {
             />
 
             <p>
-              Because <strong>T is bounded</strong>, this is a genuinely well-behaved
-              inventory problem rather than an open-ended loan book. Your worst case is
-              knowable: you hold for at most one full ladder cycle. Size your float against
-              the <em>tail</em> of the exit-size distribution, not its mean — the mean exit
-              never touches the buffer, and the whole business lives in the tail.
+              Because <strong>T is bounded</strong>, this is an inventory problem rather than an
+              open-ended loan book: you hold for at most one full ladder cycle. Size your float
+              against the <em>tail</em> of the exit-size distribution, not its mean.
             </p>
             <p>
               Estimate all of it from <code>WithdrawalMade</code> and{' '}
@@ -154,9 +151,8 @@ export default function BlueprintsPage() {
               </li>
             </ul>
             <p>
-              You never hold user funds — you pay them <em>out</em>. That single property is
-              what keeps this a service rather than a custody business, and it is worth
-              designing around from the first line.
+              You never hold user funds — you pay them <em>out</em>. That property keeps this a
+              service rather than a custody business.
             </p>
           </Block>
 
@@ -208,7 +204,7 @@ export default function BlueprintsPage() {
         <SectionHeader
           eyebrow="The pipeline"
           title="What’s coming, and in what order"
-          lead="Published in advance so you can take one before we write it. If you build a blueprint, it becomes yours — we will link to it rather than compete with it."
+          lead="Published in advance so you can take one before it is written. Build a blueprint and it is yours; Northlatch Labs links to it rather than competing with it."
         />
 
         <ul className="mt-12 flex flex-col gap-4">
@@ -216,11 +212,11 @@ export default function BlueprintsPage() {
             <Reveal as="li" key={blueprint.no} delay={index * 60}>
               <div className="panel panel-hover flex flex-col gap-5 p-6 md:flex-row md:gap-8 md:p-7">
                 <div className="flex shrink-0 items-start gap-4 md:w-64">
-                  <span className="font-mono text-3xl font-semibold text-px-accent/30">
+                  <span className="font-mono text-heading font-semibold text-px-accent/30">
                     {blueprint.no}
                   </span>
                   <div className="flex flex-col gap-2">
-                    <h3 className="text-lg font-semibold text-white">{blueprint.title}</h3>
+                    <h3 className="text-subhead font-semibold text-white">{blueprint.title}</h3>
                     <Badge
                       tone={blueprint.status === 'Next' ? 'accent' : 'neutral'}
                       className="w-fit"
@@ -231,8 +227,8 @@ export default function BlueprintsPage() {
                 </div>
 
                 <div className="flex flex-1 flex-col gap-3">
-                  <p className="text-[1.0625rem] leading-[1.65] text-px-muted">{blueprint.summary}</p>
-                  <dl className="grid gap-x-8 gap-y-3 text-[0.9375rem] sm:grid-cols-2">
+                  <p className="text-body text-px-muted">{blueprint.summary}</p>
+                  <dl className="grid gap-x-8 gap-y-3 text-meta sm:grid-cols-2">
                     <div className="flex flex-col gap-0.5">
                       <dt className="label">Earns</dt>
                       <dd className="text-px-faint">{blueprint.revenue}</dd>
@@ -243,13 +239,13 @@ export default function BlueprintsPage() {
                     </div>
                   </dl>
                   <div className="flex flex-wrap gap-2 pt-1">
-                    <span className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted">
+                    <span className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted">
                       {blueprint.difficulty}
                     </span>
                     {blueprint.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-faint"
+                        className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-faint"
                       >
                         {tag}
                       </span>
@@ -262,10 +258,10 @@ export default function BlueprintsPage() {
         </ul>
 
         <Card className="mt-8">
-          <h3 className="text-base font-semibold text-white">Want one sooner?</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-            The order is not fixed. A builder who is actually blocked on one moves it to the
-            front faster than any roadmap does — say so in the{' '}
+          <h3 className="text-subhead font-semibold text-white">Want one sooner?</h3>
+          <p className="mt-3 text-body text-px-muted">
+            The order is not fixed. A builder blocked on one moves it to the front faster than a
+            roadmap does. Say so in the{' '}
             <Link href="/community" className="text-px-accent underline underline-offset-4">
               community channels
             </Link>
@@ -293,7 +289,7 @@ function Block({
       <div className="flex flex-col gap-2">
         <span className="label text-px-accent-300">{step}</span>
         <h3
-          className={`text-xl font-semibold ${tone === 'warn' ? 'text-px-gold' : 'text-white'}`}
+          className={`text-heading font-semibold ${tone === 'warn' ? 'text-px-gold' : 'text-white'}`}
         >
           {title}
         </h3>
@@ -308,8 +304,8 @@ function Formula({ label, body, note }: { label: string; body: string; note: str
   return (
     <div className="my-6 flex flex-col gap-3 rounded-2xl border border-white/[0.07] bg-black/30 p-5">
       <span className="label">{label}</span>
-      <code className="overflow-x-auto font-mono text-base text-px-accent-200">{body}</code>
-      <p className="text-[0.875rem] leading-[1.6] text-px-faint">{note}</p>
+      <code className="overflow-x-auto font-mono text-body text-px-accent-200">{body}</code>
+      <p className="text-meta text-px-faint">{note}</p>
     </div>
   );
 }

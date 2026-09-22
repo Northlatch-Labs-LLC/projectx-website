@@ -63,18 +63,80 @@ test('both entries return the moment an interface is configured', async () => {
   assert.ok(labels(products.links).includes('Prize vault'));
 });
 
-test('the draws link points at the apex, not at a host that redirects to it', async () => {
-  // `raffle.protocolx.io` still 308s to the apex. Advertising it anyway makes every link depend
-  // on a redirect we control and may one day drop — the reasoning already applied to the retired
-  // registrar subdomain.
-  delete process.env.NEXT_PUBLIC_RAFFLE_URL;
-  const m = await loadWithDapp(undefined);
-  assert.equal(m.RAFFLE_URL, 'https://protocolx.io');
-  assert.ok(!m.RAFFLE_URL.includes('raffle.protocolx.io'));
+/*
+ * `RAFFLE_URL`, `NAMES_URL` and `SOCIAL_URL` used to carry deployment addresses as source
+ * defaults — `https://protocolx.io`, `https://weir.social/names`, `https://weir.social`. The
+ * argument for each was that the host had been verified answering, which is an argument about the
+ * VALUE while the defect is the SHAPE: a default that is only ever right because a deployment
+ * replaces it is a fixture that survived, and it ships in the client bundle of the first
+ * environment that forgets the variable.
+ *
+ * They are now nullable on the `DAPP_URL` rule, and these tests hold the two halves of it: unset
+ * means the entry is absent, set means it is back with no code change.
+ */
+async function loadWithOrigins(env: Record<string, string | undefined>) {
+  for (const [key, value] of Object.entries(env)) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+  return loadWithDapp(undefined);
+}
+
+test('with no origin configured, the three product URLs are null', async () => {
+  const m = await loadWithOrigins({
+    NEXT_PUBLIC_RAFFLE_URL: undefined,
+    NEXT_PUBLIC_NAMES_URL: undefined,
+    NEXT_PUBLIC_SOCIAL_URL: undefined,
+  });
+  assert.equal(m.RAFFLE_URL, null);
+  assert.equal(m.NAMES_URL, null);
+  assert.equal(m.SOCIAL_URL, null);
+});
+
+test('the nav and footer drop every entry whose origin is unset', async () => {
+  const m = await loadWithOrigins({
+    NEXT_PUBLIC_RAFFLE_URL: undefined,
+    NEXT_PUBLIC_NAMES_URL: undefined,
+    NEXT_PUBLIC_SOCIAL_URL: undefined,
+  });
+  assert.ok(!labels(m.NAV_LINKS).includes('Draws'), 'Draws must not appear in the top nav');
+  const products = m.FOOTER_SECTIONS.find((s: { title: string }) => s.title === 'Products');
+  for (const gone of [
+    'Live competitions',
+    'Run a competition',
+    'Register a .sui name',
+    'Support a creator',
+  ]) {
+    assert.ok(!labels(products.links).includes(gone), `${gone} must not be linked`);
+  }
+});
+
+test('every entry returns the moment its origin is configured', async () => {
+  const m = await loadWithOrigins({
+    NEXT_PUBLIC_RAFFLE_URL: 'https://draws.example',
+    NEXT_PUBLIC_NAMES_URL: 'https://names.example/names',
+    NEXT_PUBLIC_SOCIAL_URL: 'https://social.example',
+  });
+  assert.ok(labels(m.NAV_LINKS).includes('Draws'));
+  const products = m.FOOTER_SECTIONS.find((s: { title: string }) => s.title === 'Products');
+  for (const back of [
+    'Live competitions',
+    'Run a competition',
+    'Register a .sui name',
+    'Support a creator',
+  ]) {
+    assert.ok(labels(products.links).includes(back), `${back} must be linked`);
+  }
+  const apply = products.links.find((l: { label: string }) => l.label === 'Run a competition');
+  assert.equal(apply.href, 'https://draws.example/organiser/apply');
 });
 
 test('no nav or footer link advertises a retired host', async () => {
-  const m = await loadWithDapp(undefined);
+  const m = await loadWithOrigins({
+    NEXT_PUBLIC_RAFFLE_URL: 'https://protocolx.io',
+    NEXT_PUBLIC_NAMES_URL: 'https://weir.social/names',
+    NEXT_PUBLIC_SOCIAL_URL: 'https://weir.social',
+  });
   const hrefs = [
     ...m.NAV_LINKS.map((l: { href: string }) => l.href),
     ...m.FOOTER_SECTIONS.flatMap((s: { links: { href: string }[] }) => s.links.map((l) => l.href)),

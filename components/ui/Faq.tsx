@@ -16,7 +16,7 @@ export function FaqList({
           className="panel panel-hover group scroll-mt-28 p-0 [&_summary::-webkit-details-marker]:hidden"
         >
           <summary className="flex cursor-pointer list-none items-center gap-4 p-6 text-left">
-            <h3 className="font-display text-[1.0625rem] font-medium text-white sm:text-[1.15rem]">
+            <h3 className="font-display text-heading font-medium text-white">
               {item.question}
             </h3>
             <span
@@ -28,7 +28,7 @@ export function FaqList({
               </svg>
             </span>
           </summary>
-          <div className="border-t border-white/[0.06] px-6 pb-6 pt-5 text-[1.0625rem] leading-[1.68] text-px-muted">
+          <div className="border-t border-white/[0.06] px-6 pb-6 pt-5 text-body text-px-muted">
             {item.answer}
           </div>
         </details>

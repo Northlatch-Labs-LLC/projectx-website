@@ -34,6 +34,12 @@ function formatProblem(label: string): string | null {
 export function NameSearch() {
   const [value, setValue] = useState('');
 
+  // Fail-closed with `NAMES_URL`: this whole control is a handoff to the registrar, so with no
+  // registrar configured there is nothing for it to hand off to and it renders nothing rather
+  // than a field that posts to the current page. Declared after the hook so the hook order is
+  // the same on every render.
+  if (!NAMES_URL) return null;
+
   const label = value.trim().toLowerCase().replace(/\.sui$/, '');
   const problem = formatProblem(label);
   const ready = label.length >= 3 && problem === null;
@@ -69,9 +75,9 @@ export function NameSearch() {
             spellCheck={false}
             autoComplete="off"
             inputMode="text"
-            className="min-w-0 flex-1 bg-transparent font-mono text-lg text-white outline-none placeholder:text-px-faint"
+            className="min-w-0 flex-1 bg-transparent font-mono text-subhead text-white outline-none placeholder:text-px-faint"
           />
-          <span className="font-mono text-lg text-px-faint">.sui</span>
+          <span className="font-mono text-subhead text-px-faint">.sui</span>
         </label>
 
         <a
@@ -80,7 +86,7 @@ export function NameSearch() {
           rel="noreferrer"
           aria-disabled={!ready}
           className={`btn-primary shrink-0 justify-center px-6 py-3 ${
-            ready ? '' : 'pointer-events-none opacity-45'
+ ready ? '' : 'pointer-events-none opacity-45'
           }`}
         >
           Check it
@@ -89,7 +95,7 @@ export function NameSearch() {
       </form>
 
       {/* Three states, and none of them asserts availability. */}
-      <p className="mt-2 min-h-[1.25rem] text-sm">
+      <p className="mt-2 min-h-[1.25rem] text-meta">
         {problem ? (
           <span className="text-px-gold">{problem}</span>
         ) : ready ? (

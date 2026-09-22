@@ -9,7 +9,7 @@ export function LadderDiagram({ depth = LADDER_DEPTH }: { depth?: number }) {
     <div className="panel p-6 md:p-7">
       <div className="flex items-baseline justify-between gap-4">
         <span className="label">Stake ladder · depth {depth}</span>
-        <span className="font-mono text-xs text-px-faint">
+        <span className="font-mono text-meta text-px-faint">
           captures {Math.round((depth / (depth + 1)) * 1000) / 10}% of available yield
         </span>
       </div>
@@ -20,20 +20,20 @@ export function LadderDiagram({ depth = LADDER_DEPTH }: { depth?: number }) {
           const mature = index === depth - 1;
           return (
             <li key={index} className="flex items-center gap-3">
-              <span className="w-20 shrink-0 font-mono text-[0.8125rem] text-px-faint">
+              <span className="w-20 shrink-0 font-mono text-meta text-px-faint">
                 tranche {index + 1}
               </span>
               <span className="relative h-2.5 flex-1 overflow-hidden rounded-full bg-black/40">
                 <span
                   className={`absolute inset-y-0 left-0 rounded-full ${
-                    mature ? 'bg-px-prize' : 'bg-px-accent/70'
+ mature ? 'bg-px-prize' : 'bg-px-accent/70'
                   }`}
                   style={{ width: `${maturity}%` }}
                 />
               </span>
               <span
-                className={`w-28 shrink-0 text-right font-mono text-[0.8125rem] ${
-                  mature ? 'text-px-prize' : 'text-px-faint'
+                className={`w-28 shrink-0 text-right font-mono text-meta ${
+ mature ? 'text-px-prize' : 'text-px-faint'
                 }`}
               >
                 {mature ? 'rotates' : `${index + 1}/${depth} epochs`}
@@ -43,7 +43,7 @@ export function LadderDiagram({ depth = LADDER_DEPTH }: { depth?: number }) {
         })}
       </ul>
 
-      <p className="mt-6 text-[1rem] leading-[1.65] text-px-muted">
+      <p className="mt-6 text-body text-px-muted">
         Each epoch the oldest mature tranche is unstaked, its yield harvested, and its
         principal restaked at the back of the ladder. Withdrawals are served from the liquid
         buffer first; only a withdrawal larger than the buffer reaches the ladder, and it

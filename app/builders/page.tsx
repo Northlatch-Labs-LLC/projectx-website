@@ -7,6 +7,8 @@ import { Section, SectionHeader } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Callout } from '@/components/ui/Callout';
+import { Badge } from '@/components/ui/Badge';
+import { Reveal } from '@/components/ui/Reveal';
 import { AddressChip } from '@/components/ui/AddressChip';
 import { Toolkit } from '@/components/builders/Toolkit';
 import { Ideas } from '@/components/builders/Ideas';
@@ -53,6 +55,42 @@ export default async function BuildersPage() {
     },
   ];
 
+  /**
+   * The published npm packages, with the version read from the registry on 11 September 2026 with
+   * `npm view <name> version` and the one-line description taken from each package's own manifest
+   * rather than written for this page.
+   *
+   * The version is a mirror, and a mirror drifts: the registry is the record, which is why every
+   * card links to it. Do not edit a number here without running `npm view` first.
+   */
+  const packages = [
+    {
+      name: '@projectx-social/sdk',
+      version: '1.0.2',
+      body: 'TypeScript client for the projectx_social Move package on Sui.',
+    },
+    {
+      name: '@projectx-social/agent',
+      version: '1.0.2',
+      body: 'A headless Node 22 library that lets an agent hold a weir account with its own Ed25519 keypair, read what it has paid for, and pay for more.',
+    },
+    {
+      name: '@projectx-social/mcp',
+      version: '1.0.4',
+      body: 'weir.social as a tool inside any agent runtime that speaks Model Context Protocol — read the network, quote a price, verify authorship and publish, without ever holding a key.',
+    },
+    {
+      name: '@projectx-social/signer',
+      version: '1.0.2',
+      body: 'The custody boundary: four adapters that hold a key at four different distances from the process, and a wrapper that will not let any of them sign a transaction that has not been simulated and judged.',
+    },
+    {
+      name: '@projectx-social/policy',
+      version: '1.0.2',
+      body: 'A pure evaluator with zero dependencies and no I/O. It takes what a simulation observed, what an operator wrote down and what the agent has already spent, and returns allow, or a reason.',
+    },
+  ];
+
   const events = [
     ['DepositMade', 'Principal entered the pool and a receipt was issued.'],
     ['WithdrawalMade', 'Principal left the pool, 1:1, with any early-exit fee itemised.'],
@@ -79,6 +117,38 @@ export default async function BuildersPage() {
 
       <Toolkit />
 
+      <Section id="packages">
+        <SectionHeader
+          eyebrow="Packages"
+          title="Published on npm"
+          lead="Five packages, all Apache-2.0, installable with npm install. Each card links to the registry, which is the record — the version beside the name is a copy of it."
+        />
+
+        <ul className="mt-10 grid gap-4 md:grid-cols-2">
+          {packages.map((item, index) => (
+            <Reveal as="li" key={item.name} delay={index * 70}>
+              <div className="panel flex h-full flex-col gap-3 p-6">
+                <div className="flex flex-wrap items-center gap-3">
+                  <code className="break-all font-mono text-meta text-px-text">{item.name}</code>
+                  <Badge tone="neutral" className="ml-auto">
+                    {item.version} · Apache-2.0
+                  </Badge>
+                </div>
+                <p className="text-body text-px-muted">{item.body}</p>
+                <div className="mt-auto pt-2">
+                  <Button
+                    href={`https://www.npmjs.com/package/${item.name}`}
+                    variant="secondary"
+                  >
+                    View on npm
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
       <Section id="api">
         <SectionHeader
           eyebrow="Read API"
@@ -90,19 +160,19 @@ export default async function BuildersPage() {
           {endpoints.map((endpoint) => (
             <li key={endpoint.path} className="panel flex flex-col gap-3 p-5 md:flex-row md:gap-6">
               <div className="flex shrink-0 items-start gap-2 md:w-80">
-                <span className="rounded-md border border-px-accent/30 bg-px-accent/10 px-2 py-0.5 font-mono text-[0.7rem] text-px-accent-200">
+                <span className="rounded-md border border-px-accent/30 bg-px-accent/10 px-2 py-0.5 font-mono text-meta text-px-accent-200">
                   {endpoint.method}
                 </span>
-                <code className="break-all font-mono text-[0.875rem] text-px-text">{endpoint.path}</code>
+                <code className="break-all font-mono text-meta text-px-text">{endpoint.path}</code>
               </div>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{endpoint.body}</p>
+              <p className="text-body text-px-muted">{endpoint.body}</p>
             </li>
           ))}
         </ul>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">A note on units</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <h3 className="text-subhead font-semibold text-white">A note on units</h3>
+          <p className="mt-3 text-body text-px-muted">
             Every amount is a base-unit string. Convert with a big-integer type, not a
             float — 1 SUI is 10<sup>9</sup> mist, prizes are quoted in{' '}
             {PRIZE_COIN.symbol} at {PRIZE_COIN.decimals} decimals, and a protocol that runs
@@ -124,13 +194,13 @@ export default async function BuildersPage() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
                 <Chart className="h-5 w-5" />
               </span>
-              <h3 className="text-base font-semibold text-white">Emitted events</h3>
+              <h3 className="text-subhead font-semibold text-white">Emitted events</h3>
             </div>
             <dl className="mt-5 flex flex-col gap-3">
               {events.map(([name, description]) => (
                 <div key={name} className="flex flex-col gap-1">
-                  <dt className="font-mono text-[0.875rem] text-px-cyan">{name}</dt>
-                  <dd className="text-[1rem] leading-[1.65] text-px-muted">{description}</dd>
+                  <dt className="font-mono text-meta text-px-cyan">{name}</dt>
+                  <dd className="text-body text-px-muted">{description}</dd>
                 </div>
               ))}
             </dl>
@@ -142,14 +212,14 @@ export default async function BuildersPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
                   <Code className="h-5 w-5" />
                 </span>
-                <h3 className="text-base font-semibold text-white">Calling the package</h3>
+                <h3 className="text-subhead font-semibold text-white">Calling the package</h3>
               </div>
-              <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-4 text-body text-px-muted">
                 The pool is generic over its prize coin type. Every call must supply the
                 prize coin as a type argument — omitting it is the single most common reason
                 a correct-looking transaction fails to resolve.
               </p>
-              <code className="mt-4 block overflow-x-auto rounded-lg border border-white/[0.08] bg-black/40 p-3 font-mono text-[0.8125rem] leading-relaxed text-px-muted">
+              <code className="mt-4 block overflow-x-auto rounded-lg border border-white/[0.08] bg-black/40 p-3 font-mono text-meta text-px-muted">
                 --type-args {PRIZE_COIN.type}
               </code>
             </Card>
@@ -159,9 +229,9 @@ export default async function BuildersPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
                   <Layers className="h-5 w-5" />
                 </span>
-                <h3 className="text-base font-semibold text-white">Separately deployed pieces</h3>
+                <h3 className="text-subhead font-semibold text-white">Separately deployed pieces</h3>
               </div>
-              <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-4 text-body text-px-muted">
                 The DEX adapter is its own package so a vendor upgrade can be re-pinned
                 without touching the pool. If you fork or extend this design, keep that
                 seam — pin dependencies by tag rather than branch, and the cost of a
@@ -189,8 +259,8 @@ export default async function BuildersPage() {
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_1fr]">
           <Card>
-            <h3 className="text-base font-semibold text-white">The two that matter</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">The two that matter</h3>
+            <p className="mt-3 text-body text-px-muted">
               Everything else is derivable from these. Both open on a block explorer, and reading
               them depends on nothing of ours.
             </p>
@@ -201,8 +271,8 @@ export default async function BuildersPage() {
           </Card>
 
           <Card>
-            <h3 className="text-base font-semibold text-white">The complete record</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">The complete record</h3>
+            <p className="mt-3 text-body text-px-muted">
               All {CHAIN_OBJECTS.length} vault objects, and all four deployed product lineages with
               the current holder of each upgrade capability, on one page — read from chain rather
               than transcribed from a specification.

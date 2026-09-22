@@ -37,7 +37,7 @@ export default function CommunityPage() {
           <p>
             <strong>These three X accounts are ours, and nothing else is.</strong>{' '}
             <a href="https://x.com/protocolx_io" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@protocolx_io</a>{' '}
-            (the draws — launched 29 August 2026),{' '}
+            (the draws),{' '}
             <a href="https://x.com/ProjectX_Sui" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@ProjectX_Sui</a>{' '}
             (the estate) and{' '}
             <a href="https://x.com/weirsocial" className="underline decoration-white/30 underline-offset-2 hover:decoration-white" rel="noopener noreferrer" target="_blank">@weirsocial</a>{' '}
@@ -55,8 +55,8 @@ export default function CommunityPage() {
         </Callout>
 
         <Card className="mt-6 border-px-gold/25">
-          <h3 className="text-base font-semibold text-white">On impersonation</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <h3 className="text-subhead font-semibold text-white">On impersonation</h3>
+          <p className="mt-3 text-body text-px-muted">
             ProjectX will never DM you first, never ask for a seed phrase, and never run a
             giveaway that requires you to send funds anywhere. Any account doing those things
             is not us regardless of how convincing it looks. When in doubt, come back to this

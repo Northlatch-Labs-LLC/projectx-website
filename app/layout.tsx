@@ -2,30 +2,61 @@
 // Built-by: @projectx.sui · Co-authored-by: Claude
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Roboto, Roboto_Mono, Space_Grotesk } from 'next/font/google';
+import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Analytics } from '@vercel/analytics/next';
 import { SITE_URL } from '@/lib/links';
+import { cn } from '@/lib/utils';
 import './globals.css';
 
-const roboto = Roboto({
+/*
+ * Three faces, three variables, and the variable NAMES are fixed.
+ *
+ * `--font-roboto` in particular no longer describes what is behind it, and it is deliberately
+ * not renamed: `font-sans` resolves through it in tailwind.config.ts and it is referenced from
+ * well over a hundred classNames. Renaming it would be a rename with no reader-visible benefit
+ * and a large blast radius, in a tree two other agents are editing.
+ *
+ * Why these three, given a type scale is only as good as the faces carrying it:
+ *
+ *   Roboto -> Inter. Roboto's apertures close up and its x-height is modest, which is what made
+ *   17px body text on a near-black canvas feel tight. Inter was drawn for screens at exactly
+ *   this size, has a taller x-height and open apertures, and — the reason it matters here —
+ *   ships as a variable font across 100-900, so the scale can use weight as a signal at every
+ *   level instead of only at the four static weights Roboto was loaded with.
+ *
+ *   Space Grotesk -> Plus Jakarta Sans. Space Grotesk tops out at 700 and its quirks (the
+ *   single-storey g, the flat-sided o) are charming at 24px and distracting at 96px. Plus Jakarta
+ *   Sans runs 200-800, so `hero` can sit at 800 and `subhead` at 600 and read as the same voice;
+ *   its tighter, more even colour is what lets the -0.042em tracking on the headline hold
+ *   together rather than collide.
+ *
+ *   Roboto Mono -> JetBrains Mono. This site sets Sui object addresses in mono. JetBrains Mono
+ *   has a taller x-height at the same point size and, more to the point, disambiguates 0/O and
+ *   1/l/I — which is the difference between an address a reader can check and one they cannot.
+ *
+ * No `weight` is passed: all three are variable on Google Fonts, so omitting it loads the full
+ * axis. That is what "a wide weight range so the hierarchy can breathe" requires. `display:
+ * swap` is kept, and tailwind.config.ts carries fallback stacks chosen to sit near these metrics
+ * so the swap does not reflow a headline.
+ *
+ * Still three families. Nothing self-hosted.
+ */
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
   variable: '--font-roboto',
   display: 'swap',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const robotoMono = Roboto_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
   variable: '--font-mono',
   display: 'swap',
 });
@@ -41,7 +72,7 @@ const robotoMono = Roboto_Mono({
  * nothing to click; add it back when an interface serves it again.
  */
 const SITE_DESCRIPTION =
-  'Verification for Sui Move: five PR checks, early access, plus a report. Also: Weir, an open Sui creator network, and re-derivable draw software.';
+  'Verification for Sui Move: five PR checks, free to run in your own CI, plus a measured report. Also: Weir, an open Sui creator network, and re-derivable draw software.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -110,7 +141,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en-GB"
-      className={`${roboto.variable} ${spaceGrotesk.variable} ${robotoMono.variable}`}
+      className={cn(inter.variable, plusJakarta.variable, jetbrainsMono.variable)}
       // The pre-paint script below sets data-theme here, so this element legitimately differs
       // from the server HTML. Scoped to <html>'s own attributes, not its subtree.
       suppressHydrationWarning
@@ -129,7 +160,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex min-h-screen flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-px-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[#04101f]"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-px-accent focus:px-4 focus:py-2 focus:text-meta focus:font-semibold focus:text-[#04101f]"
         >
           Skip to content
         </a>

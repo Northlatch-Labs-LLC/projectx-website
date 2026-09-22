@@ -25,7 +25,7 @@ export function ChannelLinks({ className = '' }: { className?: string }) {
               target="_blank"
               rel="noreferrer"
               aria-label={channel.label}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-2 text-[0.8125rem] text-px-muted transition-colors duration-300 hover:border-white/[0.14] hover:text-white"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-2 text-meta text-px-muted transition-colors duration-300 hover:border-white/[0.14] hover:text-white"
             >
               <Icon className="h-4 w-4 shrink-0" />
               {channel.short}

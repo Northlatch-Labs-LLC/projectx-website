@@ -5,11 +5,13 @@ import { CopyBlock } from '@/components/ui/CopyBlock';
 import { NotifySignup } from '@/components/ui/NotifySignup';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
+import { Button } from '@/components/ui/Button';
+import { VERIFY_REPO_URL } from '@/lib/links';
 
 export const metadata: Metadata = {
   title: 'Install ProtocolX Verify',
   description:
-    'What the five ProtocolX Verify check runs measure on your pull request, what a repository needs to qualify, the .protocolx-verify.json config in full, and how to get the GitHub App installed while it is in early access.',
+    'What the five ProtocolX Verify check runs measure on your pull request, what a repository needs to qualify, the .protocolx-verify.json config in full, how to run the Action free in your own CI, and how the hosted GitHub App gets installed for you.',
   // The install-flow plate, reused as the card rather than redrawn. It states the same four
   // steps this page states, in the same order and the same words, so a reader who arrives from
   // a shared link recognises the page they land on. Reusing it is also the only way the two can
@@ -47,16 +49,19 @@ export const metadata: Metadata = {
  *      repositories only, no remediation, not an audit) or the number promises more than it
  *      covers. Sprints are quoted per engagement, so no sprint figure is printed here.
  *
- *      The App tier has no price: billing and metering are unbuilt. Printing a number here would
- *      be one we later had to withdraw, and a withdrawn price is worth less than no price. When
- *      the App is priced, that price is the App's alone — the GitHub Action is licensed BUSL-1.1
- *      and is free to run in a customer's own CI on their own code, public or private. Do not
- *      present the hosted service's monthly figure as the Action's price.
+ *      The hosted App tier now carries a list price and a founding price, and both are printed.
+ *      That price is the App's alone. The GitHub Action is free to run in a customer's own CI on
+ *      their own code, public or private, and the licence says so — never present the hosted
+ *      service's monthly figure as the Action's price, and never let the App's billing state be
+ *      read as a charge for the Action.
  *
- *   3. **No claim of general availability.** The App is installable on one account only and
- *      multi-tenancy beyond this org is not built, so it is genuinely not self-serve and the page
- *      says early access. When that setting changes and the App is listed, the honest change here
- *      is a public install button — not a rewrite of the claims.
+ *   3. **Separate the two products, every time.** The Action is published and free: the licence
+ *      grants production use in a customer's own CI, on public and private repositories alike,
+ *      with nothing to sign and nothing metered, and it does not expire. The HOSTED App is the
+ *      one that is installable on one account only — multi-tenancy beyond this org is not built,
+ *      so it is genuinely not self-serve and this page says so. Never let a limit on the App be
+ *      read as a limit on the Action. When the App is listed, the honest change here is a public
+ *      install button — not a rewrite of the claims.
  *
  * The five gate descriptions are written from `engine/ci/gates.sh`, not from the marketing copy,
  * which is why two of them say when they will report neutral. `digest` runs only where a
@@ -75,27 +80,27 @@ export default function VerifyInstallPage() {
     {
       title: 'PVS · build',
       question: 'Does it still compile somewhere that is not your laptop?',
-      body: 'A clean runner, a pinned Sui CLI, your package, nothing cached and nothing left over from a previous run. If the build depends on something only your machine has, that surfaces on the pull request rather than on the day someone else clones the repository.',
+      body: 'A clean runner, a pinned Sui CLI, your package, nothing cached. A build that depends on something only your machine has fails the pull request, not the day someone else clones the repository.',
     },
     {
       title: 'PVS · digest',
       question: 'Does your source still build to the contract that is live?',
-      body: 'Where your package carries a recorded digest, the check builds your source and compares the result byte for byte against it. An accidental edit to deployed code fails the pull request instead of surfacing in an incident review. Where no digest is recorded, this check reports neutral and says so — it will not claim to have measured a package you never deployed.',
+      body: 'Where your package carries a recorded digest, the check builds your source and compares the result byte for byte against it. An accidental edit to deployed code fails the pull request instead of surfacing in an incident review. With no digest recorded, the check reports neutral.',
     },
     {
       title: 'PVS · tests',
       question: 'Is the Move suite green on the runner, not just for you?',
-      body: 'The suite runs against the exact commit the pull request proposes. Treat it as the floor rather than the evidence: the four checks around it exist because a green suite on its own says only that nothing you wrote a test for is broken.',
+      body: 'The suite runs against the exact commit the pull request proposes. It is the floor, not the evidence: a green suite says only that nothing you wrote a test for is broken.',
     },
     {
       title: 'PVS · pin',
       question: 'Has the framework moved underneath you?',
-      body: 'Where your repository carries an executable framework-pin script, the check runs it. A dependency that drifts changes what compiles — and changes what your digest means — without a single line of your repository changing. Where there is no such script, this check reports neutral and names the file it looked for.',
+      body: 'Where your repository carries an executable framework-pin script, the check runs it. A dependency that drifts changes what compiles, and what your digest means, without a line of your repository changing. With no such script, the check reports neutral and names the file it looked for.',
     },
     {
       title: 'PVS · mutation-smoke',
       question: 'Would your tests notice if a guard were quietly deleted?',
-      body: 'Five assertions in your sources are broken on purpose, one at a time, and the suite has to fail for each. A mutation that survives names an assertion no test exercises — a gap in the suite, not a defect found in the contract, and the report is checked against a word list so it cannot be promoted into one. Five per pull request: a full run costs one suite run per assert and belongs on a schedule.',
+      body: 'Five assertions in your sources are broken on purpose, one at a time, and the suite has to fail for each. A survivor names an assertion no test exercises: a gap in the suite, not a defect in the contract. A full run costs one suite run per assert and belongs on a schedule.',
     },
   ];
 
@@ -109,8 +114,8 @@ export default function VerifyInstallPage() {
   const flow = [
     {
       step: '01',
-      title: 'Install the App',
-      body: 'The App is added to your repository from GitHub. While it is in early access we do that step with you, on a call or over email, because the App is not yet listed for public installation.',
+      title: 'Add it to the repository',
+      body: 'The Action is published and free: drop it into your own CI today, public or private, nothing to sign. The hosted App, where Northlatch Labs runs the gates for you, is not yet listed for public installation, so that one is added over email.',
     },
     {
       step: '02',
@@ -120,12 +125,12 @@ export default function VerifyInstallPage() {
     {
       step: '03',
       title: 'Five checks run',
-      body: 'PVS · build, digest, tests, pin and mutation-smoke, run by the same engine that measures our own mainnet contracts. A gate that never reported is swept to an explicit failure at the end: never ran must not read as passed.',
+      body: 'PVS · build, digest, tests, pin and mutation-smoke, run by the same engine that measures Northlatch Labs’ own mainnet contracts. A gate that never reported is swept to an explicit failure at the end: never ran must not read as passed.',
     },
     {
       step: '04',
       title: 'Read the evidence',
-      body: 'Every check reports what it measured with the run log behind it, and the run writes an evidence bundle — a manifest and a report, with a digest over them that reproduces — uploaded as a workflow artifact. A check run is five coloured rows that live as long as GitHub keeps the page; the bundle is the file an auditor can cite.',
+      body: 'Every check reports what it measured with the run log behind it. The run also writes an evidence bundle — a manifest, a report and a digest that reproduces — uploaded as a workflow artifact. The bundle is the file an auditor can cite.',
     },
   ];
 
@@ -137,8 +142,8 @@ export default function VerifyInstallPage() {
             as="h1"
             eyebrow="Product · ProtocolX Verify"
             title="Install it, open a pull request, read the evidence"
-            lead="Verify is a GitHub App. Installed on a Sui Move repository, it puts five check runs from the ProtocolX Verification Standard on every pull request — run by the same engine that measures our own mainnet contracts, reported on your commit."
-            proof="Early access, stated plainly: the App is installable on one account today and is not yet listed for self-serve installation, so an install is arranged with us. Everything below describes what it does on the repositories it already runs on, not what it will do."
+            lead="Verify is a published GitHub Action and a hosted GitHub App. Either one puts five check runs from the ProtocolX Verification Standard on every pull request of a Sui Move repository, run by the engine that measures Northlatch Labs' own mainnet contracts."
+            proof="The two differ. The Action is free to run in your own CI today, on public and private repositories alike. The hosted App is installable on one account and not yet listed for self-serve installation, so that install is arranged by email."
           />
 
           <ul className="grid w-full gap-4 md:grid-cols-3">
@@ -147,9 +152,9 @@ export default function VerifyInstallPage() {
                 <div className="panel flex h-full flex-col gap-2.5 p-6">
                   {/* h2 for the same reason as the gate cards on /verification: this page's
                       opening SectionHeader is the document h1, so h3 here skipped a level. */}
-                  <h2 className="font-mono text-[0.8125rem] text-px-faint">{check.title}</h2>
-                  <p className="text-base font-semibold text-white">{check.question}</p>
-                  <p className="text-[1rem] leading-[1.65] text-px-muted">{check.body}</p>
+                  <h2 className="font-mono text-meta text-px-faint">{check.title}</h2>
+                  <p className="text-body font-semibold text-white">{check.question}</p>
+                  <p className="text-body text-px-muted">{check.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -169,9 +174,9 @@ export default function VerifyInstallPage() {
             {flow.map((item, index) => (
               <Reveal as="li" key={item.step} delay={index * 80}>
                 <div className="panel flex h-full flex-col gap-2.5 p-6">
-                  <span className="font-mono text-[0.8125rem] text-px-cyan">{item.step}</span>
-                  <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                  <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+                  <span className="font-mono text-meta text-px-cyan">{item.step}</span>
+                  <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+                  <p className="text-body text-px-muted">{item.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -189,22 +194,22 @@ export default function VerifyInstallPage() {
 
           <div className="flex w-full max-w-3xl flex-col gap-6">
             <div className="panel flex flex-col gap-2.5 p-6">
-              <h3 className="text-base font-semibold text-white">A Sui Move package</h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">
+              <h3 className="text-subhead font-semibold text-white">A Sui Move package</h3>
+              <p className="text-body text-px-muted">
                 A directory in your repository holding a Move.toml that sui move build and sui
-                move test can run in. One package per repository is what the App measures today.
+                move test can run in. The App measures one package per repository.
               </p>
             </div>
 
             <div className="panel flex flex-col gap-2.5 p-6">
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-subhead font-semibold text-white">
                 .protocolx-verify.json at the repository root
               </h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">
+              <p className="text-body text-px-muted">
                 One required key: package, the path from the repository root to the directory
                 holding your Move.toml. The runner refuses a config whose package is not a
-                non-empty string rather than guessing — a guess that happened to work would be a
-                verdict about the wrong directory.
+                non-empty string. It does not guess, because a lucky guess is a verdict about the
+                wrong directory.
               </p>
             </div>
 
@@ -215,22 +220,22 @@ export default function VerifyInstallPage() {
             />
 
             <div className="panel flex flex-col gap-2.5 p-6">
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-subhead font-semibold text-white">
                 Two optional files, each turning on one more check
               </h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">
+              <p className="text-body text-px-muted">
                 A file named ci-expected-digest beside your Move.toml, holding the hex digest your
                 deployed package builds to, turns PVS · digest from neutral into a live
                 deployed-drift tripwire. An executable scripts/check-framework-pin.sh inside the
-                package does the same for PVS · pin. Neither is required, and neither is invented
-                for you: a digest recorded by us would be a digest nobody checked.
+                package does the same for PVS · pin. Neither is required, and neither is written
+                for you.
               </p>
             </div>
 
-            <p className="text-[0.9375rem] leading-[1.6] text-px-faint">
-              With no .protocolx-verify.json at all, the App still answers: all five checks
-              complete neutral carrying setup instructions. A repository that has not opted in
-              gets an explanation, never a red cross.
+            <p className="text-meta text-px-faint">
+              With no .protocolx-verify.json at all, all five checks complete neutral and carry
+              setup instructions. A repository that has not opted in gets an explanation, never a
+              red cross.
             </p>
           </div>
         </div>
@@ -240,23 +245,21 @@ export default function VerifyInstallPage() {
         <div className="flex flex-col items-center gap-10">
           <SectionHeader
             eyebrow="What it costs"
-            title="The measurement has a number. The App does not have one yet."
-            lead="Two things are being sold here and only one of them is priced, so this page prices one of them."
+            title="Running it yourself is free. The two hosted things have numbers."
+            lead="Three products, one price list. The Action costs nothing to run in your own CI. The First Report and the hosted App are priced, and both figures are below."
           />
 
           <div className="panel w-full max-w-prose p-6">
-            <p className="text-[1rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               {/* Deliberately word-for-word with /verification. Two pages that paraphrase the
                   same price eventually quote two different ones. */}
               <span className="font-semibold text-white">From $1,000.</span> That is the First
               Report: one Move package, all five PVS gates, returned as an evidence bundle whose
               digest you can re-derive without us, paid in USDC on Sui. Turnaround is agreed in
-              writing when you order; none has been delivered yet. It is a measurement and not an
-              engagement — public repositories only, no remediation, and no claim of independence.
-              Sprints sit above it, scoped to the codebase and quoted flat, in writing, before work
-              begins.
+              writing when you order; none has been delivered yet. It is a measurement, not an
+              engagement: public repositories only, no remediation, no claim of independence.
             </p>
-            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+            <p className="mt-4 text-body text-px-muted">
               <span className="font-semibold text-white">The App is $249 per repository per
               month</span>, or $2,490 a year. Every pull request gets the five gates and its own
               evidence bundle, the digest gate included — the one that reads the chain. One public
@@ -268,7 +271,7 @@ export default function VerifyInstallPage() {
                 thing it sells. The first three repositories keep it, and "for as long as it runs"
                 is a commitment, not a promotion — it does not expire and there is no review date.
                 If this offer is ever withdrawn, it is withdrawn for NEW repositories only. */}
-            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+            <p className="mt-4 text-body text-px-muted">
               <span className="font-semibold text-white">The first three repositories are $149,
               and keep that price for as long as the app runs on them.</span> That is the figure
               this page carried before the list price was set, and anyone who read it then is
@@ -281,19 +284,25 @@ export default function VerifyInstallPage() {
                 concludes we hid it; a buyer told it up front concludes we are the kind of vendor
                 that says the inconvenient thing. We sell verifiability, so it is the only
                 position available to us. */}
-            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              <span className="font-semibold text-white">The engine is source-available and you
-              may run it in your own CI at no charge.</span> The licence grants that in writing,
-              for your own organisation, with no separate agreement. What the subscription buys is
-              the hosted App: the runs, the check runs on your pull requests, the retained
-              evidence bundles, and the digest gate that reads the chain — none of which you have
-              to stand up or keep running yourself.
+            <p className="mt-4 text-body text-px-muted">
+              <span className="font-semibold text-white">Running the Action yourself is free, on
+              public and private repositories alike.</span> The licence grants production use in
+              your own CI against your own code, with nothing to sign and nothing metered. It is
+              not a trial and it does not expire. The subscription buys the hosted App: the runs,
+              the check runs, the retained bundles and the digest gate that reads the chain.
             </p>
-            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              Self-serve billing is not open yet, so early access is arranged by email and costs
-              nothing until it is. Nothing here commits you to a subscription.
+            <p className="mt-4 text-body text-px-muted">
+              The hosted App is not publicly listed yet, so that install is arranged by email and
+              self-serve billing is not open. Running the Action needs none of that.
             </p>
           </div>
+
+          {/* The licence paragraph above says the engine may be run in your own CI. A reader who
+              is told that and given no address has been told to take our word for it, so the
+              repository carrying the composite Action and its gate scripts is linked here. */}
+          <Button href={VERIFY_REPO_URL} variant="secondary" className="px-5">
+            The Action on GitHub
+          </Button>
 
           {/* Two controls, and they are deliberately not the same control.
               The email is the one that gets a repository installed: early access means a person
@@ -304,13 +313,13 @@ export default function VerifyInstallPage() {
               one promise this site makes to every address it holds. Naming which control does
               which costs two sentences and keeps both honest. */}
           <div className="w-full max-w-prose">
-            <h3 className="text-base font-semibold text-white">
-              Tell us your repository and we will install it with you
+            <h3 className="text-subhead font-semibold text-white">
+              Want the hosted App instead? Name the repository
             </h3>
-            <p className="mt-2 text-[1rem] leading-[1.65] text-px-muted">
-              One email is the whole process while the App is in early access: send the repository
-              name and we reply with what the install needs from your side, then the two of us do
-              step 01 together.
+            <p className="mt-2 text-body text-px-muted">
+              Send the repository name and Northlatch Labs replies with what the install needs from
+              your side. The Action needs no email at all: it is published and you can start with
+              it today.
             </p>
             {/* MUST be hello@projectxprotocol.dev: it is the published address for verification
                 enquiries and it reaches a monitored inbox — verified.
@@ -329,30 +338,27 @@ export default function VerifyInstallPage() {
           </div>
 
           <div className="w-full max-w-prose">
-            <h3 className="text-base font-semibold text-white">
+            <h3 className="text-subhead font-semibold text-white">
               Not ready to name a repository
             </h3>
-            <p className="mb-3 mt-2 text-[0.9375rem] leading-[1.6] text-px-muted">
-              This field is the announcements list and only that: it tells you the day the App
-              opens for self-serve installation, and it is never used to start a conversation you
-              did not ask for.
+            <p className="mb-3 mt-2 text-meta text-px-muted">
+              This field is the announcements list and only that. It tells you the day the hosted
+              App opens for self-serve installation, and nothing else.
             </p>
             <NotifySignup source="install" cta="Tell me when it opens" />
           </div>
 
           <div className="panel w-full max-w-prose p-6">
-            <p className="text-[1rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               <span className="font-semibold text-white">The independence clause, in full:</span>{' '}
-              where we verify our own contracts, that is an internal review by the party that
-              wrote the code — evidence, not an audit; no claim of independence is made, and none
-              should be inferred. Where we verify yours, we are still not your auditors: we are
-              the measured layer below the audit, and a well-verified codebase is the cheapest
-              audit you will ever buy.
+              where Northlatch Labs verifies its own contracts, that is an internal review by the
+              party that wrote the code — evidence, not an audit, and no claim of independence is
+              made. Where it verifies yours, it is still not your auditor. This is the measured
+              layer below the audit.
             </p>
-            <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
-              What the App produces is measured evidence — verdicts, survivor counts, an evidence
-              bundle whose digest reproduces — and nothing on this page should be read as an audit
-              opinion, because none is offered.
+            <p className="mt-4 text-body text-px-muted">
+              What the App produces is measured evidence: verdicts, survivor counts, and an
+              evidence bundle whose digest reproduces. No audit opinion is offered.
             </p>
           </div>
         </div>

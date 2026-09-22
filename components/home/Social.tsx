@@ -50,22 +50,24 @@ export function Social() {
             validator, the staking yield goes to them, and the deposit stays yours — withdrawable
             in full, whenever you like.
           </p>
-          <p className="text-sm text-px-muted">
-            That is not a policy the platform promises to honour; it is what the contract permits.
-            No function exists by which the platform or the creator can touch a supporter&rsquo;s
-            principal. Creators who need real revenue sell memberships and paid posts — those
+          <p className="text-meta text-px-muted">
+            That is what the contract permits, not a policy the platform promises to honour: the
+            withdrawal path answers to the supporter&rsquo;s own address, and to that address
+            alone. Creators who need real revenue sell memberships and paid posts — those
             settle on chain too, and what a creator is owed is held by a contract rather than by
             the platform.
           </p>
           <div className="mt-2 flex flex-wrap gap-2.5">
-            <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-              Support a creator
-            </Button>
+            {SOCIAL_URL && (
+              <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
+                Support a creator
+              </Button>
+            )}
             <Button href="/social" variant="ghost">
               How it works
             </Button>
           </div>
-          <p className="text-xs text-px-muted">
+          <p className="text-meta text-px-muted">
             Weir is open — a Google account or a wallet is all it takes to get in.
           </p>
         </div>
@@ -78,14 +80,14 @@ export function Social() {
                 key={s.step}
                 className="flex items-baseline gap-4 border-b border-white/[0.08] py-4"
               >
-                <span className="w-16 shrink-0 font-mono text-sm font-semibold uppercase tracking-wide text-px-cyan">
+                <span className="w-16 shrink-0 font-mono text-meta font-semibold uppercase tracking-wide text-px-cyan">
                   {s.step}
                 </span>
-                <span className="text-[0.9375rem] leading-[1.6] text-px-muted">{s.detail}</span>
+                <span className="text-meta text-px-muted">{s.detail}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-px-faint">
+          <p className="mt-4 text-meta text-px-faint">
             The entire price of supporting someone is the yield you would have earned staking that
             SUI yourself. Nothing leaves your wallet for good.
           </p>

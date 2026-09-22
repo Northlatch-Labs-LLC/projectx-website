@@ -67,7 +67,7 @@ export default async function CtfPage() {
             <Warning className="mt-0.5 h-6 w-6 shrink-0 text-px-gold" />
             <div className="flex w-full flex-col gap-6">
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-semibold text-white">Read the scope first</h2>
+                <h2 className="text-title font-semibold text-white">Read the scope first</h2>
                 <p className="body-copy">
                   The range is a retired v1.0 deployment, taken out of service when v1.0.1
                   shipped. Its balances were migrated at that point, so no depositor funds are
@@ -80,7 +80,7 @@ export default async function CtfPage() {
                   <span className="label text-px-prize">In scope</span>
                   <ul className="flex flex-col gap-2.5">
                     {SCOPE.inScope.map((item) => (
-                      <li key={item} className="flex gap-2.5 text-[1rem] leading-[1.65] text-px-muted">
+                      <li key={item} className="flex gap-2.5 text-body text-px-muted">
                         <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-px-prize" />
                         {item}
                       </li>
@@ -92,7 +92,7 @@ export default async function CtfPage() {
                   <span className="label text-px-danger">Out of scope</span>
                   <ul className="flex flex-col gap-2.5">
                     {SCOPE.outOfScope.map((item) => (
-                      <li key={item} className="flex gap-2.5 text-[1rem] leading-[1.65] text-px-muted">
+                      <li key={item} className="flex gap-2.5 text-body text-px-muted">
                         <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-px-danger" />
                         {item}
                       </li>
@@ -103,7 +103,7 @@ export default async function CtfPage() {
 
               <div className="flex flex-col gap-3 rounded-2xl border border-px-danger/25 bg-px-danger/[0.04] p-5">
                 <span className="label text-px-danger">Never a target</span>
-                <p className="text-[1rem] leading-[1.65] text-px-muted">
+                <p className="text-body text-px-muted">
                   {STATS.live
                     ? 'The live v1.0.1 pool holds real deposits.'
                     : `The live v1.0.1 pool is out of scope. It holds no deposits today (read ${STATS.capturedOn}) and a small prize balance.`}{' '}
@@ -128,12 +128,12 @@ export default async function CtfPage() {
         <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
           <Card>
             <span className="label">The range</span>
-            <h3 className="mt-3 text-lg font-semibold text-white">{TARGET.label}</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">{TARGET.label}</h3>
+            <p className="mt-3 text-body text-px-muted">
               A real deployment on {TARGET.network}: real gas, real shared objects and real
-              failure modes — everything a local sandbox quietly gets wrong. Drained and
-              migrated when v1.0.1 shipped, then left standing so the code that made these
-              mistakes can still be run against.
+              failure modes, which a local sandbox gets wrong. Drained and migrated when v1.0.1
+              shipped, then left standing so the code that made these mistakes can still be run
+              against.
             </p>
 
             {configured ? (
@@ -143,10 +143,10 @@ export default async function CtfPage() {
               </div>
             ) : (
               <div className="mt-5 rounded-2xl border border-dashed border-px-gold/30 bg-px-gold/[0.04] p-4">
-                <p className="text-[1rem] leading-[1.65] text-px-muted">
+                <p className="text-body text-px-muted">
                   <span className="font-semibold text-px-gold">Being finalised.</span> The
-                  retired deployment&rsquo;s identifiers are not published yet. They will be
-                  listed here, with links to the explorer, once they are.
+                  retired deployment&rsquo;s identifiers are not published. They will be listed
+                  here with explorer links.
                 </p>
               </div>
             )}
@@ -154,7 +154,7 @@ export default async function CtfPage() {
 
           <Card>
             <span className="label">House rules</span>
-            <ol className="mt-4 flex list-decimal flex-col gap-2.5 pl-5 text-[1rem] leading-[1.65] text-px-muted">
+            <ol className="mt-4 flex list-decimal flex-col gap-2.5 pl-5 text-body text-px-muted">
               <li>Use your own wallet and your own gas. Nothing here is sponsored.</li>
               <li>
                 A flag is a transaction digest: the state you made true, and the call that
@@ -183,7 +183,7 @@ export default async function CtfPage() {
         <SectionHeader
           eyebrow="Know the target"
           title="What the contract was trying to do"
-          lead="Every finding on the board is a way the v1.0 package failed at something specific. Here is what it was attempting, in four moves — because an exploit you cannot explain is a transaction you got lucky with."
+          lead="Every finding on the board is a way the v1.0 package failed at something specific. Here is what it was attempting, in four moves."
           proof="The mechanism below is v1.0.1's, the fixed version. v1.0 attempted the same four moves and got three of the eight things on this board wrong while doing it."
         />
 
@@ -192,49 +192,46 @@ export default async function CtfPage() {
             {
               step: '1 · Take',
               title: 'Principal in, receipt out',
-              body: 'A deposit pays SUI into a shared pool object and receives a receipt — a Move object with key and no store, so no external transaction can transfer, sell, lend or wrap it. The principal total has exactly two writers, deposit and withdraw, and no function taking the admin capability can reach any of it. Several challenges on this board are attempts to find a third writer.',
+              body: 'A deposit pays SUI into a shared pool object and receives a receipt: a Move object with key and no store, so nothing can transfer or wrap it. The principal total has exactly two writers, deposit and withdraw, and no admin function reaches it.',
             },
             {
               step: '2 · Stake',
               title: 'A ladder, so a harvest is not a liquidation',
-              body: 'Sui only realises staking rewards when a stake is withdrawn, so the pool stakes in tranches of staggered age and rotates one at a time. A liquidity buffer stays unstaked so an ordinary withdrawal never disturbs the ladder, and a larger one pulls from the ladder head regardless of maturity. The rule is that leaving outranks earning — look for the path where it does not.',
+              body: 'Sui only realises staking rewards when a stake is withdrawn, so the pool stakes in tranches of staggered age and rotates one at a time. A liquidity buffer keeps ordinary withdrawals off the ladder; a larger one pulls from the ladder head. Leaving outranks earning.',
             },
             {
               step: '3 · Draw',
               title: 'One winner, weighted by stake',
-              body: 'Each epoch selects one depositor with weight proportional to share, using Sui native randomness inside a non-public entry function so the value cannot be read and acted on in the same transaction. Ineligible slots are resampled rather than skipped. Eligibility begins two epochs after a deposit — which is precisely what "The late ticket" is about.',
+              body: 'Each epoch selects one depositor with weight proportional to share, using Sui native randomness inside a non-public entry function, so the value cannot be read and acted on in the same transaction. Ineligible slots are resampled. Eligibility begins two epochs after a deposit.',
             },
             {
               step: '4 · Settle',
               title: 'A price checked before a swap is trusted',
-              body: 'The prize is converted to USDC through a DEX pool, floored by an oracle reading that must pass a positive mean, a freshness window and a dispersion bound. The minimum output is pinned into a ticket object Move cannot drop, copy or store, so the transaction cannot complete unless the settlement consumes it. "The settler\u2019s spread" and "Zero means zero" both live in this step.',
+              body: 'The prize is converted to USDC through a DEX pool, floored by an oracle reading with a positive mean, a freshness window and a dispersion bound. The minimum output is pinned into a ticket object Move cannot drop or copy, so the transaction cannot complete unless the settlement consumes it.',
             },
           ].map((item) => (
             <li key={item.step} className="panel flex flex-col gap-3 p-6">
-              <p className="font-mono text-sm font-semibold uppercase tracking-wide text-px-cyan">
+              <p className="font-mono text-meta font-semibold uppercase tracking-wide text-px-cyan">
                 {item.step}
               </p>
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="text-body text-px-muted">{item.body}</p>
             </li>
           ))}
         </ol>
 
         <div className="mt-6 grid gap-5 lg:grid-cols-2">
           <Card>
-            <h3 className="text-base font-semibold text-white">v1.0 and v1.0.1</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-              v1.0 is the retired in-situ deployment this board runs against — drained and migrated
-              when v1.0.1 shipped, and left standing so the code that made these mistakes can still
-              be run. v1.0.1 is the live pool, and it is out of scope on every challenge. Both are
-              the same product at two points in its life, which is the only reason a range like this
-              can be honest: the fixes are published, so the spoiler under each card is checkable
-              rather than a claim.
+            <h3 className="text-subhead font-semibold text-white">v1.0 and v1.0.1</h3>
+            <p className="mt-3 text-body text-px-muted">
+              v1.0 is the retired deployment this board runs against, drained and migrated when
+              v1.0.1 shipped. v1.0.1 is the live pool and is out of scope on every challenge. The
+              fixes are published, so the spoiler under each card is checkable.
             </p>
           </Card>
           <Card>
-            <h3 className="text-base font-semibold text-white">Read before you send</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">Read before you send</h3>
+            <p className="mt-3 text-body text-px-muted">
               The full mechanism — every parameter, the four epoch phases, the settlement bounds and
               the six type-system properties the package relies on — is on{' '}
               <Link href="/protocol" className="text-px-accent underline underline-offset-4">
@@ -278,8 +275,8 @@ export default async function CtfPage() {
             return (
               <div key={difficulty} className="flex flex-col gap-5">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <h3 className="font-display text-lg font-semibold text-white">{difficulty}</h3>
-                  <span className="text-sm text-px-faint">
+                  <h3 className="font-display text-subhead font-semibold text-white">{difficulty}</h3>
+                  <span className="text-meta text-px-faint">
                     {group.length} challenge{group.length === 1 ? '' : 's'} ·{' '}
                     {group.reduce((s, c) => s + c.points, 0)} points
                   </span>
@@ -296,27 +293,27 @@ export default async function CtfPage() {
                           <Badge tone={TONE[challenge.difficulty].badge}>
                             {challenge.points} pts
                           </Badge>
-                          <span className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[0.8125rem] text-px-muted">
+                          <span className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-meta text-px-muted">
                             {challenge.finding}
                           </span>
-                          <span className="text-xs text-px-faint">{challenge.category}</span>
+                          <span className="text-meta text-px-faint">{challenge.category}</span>
                         </div>
 
-                        <h4 className="text-xl font-semibold text-white">{challenge.title}</h4>
+                        <h4 className="text-heading font-semibold text-white">{challenge.title}</h4>
 
-                        <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+                        <p className="text-body text-px-muted">
                           {challenge.premise}
                         </p>
 
                         <div className="rounded-2xl border border-white/[0.06] bg-black/25 p-4">
                           <span className="label">Capture</span>
-                          <p className="mt-2 text-sm leading-relaxed text-px-text">
+                          <p className="mt-2 text-meta text-px-text">
                             {challenge.objective}
                           </p>
                         </div>
 
                         <details className="group mt-auto [&_summary::-webkit-details-marker]:hidden">
-                          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-px-accent">
+                          <summary className="flex cursor-pointer list-none items-center gap-2 text-meta font-medium text-px-accent">
                             <span className="grid h-5 w-5 place-items-center rounded-full border border-px-accent/30 transition group-open:rotate-45">
                               <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
                                 <path d="M12 5v14M5 12h14" />
@@ -343,7 +340,7 @@ export default async function CtfPage() {
           <SectionHeader
             eyebrow="For agents"
             title="Machine-readable, on purpose"
-            lead="Coding agents are going to audit protocols whether or not we make it convenient. This range is built so they can — same rules, same scope, same chain."
+            lead="This range is built for coding agents to run: same rules, same scope, same chain."
             proof="The manifest is stable JSON: challenge ids, categories, points, objectives, the target identifiers and the scope boundary, so a harness can enumerate the board without scraping this page."
           />
 
@@ -353,12 +350,12 @@ export default async function CtfPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
                   <Code className="h-5 w-5" />
                 </span>
-                <h3 className="text-base font-semibold text-white">The manifest</h3>
+                <h3 className="text-subhead font-semibold text-white">The manifest</h3>
               </div>
-              <code className="mt-4 block overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[0.9375rem] text-px-cyan">
+              <code className="mt-4 block overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-meta text-px-cyan">
                 GET /ctf/manifest.json
               </code>
-              <p className="mt-4 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-4 text-body text-px-muted">
                 Includes the scope boundary as data, not prose — an agent that reads{' '}
                 <code className="rounded bg-black/50 px-1.5 py-0.5 font-mono text-[0.85em] text-px-accent-200">
                   outOfScope
@@ -377,12 +374,11 @@ export default async function CtfPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-prize/20 to-px-prize/5 text-px-prize">
                   <Sparkle className="h-5 w-5" />
                 </span>
-                <h3 className="text-base font-semibold text-white">If you are running an agent</h3>
+                <h3 className="text-subhead font-semibold text-white">If you are running an agent</h3>
               </div>
-              <ul className="mt-4 flex flex-col gap-2.5 text-[1rem] leading-[1.65] text-px-muted">
+              <ul className="mt-4 flex flex-col gap-2.5 text-body text-px-muted">
                 <li>
-                  Dry-run everything first. Sui simulates for free and it catches most of what
-                  a blind send would cost you.
+                  Dry-run everything first. Sui simulates for free, and a blind send does not.
                 </li>
                 <li>
                   Bisect with A/B transactions that differ in exactly one way. A wrong theory

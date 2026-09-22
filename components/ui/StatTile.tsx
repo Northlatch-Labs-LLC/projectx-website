@@ -40,9 +40,9 @@ export function StatTile({
         ) : (
           <span className={`stat-value ${valueColor}`}>{value}</span>
         )}
-        {unit ? <span className="text-[0.9375rem] font-medium text-px-faint">{unit}</span> : null}
+        {unit ? <span className="text-meta font-medium text-px-faint">{unit}</span> : null}
       </span>
-      {note ? <span className="text-[0.875rem] leading-[1.6] text-px-faint">{note}</span> : null}
+      {note ? <span className="text-meta text-px-faint">{note}</span> : null}
     </div>
   );
 }

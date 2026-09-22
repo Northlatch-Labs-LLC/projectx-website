@@ -87,7 +87,7 @@ export default function ProtocolPage() {
       <PageHeader
         eyebrow="Prize Vault · the mechanism"
         title="How the prize vault works, in full"
-        lead={`Principal is delegated to a validator and returned 1:1. The yield that principal earns is pooled, and each epoch the whole pot goes to one depositor instead of a fraction of it to everyone. That is the design; in Alpha the harvester has not yet covered a prize, and sponsors funded every draw settled so far.`}
+        lead={`Principal is delegated to a validator and returned 1:1. The yield that principal earns is pooled, and each epoch the whole pot goes to one depositor instead of a fraction of it to everyone. That is the design; the harvester has not yet covered a prize, and sponsors funded every draw settled so far.`}
         proof="This page is a record of a deployed contract, not an offer. It is also the technical appendix to the capture-the-flag range, which runs against the retired v1.0 of the package described here."
         art={<ProtocolArt className="w-full" />}
       >
@@ -103,8 +103,8 @@ export default function ProtocolPage() {
           <div className="flex gap-4">
             <Warning className="mt-0.5 h-6 w-6 shrink-0 text-px-gold" />
             <div className="flex flex-col gap-3">
-              <h2 className="text-lg font-semibold text-white">Where this stands today</h2>
-              <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+              <h2 className="text-subhead font-semibold text-white">Where this stands today</h2>
+              <p className="text-body text-px-muted">
                 The vault&rsquo;s contract is live on Sui mainnet and everything on this page
                 describes it accurately. Its interface was retired on 25 August 2026, so there is
                 nothing here to deposit into today. The package, the pool, the treasury and every
@@ -114,7 +114,7 @@ export default function ProtocolPage() {
                 </Link>
                 , and can be read on a block explorer without our permission or our participation.
               </p>
-              <p className="text-[0.95rem] leading-relaxed text-px-text">
+              <p className="text-body text-px-text">
                 Where the vault is still an active subject on this hub is{' '}
                 <Link href="/ctf" className="text-px-accent underline underline-offset-4">
                   the capture-the-flag range
@@ -171,10 +171,10 @@ export default function ProtocolPage() {
         </div>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-subhead font-semibold text-white">
             What happens if a phase cannot complete
           </h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <p className="mt-3 text-body text-px-muted">
             An epoch that closes with no yield, no depositors or no draw weight rolls over
             rather than aborting — the prize carries into the next epoch, and the pool stays
             in a phase the harvest can run from. If the conversion cannot be made within the
@@ -194,8 +194,8 @@ export default function ProtocolPage() {
           <LadderDiagram />
           <div className="flex flex-col gap-5">
             <Card>
-              <h3 className="text-base font-semibold text-white">Withdrawals come first</h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              <h3 className="text-subhead font-semibold text-white">Withdrawals come first</h3>
+              <p className="mt-3 text-body text-px-muted">
                 A {formatBps(config.liquidityBufferBps)} buffer stays liquid, so an ordinary
                 withdrawal never has to disturb the ladder. A withdrawal larger than the
                 buffer pulls from the ladder head immediately and regardless of maturity — a
@@ -204,10 +204,10 @@ export default function ProtocolPage() {
               </p>
             </Card>
             <Card>
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-subhead font-semibold text-white">
                 Yield is real, and it takes time
               </h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-3 text-body text-px-muted">
                 A tranche must sit for {formatDuration(config.maturityPeriodMs)} before it is
                 rotated and its rewards realised. On a young pool, or one being actively tested with
                 withdrawals, harvests can legitimately return zero for a while. The protocol
@@ -229,8 +229,8 @@ export default function ProtocolPage() {
           <DrawDiagram />
           <div className="flex flex-col gap-5">
             <Card>
-              <h3 className="text-base font-semibold text-white">Losing costs nothing</h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              <h3 className="text-subhead font-semibold text-white">Losing costs nothing</h3>
+              <p className="mt-3 text-body text-px-muted">
                 A depositor who is not drawn holds exactly what they held before: the same
                 principal, withdrawable on demand, entered in the next epoch. The only thing
                 forgone is the staking yield that deposit would have earned on its own — which is
@@ -238,10 +238,10 @@ export default function ProtocolPage() {
               </p>
             </Card>
             <Card>
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-subhead font-semibold text-white">
                 The receipt cannot be taken from its holder
               </h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-3 text-body text-px-muted">
                 A deposit receipt is a Move object with{' '}
                 <code className="rounded bg-black/50 px-1.5 py-0.5 font-mono text-[0.85em] text-px-accent-200">
                   key
@@ -268,8 +268,8 @@ export default function ProtocolPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           <Card>
             <span className="label">Step one</span>
-            <h3 className="mt-3 text-base font-semibold text-white">Read the oracle</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">Read the oracle</h3>
+            <p className="mt-3 text-body text-px-muted">
               A Switchboard on-demand aggregator is pulled and validated: positive mean,
               sample age inside the freshness window, dispersion within the permitted band.
               A reading that fails any check stops settlement.
@@ -277,8 +277,8 @@ export default function ProtocolPage() {
           </Card>
           <Card>
             <span className="label">Step two</span>
-            <h3 className="mt-3 text-base font-semibold text-white">Bound the swap</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">Bound the swap</h3>
+            <p className="mt-3 text-body text-px-muted">
               The oracle price sets fair value; the contract will not accept an execution
               worse than {formatBps(config.maxSlippageBps)} from it. A DEX quote outside that
               bound reverts the settlement rather than selling the prize badly.
@@ -286,8 +286,8 @@ export default function ProtocolPage() {
           </Card>
           <Card>
             <span className="label">Step three</span>
-            <h3 className="mt-3 text-base font-semibold text-white">Pay the winner</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">Pay the winner</h3>
+            <p className="mt-3 text-body text-px-muted">
               The converted USDC is paid to the drawn depositor, less the{' '}
               {formatBps(config.spreadBps)} conversion spread, and the settlement is emitted
               as an on-chain event with the realised rate and slippage.
@@ -296,8 +296,8 @@ export default function ProtocolPage() {
         </div>
 
         <Card className="mt-6 border-px-gold/30">
-          <h3 className="text-base font-semibold text-white">The honest caveat</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <h3 className="text-subhead font-semibold text-white">The honest caveat</h3>
+          <p className="mt-3 text-body text-px-muted">
             Settlement depends on two external systems — one price feed and one DEX pool.
             There is one price feed. A second is not built. The failure mode is a delayed
             prize, not a lost deposit: if either system is unavailable, the epoch does not
@@ -313,13 +313,13 @@ export default function ProtocolPage() {
           eyebrow="Defences"
           title="Six properties, each enforced by structure rather than policy"
           lead="A protective measure that depends on an operator behaving correctly is a promise. These are not that — each one is a consequence of how the Move package is typed, and the compiler is what enforces it."
-          proof="Relocated from the security page on 30 August 2026, unchanged. They are properties of this contract rather than of the company that wrote it, and they belong beside the mechanism they bound."
+          proof="They are properties of this contract rather than of the company that wrote it, which is why they are stated beside the mechanism they bound."
         />
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
           {defences.map((item) => (
             <li key={item.title} className="panel flex flex-col gap-3 p-6">
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="text-body text-px-muted">{item.body}</p>
             </li>
           ))}
         </ul>
@@ -336,16 +336,16 @@ export default function ProtocolPage() {
             <li key={item.title} className="panel flex gap-4 border-px-gold/20 p-6">
               <Warning className="mt-0.5 h-5 w-5 shrink-0 text-px-gold" />
               <div className="flex flex-col gap-2">
-                <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+                <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+                <p className="text-body text-px-muted">{item.body}</p>
               </div>
             </li>
           ))}
         </ul>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">Monitoring what silence hides</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <h3 className="text-subhead font-semibold text-white">Monitoring what silence hides</h3>
+          <p className="mt-3 text-body text-px-muted">
             A protocol can fail by doing nothing, and a dashboard showing green is not evidence
             that anything happened. The pool counts consecutive zero-yield harvests and the Sui
             epochs elapsed since yield was last realised, and reports the state as anomalous once

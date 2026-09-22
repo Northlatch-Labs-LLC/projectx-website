@@ -67,12 +67,16 @@ export function Organisers() {
               complete. A button reading "Start a competition" has to land somewhere that accepts
               a start.
             */}
-            <Button href={`${RAFFLE_URL}/organiser/apply`} variant="primary" showExternalIcon={false}>
-              Start a competition
-            </Button>
-            <Button href={`${RAFFLE_URL}/rules`} variant="secondary" showExternalIcon={false}>
-              Read the draw rules
-            </Button>
+            {RAFFLE_URL && (
+              <>
+                <Button href={`${RAFFLE_URL}/organiser/apply`} variant="primary" showExternalIcon={false}>
+                  Start a competition
+                </Button>
+                <Button href={`${RAFFLE_URL}/rules`} variant="secondary" showExternalIcon={false}>
+                  Read the draw rules
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
@@ -82,7 +86,7 @@ export function Organisers() {
               key={g.k}
               className="grid grid-cols-[2rem_1fr] gap-4 border-b border-white/[0.08] py-5"
             >
-              <span className="font-mono text-xs text-px-accent">{g.k}</span>
+              <span className="font-mono text-meta text-px-accent">{g.k}</span>
               <span>
                 <b className="font-semibold text-white">{g.t}</b>{' '}
                 <span className="text-px-muted">{g.d}</span>

@@ -16,7 +16,7 @@ export function CtaBand() {
       <div className="mx-auto flex max-w-content flex-col items-center gap-7 px-5 py-24 text-center sm:px-8 md:py-28">
         <Signature width="short" className="mb-2" />
 
-        <h2 className="text-gradient-chrome max-w-2xl text-display">
+        <h2 className="text-gradient-chrome max-w-2xl text-title">
           Get the measurement.
           <br />
           <span className="text-gradient-accent">Then decide who to trust.</span>
@@ -39,15 +39,19 @@ export function CtaBand() {
           <Button href="/verification" variant="primary" className="px-7">
             See what it measures
           </Button>
-          <Button href={NAMES_URL} variant="secondary" showExternalIcon={false}>
-            Claim a .sui name
-            <ArrowUpRight className="h-4 w-4" />
-          </Button>
+          {NAMES_URL && (
+            <Button href={NAMES_URL} variant="secondary" showExternalIcon={false}>
+              Claim a .sui name
+              <ArrowUpRight className="h-4 w-4" />
+            </Button>
+          )}
           {/* /organiser/apply, not /organiser — the console refuses any wallet not on the
               platform allowlist. See the note in components/home/Organisers.tsx. */}
-          <Button href={`${RAFFLE_URL}/organiser/apply`} variant="secondary" showExternalIcon={false}>
-            Run a competition
-          </Button>
+          {RAFFLE_URL && (
+            <Button href={`${RAFFLE_URL}/organiser/apply`} variant="secondary" showExternalIcon={false}>
+              Run a competition
+            </Button>
+          )}
           {DAPP_URL && (
             <Button href={DAPP_URL} variant="secondary" showExternalIcon={false}>
               Open the vault

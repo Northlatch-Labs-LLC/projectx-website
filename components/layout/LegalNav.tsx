@@ -19,7 +19,7 @@ export function LegalNav({ current }: { current: string }) {
   return (
     <nav
       aria-label="Legal pages"
-      className="mx-auto mb-10 flex w-full max-w-prose flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/[0.07] pb-5 text-[0.875rem]"
+      className="mx-auto mb-10 flex w-full max-w-prose flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/[0.07] pb-5 text-meta"
     >
       {LEGAL_ROUTES.map((route) =>
         route.href === current ? (

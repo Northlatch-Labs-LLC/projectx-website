@@ -113,7 +113,7 @@ export function HeroStage({ className = '' }: { className?: string }) {
     >
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[62%] w-[62%] -translate-x-1/2 -translate-y-1/2
-                   animate-spin-slow rounded-full opacity-70 blur-2xl"
+ animate-spin-slow rounded-full opacity-70 blur-2xl"
         style={{
           background:
             'conic-gradient(from 0deg, rgba(77,162,255,0.28), rgba(63,216,245,0.16) 25%, rgba(139,107,255,0.26) 55%, rgba(61,220,151,0.14) 78%, rgba(77,162,255,0.28))',
@@ -122,7 +122,7 @@ export function HeroStage({ className = '' }: { className?: string }) {
 
       <div
         className="absolute left-1/2 top-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 transition-transform
-                   duration-700 ease-[var(--ease-expo)] sm:w-[62%] lg:w-[58%]"
+ duration-700 ease-[var(--ease-expo)] sm:w-[62%] lg:w-[58%]"
         style={{ transform: `translate3d(calc(-50% + ${pointer.x * 10}px), calc(-50% + ${pointer.y * 8}px), 0)` }}
       >
         {/* Keyframe, not JS state: the entrance must reach its visible frame without scripts. */}
@@ -135,7 +135,7 @@ export function HeroStage({ className = '' }: { className?: string }) {
         <div
           key={tag.text}
           className={`absolute transition-transform duration-700 ease-[var(--ease-expo)] ${
-            tag.wideOnly ? 'hidden sm:block' : ''
+ tag.wideOnly ? 'hidden sm:block' : ''
           }`}
           style={{
             ...tag.at,

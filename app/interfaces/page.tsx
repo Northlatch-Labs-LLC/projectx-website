@@ -75,7 +75,7 @@ export default function InterfacesPage() {
     {
       icon: <Sparkle className="h-5 w-5" />,
       title: 'No revenue share',
-      body: 'We take nothing from what you build. The protocol fee is the protocol fee.',
+      body: 'Everything your interface earns is yours to keep. The protocol fee is the protocol fee.',
     },
   ];
 
@@ -120,15 +120,15 @@ export default function InterfacesPage() {
                   Named Weir, not "ProjectX Social" — see SOCIAL_URL in lib/links.ts.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">Weir</h3>
+                  <h3 className="text-heading font-semibold text-white">Weir</h3>
                   <Badge tone="prize">Live</Badge>
                   <Badge tone="accent">Open</Badge>
                 </div>
-                <span className="text-xs text-px-faint">By ProjectX</span>
+                <span className="text-meta text-px-faint">By ProjectX</span>
               </div>
             </div>
 
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               Support a creator without spending anything: park SUI in their vault, the staking
               yield goes to them, and your deposit stays withdrawable in full — the contract
               permits nothing else. Memberships and paid posts settle on chain too.
@@ -139,7 +139,7 @@ export default function InterfacesPage() {
                 (tag) => (
                   <li
                     key={tag}
-                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
+                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted"
                   >
                     {tag}
                   </li>
@@ -147,7 +147,7 @@ export default function InterfacesPage() {
               )}
             </ul>
 
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               Live on Sui mainnet. Each creator has a vault on chain; what a creator is owed is
               held by a contract, not by the platform. Registration is open to anyone with a
               Google account or a wallet, so this link opens the platform directly. Explained in
@@ -158,15 +158,20 @@ export default function InterfacesPage() {
               .
             </p>
 
-            <a
-              href={SOCIAL_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary mt-auto w-fit px-5"
-            >
-              Create your account
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {/* The card describes a contract that is live; the button is the only part that
+                needs an address. Withheld when none is configured, on the same rule the vault
+                card below follows — never render a control against a guess. */}
+            {SOCIAL_URL && (
+              <a
+                href={SOCIAL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary mt-auto w-fit px-5"
+              >
+                Create your account
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
 
           <div className="panel panel-hover flex flex-col gap-4 p-7">
@@ -176,13 +181,13 @@ export default function InterfacesPage() {
               </span>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">ProjectX Vault</h3>
+                  <h3 className="text-heading font-semibold text-white">ProjectX Vault</h3>
                   {/* Two badges, same reasoning as Weir's: the contract is live and no
                       interface serves it. Dropping either half misleads. */}
                   <Badge tone="prize">Contract live</Badge>
                   <Badge tone="gold">No interface</Badge>
                 </div>
-                <span className="text-xs text-px-faint">By ProjectX</span>
+                <span className="text-meta text-px-faint">By ProjectX</span>
               </div>
             </div>
 
@@ -192,24 +197,24 @@ export default function InterfacesPage() {
               and must not describe an action a reader can take, because the conditional below
               withholds the button and there is no door behind it.
             */}
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               A prize pool on Sui mainnet: principal delegated to a validator and returned 1:1,
               with the staking yield it earns awarded to one depositor per epoch. The contract is
-              live and its interface was retired on 25 August 2026, so there is no door here today.
+              live and its interface was retired on 25 August 2026, so there is no door here.
             </p>
 
             <ul className="flex flex-wrap gap-2">
               {['Contract live', 'No interface', 'Mechanism published', 'CTF target'].map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
+                  className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted"
                 >
                   {tag}
                 </li>
               ))}
             </ul>
 
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               Documented in full on{' '}
               <Link href="/protocol" className="underline decoration-white/20 underline-offset-4 hover:text-px-muted">
                 /protocol
@@ -245,14 +250,14 @@ export default function InterfacesPage() {
               </span>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">ProjectX Draws</h3>
+                  <h3 className="text-heading font-semibold text-white">ProjectX Draws</h3>
                   <Badge tone="gold">Live</Badge>
                 </div>
-                <span className="text-xs text-px-faint">By ProjectX</span>
+                <span className="text-meta text-px-faint">By ProjectX</span>
               </div>
             </div>
 
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               Prize competitions whose draw runs on chain. The entrant list is sealed when sales
               close, and the winning number comes from Sui&rsquo;s own randomness — it does not
               exist until the draw transaction runs, so nobody can know it or steer it beforehand.
@@ -263,7 +268,7 @@ export default function InterfacesPage() {
                 (tag) => (
                   <li
                     key={tag}
-                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
+                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted"
                   >
                     {tag}
                   </li>
@@ -271,21 +276,23 @@ export default function InterfacesPage() {
               )}
             </ul>
 
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
-              Live on Sui mainnet; one proving draw has settled, and no competition is open today.
-              ProjectX provides the draw software — the promoter holds the prize and runs the
+            <p className="text-meta text-px-faint">
+              Live on Sui mainnet. One proving draw has settled and no competition is open.
+              ProjectX provides the draw software; the promoter holds the prize and runs the
               competition in their own name.
             </p>
 
-            <a
-              href={RAFFLE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary mt-auto w-fit px-5"
-            >
-              Open the draws
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {RAFFLE_URL && (
+              <a
+                href={RAFFLE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary mt-auto w-fit px-5"
+              >
+                Open the draws
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
 
           <div className="panel panel-hover flex flex-col gap-4 p-7">
@@ -301,18 +308,18 @@ export default function InterfacesPage() {
                   list, no invitation code.
                 */}
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl font-semibold text-white">ProjectX Names</h3>
+                  <h3 className="text-heading font-semibold text-white">ProjectX Names</h3>
                   <Badge tone="gold">Live</Badge>
                   <Badge tone="accent">Open</Badge>
                 </div>
-                <span className="text-xs text-px-faint">By ProjectX</span>
+                <span className="text-meta text-px-faint">By ProjectX</span>
               </div>
             </div>
 
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               Register a <code>.sui</code> name in one transaction. The name is issued by SuiNS
               itself, so it resolves in every wallet and explorer that supports Sui names, and it
-              arrives as an NFT in your own wallet &mdash; we never take custody of it.
+              arrives as an NFT in your own wallet, held by you from the moment it is issued.
             </p>
 
             <ul className="flex flex-wrap gap-2">
@@ -320,7 +327,7 @@ export default function InterfacesPage() {
                 (tag) => (
                   <li
                     key={tag}
-                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
+                    className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted"
                   >
                     {tag}
                   </li>
@@ -328,22 +335,23 @@ export default function InterfacesPage() {
               )}
             </ul>
 
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               Live on Sui mainnet. SuiNS&rsquo;s registration fee plus a ProjectX service fee for the
-              interface &mdash; registering directly at suins.io is always available and costs less.
-              The registrar moved into Weir, so this link opens the Names page directly; suins.io
-              is still the cheaper way to register a name today.
+              interface. Registering directly at suins.io costs less. The registrar moved into
+              Weir, so this link opens the Names page.
             </p>
 
-            <a
-              href={NAMES_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary mt-auto w-fit px-5"
-            >
-              Register a name
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {NAMES_URL && (
+              <a
+                href={NAMES_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary mt-auto w-fit px-5"
+              >
+                Register a name
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
 
           {LAUNCHER_URL && (
@@ -354,17 +362,17 @@ export default function InterfacesPage() {
                 </span>
                 <div className="flex flex-col gap-1">
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <h3 className="text-xl font-semibold text-white">Token Launcher</h3>
+                    <h3 className="text-heading font-semibold text-white">Token Launcher</h3>
                     <Badge tone="accent">Testnet</Badge>
                   </div>
-                  <span className="text-xs text-px-faint">By ProjectX</span>
+                  <span className="text-meta text-px-faint">By ProjectX</span>
                 </div>
               </div>
 
-              <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+              <p className="text-body text-px-muted">
                 Publish a fixed-supply Sui coin from your own wallet. The bytecode is built in
-                your browser from an open template — we never hold your token and never sign
-                anything. Supply and metadata are frozen at launch and cannot be changed after.
+                your browser from an open template, and your wallet is the only thing that signs.
+                Supply and metadata are frozen at launch and cannot be changed after.
               </p>
 
               <ul className="flex flex-wrap gap-2">
@@ -372,7 +380,7 @@ export default function InterfacesPage() {
                   (tag) => (
                     <li
                       key={tag}
-                      className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-px-muted"
+                      className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-meta text-px-muted"
                     >
                       {tag}
                     </li>
@@ -380,7 +388,7 @@ export default function InterfacesPage() {
                 )}
               </ul>
 
-              <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+              <p className="text-meta text-px-faint">
                 Live on Sui testnet. Not yet deployed to mainnet.
               </p>
 
@@ -400,15 +408,15 @@ export default function InterfacesPage() {
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-dashed border-white/[0.12] bg-white/[0.02] text-px-faint">
               <Code className="h-6 w-6" />
             </span>
-            <h3 className="text-xl font-semibold text-white">Your interface here</h3>
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <h3 className="text-heading font-semibold text-white">Your interface here</h3>
+            <p className="text-body text-px-muted">
               The pool is permissionless and the integration surface is complete. Ship an
               interface and tell us; we will list it here under your name. None has been built
               yet.
             </p>
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               The on-chain events and every deployed address are documented. The HTTP read API is
-              not served at present.
+              not served.
             </p>
             <Button href="/builders" variant="secondary" className="mt-auto px-5">
               Start building
@@ -421,7 +429,7 @@ export default function InterfacesPage() {
         <SectionHeader
           eyebrow="Why it matters"
           title="A protocol with one front door is a company"
-          lead="If the only way to reach your money is a website we operate, then our hosting bill is your withdrawal risk. More interfaces is not a growth tactic — it is the failure mode being removed."
+          lead="If the only way to reach your money is a website Northlatch Labs operates, its hosting bill is your withdrawal risk. More interfaces removes that failure mode."
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -430,21 +438,20 @@ export default function InterfacesPage() {
               <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-prize/20 to-px-prize/5 text-px-prize">
                 {item.icon}
               </span>
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="mt-2.5 text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="mt-2.5 text-body text-px-muted">{item.body}</p>
             </Card>
           ))}
         </div>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">
-            What happens if we disappear tomorrow
+          <h3 className="text-subhead font-semibold text-white">
+            If Northlatch Labs disappears tomorrow
           </h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <p className="mt-3 text-body text-px-muted">
             The pool keeps working. It is a shared object on Sui with public entry points, and
-            withdrawals have no dependency on our daemon, our API or this website. Anyone can
-            call the contract directly from a terminal — and the addresses to do it with are
-            published below and on the{' '}
+            withdrawals depend on no daemon, no API and no website. The addresses to call it
+            directly are published below and on the{' '}
             <Link href="/builders" className="text-px-accent underline underline-offset-4">
               builders page
             </Link>
@@ -462,8 +469,8 @@ export default function InterfacesPage() {
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_1fr]">
           <Card>
-            <h3 className="text-base font-semibold text-white">Start here</h3>
-            <ol className="mt-4 flex list-decimal flex-col gap-3 pl-5 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">Start here</h3>
+            <ol className="mt-4 flex list-decimal flex-col gap-3 pl-5 text-body text-px-muted">
               <li>
                 Read the{' '}
                 <Link href="/protocol" className="text-px-accent underline underline-offset-4">
@@ -484,8 +491,8 @@ export default function InterfacesPage() {
           </Card>
 
           <Card>
-            <h3 className="text-base font-semibold text-white">The two addresses that matter</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">The two addresses that matter</h3>
+            <p className="mt-3 text-body text-px-muted">
               Everything else is derivable from these, and all seven objects plus every other
               deployed package are on{' '}
               <Link href="/chain" className="text-px-accent underline underline-offset-4">

@@ -64,15 +64,21 @@ export const LAUNCHER_URL = process.env.NEXT_PUBLIC_LAUNCHER_URL ?? null;
 // The raffle is a separate origin for the same reason as the launcher: it connects a wallet and
 // requests signatures, which this site promises not to do.
 //
-// This one carries a default where the launcher deliberately does not, because the condition that
-// rule protects against does not hold — the host was verified serving 200 before this line was
-// written. The reasoning is the same in both places: never advertise a host that does not answer.
+// It carried `?? 'https://protocolx.io'` until this change, on the argument that the host had been
+// verified answering. That argument is about the VALUE; the defect is the SHAPE. A deployment
+// address written into source is a fixture that survives — it is right only for as long as nobody
+// moves the product, it ships in the client bundle of every environment that forgets the variable,
+// and it ships silently, on a page that renders perfectly. That is the paragraph at the top of this
+// file, and it applies here exactly as it applies to `DAPP_URL`.
 //
-// Moved to the apex on 25 August 2026, when the vault dashboard was retired and the draws took
-// `protocolx.io`. `raffle.protocolx.io` still 308s here, but a link that depends on a redirect is
-// advertising a host we have moved off — the same reasoning applied to the retired registrar
-// below. Pointed at the destination instead.
-export const RAFFLE_URL = process.env.NEXT_PUBLIC_RAFFLE_URL ?? 'https://protocolx.io';
+// So: nullable, fail-closed, required in production. Every consumer must render nothing rather than
+// a control pointing at a guess. Set `NEXT_PUBLIC_RAFFLE_URL` to the draws' origin, with no
+// trailing slash — `/organiser/apply` and `/rules` are appended to it.
+//
+// Whatever it is set to must be the destination, not a host that redirects to one: the draws moved
+// to the apex on 25 August 2026 and `raffle.protocolx.io` only 308s there. A link that depends on a
+// redirect advertises a host we have moved off.
+export const RAFFLE_URL = process.env.NEXT_PUBLIC_RAFFLE_URL ?? null;
 
 // The name registrar, on the same reasoning as the two above: it connects a wallet and requests a
 // signature, which this site promises not to do.
@@ -82,11 +88,14 @@ export const RAFFLE_URL = process.env.NEXT_PUBLIC_RAFFLE_URL ?? 'https://protoco
 // redirect is advertising a host we have retired, and that redirect has now gone. Pointed at the
 // destination instead.
 //
-// Carries a default on the same evidence standard as the raffle: weir.social/names was verified
-// answering on 22 August 2026, immediately before this was deployed — 307 to the waiting list while
-// the alpha is closed, which is the site's own front door and not a dead host. Never advertise a
-// host that does not answer.
-export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? 'https://weir.social/names';
+// Nullable and fail-closed for the same reason as the raffle above: a verified host is an argument
+// about the value, and what is wrong is a deployment address living in source. Required in
+// production — unset, the name search and the registrar's links do not render.
+//
+// This one is a full path rather than a bare origin. `NameSearch` appends `?name=` directly, so a
+// value with a trailing slash produces `/names/?name=`, which answers 308 before the page is
+// reached.
+export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? null;
 
 // The social platform — creator support over staking yield. A separate origin for the same reason
 // as every product above: it connects wallets and settles subscriptions on chain, which this site
@@ -96,10 +105,18 @@ export const NAMES_URL = process.env.NEXT_PUBLIC_NAMES_URL ?? 'https://weir.soci
 // been retired; it is not redirected, so a link left pointing at it would advertise a host that no
 // longer answers — precisely what the standard below forbids.
 //
-// Carries a default on the same evidence standard as the raffle and the registrar: weir.social was
-// verified serving 200 over TLS on 19 August 2026, immediately before this line was written, from
-// the same Vercel project that served the old host. Never advertise a host that does not answer.
-export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? 'https://weir.social';
+// Nullable and fail-closed, on the reasoning the raffle carries above. Required in production:
+// unset, every outbound control to the platform is withheld and the pages that describe it keep
+// their prose and lose their buttons.
+export const SOCIAL_URL = process.env.NEXT_PUBLIC_SOCIAL_URL ?? null;
+
+// The public source of ProtocolX Verify: the composite GitHub Action, the gate scripts it runs and
+// the licence that grants running them in your own CI. A constant rather than a literal in three
+// pages, for the reason every other origin here is one — a moved repository is then one edit.
+//
+// Not an environment variable: this is a public GitHub URL that is the same in every environment,
+// and a variable would let a deployment quietly point the word "source" at something else.
+export const VERIFY_REPO_URL = 'https://github.com/Northlatch-Labs-LLC/protocolx-verify';
 
 // RE-MEASURED 2026-08-30 (second pass), in a browser, at 1024px — the tightest
 // width at which this bar renders at all, since the pill is `hidden` below `lg`.
@@ -153,7 +170,9 @@ export const NAV_LINKS = [
   { href: '/chain', label: 'On chain' },
   // Internal on purpose; see the note above. /social links out to weir.social from the page.
   { href: '/social', label: 'Social' },
-  { href: RAFFLE_URL, label: 'Draws', external: true },
+  // Present only while `NEXT_PUBLIC_RAFFLE_URL` is set, for the reason the Vault entry below is
+  // conditional: a nav entry is a promise that something is there.
+  ...(RAFFLE_URL ? ([{ href: RAFFLE_URL, label: 'Draws', external: true }] as const) : []),
   // Present only while an interface serves the vault. The vault's front end was retired on
   // 25 August 2026 and the draws took `protocolx.io`; leaving this entry would have put "Vault" in
   // the top nav pointing at the raffle. Restores itself the moment NEXT_PUBLIC_DAPP_URL is set.
@@ -194,11 +213,17 @@ export const FOOTER_SECTIONS: {
       // the control. /verification/install is linked from nowhere else in the navigation.
       { label: 'Verify a Move package', href: '/verification' },
       { label: 'Install ProtocolX Verify', href: '/verification/install' },
-      { label: 'Support a creator', href: SOCIAL_URL, external: true },
-      { label: 'Register a .sui name', href: NAMES_URL, external: true },
-      { label: 'Live competitions', href: RAFFLE_URL, external: true },
-      // /organiser/apply for the same reason as the nav entry above.
-      { label: 'Run a competition', href: `${RAFFLE_URL}/organiser/apply`, external: true },
+      // Each is dropped rather than rendered against a guess when its origin is unset — the same
+      // rule the Prize vault entry below has always followed.
+      ...(SOCIAL_URL ? [{ label: 'Support a creator', href: SOCIAL_URL, external: true }] : []),
+      ...(NAMES_URL ? [{ label: 'Register a .sui name', href: NAMES_URL, external: true }] : []),
+      ...(RAFFLE_URL
+        ? [
+            { label: 'Live competitions', href: RAFFLE_URL, external: true },
+            // /organiser/apply for the same reason as the nav entry above.
+            { label: 'Run a competition', href: `${RAFFLE_URL}/organiser/apply`, external: true },
+          ]
+        : []),
       // Dropped from the nav entirely while no interface serves the vault, rather than rendered
       // pointing at nothing. A nav entry is a promise that something is there.
       ...(DAPP_URL ? [{ label: 'Prize vault', href: DAPP_URL, external: true }] : []),

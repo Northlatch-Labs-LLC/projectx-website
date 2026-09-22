@@ -88,8 +88,8 @@ export function Toolkit() {
                     {tool.badge}
                   </Badge>
                 </div>
-                <h3 className="text-base font-semibold text-white">{tool.name}</h3>
-                <p className="text-[1rem] leading-[1.65] text-px-muted">{tool.body}</p>
+                <h3 className="text-subhead font-semibold text-white">{tool.name}</h3>
+                <p className="text-body text-px-muted">{tool.body}</p>
               </div>
             </Reveal>
           ))}
@@ -110,8 +110,8 @@ export function Toolkit() {
                     Planned
                   </Badge>
                 </div>
-                <h3 className="text-base font-semibold text-white">{tool.name}</h3>
-                <p className="text-[1rem] leading-[1.65] text-px-muted">{tool.body}</p>
+                <h3 className="text-subhead font-semibold text-white">{tool.name}</h3>
+                <p className="text-body text-px-muted">{tool.body}</p>
               </div>
             </Reveal>
           ))}

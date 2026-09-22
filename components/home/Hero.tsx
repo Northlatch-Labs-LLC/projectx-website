@@ -40,21 +40,21 @@ export function Hero() {
           </h1>
 
           {/* Required disclosure. Body weight, and above the fold at every width. */}
-          <p className="max-w-[52ch] text-[0.9375rem] leading-relaxed text-px-faint">
+          <p className="max-w-[52ch] text-meta text-px-faint">
             Experimental, unaudited software. Not a bank, not a savings product, not investment
             advice.
           </p>
         </div>
 
         <div className="panel flex w-full min-w-0 flex-col gap-5 p-6 sm:p-8">
-          <p className="text-lg leading-relaxed text-px-muted">
+          <p className="text-subhead text-px-muted">
             <span className="font-semibold text-white">Start with the proof.</span> ProtocolX
             Verify runs five checks on a Sui Move package — it compiles clean on a machine that
             has never seen it, it still matches the digest the chain holds, the suite is green,
             the toolchain cannot drift, and guards deleted on purpose are noticed.
           </p>
 
-          <p className="text-[0.9375rem] leading-relaxed text-px-muted">
+          <p className="text-meta text-px-muted">
             <span className="font-semibold text-white">From $1,000.</span> One package, all five
             gates, returned as an evidence bundle whose digest you can re-derive without us.
             Turnaround is agreed in writing when you order; none has been delivered yet. It is a
@@ -79,7 +79,7 @@ export function Hero() {
             {/* The name search, below the divider. The control itself is unchanged. */}
             <p className="label mb-3">Or start somewhere else</p>
 
-            <p className="mb-3 text-[0.9375rem] leading-relaxed text-px-faint">
+            <p className="mb-3 text-meta text-px-faint">
               A <code>.sui</code> name replaces the sixty-four characters of your wallet address
               with something a person can type — {priceSentence()}, one transaction. Registration
               through Weir is open now, no invitation needed; suins.io registers a name today too,
@@ -89,17 +89,19 @@ export function Hero() {
             <NameSearch />
 
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-              <Button
-                // /organiser/apply, not /organiser — the console refuses any wallet not on the
-                // platform allowlist, and shows a full creation form before saying so. See the
-                // note in components/home/Organisers.tsx.
-                href={`${RAFFLE_URL}/organiser/apply`}
-                variant="secondary"
-                showExternalIcon={false}
-                className="flex-1 justify-center"
-              >
-                Run a competition
-              </Button>
+              {RAFFLE_URL && (
+                <Button
+                  // /organiser/apply, not /organiser — the console refuses any wallet not on the
+                  // platform allowlist, and shows a full creation form before saying so. See the
+                  // note in components/home/Organisers.tsx.
+                  href={`${RAFFLE_URL}/organiser/apply`}
+                  variant="secondary"
+                  showExternalIcon={false}
+                  className="flex-1 justify-center"
+                >
+                  Run a competition
+                </Button>
+              )}
               {DAPP_URL && (
                 <Button
                   href={DAPP_URL}

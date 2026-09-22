@@ -48,12 +48,12 @@ export function CopyBlock({
   return (
     <div className={`panel w-full overflow-hidden ${className}`}>
       <div className="flex items-center justify-between gap-4 border-b border-white/[0.06] px-5 py-3">
-        <span className="font-mono text-[0.8125rem] text-px-faint">{caption ?? label}</span>
+        <span className="font-mono text-meta text-px-faint">{caption ?? label}</span>
         <button
           type="button"
           onClick={copy}
           aria-label={copied ? 'Copied' : `Copy ${label}`}
-          className="flex shrink-0 items-center gap-2 rounded-lg px-2 py-1 text-[0.8125rem] text-px-faint transition hover:text-px-accent"
+          className="flex shrink-0 items-center gap-2 rounded-lg px-2 py-1 text-meta text-px-faint transition hover:text-px-accent"
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-px-prize" />
@@ -63,7 +63,7 @@ export function CopyBlock({
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
-      <pre className="overflow-x-auto px-5 py-4 font-mono text-[0.85rem] leading-[1.8] text-px-muted">
+      <pre className="overflow-x-auto px-5 py-4 font-mono text-meta text-px-muted">
         {code}
       </pre>
     </div>

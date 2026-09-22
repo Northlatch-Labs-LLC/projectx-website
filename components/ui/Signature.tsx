@@ -11,7 +11,7 @@ export function Signature({
     <div
       aria-hidden="true"
       className={`pointer-events-none flex items-center gap-5 ${
-        width === 'short' ? 'mx-auto w-56' : 'w-full'
+ width === 'short' ? 'mx-auto w-56' : 'w-full'
       } ${className}`}
     >
       <span className="h-px flex-1 bg-gradient-to-r from-transparent via-px-accent/25 to-px-accent/45" />

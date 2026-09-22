@@ -51,7 +51,7 @@ export function Reveal({
       // @ts-expect-error — one ref type across the four permitted tags
       ref={ref}
       className={`reveal transition-[opacity,transform] duration-700 ease-[var(--ease-expo)] ${
-        hidden ? 'translate-y-5 opacity-0' : 'translate-y-0 opacity-100'
+ hidden ? 'translate-y-5 opacity-0' : 'translate-y-0 opacity-100'
       } ${className}`}
       style={{ transitionDelay: hidden ? '0ms' : `${delay}ms` }}
     >

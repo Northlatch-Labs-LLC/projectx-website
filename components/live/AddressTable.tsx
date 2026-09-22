@@ -12,12 +12,12 @@ export function AddressTable() {
           className="panel flex flex-col gap-3 p-5 md:flex-row md:items-center md:gap-6"
         >
           <div className="flex min-w-0 flex-col gap-1 md:w-64 md:shrink-0">
-            <span className="font-display text-[1.0625rem] font-medium text-white">{object.label}</span>
+            <span className="font-display text-body font-medium text-white">{object.label}</span>
             <span className="label text-px-faint">
               {object.kind}
             </span>
           </div>
-          <p className="flex-1 text-[1rem] leading-[1.65] text-px-muted">{object.note}</p>
+          <p className="flex-1 text-body text-px-muted">{object.note}</p>
           <AddressChip
             id={object.id}
             href={explorerUrl(object)}

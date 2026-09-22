@@ -40,8 +40,8 @@ export function Builders() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-px-accent/20 to-px-accent/5 text-px-accent">
                 {item.icon}
               </span>
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="text-body text-px-muted">{item.body}</p>
             </li>
           ))}
         </ul>

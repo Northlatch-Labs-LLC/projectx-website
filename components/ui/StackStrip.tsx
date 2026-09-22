@@ -89,10 +89,10 @@ export function StackStrip({
                   <Mark className="h-6 w-6" />
                 </span>
                 <span className="flex min-w-0 flex-col">
-                  <span className="truncate font-display text-[0.9375rem] font-medium text-px-text">
+                  <span className="truncate font-display text-meta font-medium text-px-text">
                     {name}
                   </span>
-                  <span className="truncate text-xs text-px-faint">{role}</span>
+                  <span className="truncate text-meta text-px-faint">{role}</span>
                 </span>
               </a>
             </li>
@@ -122,21 +122,21 @@ export function StackStrip({
                     <Mark className="h-6 w-6" />
                   </span>
                   <span className="flex flex-col">
-                    <span className="font-display text-[0.9375rem] font-medium text-px-text">
+                    <span className="font-display text-meta font-medium text-px-text">
                       {name}
                     </span>
-                    <span className="text-xs text-px-cyan">Vault in development</span>
+                    <span className="text-meta text-px-cyan">Vault in development</span>
                   </span>
                 </div>
 
-                <p className="text-[1rem] leading-[1.65] text-px-muted">{note}</p>
+                <p className="text-body text-px-muted">{note}</p>
 
                 <ul className="flex flex-wrap gap-1.5 border-t border-white/[0.06] pt-4">
                   {stack.map((item) => (
                     <li
                       key={item.name}
-                      className={`rounded-lg border px-2.5 py-1.5 text-xs ${
-                        item.confirmed
+                      className={`rounded-lg border px-2.5 py-1.5 text-meta ${
+ item.confirmed
                           ? 'border-px-cyan/25 bg-px-cyan/[0.07] text-px-text'
                           : 'border-white/[0.08] bg-white/[0.02] text-px-faint'
                       }`}
@@ -149,7 +149,7 @@ export function StackStrip({
               </li>
             ))}
           </ul>
-          <p className="text-[0.8125rem] leading-[1.55] text-px-faint">
+          <p className="text-meta text-px-faint">
             Roadmap, not a commitment. No yield or prize figure is projected.
           </p>
         </div>

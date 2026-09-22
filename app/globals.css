@@ -32,6 +32,74 @@
     --px-hue-4: 107 139 255;
     --px-hue-5: 139 107 255;
     --px-hue-5-light: 183 156 255;
+
+    /*
+     * The shadcn/ui role tokens, pointed at this site's own palette.
+     *
+     * shadcn names roles — --background, --foreground, --primary, --muted, --border. This site
+     * already names colours: the --px-* triplets above and the hex tokens in tailwind.config.ts.
+     * Both now resolve to the SAME values, so a shadcn component dropped in later paints in this
+     * palette instead of importing a second, competing one. Nothing was renamed: every --px-*
+     * reference in the codebase still resolves exactly as it did.
+     *
+     * Channel triplets rather than hex, for the reason the accent is: `<alpha-value>` in
+     * tailwind.config.ts is what keeps `bg-primary/20` working.
+     *
+     * --primary and --ring read through --px-accent-400, so they follow the green theme for free
+     * rather than needing a second copy in the [data-theme='green'] block below.
+     *
+     * The site is dark-only — `color-scheme: dark` below, `colorScheme: 'dark'` in the viewport
+     * export. shadcn's convention puts light on :root and dark on .dark; here the single theme is
+     * the dark one, so these ARE the dark values and .dark restates them. Tailwind's darkMode
+     * strategy is deliberately left at its default: switching it to 'class' would change what
+     * every existing `dark:` utility means, which is not a typography change.
+     */
+    --background: 5 8 15;
+    --foreground: 238 243 250;
+    --card: 13 20 36;
+    --card-foreground: 238 243 250;
+    --popover: 18 27 46;
+    --popover-foreground: 238 243 250;
+    --primary: var(--px-accent-400);
+    --primary-foreground: 2 16 31;
+    --secondary: 23 34 58;
+    --secondary-foreground: 238 243 250;
+    --muted: 13 20 36;
+    --muted-foreground: 157 171 196;
+    --accent: 23 34 58;
+    --accent-foreground: 238 243 250;
+    --destructive: 255 92 92;
+    --destructive-foreground: 5 8 15;
+    --border: 28 39 64;
+    --input: 28 39 64;
+    --ring: var(--px-accent-400);
+    --radius: 1rem;
+  }
+
+  /*
+   * Restated so a `.dark` wrapper — which shadcn markup assumes exists — resolves to the same
+   * colours rather than to shadcn's own neutral defaults.
+   */
+  .dark {
+    --background: 5 8 15;
+    --foreground: 238 243 250;
+    --card: 13 20 36;
+    --card-foreground: 238 243 250;
+    --popover: 18 27 46;
+    --popover-foreground: 238 243 250;
+    --primary: var(--px-accent-400);
+    --primary-foreground: 2 16 31;
+    --secondary: 23 34 58;
+    --secondary-foreground: 238 243 250;
+    --muted: 13 20 36;
+    --muted-foreground: 157 171 196;
+    --accent: 23 34 58;
+    --accent-foreground: 238 243 250;
+    --destructive: 255 92 92;
+    --destructive-foreground: 5 8 15;
+    --border: 28 39 64;
+    --input: 28 39 64;
+    --ring: var(--px-accent-400);
   }
 
   :root[data-theme='green'] {
@@ -56,6 +124,81 @@
 @layer base {
   :root {
     color-scheme: dark;
+
+    /*
+     * ── The type scale ──────────────────────────────────────────────────────────────────────
+     *
+     * Defined once, here. Every size in app/ and components/ resolves through these; nothing
+     * writes a rem value into a className any more.
+     *
+     * What it replaces. 250 of the site's ~290 sized elements sat between 0.8125rem and
+     * 1.0625rem — six near-identical steps a quarter-rem apart (text-[1rem] 97 uses, text-base 60,
+     * text-[0.875rem] 27, text-[1.0625rem] 25, text-[0.9375rem] 23, text-[0.8125rem] 18) while
+     * text-5xl was used twice and text-2xl four times. Everything was body-sized, so nothing read
+     * as a heading and the page read as a broadsheet.
+     *
+     * The steps and their conventions are shadcn/ui's typography recipe — its ramp (4xl / 3xl /
+     * 2xl / xl / base / sm), its `font-semibold tracking-tight` on headings, its `leading-7` on
+     * running text, its `text-balance`. shadcn ships no type scale of its own to import: its
+     * typography page states in its first line that it ships no typography styles and is "an
+     * example of how you can use utility classes", so what is adopted is the recipe, not a file.
+     *
+     * Two deliberate departures from it, both in the brief:
+     *   - The top of the ramp is anchored where this site's headlines already were, not at
+     *     shadcn's text-4xl (2.25rem). Adopting 2.25rem literally would have made every h1 on the
+     *     site SMALLER, which is the opposite of what was asked for.
+     *   - The ramp fluidly interpolates rather than stepping at a breakpoint, so the jump between
+     *     levels is preserved at every width instead of collapsing on a phone.
+     *
+     * Below `title` the ratio tightens (1.71x, 1.4x, 1.18x) because those levels carry weight and
+     * the display face as extra signal; above it the ratio widens (1.42x, 1.41x) because a
+     * headline has nothing but size to identify it with.
+     *
+     * Body is ONE size and metadata is ONE size. There is no third.
+     */
+    --px-text-hero: clamp(3rem, 1.85rem + 5.1vw, 6rem);
+    --px-text-display: clamp(2.5rem, 1.72rem + 3.5vw, 4.25rem);
+    --px-text-title: clamp(1.875rem, 1.36rem + 2.3vw, 3rem);
+    --px-text-heading: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
+    --px-text-subhead: 1.25rem;
+    --px-text-lead: clamp(1.1875rem, 1.11rem + 0.38vw, 1.375rem);
+    --px-text-body: 1.0625rem;
+    --px-text-meta: 0.875rem;
+    --px-text-label: 0.6875rem;
+    --px-text-stat: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem);
+
+    /* Leading tightens as size grows: a 96px headline set at 1.7 falls apart. */
+    --px-leading-hero: 0.95;
+    --px-leading-display: 1.03;
+    --px-leading-title: 1.12;
+    --px-leading-heading: 1.28;
+    --px-leading-subhead: 1.4;
+    --px-leading-lead: 1.55;
+    --px-leading-body: 1.7;
+    --px-leading-meta: 1.55;
+    --px-leading-label: 1;
+    --px-leading-stat: 1.05;
+
+    /* Optical correction, not decoration. Large type needs negative tracking to stop looking
+       loose; uppercase micro-labels need positive tracking to stop looking jammed. */
+    --px-tracking-hero: -0.042em;
+    --px-tracking-display: -0.034em;
+    --px-tracking-title: -0.028em;
+    --px-tracking-heading: -0.021em;
+    --px-tracking-subhead: -0.015em;
+    --px-tracking-lead: -0.013em;
+    --px-tracking-body: -0.006em;
+    --px-tracking-meta: 0em;
+    --px-tracking-label: 0.16em;
+    /* Generic uppercase runs, as distinct from the 11px eyebrow that `.label` sets. */
+    --px-tracking-uppercase: 0.055em;
+    --px-tracking-stat: -0.022em;
+
+    /* Measure. Running text at 17px lands near 68 characters at 66ch, which is inside the
+       65-75 band; the long lines were the other half of why this read like newsprint. */
+    --px-measure-lead: 46ch;
+    --px-measure-body: 66ch;
+    --px-measure-meta: 62ch;
 
     /*
      * Motion, named.
@@ -111,16 +254,33 @@
     @apply outline-none ring-2 ring-px-accent ring-offset-2 ring-offset-px-bg;
   }
 
+  /*
+   * Headings take the display face, semibold, and balanced wrapping — shadcn's heading
+   * convention, applied at the element rather than repeated in every className.
+   *
+   * `text-wrap: balance` is what stops a two-line headline leaving one orphaned word on the
+   * second line, and it matters far more now that headlines are large: at 96px a single trailing
+   * word is most of a line of whitespace.
+   */
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     @apply font-display font-semibold text-white;
     text-wrap: balance;
   }
 
+  /* `pretty` only prevents orphans; it does not rebalance the block, which is what running text
+     wants and headings do not. */
   p {
     text-wrap: pretty;
+  }
+
+  /* Uppercase needs the extra tracking whether or not it came through `.label`. */
+  .uppercase {
+    letter-spacing: var(--px-tracking-uppercase);
   }
 
   .font-mono,
@@ -179,15 +339,14 @@
     @apply font-display text-label font-medium uppercase text-px-muted;
   }
 
+  /* The paragraph directly under a headline. One size now, fluid between the two it used to
+     step between at the `sm` breakpoint. */
   .lead {
-    @apply font-sans text-[1.1875rem] font-light leading-[1.6] text-px-text/90 sm:text-[1.375rem] sm:leading-[1.55];
-    max-width: 48ch;
-    letter-spacing: -0.013em;
+    @apply max-w-lead font-sans text-lead font-light text-px-text/90;
   }
 
   .proof {
-    @apply text-[0.9375rem] leading-[1.7] text-px-muted;
-    max-width: 66ch;
+    @apply max-w-meta text-meta text-px-muted;
   }
 
   .proof-centered {
@@ -206,15 +365,14 @@
     background: linear-gradient(90deg, transparent, #3fd8f5, transparent);
   }
 
+  /* Running text. The one body size on the site. */
   .body-copy {
-    @apply text-[1.0625rem] leading-[1.68] text-px-muted;
-    max-width: 70ch;
-    letter-spacing: -0.006em;
+    @apply max-w-copy text-body text-px-muted;
   }
 
   .chip-mono {
     @apply inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-black/40 px-3 py-2
-           font-mono text-[0.8125rem] text-px-muted transition-colors duration-base
+           font-mono text-meta text-px-muted transition-colors duration-base
            hover:border-px-cyan/35;
   }
 
@@ -224,7 +382,7 @@
 
   .btn {
     @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl px-5 py-3
-           font-sans text-[0.9375rem] font-medium tracking-[-0.01em] transition-all duration-base
+           font-sans text-body font-medium transition-all duration-base
            ease-expo disabled:cursor-not-allowed disabled:opacity-40;
   }
 
@@ -270,19 +428,19 @@
 
   .hero-tag {
     @apply inline-flex select-none items-center gap-1.5 whitespace-nowrap rounded-full border
-           px-3 py-1.5 font-sans text-[0.8125rem] font-medium tracking-[-0.01em] backdrop-blur-md
+           px-3 py-1.5 font-sans text-meta font-medium backdrop-blur-md
            transition-[transform,box-shadow,border-color] duration-slow
            ease-expo
            hover:-translate-y-1 hover:scale-[1.06] hover:brightness-125;
   }
 
   .badge {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-sans text-xs font-medium
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-sans text-meta font-medium
            backdrop-blur-sm;
   }
 
   .nav-link {
-    @apply relative rounded-xl px-3.5 py-2 font-sans text-[0.9375rem] font-normal tracking-[-0.01em]
+    @apply relative rounded-xl px-3.5 py-2 font-sans text-meta font-normal
            transition-all duration-base ease-expo;
   }
 
@@ -313,14 +471,17 @@
     box-shadow: 0 0 14px rgb(var(--px-hue-3) / 0.9);
   }
 
+  /* Long-form pages, including the legal set. `max-w-copy` rather than the old `max-w-prose`
+     (48rem): 48rem of 17px text is roughly 95 characters a line, well past the point where the
+     eye loses the start of the next one. */
   .prose-px {
-    @apply max-w-prose text-[1.0625rem] leading-[1.7] text-px-muted;
+    @apply max-w-copy text-body text-px-muted;
   }
   .prose-px h2 {
-    @apply mb-3 mt-10 text-2xl text-white;
+    @apply mb-3 mt-12 text-heading font-semibold text-white;
   }
   .prose-px h3 {
-    @apply mb-2 mt-6 text-lg text-px-text;
+    @apply mb-2 mt-8 text-subhead font-semibold text-px-text;
   }
   .prose-px p {
     @apply mb-4;

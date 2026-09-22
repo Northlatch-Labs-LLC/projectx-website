@@ -56,7 +56,7 @@ export default function DisclaimerPage() {
 
       <Section width="prose">
         <LegalNav current="/disclaimer" />
-        <p className="mb-8 text-[1rem] leading-[1.7] text-px-muted">
+        <p className="mb-8 text-body text-px-muted">
           This site is published by Northlatch Labs LLC, a Wyoming limited liability company
           (Wyoming Filing ID 2026-002064040), 5830 E 2nd St, Ste 7000 #38326, Casper, Wyoming 82609,
           United States. Northlatch develops and licenses the ProjectX protocol software. It does not
@@ -67,7 +67,7 @@ export default function DisclaimerPage() {
         <Card className="border-px-gold/30">
           <div className="flex gap-4">
             <Warning className="mt-0.5 h-5 w-5 shrink-0 text-px-gold" />
-            <p className="text-[1rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               <span className="font-semibold text-white">Read this before depositing.</span>{' '}
               &ldquo;No loss&rdquo; describes what happens to your principal — it is never spent,
               whatever funds the prize — not an absence of risk. Do not deposit more than you can
@@ -79,8 +79,8 @@ export default function DisclaimerPage() {
         <ul className="mt-8 flex flex-col gap-4">
           {risks.map((risk) => (
             <li key={risk.title} className="panel flex flex-col gap-2 p-6">
-              <h2 className="text-base font-semibold text-white">{risk.title}</h2>
-              <p className="text-[1rem] leading-[1.65] text-px-muted">{risk.body}</p>
+              <h2 className="text-subhead font-semibold text-white">{risk.title}</h2>
+              <p className="text-body text-px-muted">{risk.body}</p>
             </li>
           ))}
         </ul>

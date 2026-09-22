@@ -100,13 +100,13 @@ function StreamCard({
     <div className={`panel flex flex-col gap-4 border p-7 ${border}`}>
       <div className="flex items-center gap-3">
         <span className="label">{tag}</span>
-        <span className={`ml-auto font-mono text-2xl font-semibold ${accent}`}>{rate}</span>
+        <span className={`ml-auto font-mono text-heading font-semibold ${accent}`}>{rate}</span>
       </div>
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      <p className="text-[1rem] leading-[1.65] text-px-muted">{body}</p>
+      <h3 className="text-subhead font-semibold text-white">{title}</h3>
+      <p className="text-body text-px-muted">{body}</p>
       <div className="mt-auto flex items-baseline gap-2 border-t border-white/[0.06] pt-4">
         <span className="label">{lifetimeLabel}</span>
-        <span className={`ml-auto font-mono text-sm ${accent}`}>{lifetime}</span>
+        <span className={`ml-auto font-mono text-meta ${accent}`}>{lifetime}</span>
       </div>
     </div>
   );
@@ -116,8 +116,8 @@ function Fact({ label, value, body }: { label: string; value: string; body: stri
   return (
     <div className="panel flex flex-col gap-2 p-6">
       <span className="label">{label}</span>
-      <span className="font-mono text-xl font-semibold text-white">{value}</span>
-      <p className="text-[1rem] leading-[1.65] text-px-muted">{body}</p>
+      <span className="font-mono text-heading font-semibold text-white">{value}</span>
+      <p className="text-body text-px-muted">{body}</p>
     </div>
   );
 }

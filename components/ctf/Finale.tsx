@@ -77,7 +77,7 @@ export function Finale() {
               Why this exists
             </span>
 
-            <h2 className="max-w-[20ch] text-display">
+            <h2 className="max-w-[20ch] text-title">
               <span className="text-px-muted">Most CTFs teach you to find bugs</span>{' '}
               <span className="text-gradient-chrome">nobody ever shipped.</span>
             </h2>
@@ -97,17 +97,17 @@ export function Finale() {
           <ol className="mt-14 grid gap-x-10 gap-y-10 border-t border-white/[0.07] pt-12 md:grid-cols-3">
             {points.map((point) => (
               <li key={point.no} className="flex flex-col items-center gap-3 text-center">
-                <span className="font-mono text-[0.8125rem] font-medium tracking-[0.2em] text-px-gold">
+                <span className="font-mono text-meta font-medium tracking-label text-px-gold">
                   {point.no}
                 </span>
-                <h3 className="text-lg font-semibold text-white">{point.title}</h3>
-                <p className="text-[0.9375rem] leading-[1.65] text-px-muted">{point.body}</p>
+                <h3 className="text-subhead font-semibold text-white">{point.title}</h3>
+                <p className="text-meta text-px-muted">{point.body}</p>
               </li>
             ))}
           </ol>
 
           <div className="mt-14 flex flex-col items-center gap-5 border-t border-white/[0.07] pt-12">
-            <h3 className="text-xl font-semibold text-white">Landed one?</h3>
+            <h3 className="text-heading font-semibold text-white">Landed one?</h3>
             <p className="body-copy mx-auto text-center">
               Send the transaction digest and a paragraph on the mechanism you used. Every
               solver is a reviewer the protocol did not have to hire.

@@ -70,7 +70,7 @@ export function NotifySignup({
 
   if (phase.at === 'done') {
     return (
-      <p className="text-[0.9375rem] leading-[1.6] text-px-muted">
+      <p className="text-meta text-px-muted">
         {phase.already
           ? 'You are already on the list — nothing more to do.'
           : 'On the list. A confirmation email will ask for your yes before anything else ever arrives.'}
@@ -90,7 +90,7 @@ export function NotifySignup({
           }}
           placeholder="you@example.com"
           aria-label="Email address"
-          className="min-w-0 flex-1 rounded-lg border border-white/[0.12] bg-white/[0.04] px-4 py-3 text-[0.9375rem] text-white placeholder:text-px-faint focus:border-px-cyan/60 focus:outline-none"
+          className="min-w-0 flex-1 rounded-lg border border-white/[0.12] bg-white/[0.04] px-4 py-3 text-meta text-white placeholder:text-px-faint focus:border-px-cyan/60 focus:outline-none"
         />
         <button
           type="submit"
@@ -100,12 +100,12 @@ export function NotifySignup({
           {phase.at === 'sending' ? 'Adding…' : cta}
         </button>
       </div>
-      <p className="mt-2 text-xs text-px-faint">
+      <p className="mt-2 text-meta text-px-faint">
         Announcements only, confirmed by double opt-in before anything is sent, unsubscribe in
         one click. Nothing else, ever.
       </p>
       {phase.at === 'failed' && (
-        <p className="mt-2 text-xs text-px-gold">{phase.message}</p>
+        <p className="mt-2 text-meta text-px-gold">{phase.message}</p>
       )}
     </form>
   );

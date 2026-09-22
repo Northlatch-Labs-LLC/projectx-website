@@ -69,10 +69,10 @@ export function Logo({ className = '', ns = 'default' }: { className?: string; n
       </span>
 
       <span className="flex flex-col leading-none">
-        <span className="text-gradient-chrome text-[1.0625rem] font-semibold tracking-[-0.025em]">
+        <span className="text-gradient-chrome text-body font-semibold ">
           Project<span className="text-px-accent">X</span>
         </span>
-        <span className="mt-1 hidden text-[0.5625rem] font-medium uppercase tracking-[0.26em] text-px-faint sm:block">
+        <span className="mt-1 hidden text-meta font-medium uppercase tracking-label text-px-faint sm:block">
           Protocol on Sui
         </span>
       </span>

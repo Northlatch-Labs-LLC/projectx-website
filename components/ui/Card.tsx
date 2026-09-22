@@ -42,9 +42,9 @@ export function LinkCard({
         </span>
       ) : null}
       {eyebrow ? <span className="label text-px-faint">{eyebrow}</span> : null}
-      <h3 className="text-xl font-semibold text-white">{title}</h3>
-      {children ? <div className="text-[1rem] leading-[1.65] text-px-muted">{children}</div> : null}
-      <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[0.9375rem] font-medium text-px-cyan">
+      <h3 className="text-heading font-semibold text-white">{title}</h3>
+      {children ? <div className="text-body text-px-muted">{children}</div> : null}
+      <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-meta font-medium text-px-cyan">
         {isExternal ? 'Open' : 'Read more'}
         {isExternal ? (
           <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -91,7 +91,7 @@ export function InterfacesPreview() {
       <SectionHeader
         eyebrow="Built on Sui"
         title="One chain. Every promise kept in code."
-        lead="We build on Sui mainnet because a promise written into a contract doesn't ask you to trust us. Public rules, a permanent record, and a result anyone can check for themselves — that's the same foundation under everything we make."
+        lead="Northlatch Labs builds on Sui mainnet because a promise written into a contract is checkable by the person it was made to. Public rules, a permanent record, and a result anyone can verify for themselves — that is the same foundation under every product here."
         proof="A public ledger, settled in seconds — every contract and every transaction is there to be looked up."
       />
 
@@ -102,31 +102,33 @@ export function InterfacesPreview() {
               <Sparkle className="h-5 w-5" />
             </span>
             <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-xl font-semibold text-white">Weir</h3>
+              <h3 className="text-heading font-semibold text-white">Weir</h3>
               <Badge tone="prize">Live · open</Badge>
             </div>
-            <p className="text-[0.8125rem] font-medium uppercase tracking-wide text-px-faint">
+            <p className="text-meta font-medium uppercase tracking-wide text-px-faint">
               Operated by Northlatch Labs LLC under its own terms.
             </p>
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               Support a creator without spending anything. Park SUI in their vault: the staking
               yield goes to them, and your deposit stays yours — withdrawable in full, any time,
               enforced by the contract rather than promised by us.
             </p>
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               Subscriptions and paid posts settle on chain too, so what a creator is owed is held
               by a contract, not by the platform. Name registration through Weir is open too.
             </p>
             <div className="mt-auto flex flex-wrap gap-2.5">
-              <a
-                href={SOCIAL_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary w-fit px-5"
-              >
-                Create your account
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+              {SOCIAL_URL && (
+                <a
+                  href={SOCIAL_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary w-fit px-5"
+                >
+                  Create your account
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
               <Button href="/social" variant="ghost">
                 How it works
               </Button>
@@ -143,12 +145,12 @@ export function InterfacesPreview() {
                 <Icon className="h-5 w-5" />
               </span>
               <div className="flex flex-wrap items-center gap-3">
-                <h3 className="text-xl font-semibold text-white">{title}</h3>
+                <h3 className="text-heading font-semibold text-white">{title}</h3>
                 <Badge tone={tone}>{badge}</Badge>
               </div>
-              <p className="text-[1.0625rem] leading-[1.65] text-px-muted">{blurb}</p>
-              <p className="text-[0.875rem] leading-[1.6] text-px-faint">{note}</p>
-              <p className="text-[0.8125rem] leading-[1.55] text-px-faint/80">{legal}</p>
+              <p className="text-body text-px-muted">{blurb}</p>
+              <p className="text-meta text-px-faint">{note}</p>
+              <p className="text-meta text-px-faint/80">{legal}</p>
               {href ? (
                 <a
                   href={href}
@@ -174,7 +176,7 @@ export function InterfacesPreview() {
                   {fallback.label}
                 </Button>
               ) : (
-                <p className="mt-auto text-[0.8125rem] leading-[1.55] text-px-faint">
+                <p className="mt-auto text-meta text-px-faint">
                   No interface serves this at present.
                 </p>
               )}
@@ -188,13 +190,13 @@ export function InterfacesPreview() {
               <Code className="h-5 w-5" />
             </span>
             <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-xl font-semibold text-white">Yours</h3>
+              <h3 className="text-heading font-semibold text-white">Yours</h3>
               <span className="badge border-white/10 bg-white/[0.04] text-px-muted">Open</span>
             </div>
-            <p className="text-[1.0625rem] leading-[1.65] text-px-muted">
+            <p className="text-body text-px-muted">
               Build on any of it. No permission to ask for, no revenue share, no deal to sign.
             </p>
-            <p className="text-[0.875rem] leading-[1.6] text-px-faint">
+            <p className="text-meta text-px-faint">
               The on-chain events and every deployed address are documented. The HTTP read API is
               not served at present.
             </p>

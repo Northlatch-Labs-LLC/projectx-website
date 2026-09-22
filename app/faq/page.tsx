@@ -13,7 +13,7 @@ import { FaqList } from '@/components/ui/Faq';
 export const metadata: Metadata = {
   title: 'FAQ',
   description:
-    'Straight answers about ProtocolX Verify: what the five gates measure, what it costs, why it is not an audit, what your repository needs, what the evidence bundle contains, and what we will not claim. Plus how to enter a draw for free.',
+    'Straight answers about ProtocolX Verify: what the five gates measure, what it costs, why running it yourself is free, why it is not an audit, what your repository needs, what the evidence bundle contains, and what Northlatch Labs will not claim. Plus how to enter a draw for free.',
 };
 
 /**
@@ -32,10 +32,11 @@ export default function FaqPage() {
       question: 'What is ProtocolX Verify?',
       answer: (
         <>
-          A GitHub App. Installed on a Sui Move repository, it puts five check runs from the
-          ProtocolX Verification Standard on every pull request — build, digest, tests, pin and
-          mutation-smoke — run by the same engine that measures our own mainnet contracts. The
-          five are described one by one on the{' '}
+          A published GitHub Action and a hosted GitHub App. Added to a Sui Move repository,
+          either puts five check runs from the ProtocolX Verification Standard on every pull
+          request — build, digest, tests, pin and mutation-smoke — run by the same engine that
+          measures Northlatch Labs&rsquo; own mainnet contracts. The five are described one by one
+          on the{' '}
           <Link href="/verification" className="text-px-accent underline underline-offset-4">
             verification page
           </Link>
@@ -48,10 +49,9 @@ export default function FaqPage() {
       answer: (
         <>
           No, and it is never called one. An audit is an independent engagement by a third party.
-          What the App produces is measured evidence — verdicts, survivor counts and an evidence
-          bundle whose digest reproduces. Where we verify our own contracts, that is an internal
-          review by the party that wrote the code. Where we verify yours, we are still not your
-          auditors: we are the measured layer below the audit.
+          What the App produces is measured evidence: verdicts, survivor counts and a bundle whose
+          digest reproduces. Northlatch Labs wrote the contracts it verifies here, and where it
+          verifies yours it is the layer below your audit, not your auditor.
         </>
       ),
     },
@@ -60,14 +60,21 @@ export default function FaqPage() {
       answer: (
         <>
           <p>
+            Running the Action yourself costs nothing. The licence grants production use in your
+            own CI against your own code, on public and private repositories alike, with nothing
+            to sign, nothing metered and nothing transmitted to Northlatch Labs — and it does not
+            expire. The two hosted things are priced.
+          </p>
+          <p className="mt-3">
             The First Report is from $1,000: one Move package, all five gates, returned as an
             evidence bundle whose digest you can re-derive without us, paid in USDC on Sui.
             Turnaround is agreed in writing when you order; none has been delivered yet. Public
             repositories only, no remediation, and no claim of independence.
           </p>
           <p className="mt-3">
-            The App is $149 per repository per month, or $1,490 a year, and one public repository
-            is free permanently — no expiry. Sprints sit above both and are quoted flat,
+            The App is $249 per repository per month, or $2,490 a year, and one public repository
+            is free permanently — no expiry. The first three repositories are $149 and keep that
+            price for as long as the app runs on them. Sprints sit above both and are quoted flat,
             in writing, before work begins.{' '}
             <Link
               href="/verification/install"
@@ -86,9 +93,8 @@ export default function FaqPage() {
         <>
           Three always do. PVS · digest needs a recorded digest beside your Move.toml and PVS ·
           pin needs an executable framework-pin script; without those files each reports neutral
-          and says which file it looked for, rather than claiming to have measured something it
-          did not. A gate that never reported at all is swept to an explicit failure at the end
-          of the run — never ran must not read as passed.
+          and names the file it looked for. A gate that never reported at all is swept to an
+          explicit failure at the end of the run: never ran must not read as passed.
         </>
       ),
     },
@@ -96,22 +102,20 @@ export default function FaqPage() {
       question: 'A mutation survived. Is my contract broken?',
       answer: (
         <>
-          No. A survivor names an assertion that no test exercises — a gap in your suite, not a
-          defect found in your contract. The report is checked against a word list so it cannot
-          be promoted into one. That distinction is the whole point of the measurement: a passing
-          suite tells you nothing you wrote a test for is broken, and says nothing about what you
-          never tested.
+          No. A survivor names an assertion that no test exercises: a gap in your suite, not a
+          defect in your contract. The report is checked against a word list so it cannot be
+          promoted into one. A passing suite says nothing about what you never tested.
         </>
       ),
     },
     {
-      question: 'Can I install it today?',
+      question: 'Can I use it today?',
       answer: (
         <>
-          Not by yourself yet. The App is installable on one account and is not listed for
-          self-serve installation, so early access is arranged with us by email and costs nothing
-          until self-serve billing opens. That is a statement about the listing, not about the
-          software — it already runs on repositories today.
+          Yes. The Action is published: add it to your own CI and it runs today, free, on public
+          and private repositories alike, with nothing to sign and no expiry. The hosted App,
+          where Northlatch Labs runs the gates for you, is not listed for self-serve installation,
+          so that one is installed by arrangement over email.
         </>
       ),
     },
@@ -149,9 +153,7 @@ export default function FaqPage() {
       answer: (
         <>
           All five checks complete neutral, each carrying its own setup instructions. A repository
-          that has not opted in gets an explanation, never a red cross. This is deliberate: a
-          failing check on a repository that never asked to be measured is a false accusation, and
-          the first thing a new user would learn from it is to distrust the next verdict too.
+          that has not opted in gets an explanation, never a red cross.
         </>
       ),
     },
@@ -170,9 +172,8 @@ export default function FaqPage() {
       question: 'Can I re-derive the digest without you?',
       answer: (
         <>
-          Yes, and that is the whole design. A measurement you can only confirm by asking us again
-          is not evidence, it is a reference. The digest reproduces from the bundle&rsquo;s own
-          contents, so the artifact keeps its meaning if we are unreachable, uninterested, or gone.
+          Yes. The digest reproduces from the bundle&rsquo;s own contents, so the artifact keeps
+          its meaning without Northlatch Labs.
         </>
       ),
     },
@@ -180,9 +181,8 @@ export default function FaqPage() {
       question: 'Can you measure a private repository?',
       answer: (
         <>
-          The First Report is public repositories only, and its terms say so. For anything beyond
-          that, ask us rather than reading an answer off this page — it is not something published
-          material settles, and this page will not guess at a commercial term.
+          The First Report is public repositories only. For anything beyond that, ask: no
+          published term covers it.
         </>
       ),
     },
@@ -191,9 +191,7 @@ export default function FaqPage() {
       answer: (
         <>
           Inside 24 hours, in USDC on Sui. It covers one Move package and all five gates. It comes
-          with no remediation and no claim of independence — both are stated up front rather than
-          discovered afterwards, because a scope a buyer learns late is a scope they were sold
-          badly.
+          with no remediation and no claim of independence.
         </>
       ),
     },
@@ -204,11 +202,10 @@ export default function FaqPage() {
       question: 'Has any of this been independently audited?',
       answer: (
         <>
-          No. No third party has reviewed this code, and we will not imply one has. On this
-          laptop&rsquo;s last run (3 September 2026) the protocol package passed 75 Move tests and
+          No third party has reviewed this code. The protocol package carries 75 Move tests and
           the vault package 170, and the vault&rsquo;s no-loss invariant is enforced by the Move
-          type system rather than by runtime checks, which is a real guarantee and not the same
-          thing as a review. The complete threat model, including where it stops, is on the{' '}
+          type system rather than by runtime checks. Neither of those is a review. The threat
+          model, including where it stops, is on the{' '}
           <Link href="/security" className="text-px-accent underline underline-offset-4">
             security page
           </Link>
@@ -226,12 +223,12 @@ export default function FaqPage() {
             verification engine are not published; their bytecode is readable on any explorer.
           </p>
           <p className="mt-3">
-            What you can read instead is the chain. Every package we have deployed is listed with
-            its identifier on{' '}
+            What you can read instead is the chain. Every deployed package is listed with its
+            identifier on{' '}
             <Link href="/chain" className="text-px-accent underline underline-offset-4">
               the on-chain record
             </Link>
-            , and published Move bytecode is readable on any explorer without our permission.
+            .
           </p>
         </>
       ),
@@ -247,8 +244,7 @@ export default function FaqPage() {
           </Link>
           . On Sui an upgrade cannot change the types of existing objects or remove public
           functions, but it can add functions and change non-public behaviour. It is the largest
-          trust assumption in the system, which is exactly why it is on a page rather than in a
-          paragraph.
+          trust assumption in the system.
         </>
       ),
     },
@@ -256,9 +252,9 @@ export default function FaqPage() {
       question: 'What happens to any of this if you disappear?',
       answer: (
         <>
-          The contracts keep working. They are objects on Sui with public entry points, and none of
-          them depends on our daemon, our API or this website. An evidence bundle keeps its meaning
-          for the same reason — its digest reproduces from the bundle, not from a server of ours.
+          The contracts keep working. They are objects on Sui with public entry points and depend
+          on no daemon, no API and no website. An evidence bundle keeps its meaning for the same
+          reason: its digest reproduces from the bundle, not from a server.
         </>
       ),
     },
@@ -273,9 +269,9 @@ export default function FaqPage() {
           >
             security@projectxprotocol.dev
           </a>
-          , rather than as a public issue. We aim to acknowledge within 72 hours. A report that arrives
-          before an exploit is worth considerably more to us than one that arrives after, and we
-          would rather hear it early and imperfectly than late.
+          , rather than as a public issue. We aim to acknowledge within 72 hours. A report that
+          arrives before an exploit is worth more than one that arrives after. Early and imperfect
+          beats late.
         </>
       ),
     },
@@ -287,8 +283,7 @@ export default function FaqPage() {
             A prize pool on Sui mainnet: principal is delegated to a validator and returned 1:1,
             and the staking yield it earns is awarded to one depositor per epoch instead of split
             into pennies. The contract is live. Its interface was retired on 25 August 2026, so
-            there is no door to walk through today — the mechanism is real and it is unreachable,
-            and those are different sentences.
+            there is no door to walk through.
           </p>
           <p className="mt-3">
             It is documented in full on{' '}
@@ -312,7 +307,7 @@ export default function FaqPage() {
       <PageHeader
         eyebrow="FAQ"
         title="The questions worth asking first"
-        lead="Including the ones a company would usually rather you asked after. Verification is what we sell — five gates on a Sui Move package, measured and never called an audit."
+        lead="Verification is the product: five gates on a Sui Move package, measured and never called an audit."
         art={<FaqArt className="w-full" />}
       />
 
@@ -338,7 +333,7 @@ export default function FaqPage() {
         <SectionHeader
           eyebrow="What we will not claim"
           title="The answers that cost us something"
-          lead="A company selling measurement has to be measurable itself. These are the questions where the true answer is the weaker one."
+          lead="These are the questions where the true answer is the weaker one."
         />
         <div className="mt-8">
           <FaqList items={honesty} />
@@ -362,10 +357,10 @@ export default function FaqPage() {
         />
 
         <Card className="mt-10">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-subhead font-semibold text-white">
             Alternative Method of Entry (AMOE)
           </h3>
-          <ol className="mt-4 flex list-decimal flex-col gap-3 pl-5 text-[1rem] leading-[1.65] text-px-muted">
+          <ol className="mt-4 flex list-decimal flex-col gap-3 pl-5 text-body text-px-muted">
             <li>
               Hand-print your name, date of birth, postal address, email address and the Sui
               address you wish any prize sent to, on a plain 3&quot; × 5&quot; card.
@@ -383,7 +378,7 @@ export default function FaqPage() {
               hours after it is received and verified.
             </li>
           </ol>
-          <p className="mt-5 text-[1rem] leading-[1.65] text-px-muted">
+          <p className="mt-5 text-body text-px-muted">
             The full procedure, the sponsor&rsquo;s address and the entry weighting are in the{' '}
             <Link href="/legal/terms" className="text-px-accent underline underline-offset-4">
               official rules

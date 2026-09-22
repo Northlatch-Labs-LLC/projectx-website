@@ -57,27 +57,152 @@ export default {
           // scripts/verify-contrast.mjs — it is the tightest pair on the site.
           faint: '#707f9a',
         },
+
+        /*
+         * shadcn/ui's role names, resolving through the variables mapped onto the palette above
+         * in app/globals.css. No hex here: a shadcn component that asks for `bg-primary` or
+         * `text-muted-foreground` gets this site's colours, and there is no second palette to
+         * drift out of step.
+         */
+        border: 'rgb(var(--border) / <alpha-value>)',
+        input: 'rgb(var(--input) / <alpha-value>)',
+        ring: 'rgb(var(--ring) / <alpha-value>)',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        primary: {
+          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+          foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+        },
+        secondary: {
+          DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+          foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+        },
+        destructive: {
+          DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+          foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+        },
+        muted: {
+          DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+          foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+        },
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+        },
+        card: {
+          DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+          foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+        },
+        popover: {
+          DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+          foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+        },
       },
 
+      /*
+       * The three CSS variable names are load-bearing: `font-sans` resolves through
+       * --font-roboto at well over a hundred call sites, and app/layout.tsx must keep declaring
+       * all three whatever faces sit behind them.
+       *
+       * The fallbacks are written out properly because `display: 'swap'` means they are what a
+       * visitor actually reads for the first paint. A stack that fell straight to system-ui put
+       * a different set of metrics on screen than the face that replaced it; these are chosen to
+       * sit close to the real ones so the swap does not reflow the headline.
+       */
       fontFamily: {
-        display: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-roboto)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'SFMono-Regular', 'ui-monospace', 'Menlo', 'monospace'],
+        display: [
+          'var(--font-display)',
+          'Avenir Next',
+          'Segoe UI',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        sans: [
+          'var(--font-roboto)',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        mono: [
+          'var(--font-mono)',
+          'SFMono-Regular',
+          'Menlo',
+          'Consolas',
+          'ui-monospace',
+          'monospace',
+        ],
       },
 
+      /*
+       * The type scale. Sizes, leading and tracking are all defined in app/globals.css and
+       * referenced here — one definition, visible in devtools, themeable without a rebuild.
+       * This list and the `font-size` class group in lib/utils.ts must stay in step: a key
+       * added here and forgotten there does not error, it silently stops overriding.
+       *
+       * Tailwind's own text-xs..text-9xl survive underneath (this is `extend`), but nothing
+       * in app/ or components/ uses them any more — they are the fallback, not the scale.
+       */
       fontSize: {
-        hero: ['clamp(2.5rem, 1.5rem + 3.6vw, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.038em' }],
-        display: ['clamp(2.1rem, 1.35rem + 3vw, 3.4rem)', { lineHeight: '1.07', letterSpacing: '-0.03em' }],
-        title: ['clamp(1.6rem, 1.25rem + 1.5vw, 2.4rem)', { lineHeight: '1.15', letterSpacing: '-0.024em' }],
-        stat: ['clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.022em' }],
-        label: ['0.6875rem', { lineHeight: '1', letterSpacing: '0.16em' }],
+        hero: [
+          'var(--px-text-hero)',
+          { lineHeight: 'var(--px-leading-hero)', letterSpacing: 'var(--px-tracking-hero)' },
+        ],
+        display: [
+          'var(--px-text-display)',
+          { lineHeight: 'var(--px-leading-display)', letterSpacing: 'var(--px-tracking-display)' },
+        ],
+        title: [
+          'var(--px-text-title)',
+          { lineHeight: 'var(--px-leading-title)', letterSpacing: 'var(--px-tracking-title)' },
+        ],
+        heading: [
+          'var(--px-text-heading)',
+          { lineHeight: 'var(--px-leading-heading)', letterSpacing: 'var(--px-tracking-heading)' },
+        ],
+        subhead: [
+          'var(--px-text-subhead)',
+          { lineHeight: 'var(--px-leading-subhead)', letterSpacing: 'var(--px-tracking-subhead)' },
+        ],
+        lead: [
+          'var(--px-text-lead)',
+          { lineHeight: 'var(--px-leading-lead)', letterSpacing: 'var(--px-tracking-lead)' },
+        ],
+        body: [
+          'var(--px-text-body)',
+          { lineHeight: 'var(--px-leading-body)', letterSpacing: 'var(--px-tracking-body)' },
+        ],
+        meta: [
+          'var(--px-text-meta)',
+          { lineHeight: 'var(--px-leading-meta)', letterSpacing: 'var(--px-tracking-meta)' },
+        ],
+        label: [
+          'var(--px-text-label)',
+          { lineHeight: 'var(--px-leading-label)', letterSpacing: 'var(--px-tracking-label)' },
+        ],
+        stat: [
+          'var(--px-text-stat)',
+          { lineHeight: 'var(--px-leading-stat)', letterSpacing: 'var(--px-tracking-stat)' },
+        ],
+      },
+
+      /* The two tracking values that are not carried by a fontSize rung: the uppercase eyebrow,
+         and generic caps runs. Both read from the same tokens as the scale. */
+      letterSpacing: {
+        label: 'var(--px-tracking-label)',
+        caps: 'var(--px-tracking-uppercase)',
       },
 
       maxWidth: {
         content: '76rem',
         prose: '48rem',
-        lead: '48ch',
-        copy: '70ch',
+        // Measure, from the same tokens as the sizes they belong to.
+        lead: 'var(--px-measure-lead)',
+        copy: 'var(--px-measure-body)',
+        meta: 'var(--px-measure-meta)',
       },
 
       boxShadow: {

@@ -94,12 +94,12 @@ const LOOP = [
   {
     step: '3 · Yield',
     title: 'The creator earns the yield',
-    body: 'Each epoch, matured rungs realise their staking rewards and the yield goes to the creator. The principal restakes and keeps working. The harvest itself is permissionless — anyone may trigger it, so nobody has to trust the platform to keep the machine turning.',
+    body: 'Each epoch, matured rungs realise their staking rewards and the yield goes to the creator. The principal restakes and keeps working. The harvest itself is permissionless: any address may trigger it, so the machine turns on whoever calls it first.',
   },
   {
     step: '4 · Leave',
     title: 'Withdraw whenever you like',
-    body: 'Withdrawal returns your principal in full — no lock-up, no notice period, no approval from the creator or the platform. This is not a policy anyone promises to honour; it is what the contract permits. No function exists by which the platform or the creator can touch a supporter’s deposit.',
+    body: 'Withdrawal returns your principal in full — no lock-up, no notice period, no approval from the creator or the platform. That is what the contract permits, not a policy anyone promises to honour: the withdrawal path answers to the depositor’s own address, and to that address alone.',
   },
 ];
 
@@ -114,7 +114,7 @@ const NOVELTIES = [
   },
   {
     title: 'A paywall that fails locked',
-    body: 'A paid post’s body is released only against a Subscription or Unlock object held on chain — one predicate, checked in one place. If that read fails, the post stays locked. A paywall bug on this platform fails closed, never open: the failure mode is a subscriber briefly inconvenienced, not a creator’s paid work leaked.',
+    body: 'A paid post’s body is released only against a Subscription or Unlock object held on chain — one predicate, checked in one place. If that read fails, the post stays locked. A paywall bug on this platform fails closed, never open: the worst it can do is keep a paying subscriber waiting.',
   },
   {
     title: 'Support that does not churn',
@@ -129,7 +129,7 @@ export default function SocialPage() {
         eyebrow="Weir · weir.social"
         title="Support a creator without spending anything"
         lead="Park SUI in a creator’s vault. It is delegated to a validator, the staking yield goes to the creator, and the deposit stays yours — withdrawable in full, any time, with no lock-up and no approval to ask for. The only thing you give up is the yield you would have earned staking it yourself."
-        proof="The contracts are live on Sui mainnet, and the door is open. What this page says about a supporter’s deposit — that it cannot be spent, and comes back in full — is the contract’s behaviour rather than the platform’s policy, which is why it can be stated this plainly."
+        proof="The contracts are live on Sui mainnet, and the door is open. What this page says about a supporter’s deposit — that it earns, and that it comes back in full — is the contract’s behaviour rather than the platform’s policy, which is why it can be stated this plainly."
         art={<SocialArt className="w-full" />}
       >
         <Badge tone="neutral">Sui mainnet</Badge>
@@ -144,16 +144,16 @@ export default function SocialPage() {
         />
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
           <Card>
-            <h3 className="text-base font-semibold text-white">If you support</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">If you support</h3>
+            <p className="mt-3 text-body text-px-muted">
               Nothing leaves your wallet for good. You park SUI, the creator earns its yield while
-              it sits there, and you take all of it back whenever you like. Losing your deposit is
-              not a risk the contract makes available to anyone.
+              it sits there, and you take all of it back whenever you like. The contract allows a
+              deposit exactly two destinations: it earns, or it returns to you.
             </p>
           </Card>
           <Card>
-            <h3 className="text-base font-semibold text-white">If you create</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">If you create</h3>
+            <p className="mt-3 text-body text-px-muted">
               Two incomes, side by side: a stream of staking yield from parked support that costs
               your audience nothing, and real revenue from memberships and paid posts — which
               settle on chain, so what you are owed is held by a contract rather than by the
@@ -161,12 +161,11 @@ export default function SocialPage() {
             </p>
           </Card>
           <Card>
-            <h3 className="text-base font-semibold text-white">What holds it together</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
-              No trust in the platform is required for the part that matters. Principal is
-              withdrawable by its owner and by nobody else, harvests are permissionless, and paid
-              content unlocks only against an object on chain. The company is the interface, not
-              the custodian.
+            <h3 className="text-subhead font-semibold text-white">What holds it together</h3>
+            <p className="mt-3 text-body text-px-muted">
+              The contract holds the part that matters. Principal is withdrawable by its owner and
+              by that owner alone, harvests are permissionless, and paid content unlocks against an
+              object on chain. The company is the interface; the chain is the custodian.
             </p>
           </Card>
         </div>
@@ -181,15 +180,15 @@ export default function SocialPage() {
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
           {LOOP.map((item) => (
             <Card key={item.step}>
-              <p className="font-mono text-sm font-semibold uppercase tracking-wide text-px-cyan">
+              <p className="font-mono text-meta font-semibold uppercase tracking-wide text-px-cyan">
                 {item.step}
               </p>
-              <h3 className="mt-2 text-base font-semibold text-white">{item.title}</h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="mt-2 text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="mt-3 text-body text-px-muted">{item.body}</p>
             </Card>
           ))}
         </div>
-        <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-px-faint">
+        <p className="mx-auto mt-8 max-w-3xl text-center text-meta text-px-faint">
           Sui floors a single stake at 1 SUI, so very small creator vaults build fewer rungs and their
           yield arrives in bursts rather than continuously — the platform says so itself rather
           than letting a small creator vault discover it.
@@ -205,8 +204,8 @@ export default function SocialPage() {
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
           {NOVELTIES.map((item) => (
             <Card key={item.title}>
-              <h3 className="text-base font-semibold text-white">{item.title}</h3>
-              <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">{item.body}</p>
+              <h3 className="text-subhead font-semibold text-white">{item.title}</h3>
+              <p className="mt-3 text-body text-px-muted">{item.body}</p>
             </Card>
           ))}
         </div>
@@ -220,18 +219,18 @@ export default function SocialPage() {
         />
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
           <Card>
-            <h3 className="text-base font-semibold text-white">For supporters: free means free</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="text-subhead font-semibold text-white">For supporters: free means free</h3>
+            <p className="mt-3 text-body text-px-muted">
               The cost of parking SUI with a creator is the yield you would have earned staking it
-              yourself — that is the entire price. Your principal is never spent, never staked
-              past your reach, and never subject to anyone’s approval to return.
+              yourself — that is the entire price. Your principal stays inside your reach the whole
+              time, and it returns on your signature alone.
             </p>
           </Card>
           <Card>
-            <h3 className="text-base font-semibold text-white">
+            <h3 className="text-subhead font-semibold text-white">
               For creators: yield is reach, sales are revenue
             </h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <p className="mt-3 text-body text-px-muted">
               Staking yield is small — generating a given monthly amount takes parked principal
               several hundred times that amount. Free support is what converts the people who
               will never pay into a broad base that does not churn. The living comes from
@@ -247,9 +246,11 @@ export default function SocialPage() {
           actions={
             /* One href, so one control: weir.social/join was verified serving registration
                directly, 8 September 2026 — no invitation code, no waiting-list redirect. */
-            <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
-              Support a creator
-            </Button>
+            SOCIAL_URL ? (
+              <Button href={SOCIAL_URL} variant="primary" showExternalIcon={false}>
+                Support a creator
+              </Button>
+            ) : null
           }
         >
           Creators are live on the platform now, each with a creator vault on chain, and the door

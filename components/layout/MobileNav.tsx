@@ -77,7 +77,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
               href={DAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="btn-primary w-full py-3.5 text-base"
+              className="btn-primary w-full py-3.5 text-body"
             >
               Open the vault
               <ArrowUpRight className="h-4 w-4" />
@@ -100,7 +100,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                   key={`${section.title}-${link.label}`}
                   href={link.href}
                   onClick={onClose}
-                  className="-mx-2 rounded-xl px-3 py-3 text-[1.0625rem] text-px-text transition-colors duration-300 hover:bg-white/[0.06] hover:text-white"
+                  className="-mx-2 rounded-xl px-3 py-3 text-body text-px-text transition-colors duration-300 hover:bg-white/[0.06] hover:text-white"
                 >
                   {link.label}
                 </Link>

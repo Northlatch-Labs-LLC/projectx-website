@@ -42,9 +42,9 @@ export default function ChainPage() {
     <>
       <PageHeader
         eyebrow="On chain"
-        title="Everything we run, with the identifier to check it"
+        title="Every deployment, with the identifier to check it"
         lead="Four products, deployed on Sui mainnet. Every package, every shared object and every upgrade capability is listed below with its identifier and a link that opens it on a block explorer."
-        proof="Nothing on this page asks you to take our word for it. That is the entire point of publishing it — an identifier you can open is an argument, and a claim you cannot check is not."
+        proof="Every line here is an identifier you can open on a block explorer, not a claim."
         art={<BuildersArt className="w-full" />}
       >
         <Badge tone="neutral">{NETWORK}</Badge>
@@ -60,7 +60,7 @@ export default function ChainPage() {
         />
 
         <div className="mt-10 overflow-x-auto rounded-2xl border border-white/[0.08]">
-          <table className="w-full min-w-[46rem] border-collapse text-left text-[0.875rem]">
+          <table className="w-full min-w-[46rem] border-collapse text-left text-meta">
             <caption className="sr-only">
               ProtocolX packages deployed on {SECURITY_NETWORK}, with package identifier, upgrade
               count and the current holder of each upgrade capability.
@@ -78,16 +78,16 @@ export default function ChainPage() {
                 <tr key={row.product} className="border-b border-white/[0.06] align-top last:border-0">
                   <th scope="row" className="p-4 text-left font-medium text-white">
                     {row.product}
-                    <span className="mt-1 block text-[0.6875rem] font-normal uppercase tracking-wide text-px-faint">
+                    <span className="mt-1 block text-meta font-normal uppercase tracking-wide text-px-faint">
                       {row.source === 'chain' ? `read from chain · ${SECURITY_READ_AT}` : 'from spec · not re-read'}
                     </span>
                   </th>
                   <td className="p-4">
-                    <span className="block break-all font-mono text-[0.75rem] text-px-muted">
+                    <span className="block break-all font-mono text-meta text-px-muted">
                       {row.packageId}
                     </span>
                     {row.packageOrigin ? (
-                      <span className="mt-1 block break-all font-mono text-[0.6875rem] text-px-faint">
+                      <span className="mt-1 block break-all font-mono text-meta text-px-faint">
                         origin {row.packageOrigin}
                       </span>
                     ) : null}
@@ -96,11 +96,11 @@ export default function ChainPage() {
                     {row.version ?? 'not yet published'}
                   </td>
                   <td className="p-4">
-                    <span className="block break-all font-mono text-[0.75rem] text-px-muted">
+                    <span className="block break-all font-mono text-meta text-px-muted">
                       {row.upgradeCapHolder}
                     </span>
                     {row.upgradeCapId ? (
-                      <span className="mt-1 block break-all font-mono text-[0.6875rem] text-px-faint">
+                      <span className="mt-1 block break-all font-mono text-meta text-px-faint">
                         cap {row.upgradeCapId}
                       </span>
                     ) : null}
@@ -112,15 +112,15 @@ export default function ChainPage() {
         </div>
 
         <Card className="mt-6 border-px-gold/30">
-          <h2 className="text-base font-semibold text-white">
+          <h2 className="text-subhead font-semibold text-white">
             Why the upgrade column is the one to read first
           </h2>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <p className="mt-3 text-body text-px-muted">
             On Sui the holder of a package&rsquo;s UpgradeCap can publish a new version of it. An
-            upgrade cannot change the types of existing objects or remove public functions, but it
-            can add functions and change the behaviour of existing non-public logic. That makes the
-            holder the largest trust assumption in any Sui system, which is why it is published
-            here rather than described. Every upgrade is itself a public transaction.{' '}
+            upgrade cannot change existing object types or remove public functions, but it can add
+            functions and change non-public logic. That makes the holder the largest trust
+            assumption in any Sui system, so it is published here. Every upgrade is itself a public
+            transaction.{' '}
             <Link href="/security" className="text-px-accent underline underline-offset-4">
               What that authority can and cannot do
             </Link>
@@ -133,7 +133,7 @@ export default function ChainPage() {
         <SectionHeader
           eyebrow="Prize Vault"
           title="The objects the pool is made of"
-          lead="The vault's contract is live on Sui mainnet and no interface serves it at present — which changes nothing about what is on chain. Package, pool, treasury, DEX adapter, price feed, liquidity pool and validator, each resolvable below."
+          lead="The vault's contract is live on Sui mainnet and no interface serves it. Package, pool, treasury, DEX adapter, price feed, liquidity pool and validator, each resolvable below."
           proof="These seven identifiers are the deployment record in lib/chain.ts. Every figure this website has ever displayed about the pool was read from them."
         />
         <div className="mt-10">
@@ -141,16 +141,16 @@ export default function ChainPage() {
         </div>
 
         <Card className="mt-6">
-          <h3 className="text-base font-semibold text-white">Calling it needs the coin type</h3>
-          <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+          <h3 className="text-subhead font-semibold text-white">Calling it needs the coin type</h3>
+          <p className="mt-3 text-body text-px-muted">
             The pool is generic over the coin it pays in. Every call must supply that coin as a
-            type argument — omitting it is the single most common reason a correct-looking
-            transaction fails to resolve.
+            type argument. Omitting it is the most common reason a correct-looking transaction
+            fails to resolve.
           </p>
-          <code className="mt-4 block overflow-x-auto rounded-lg border border-white/[0.08] bg-black/40 p-3 font-mono text-[0.8125rem] leading-relaxed text-px-muted">
+          <code className="mt-4 block overflow-x-auto rounded-lg border border-white/[0.08] bg-black/40 p-3 font-mono text-meta text-px-muted">
             --type-args {PRIZE_COIN.type}
           </code>
-          <p className="mt-4 text-[0.875rem] leading-[1.6] text-px-faint">
+          <p className="mt-4 text-meta text-px-faint">
             {PRIZE_COIN.symbol} at {PRIZE_COIN.decimals} decimals. Amounts everywhere on this
             estate are base-unit strings — convert with a big-integer type, never a float.
           </p>
@@ -160,15 +160,15 @@ export default function ChainPage() {
       <Section id="retired">
         <SectionHeader
           eyebrow="Retired, and still standing"
-          title="The deployments we did not take down"
+          title="The deployments left standing"
           lead="A retired deployment is not a deleted one. Both of these are still on chain, still readable, and listed here so that nobody has to guess which pool a given identifier belongs to."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           <Card>
             <span className="label">Retired · in situ</span>
-            <h3 className="mt-3 text-lg font-semibold text-white">{TARGET.label}</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">{TARGET.label}</h3>
+            <p className="mt-3 text-body text-px-muted">
               The v1.0 deployment, taken out of service when v1.0.1 shipped. Its balances were
               migrated at that point, so it holds no depositor funds — which is exactly why it was
               left standing. It is the range the capture-the-flag board runs against.
@@ -187,10 +187,10 @@ export default function ChainPage() {
                 />
               </div>
             ) : (
-              <p className="mt-5 rounded-2xl border border-dashed border-px-gold/30 bg-px-gold/[0.04] p-4 text-[1rem] leading-[1.65] text-px-muted">
+              <p className="mt-5 rounded-2xl border border-dashed border-px-gold/30 bg-px-gold/[0.04] p-4 text-body text-px-muted">
                 <span className="font-semibold text-px-gold">Being finalised.</span> The retired
-                deployment&rsquo;s identifiers are not published yet. They will be listed here, and
-                on the capture-the-flag board, once they are.
+                deployment&rsquo;s identifiers are not published. They will be listed here and on
+                the capture-the-flag board.
               </p>
             )}
             <div className="mt-6">
@@ -202,11 +202,11 @@ export default function ChainPage() {
 
           <Card className="border-px-danger/30">
             <span className="label text-px-danger">Live · never a target</span>
-            <h3 className="mt-3 text-lg font-semibold text-white">The v1.0.1 pool</h3>
-            <p className="mt-3 text-[1rem] leading-[1.65] text-px-muted">
+            <h3 className="mt-3 text-subhead font-semibold text-white">The v1.0.1 pool</h3>
+            <p className="mt-3 text-body text-px-muted">
               The current pool holds real deposits. It is out of scope for the capture-the-flag
-              board and always will be. Anything found here is a real vulnerability and is worth
-              more as a private report than as a flag —{' '}
+              board and always will be. Anything found here is a real vulnerability, worth more as
+              a private report than as a flag —{' '}
               <Link href="/security" className="text-px-accent underline underline-offset-4">
                 the disclosure route
               </Link>{' '}
@@ -228,7 +228,7 @@ export default function ChainPage() {
         <SectionHeader
           eyebrow="Check it"
           title="Open any one of them"
-          lead={`Every identifier on this page links to ${EXPLORER.replace('https://', '')}. Nothing about reading them depends on this website being up, on our API answering, or on us existing.`}
+          lead={`Every identifier on this page links to ${EXPLORER.replace('https://', '')}. Reading them depends on no website, no API and no company.`}
         />
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button href="/verification" variant="primary" className="px-5">
@@ -238,7 +238,7 @@ export default function ChainPage() {
             Index it yourself
           </Button>
         </div>
-        <p className="mt-8 text-center text-[0.875rem] leading-[1.6] text-px-faint">
+        <p className="mt-8 text-center text-meta text-px-faint">
           {CHAIN_OBJECTS.length} vault objects and {SECURITY_PACKAGES.length} product lineages
           listed above, all on {NETWORK}.
         </p>
