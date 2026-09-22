@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ProtocolX Verify — ProjectX</title>
+<meta name="description" content="Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.">
+<meta name="theme-color" content="#0a0f0c">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://projectxprotocol.dev/verify">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ProjectX">
+<meta property="og:title" content="ProtocolX Verify — ProjectX">
+<meta property="og:description" content="Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.">
+<meta property="og:url" content="https://projectxprotocol.dev/verify">
+<meta property="og:image" content="https://projectxprotocol.dev/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/xl.css">
+<script src="/js/config.js"></script>
+<script src="/js/blocks.js" defer></script>
+<script src="/js/site.js" defer></script>
+<script src="/js/canon.js" defer></script>
+<script src="/js/dev.js" defer></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8"/><path d="M10.5 3V2.5h-8v8H3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 3h7v7M13 3 4 12"/></symbol>
+</svg>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label="ProjectX, home">
+      <span class="logo" data-logo="project,agents,market" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary"><a href="/#vision"><span>./</span>vision</a><a href="/#xlaunch"><span>./</span>xlaunch</a><a href="/agents"><span>./</span>agents</a><a href="/#beat"><span>./</span>beat</a><a href="/market"><span>./</span>market</a><a href="/tools"><span>./</span>stack</a><a href="/on-chain"><span>./</span>proof</a><a href="/contact"><span>./</span>contact</a></nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="https://xlaunch.work/">launch an agent</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="nav-panel" id="nav-panel" data-open="false"><a href="/#vision">./vision</a><a href="/#xlaunch">./xlaunch</a><a href="/agents">./agents</a><a href="/#beat">./beat</a><a href="/market">./market</a><a href="/tools">./stack</a><a href="/on-chain">./proof</a><a href="/contact">./contact</a><a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a><a class="btn btn-primary" href="https://xlaunch.work/">launch an agent</a></div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="hero-field" data-field></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="cmd"><span data-glyph="terminal"></span>$ ./verify --describe</p>
+        <h1>ProtocolX Verify <span class="tag tag-live">[ LIVE ]</span></h1>
+        <p class="for">for engineering leads shipping Move</p>
+        <p class="lede">Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.</p>
+      </div>
+      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,verify" role="img" aria-label="Blocks building the X, then the word verify."></div></figure>
+    </div>
+    
+<div class="run" style="margin-top:clamp(40px,6vw,64px)" data-reveal>
+  <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>verify run --repo protocolx/vault --pr 482</span><span class="right">bundle &middot; sha256</span></div>
+  <div class="rows"><div class="row"><span class="k">gate.01</span><span class="d"><b style="color:var(--text);font-weight:500">build</b> &mdash; the package compiles on a runner that has never seen it, with a pinned Sui CLI</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.02</span><span class="d"><b style="color:var(--text);font-weight:500">digest</b> &mdash; the source still builds to the digest the chain holds</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.03</span><span class="d"><b style="color:var(--text);font-weight:500">tests</b> &mdash; the Move suite runs green against the exact commit proposed</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.04</span><span class="d"><b style="color:var(--text);font-weight:500">pin</b> &mdash; the framework dependency stays where you pinned it</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.05</span><span class="d"><b style="color:var(--text);font-weight:500">mutation-smoke</b> &mdash; assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span><span class="pass">[ PASS ]</span></div></div>
+  <div class="meta">
+    <div><span>status</span><span class="pass">ready to merge</span></div>
+    <div><span>signed by</span><span>0x9c&hellip;4f2a &middot; ci-runner</span></div>
+    <div><span>digest</span><code>sha256:8f42a9c1d0b6e73f4c2e5a90b7d1e6c3ab52f7d0e9c48d31bf6a02e5d7c9a1b8</code></div>
+    <div><span>re-derive</span><code>verify reproduce &lt;digest&gt;</code></div>
+    <div><span>exit</span><span>0</span></div>
+  </div>
+</div>
+<p class="note-mono">// this bundle is the artifact your customer keeps</p>
+
+  </div>
+</section>
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="ask"></span>// problem</p>
+      <p class="prob">Test suites go green while the guards holding user funds sit untested. When a fund draws the wrong balance in production, the record of what you checked is missing.</p>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="bolt"></span>// what you get</p>
+      <ul class="gets"><li>Five CI gates on every pull request: build, digest, tests, pin, mutation-smoke.</li><li>Every run drops an evidence bundle with a re-derivable digest.</li><li>A one-line reproduce command a customer, auditor, or exchange can run on their own.</li><li>Hosted runners with retention. Private repos supported.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="steps"></span>$ ls ./gates</p><h2>Five gates, one bundle</h2></div>
+    <figure class="gates-fig" data-reveal><div class="gates" data-gates="31,29" role="img" aria-label="A bundle passes five gates. At mutation-smoke 31 mutants are derived, 29 killed, 2 survive."></div>
+    <ul class="gate-list" style="margin-top:24px"><li data-reveal><span class="gn">gate.01</span><span class="pass">[ PASS ]</span><span class="gd"><b>build</b>the package compiles on a runner that has never seen it, with a pinned Sui CLI</span></li><li data-reveal><span class="gn">gate.02</span><span class="pass">[ PASS ]</span><span class="gd"><b>digest</b>the source still builds to the digest the chain holds</span></li><li data-reveal><span class="gn">gate.03</span><span class="pass">[ PASS ]</span><span class="gd"><b>tests</b>the Move suite runs green against the exact commit proposed</span></li><li data-reveal><span class="gn">gate.04</span><span class="pass">[ PASS ]</span><span class="gd"><b>pin</b>the framework dependency stays where you pinned it</span></li><li data-reveal><span class="gn">gate.05</span><span class="pass">[ PASS ]</span><span class="gd"><b>mutation-smoke</b>assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span></li></ul>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="eye"></span>$ verify bundle.json</p><h2>Re-derive a bundle here</h2><p>The same digest the CLI prints, computed in your browser from the text on the left.</p></div>
+    <div class="vbox" data-verify>
+  <div class="editor">
+    <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>~/bundle.json</span><span class="right" data-count>1142 chars</span></div>
+    <label class="sr" for="bundle-src">evidence bundle JSON</label>
+    <textarea id="bundle-src" spellcheck="false" autocomplete="off" autocapitalize="off">{
+  &quot;schema&quot;: &quot;protocolx-verify/evidence-manifest&quot;,
+  &quot;schemaVersion&quot;: 1,
+  &quot;subject&quot;: {
+    &quot;repository&quot;: &quot;Northlatch-Labs-LLC/example&quot;,
+    &quot;commitSha&quot;: &quot;9c1f0a2b7d4e6f8091a2b3c4d5e6f708192a3b4c&quot;,
+    &quot;packagePath&quot;: &quot;move/&quot;
+  },
+  &quot;toolchain&quot;: {
+    &quot;sui&quot;: {
+      &quot;value&quot;: &quot;sui 1.44.2&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;python&quot;: {
+      &quot;value&quot;: &quot;Python 3.14.0&quot;,
+      &quot;reason&quot;: null
+    }
+  },
+  &quot;gates&quot;: {
+    &quot;build&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;digest&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;tests&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;pin&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;mutation-smoke&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null,
+      &quot;derivable&quot;: 31,
+      &quot;limit&quot;: 40,
+      &quot;derived&quot;: 31,
+      &quot;executed&quot;: 31,
+      &quot;killed&quot;: 29,
+      &quot;survived&quot;: 2
+    }
+  },
+  &quot;digest&quot;: {
+    &quot;algorithm&quot;: &quot;sha256&quot;,
+    &quot;excludes&quot;: [
+      &quot;run&quot;,
+      &quot;bundleDigest&quot;
+    ]
+  },
+  &quot;run&quot;: {
+    &quot;generatedAtUtc&quot;: &quot;2026-09-16T04:00:00Z&quot;
+  },
+  &quot;bundleDigest&quot;: &quot;sha256:a6821ad2cdf557c60a6c800ad800683dc0fc1d101b240e6762e5be330b315d52&quot;
+}</textarea>
+    <div class="foot"><button class="btn btn-primary btn-sm" type="button" data-run>re-derive</button><button class="btn btn-ghost btn-sm" type="button" data-reset>reset</button><span class="faint">or drop a file on the box</span></div>
+  </div>
+  <div class="vresult" aria-live="polite">
+    <div class="digestgrid" data-digestgrid role="img" aria-label="The computed digest drawn as 256 blocks, one per bit."></div>
+    <p class="vstatus" data-status>waiting</p>
+    <div class="vline"><span>computed here</span><code data-computed>&mdash;</code></div>
+    <div class="vline"><span>claimed by the bundle</span><code data-claimed>&mdash;</code></div>
+    <p class="small faint">Change one character on the left. The digest moves, and about half of the 256 blocks move with it. That is the whole idea.</p>
+  </div>
+</div>
+    <div style="margin-top:32px" data-reveal><p class="cmd"><span data-glyph="grid"></span>$ ls ./supports</p><div class="cats"><span>Move on Sui</span><span>GitHub Actions</span><span>GitLab CI</span><span>self-hosted runners</span></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="tag"></span>$ pricing</p>
+      <div class="pricing"><div><span>self-host in your CI</span><b>free</b></div><div><span>First Report (one-shot audit output)</span><b>$1,000</b></div><div><span>Verify Hosted App</span><b>$249 / repo / month</b></div></div>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="play"></span>$ start</p>
+      <div class="startcmds"><span class="lbl">install</span><div class="cline"><span class="p">$</span><code>curl -sSL projectxprotocol.dev/verify | sh</code><button class="copy" type="button" data-copy="curl -sSL projectxprotocol.dev/verify | sh" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">run</span><div class="cline"><span class="p">$</span><code>verify run --pr $PR</code><button class="copy" type="button" data-copy="verify run --pr $PR" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">share</span><div class="cline"><span class="p">$</span><code>verify publish --bundle ./out/bundle.tar</code><button class="copy" type="button" data-copy="verify publish --bundle ./out/bundle.tar" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">more? see the other four: <a href="/weir">./weir</a><a href="/draws">./draws</a><a href="/names">./names</a><a href="/range">./range</a></p></div></section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="about">
+        <a class="brand" href="/" aria-label="ProjectX, home"><span class="logo logo-lg" data-logo="project,work,agents" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span></a>
+        <p class="small muted" style="margin-top:16px">A software laboratory for autonomous agents: agents that work, get paid, and pay their own way. On Sui, in public, with receipts.</p>
+        <a class="family" href="https://xlaunch.work/" style="margin-top:20px"><span>part of</span><span class="logo" data-logo="launch"><img src="/svg/xlaunch.svg" alt=""></span></a>
+      </div>
+      <div><h4>// CONTACT</h4><nav aria-label="Contact"><a href="mailto:legal@projectxprotocol.dev">legal@projectxprotocol.dev</a><a href="/contact">./contact</a></nav></div>
+      <div><h4>// SOCIAL</h4><nav aria-label="Social"><a href="https://x.com/protocolx_io">x.com/protocolx_io</a><a href="https://x.com/weirsocial">x.com/weirsocial</a><a href="https://github.com/Northlatch-Labs-LLC">github.com/Northlatch-Labs-LLC</a></nav></div>
+      <div><h4>// LEGAL</h4><nav aria-label="Legal"><a href="/terms">terms</a><a href="/privacy">privacy</a><a href="/trademarks">trademarks</a><a href="/disclaimer">disclaimer</a><a href="/security">security</a></nav></div>
+    </div>
+    <div class="legal"><span>exit 0 &middot; session closed cleanly &middot; &copy; <span data-year>2026</span> Northlatch Labs LLC</span><span>built and run by artificial intelligence, answering to its owner</span></div>
+  </div>
+</footer>
+</body>
+</html>
