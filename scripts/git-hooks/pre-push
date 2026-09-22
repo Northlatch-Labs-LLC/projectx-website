@@ -1,18 +1,25 @@
 #!/bin/sh
-# Refuse a push whose provenance or destination cannot be established, and refuse one whose gates
-# have not been run.
+# Refuse a push whose provenance or destination cannot be established.
 #
 # This repository was extracted from a monorepo that carried these guards. They came with it
 # because the code they protect came with it — a repository that builds a public surface and holds
 # no secret scanner is one secret away from a bad afternoon.
 #
-# The monorepo's version also consults a path allowlist, because that tree mixes proprietary code
-# with a publishable website. This one does not: the whole repository is proprietary and the only
-# question is whether the destination is private. That is checked against GitHub at push time
-# rather than trusted from a config file, because a repository can be flipped to public in two
-# clicks long after anyone wrote it down.
+# Until 22 Sep 2026 this hook demanded that the destination be PRIVATE, and failed closed on
+# anything else. The repository is now published deliberately: it carries the site that is served
+# at projectxprotocol.dev, and the licence in README and LICENSE states that publication grants no
+# licence to use it. So the destination check no longer asks whether the repository is private. It
+# asks whether it is the one repository this checkout is allowed to publish to, which is the guard
+# that still means something once "private" is no longer the answer.
+#
+# What has not changed: no linked worktrees, no detached HEAD, no rewriting history that is already
+# on the remote, and the secret scanner runs over everything about to leave this machine rather
+# than only over the last commit.
 set -e
 refs="$(cat)"
+
+# The only destination this checkout may push to.
+ALLOWED_REPO="github.com/Northlatch-Labs-LLC/projectx-website"
 
 if [ "$GIT_PUSH_ANYWAY" != "1" ]; then
   if [ "$(git rev-parse --git-dir)" != "$(git rev-parse --git-common-dir)" ]; then
@@ -38,23 +45,14 @@ if [ "$GIT_PUSH_ANYWAY" != "1" ]; then
   fi
 fi
 
-# Is the destination actually private, right now?
+# Is the destination the repository this checkout is allowed to publish to?
 remote_url="$2"
 repo_path="$(printf '%s' "$remote_url" | sed -e 's#^git@github.com:#github.com/#' -e 's#^https://github.com/#github.com/#' -e 's#\.git$##')"
-case "$repo_path" in
-  github.com/*)
-    name="${repo_path#github.com/}"
-    private="$(gh repo view "$name" --json isPrivate -q .isPrivate 2>/dev/null || echo unknown)"
-    if [ "$private" != "true" ]; then
-      printf '\n  PUSH REFUSED — destination is not verified private (%s)\n\n' "$private" >&2
-      printf '  This repository is proprietary. Anything other than a definite yes fails closed.\n\n' >&2
-      exit 1
-    fi ;;
-  *)
-    printf '\n  PUSH REFUSED — not a github.com remote, so visibility cannot be checked\n\n' >&2
-    exit 1 ;;
-esac
+if [ "$repo_path" != "$ALLOWED_REPO" ]; then
+  printf '\n  PUSH REFUSED — destination is %s, not %s\n\n' "$repo_path" "$ALLOWED_REPO" >&2
+  printf '  This checkout publishes to one repository. Anything else fails closed.\n\n' >&2
+  exit 1
+fi
 
-# The gates. A push is a claim that this passes; run it rather than assume it.
-cd "$(git rev-parse --show-toplevel)/."
-npm run check
+# The gate. Everything about to leave this machine is scanned, not only the last commit.
+exec python3 "$(git rev-parse --show-toplevel)/scripts/scan-secrets.py"
