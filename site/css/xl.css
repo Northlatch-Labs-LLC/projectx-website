@@ -220,6 +220,7 @@ code, kbd, pre { font-family: var(--mono); }
   .nav-panel[data-open="true"] { display: grid; gap: 2px; padding: var(--s3) var(--gutter) var(--s5);
     border-top: 1px solid var(--line); }
   .nav-panel a:not(.btn) { padding: var(--s3) 0; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .nav-panel .nav-group { padding: var(--s4) 0 var(--s1); color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
   .nav-panel .btn { margin-top: var(--s4); }
 }
 
