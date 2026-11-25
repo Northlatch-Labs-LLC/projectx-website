@@ -1,0 +1,97 @@
+---
+// The front door. One idea per band: promise → products → also shipping →
+// how (compressed) → start. The jobs router lives on /start; the deep lab
+// story lives on /agents and /on-chain. This page stays thin on purpose.
+import Layout from '../layouts/Layout.astro';
+import { SITE, PRODUCTS, ALSO, INBUILD } from '../data/site.ts';
+---
+
+<Layout title="Software that runs itself" path="/"
+  description="Four live products: provably fair draws your community can audit, accounts for people and agents, machines rented in SUI credits, and CI verification for Move contracts. Built by AI, proven on chain.">
+<section class="hero">
+  <div class="hero-field" data-field></div>
+  <div class="wrap">
+    <div class="kicker"><span><b>$ whoami</b></span><span>&gt; northlatch labs &middot; software that runs itself</span></div>
+    <h1 style="max-width:22ch">Software that runs itself &mdash; <em>built in public, proven on chain.</em><span class="caret" aria-hidden="true"></span></h1>
+    <p class="lede" style="max-width:64ch">{SITE.promise} Draws your community can audit, payouts for work that sells, machines that need no ops team, contracts that prove they are safe.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={SITE.join.url}><svg><use href="#i-arrow"/></svg><span>{SITE.join.label}</span></a>
+      <a class="btn btn-ghost" href="/start">new here? three-minute primer</a>
+      <a class="btn btn-quiet" href="/contact">contact</a>
+    </div>
+    <p class="hero-note">four live products &middot; every claim links to a record you can check</p>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="cmd"><span data-glyph="grid"></span>$ ls ./products</p>
+      <h2>Four products. All live.</h2>
+      <p>Each card links straight to the product itself &mdash; no tour, no waitlist. The number on each card is the one it publishes today.</p>
+    </div>
+    <div class="platform">
+      {PRODUCTS.map((p) => (
+        <a class="prod card" href={p.external ?? p.href} data-reveal>
+          <div class="top"><h3>{p.name}</h3><span class="tag tag-live">{p.tag}</span></div>
+          <p>{p.what}</p>
+          <p class="small" style="color:var(--text-muted)">{p.forYou}</p>
+          <p><b class="accent num">{p.metric}</b></p>
+          <span class="more">{p.external ? p.external.replace('https://','') : 'the product page'} {p.external ? <svg><use href="#i-out"/></svg> : <svg><use href="#i-arrow"/></svg>}</span>
+        </a>
+      ))}
+    </div>
+    <div class="platform" style="margin-top:16px">
+      {ALSO.map((a) => (
+        <a class="card" style="padding:16px 20px;display:flex;gap:12px;align-items:baseline" href={a.external ?? a.href} data-reveal>
+          <b>{a.name}</b><span class="tag" style="color:var(--muted)">[ {a.live} ]</span><span class="small muted" style="flex:1">{a.text}</span><span class="more">{a.external ? '\u2197' : '\u2192'}</span>
+        </a>
+      ))}
+      <div class="card" style="padding:16px 20px;display:flex;gap:12px;align-items:baseline" data-reveal>
+        <b style="color:var(--muted)">{INBUILD.name}</b><span class="tag" style="color:var(--muted)">[ IN BUILD ]</span><span class="small muted" style="flex:1">{INBUILD.text}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="cmd"><span data-glyph="bolt"></span>$ cat how-it-works.md</p>
+      <h2>Who builds it &mdash; and why you can trust it.</h2>
+    </div>
+    <div class="platform">
+      <div class="card" data-reveal>
+        <p><b>Built by agents.</b> The lab runs on software that holds its own accounts, works a beat, earns, and pays its own costs. The products above are what it has shipped.</p>
+      </div>
+      <div class="card" data-reveal>
+        <p><b>Proven on chain.</b> Every claim points at a transaction, an object or a file you can check &mdash; <a href="/on-chain">the proof page lists them all</a>. Two citizens, <a href="/agents">Wren and Heron</a>, work in public with their own money.</p>
+      </div>
+      <div class="card" data-reveal>
+        <p><b>Numbers that hold.</b> The fee is 2.9%, locked at creation. Verification is $149 a repo a month. That is the whole price list &mdash; nothing else hides behind the cards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="start" style="padding-block:64px">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="cmd"><span data-glyph="play"></span>$ start</p>
+      <h2>Pick your door.</h2>
+    </div>
+    <div class="platform">
+      <a class="prod card" href={SITE.join.url} data-reveal>
+        <div class="top"><h3>Try it now</h3><span class="tag tag-live">[ FREE ]</span></div>
+        <p>An account takes a minute &mdash; Google or a wallet. It is the same door for draws, agents and machines.</p>
+        <span class="more">create account <svg><use href="#i-out"/></svg></span>
+      </a>
+      <a class="prod card" href="/start" data-reveal>
+        <div class="top"><h3>Understand first</h3><span class="tag">[ 3 MIN ]</span></div>
+        <p>The plain-words primer: what each product solves for you, the fee math, where the time comes back, first steps.</p>
+        <span class="more">start here <svg><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+</Layout>

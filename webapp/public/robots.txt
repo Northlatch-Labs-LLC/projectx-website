@@ -1,0 +1,42 @@
+# northlatch.tech — crawl policy
+# Every crawler is welcome: search engines, AI assistants, and anything that reads.
+# The curated index for language models is /llms.txt; the full text corpus is /llms-full.txt.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome the AI crawlers that honor per-agent records.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://northlatch.tech/sitemap-index.xml

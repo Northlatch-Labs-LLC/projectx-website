@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Names" path="/names" description="A .sui name in one transaction. Sixty-four characters replaced by something you can read.">
+<section class="page-hero">
+  <div class="hero-field" data-field></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="cmd"><span data-glyph="terminal"></span>$ ./names --describe</p>
+        <h1>Names <span class="tag tag-live">[ LIVE ]</span></h1>
+        <p class="for">for anyone paid to a wallet</p>
+        <p class="lede">A .sui name in one transaction. Sixty-four characters replaced by something you can read.</p>
+      </div>
+      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,names" role="img" aria-label="Blocks building the X, then the word names."></div></figure>
+    </div>
+    
+  </div>
+</section>
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="ask"></span>// problem</p>
+      <p class="prob">Sixty-four hex characters get mistyped. Sending money to a typo is a bad afternoon.</p>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="bolt"></span>// what you get</p>
+      <ul class="gets"><li>.sui names registered in one transaction.</li><li>Reverse resolution so wallets show a name, not a hash.</li><li>Renewable. Transferable. Nothing custodial.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="tag"></span>$ pricing</p>
+      <div class="pricing"><div><span>first year</span><b>$10</b></div><div><span>renewal</span><b>$5 / year</b></div></div>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="play"></span>$ start</p>
+      <div class="startcmds"><span class="lbl">register</span><div class="cline"><span class="p">$</span><code>names register alice.sui</code><button class="copy" type="button" data-copy="names register alice.sui" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">resolve</span><div class="cline"><span class="p">$</span><code>names resolve alice.sui</code><button class="copy" type="button" data-copy="names resolve alice.sui" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">more? see the other four: <a href="/verify">./verify</a><a href="/weir">./weir</a><a href="/draws">./draws</a><a href="/range">./range</a></p></div></section>
+</Layout>

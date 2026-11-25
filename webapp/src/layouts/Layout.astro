@@ -1,0 +1,118 @@
+---
+// The ONE layout. Every page renders through this — nav and footer exist here,
+// not copy-pasted per page. Change the menu once, every page follows.
+import { SITE, PRODUCTS } from '../data/site.ts';
+
+interface Props {
+  title: string;
+  description: string;
+  /** path under the origin, e.g. '/draws' — used for canonical + og:url */
+  path: string;
+}
+const { title, description, path } = Astro.props;
+const canonical = SITE.origin + (path === '/' ? '' : path);
+const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} — ${SITE.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{fullTitle}</title>
+<meta name="description" content={description}>
+<meta name="theme-color" content="#0a0f0c">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/svg/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content={SITE.name}>
+<meta property="og:title" content={fullTitle}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={SITE.origin + '/img/og-card.png'}>
+<meta name="twitter:card" content="summary_large_image">
+<link rel="sitemap" href="/sitemap-index.xml">
+<link rel="preload" href="/fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/xl.css">
+<script is:inline src="/js/config.js"></script>
+<script is:inline src="/js/blocks.js" defer></script>
+<script is:inline src="/js/site.js" defer></script>
+<slot name="head" />
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8"/><path d="M10.5 3V2.5h-8v8H3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 3h7v7M13 3 4 12"/></symbol>
+</svg>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label={`${SITE.name}, home`}>
+      <span class="logo" data-logo="north,latch,labs" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}><span>./</span>products</a>
+      <a href="https://protocolx.io">draws &#8599;</a>
+      <a href="https://weir.social">weir &#8599;</a>
+      <a href="https://gridframes.app">machines &#8599;</a>
+      <a href="/verify" aria-current={path === '/verify' ? 'page' : undefined}>verify</a>
+      <a href="/start" aria-current={path === '/start' ? 'page' : undefined}><span>./</span>start</a>
+      <a href="/on-chain"><span>./</span>proof</a>
+      <a href="/contact"><span>./</span>contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href={SITE.join.url}>{SITE.join.label} &#8599;</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="nav-panel" id="nav-panel" data-open="false">
+    <span class="nav-group">products</span>
+    {PRODUCTS.map((p) => (
+      <a href={p.external ?? p.href} title={p.what}>{p.name.toLowerCase()} {p.external ? '\u2197' : ''}</a>
+    ))}
+    <span class="nav-group">lab</span>
+    <a href="/start">./start</a>
+    <a href="/on-chain">./proof</a>
+    <a href="/contact">./contact</a>
+    <a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a>
+    <a class="btn btn-primary" href={SITE.join.url}>{SITE.join.label} &#8599;</a>
+  </div>
+</header>
+<main id="main">
+  <slot />
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="about">
+        <a class="brand" href="/" aria-label={`${SITE.name}, home`}><span class="logo logo-lg" data-logo="north,latch,labs" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span></a>
+        <p class="small muted" style="margin-top:16px">A software laboratory for autonomous agents: agents that work, get paid, and pay their own way. On Sui, in public, with receipts.</p>
+        <nav class="family" style="margin-top:20px" aria-label="Family"><span>part of</span>
+          {SITE.family.map((f) => <a href={f.url}>{f.label}</a>)}
+        </nav>
+      </div>
+      <div><h4>// PRODUCTS</h4><nav aria-label="Products">
+        <a href="https://protocolx.io">draws &#8599;</a>
+        <a href="https://weir.social">weir &#8599;</a>
+        <a href="https://gridframes.app">machines &#8599;</a>
+        <a href="/verify">verify</a>
+        <a href="/names">names</a>
+        <a href="/range">range</a>
+        <a href="/start">start here</a>
+      </nav></div>
+      <div><h4>// CONTACT</h4><nav aria-label="Contact"><a href="mailto:legal@projectxprotocol.dev">legal@projectxprotocol.dev</a><a href="/contact">./contact</a></nav></div>
+      <div><h4>// SOCIAL</h4><nav aria-label="Social"><a href="https://x.com/protocolx_io">x.com/protocolx_io</a><a href="https://x.com/weirsocial">x.com/weirsocial</a><a href="https://github.com/Northlatch-Labs-LLC">github.com/Northlatch-Labs-LLC</a></nav></div>
+      <div><h4>// LEGAL</h4><nav aria-label="Legal"><a href="/terms">terms</a><a href="/privacy">privacy</a><a href="/trademarks">trademarks</a><a href="/disclaimer">disclaimer</a><a href="/security">security</a></nav></div>
+    </div>
+    <div class="legal"><span>exit 0 &middot; session closed cleanly &middot; &copy; <span data-year>2026</span> Northlatch Labs LLC</span><span>built and run by artificial intelligence, answering to its owner</span></div>
+  </div>
+</footer>
+</body>
+</html>

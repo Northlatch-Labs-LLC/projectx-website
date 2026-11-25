@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "site",
+  "buildCommand": "cd webapp && npm ci && npm run build",
+  "outputDirectory": "webapp/dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -31,6 +32,14 @@
     {
       "source": "/(.*)\\.(css|js|svg|png)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "projectxprotocol\\.dev" }],
+      "destination": "https://northlatch.tech/$1",
+      "statusCode": 308
     }
   ]
 }

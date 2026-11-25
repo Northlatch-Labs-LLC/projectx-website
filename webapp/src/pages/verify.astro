@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site.ts';
+---
+<Layout title="ProtocolX Verify" path="/verify" description="Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.">
+  <Fragment slot="head">
+    <script is:inline src="/js/canon.js" defer></script>
+    <script is:inline src="/js/dev.js" defer></script>
+  </Fragment>
+<section class="page-hero">
+  <div class="hero-field" data-field></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="cmd"><span data-glyph="terminal"></span>$ ./verify --describe</p>
+        <h1>ProtocolX Verify <span class="tag tag-live">[ LIVE ]</span></h1>
+        <p class="for">for engineering leads shipping Move</p>
+        <p class="lede">Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.</p>
+      </div>
+      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,verify" role="img" aria-label="Blocks building the X, then the word verify."></div></figure>
+    </div>
+    
+<div class="run" style="margin-top:clamp(40px,6vw,64px)" data-reveal>
+  <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>verify run --repo example/pkg --pr 482 &middot; illustrative</span><span class="right">bundle &middot; sha256</span></div>
+  <div class="rows"><!-- illustrative: gate names and counts are what a real run reports; the repo and PR named here are examples --><div class="row"><span class="k">gate.01</span><span class="d"><b style="color:var(--text);font-weight:500">build</b> &mdash; the package compiles on a runner that has never seen it, with a pinned Sui CLI</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.02</span><span class="d"><b style="color:var(--text);font-weight:500">digest</b> &mdash; the source still builds to the digest the chain holds</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.03</span><span class="d"><b style="color:var(--text);font-weight:500">tests</b> &mdash; the Move suite runs green against the exact commit proposed</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.04</span><span class="d"><b style="color:var(--text);font-weight:500">pin</b> &mdash; the framework dependency stays where you pinned it</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.05</span><span class="d"><b style="color:var(--text);font-weight:500">mutation-smoke</b> &mdash; assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span><span class="pass">[ PASS ]</span></div></div>
+  <div class="meta">
+    <div><span>status</span><span class="pass">ready to merge</span></div>
+    <div><span>engine</span><span>protocolx-verify &middot; self-gates</span></div>
+    <div><span>digest</span><code>sha256:8f42a9c1d0b6e73f4c2e5a90b7d1e6c3ab52f7d0e9c48d31bf6a02e5d7c9a1b8</code></div>
+    <div><span>re-derive</span><code>verify reproduce &lt;digest&gt;</code></div>
+    <div><span>exit</span><span>0</span></div>
+  </div>
+</div>
+<p class="note-mono">// this bundle is the artifact your customer keeps</p>
+
+  </div>
+</section>
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="ask"></span>// problem</p>
+      <p class="prob">Test suites go green while the guards holding user funds sit untested. When a fund draws the wrong balance in production, the record of what you checked is missing.</p>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="bolt"></span>// what you get</p>
+      <ul class="gets"><li>Five CI gates on every pull request: build, digest, tests, pin, mutation-smoke.</li><li>Every run drops an evidence bundle with a re-derivable digest.</li><li>A one-line reproduce command a customer, auditor, or exchange can run on their own.</li><li>Hosted runners with retention. Private repos supported.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="steps"></span>$ ls ./gates</p><h2>Five gates, one bundle</h2></div>
+    <figure class="gates-fig" data-reveal><div class="gates" data-gates="31,29" role="img" aria-label="A bundle passes five gates. At mutation-smoke 31 mutants are derived, 29 killed, 2 survive."></div>
+    <ul class="gate-list" style="margin-top:24px"><li data-reveal><span class="gn">gate.01</span><span class="pass">[ PASS ]</span><span class="gd"><b>build</b>the package compiles on a runner that has never seen it, with a pinned Sui CLI</span></li><li data-reveal><span class="gn">gate.02</span><span class="pass">[ PASS ]</span><span class="gd"><b>digest</b>the source still builds to the digest the chain holds</span></li><li data-reveal><span class="gn">gate.03</span><span class="pass">[ PASS ]</span><span class="gd"><b>tests</b>the Move suite runs green against the exact commit proposed</span></li><li data-reveal><span class="gn">gate.04</span><span class="pass">[ PASS ]</span><span class="gd"><b>pin</b>the framework dependency stays where you pinned it</span></li><li data-reveal><span class="gn">gate.05</span><span class="pass">[ PASS ]</span><span class="gd"><b>mutation-smoke</b>assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span></li></ul></figure>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="eye"></span>$ verify bundle.json</p><h2>Re-derive a bundle here</h2><p>The same digest the CLI prints, computed in your browser from the text on the left.</p></div>
+    <div class="vbox" data-verify>
+  <div class="editor">
+    <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>~/bundle.json</span><span class="right" data-count>1142 chars</span></div>
+    <label class="sr" for="bundle-src">evidence bundle JSON</label>
+    <textarea is:raw id="bundle-src" spellcheck="false" autocomplete="off" autocapitalize="off">{
+  &quot;schema&quot;: &quot;protocolx-verify/evidence-manifest&quot;,
+  &quot;schemaVersion&quot;: 1,
+  &quot;subject&quot;: {
+    &quot;repository&quot;: &quot;Northlatch-Labs-LLC/example&quot;,
+    &quot;commitSha&quot;: &quot;9c1f0a2b7d4e6f8091a2b3c4d5e6f708192a3b4c&quot;,
+    &quot;packagePath&quot;: &quot;move/&quot;
+  },
+  &quot;toolchain&quot;: {
+    &quot;sui&quot;: {
+      &quot;value&quot;: &quot;sui 1.44.2&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;python&quot;: {
+      &quot;value&quot;: &quot;Python 3.14.0&quot;,
+      &quot;reason&quot;: null
+    }
+  },
+  &quot;gates&quot;: {
+    &quot;build&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;digest&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;tests&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;pin&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null
+    },
+    &quot;mutation-smoke&quot;: {
+      &quot;status&quot;: &quot;pass&quot;,
+      &quot;reason&quot;: null,
+      &quot;derivable&quot;: 31,
+      &quot;limit&quot;: 40,
+      &quot;derived&quot;: 31,
+      &quot;executed&quot;: 31,
+      &quot;killed&quot;: 29,
+      &quot;survived&quot;: 2
+    }
+  },
+  &quot;digest&quot;: {
+    &quot;algorithm&quot;: &quot;sha256&quot;,
+    &quot;excludes&quot;: [
+      &quot;run&quot;,
+      &quot;bundleDigest&quot;
+    ]
+  },
+  &quot;run&quot;: {
+    &quot;generatedAtUtc&quot;: &quot;2026-09-16T04:00:00Z&quot;
+  },
+  &quot;bundleDigest&quot;: &quot;sha256:a6821ad2cdf557c60a6c800ad800683dc0fc1d101b240e6762e5be330b315d52&quot;
+}</textarea>
+    <div class="foot"><button class="btn btn-primary btn-sm" type="button" data-run>re-derive</button><button class="btn btn-ghost btn-sm" type="button" data-reset>reset</button><span class="faint">or drop a file on the box</span></div>
+  </div>
+  <div class="vresult" aria-live="polite">
+    <div class="digestgrid" data-digestgrid role="img" aria-label="The computed digest drawn as 256 blocks, one per bit."></div>
+    <p class="vstatus" data-status>waiting</p>
+    <div class="vline"><span>computed here</span><code data-computed>&mdash;</code></div>
+    <div class="vline"><span>claimed by the bundle</span><code data-claimed>&mdash;</code></div>
+    <p class="small faint">Change one character on the left. The digest moves, and about half of the 256 blocks move with it. That is the whole idea.</p>
+  </div>
+</div>
+    <div style="margin-top:32px" data-reveal><p class="cmd"><span data-glyph="grid"></span>$ ls ./supports</p><div class="cats"><span>Move on Sui</span><span>GitHub Actions</span><span>GitLab CI</span><span>self-hosted runners</span></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap twocol">
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="tag"></span>$ pricing</p>
+      <div class="pricing"><div><span>the Action, in your own CI</span><b>free</b></div><div><span>First Report (one-shot audit output)</span><b>$1,000</b></div><div><span>The App, hosted by us</span><b>$149 / repo / month</b></div></div>
+    </div>
+    <div data-reveal>
+      <p class="cmd"><span data-glyph="play"></span>$ start</p>
+      <div class="startcmds"><span class="lbl">install &middot; one workflow step</span><div class="cline"><span class="p">$</span><code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code><button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">or scaffold it with the installer</span><div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">run</span><div class="cline"><span class="p">$</span><code>git push &amp;&amp; open the check run</code><button class="copy" type="button" data-copy="git push &amp;&amp; open the check run" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">share</span><div class="cline"><span class="p">$</span><code>download bundle.json from the run artifacts</code><button class="copy" type="button" data-copy="download bundle.json from the run artifacts" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div><p class="small faint" style="margin-top:16px">// downloaded, then run — not piped. Read the script first; --check prints without writing.</p>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">more? see the other four: <a href="/weir">./weir</a><a href="/draws">./draws</a><a href="/names">./names</a><a href="/range">./range</a></p></div></section>
+</Layout>

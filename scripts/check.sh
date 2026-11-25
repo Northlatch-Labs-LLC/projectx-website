@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Local check for a static site. No build, no npm, no Next.js: this repository serves
-# hand-written HTML from site/ through Vercel, so the checks are the ones a static site
-# can actually fail — links, claims, secrets, deploy config, and the machine surface.
+# Local check for the site. The site is the Astro app in webapp/, built to
+# webapp/dist and served by Vercel from northlatch.tech (projectxprotocol.dev
+# 308-redirects to it). The build is the first gate: Astro fails on dead
+# internal links, and its postbuild regenerates llms.txt/llms-full.txt with a
+# route-set check that fails on missing or phantom pages. Everything after the
+# build checks the artifact that actually ships.
 #
 #   bash scripts/check.sh
 #
@@ -27,9 +30,12 @@ else
   fail "vercel.json"
 fi
 # The rules the site depends on, present in the file it will ship with:
-for pattern in '"outputDirectory": "site"' 'Content-Security-Policy' 'woff2' 'css|js|svg|png'; do
+for pattern in '"outputDirectory": "webapp/dist"' 'Content-Security-Policy' 'woff2' 'css|js|svg|png' 'northlatch.tech'; do
   grep -q "$pattern" vercel.json || { printf 'missing in vercel.json: %s\n' "$pattern"; fail "deploy config"; }
 done
+# The legacy domain must redirect to the apex, at the host level (previews exempt):
+grep -q '"type": "host"' vercel.json && grep -q 'projectxprotocol' vercel.json \
+  || { printf 'missing the .dev host-conditioned redirect\n'; fail "deploy config"; }
 # The form is first-party: the readdy allowance must never return.
 if grep -q 'readdy' vercel.json; then
   printf 'the readdy CSP allowance is back in vercel.json\n'
@@ -37,10 +43,17 @@ if grep -q 'readdy' vercel.json; then
 fi
 printf '\033[32mrequired rules present\033[0m\n'
 
+hr "Build"
+# Astro fails on dead internal links; postbuild regenerates the llms surface
+# and fails on a route set that does not match the built pages.
+( cd webapp && npm run build ) || fail "astro build"
+printf '\033[32mbuild green (dead links would have failed it)\033[0m\n'
+
 hr "Claims"
 # Copy that was wrong once must not return — denylist in config/claims-banned.json.
-# Source-only; no network, so it cannot pass for the wrong reason.
-"$NODE" --no-warnings scripts/verify-claims.mjs || fail "claims check"
+"$NODE" --no-warnings scripts/verify-claims.mjs || fail "claims check (baseline)"
+"$NODE" --no-warnings scripts/verify-claims.mjs webapp/src/data/*.ts webapp/src/layouts/*.astro webapp/src/pages/*.astro || fail "claims check (sources)"
+"$NODE" --no-warnings scripts/verify-claims.mjs webapp/dist/*.html || fail "claims check (dist)"
 
 hr "Secrets"
 # The scanner reads staged files inside a commit; outside one it takes explicit paths.
@@ -48,48 +61,62 @@ if git diff --cached --name-only 2>/dev/null | grep -q .; then
   python3 scripts/scan-secrets.py || fail "secret scan"
 else
   printf 'nothing staged — scanning the working tree instead\n'
-  python3 scripts/scan-secrets.py site api scripts config README.md || fail "secret scan"
+  python3 scripts/scan-secrets.py site webapp/src webapp/scripts webapp/public api scripts config README.md || fail "secret scan"
 fi
 
-hr "Links"
-# Every internal href/src resolves to a file in site/, every fragment to an id in its page.
-"$NODE" --no-warnings scripts/check-links.mjs || fail "link check"
-
-hr "Machine surface"
-# robots, sitemap, llms: the URL set must equal the pages that actually exist.
-if [ ! -f site/robots.txt ]; then printf 'site/robots.txt missing\n'; fail "robots.txt"; fi
-grep -q 'Sitemap: https://projectxprotocol.dev/sitemap.xml' site/robots.txt \
-  || { printf 'robots.txt does not name the sitemap\n'; fail "robots.txt"; }
-if [ ! -f site/sitemap.xml ]; then printf 'site/sitemap.xml missing\n'; fail "sitemap.xml"; fi
-if [ ! -f site/.well-known/security.txt ] || [ ! -f site/.well-known/agent-card.json ]; then
-  printf '.well-known surface incomplete\n'; fail ".well-known"
-fi
-"$NODE" -e 'JSON.parse(require("fs").readFileSync("site/.well-known/agent-card.json","utf8"))' \
-  || { printf 'agent-card.json does not parse\n'; fail "agent-card.json"; }
+hr "Links (dist)"
+# The build already fails on dead links; this re-checks the artifact, not the sources.
 "$NODE" -e '
-const { readFileSync, readdirSync } = require("fs");
-const pages = readdirSync("site").filter(f=>f.endsWith(".html")).map(f=>f==="index.html"?"/":"/"+f.replace(/\.html$/,"")).filter(r=>r!=="/404").sort();
-const xml = readFileSync("site/sitemap.xml","utf8");
-const inSitemap = [...xml.matchAll(/<loc>https:\/\/projectxprotocol\.dev(\/[a-z0-9-]*)?<\/loc>/g)].map(m=>m[1]||"/").sort();
-const a = pages.join(","), b = inSitemap.join(",");
-if (a !== b) { console.error("sitemap set differs from pages:\n  pages:   "+a+"\n  sitemap: "+b); process.exit(1); }
-console.log("sitemap == pages ("+pages.length+" routes)");
-' || fail "sitemap URL set"
-# llms-full.txt is generated from the HTML; regenerating must produce no diff.
-"$NODE" --no-warnings scripts/gen-llms.mjs || fail "llms generation"
-if ! git diff --quiet -- site/llms-full.txt site/llms.txt 2>/dev/null; then
-  printf '\033[31mllms-full.txt or llms.txt is stale — regen produced a diff; commit the regenerated files\033[0m\n'
-  git diff --stat -- site/llms-full.txt site/llms.txt
-  fail "llms surface"
-fi
+const { readFileSync, readdirSync, existsSync } = require("fs");
+const dir = "webapp/dist";
+const bad = [];
+for (const f of readdirSync(dir).filter(f=>f.endsWith(".html"))) {
+  const html = readFileSync(dir+"/"+f,"utf8");
+  const route = f==="index.html" ? "/" : "/"+f.replace(/\.html$/,"");
+  const refs = [...html.matchAll(/(?:href|src)="(\/[^"#]*)(#[^"]*)?"/g)];
+  for (const [, path, frag] of refs) {
+    let rel;
+    if (path === "/") rel = "/index.html";
+    else if (path.endsWith(".html") || path.endsWith(".xml") || path.endsWith(".txt") || path.endsWith(".json") || path.includes(".well-known") || path.endsWith(".sh") || path.endsWith(".webmanifest")) rel = path;
+    else rel = path + ".html";
+    let ok = existsSync(dir + rel) || existsSync(dir + path);
+    if (!ok) { bad.push(route+" -> "+path); continue; }
+    const targetPath = existsSync(dir + rel) ? rel : path;
+    if (frag && frag.length > 1 && targetPath.endsWith(".html")) {
+      const target = readFileSync(dir + targetPath, "utf8");
+      if (!target.includes(`id="${frag.slice(1)}"`)) bad.push(route+" -> "+path+frag+" (no such id)");
+    }
+  }
+}
+if (bad.length) { console.error(bad.join("\n")); process.exit(1); }
+console.log("dist link check: ok (every internal href/src + fragment resolves)");
+' || fail "dist link check"
+
+hr "Machine surface (dist)"
+# robots names the sitemap; the sitemap exists; the well-known surface is complete.
+grep -q 'Sitemap: https://northlatch.tech/sitemap-index.xml' webapp/dist/robots.txt \
+  || { printf 'robots.txt does not name the sitemap-index\n'; fail "robots.txt"; }
+[ -f webapp/dist/sitemap-index.xml ] || { printf 'sitemap-index.xml missing\n'; fail "sitemap.xml"; }
+"$NODE" -e '
+const n = (require("fs").readFileSync("webapp/dist/sitemap-0.xml","utf8").match(/<loc>/g)||[]).length;
+if (n < 17) { console.error("sitemap-0.xml has "+n+" routes, expected >= 17"); process.exit(1); }
+console.log("sitemap: "+n+" routes");
+' || fail "sitemap"
+[ -f webapp/dist/.well-known/security.txt ] && [ -f webapp/dist/.well-known/agent-card.json ] \
+  || { printf '.well-known surface incomplete\n'; fail ".well-known"; }
+"$NODE" -e 'JSON.parse(require("fs").readFileSync("webapp/dist/.well-known/agent-card.json","utf8"))' \
+  || { printf 'agent-card.json does not parse\n'; fail "agent-card.json"; }
+# The generated llms surface must name the canonical origin, and its route check ran in the build.
+grep -q '# Northlatch Labs' webapp/dist/llms.txt || { printf 'llms.txt brand line wrong\n'; fail "llms surface"; }
+grep -q 'https://northlatch.tech/llms-full.txt' webapp/dist/llms.txt || { printf 'llms.txt origin wrong\n'; fail "llms surface"; }
 printf '\033[32mmachine surface consistent\033[0m\n'
 
 hr "Installer"
-bash -n site/install.sh || fail "install.sh syntax"
+bash -n webapp/public/install.sh || fail "install.sh syntax"
 printf '\033[32minstall.sh: syntax ok\033[0m\n'
 
 hr "Contrast"
-if [ -f config/contrast-pairs.json ] && [ -f site/css/xl.css ]; then
+if [ -f config/contrast-pairs.json ] && [ -f webapp/public/css/xl.css ]; then
   "$NODE" --no-warnings scripts/verify-contrast.mjs || fail "contrast check"
 else
   printf 'skipped (contrast fixtures are from the previous build)\n'
