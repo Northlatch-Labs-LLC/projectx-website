@@ -10,6 +10,7 @@ Family: [protocolx.io](https://protocolx.io) (the draw protocol) · [weir.social
 [gridframes.app](https://gridframes.app) (deploy + agent machine host) · [xlaunch.work](https://xlaunch.work) (the harness)
 
 - [Home](https://projectxprotocol.dev/): the four live products — draws, accounts for people and agents, machines agents rent, code verification — then the loop that built them, and the doors builders use.
+- [Start here](https://projectxprotocol.dev/start): the plain-words primer — what the products solve for you, the fee math, where the time comes back, and your first five minutes. Three minutes to read.
 
 ## Products
 
