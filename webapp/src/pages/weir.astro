@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro';
         <p class="cmd"><span data-glyph="terminal"></span>How Weir works</p>
         <h1>Weir <span class="tag tag-live">[ LIVE ]</span></h1>
         <p class="for">for creators and their supporters</p>
-        <p class="lede">Support the creators you follow without losing your money: park SUI, keep the deposit fully withdrawable, and the staking yield reaches the creator.</p>
+        <p class="lede">Support the creators you follow without losing your money: park SUI, keep the deposit fully withdrawable, and the staking yield reaches the creator. Join free in minutes &mdash; or hand the whole account to your software.</p>
       </div>
       <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,weir" role="img" aria-label="Blocks building the X, then the word weir."></div></figure>
     </div>
@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="wrap twocol">
     <div data-reveal>
       <p class="cmd"><span data-glyph="ask"></span>The problem today</p>
-      <p class="prob">Supporting a creator today means spending money you might have wanted back. The subscription list shrinks each month because it costs to be on it.</p>
+      <p class="prob">Supporting a creator today means spending money you might have wanted back. The subscription list shrinks each month because it costs to be on it. And paying your own software means handing it your card.</p>
     </div>
     <div data-reveal>
       <p class="cmd"><span data-glyph="bolt"></span>What you get</p>
@@ -35,16 +35,20 @@ import Layout from '../layouts/Layout.astro';
     <div data-reveal>
       <p class="cmd"><span data-glyph="tag"></span>Pricing</p>
       <div class="pricing"><div><span>creator account</span><b>free</b></div><div><span>supporter deposit</span><b>returns 100% on withdraw</b></div><div><span>protocol fee on yield</span><b>5%</b></div></div>
+      <p class="small muted" style="margin-top:16px">You keep 95% of the yield. The fee comes out of earnings only &mdash; never from the deposit itself.</p>
     </div>
     <div data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>Get started</p>
-      <div class="startcmds"><span class="lbl">creator</span><div class="cline"><span class="p">$</span><code>open https://weir.social/join</code><button class="copy" type="button" data-copy="open https://weir.social/join" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">supporter</span><div class="cline"><span class="p">$</span><code>open https://weir.social/explore</code><button class="copy" type="button" data-copy="open https://weir.social/explore" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div>
+      <p class="cmd"><span data-glyph="play"></span>Start here</p>
+      <h2 style="margin-bottom:20px">Three ways in.</h2>
+      <div class="actions" id="join" style="flex-direction:column;align-items:stretch;gap:12px"><a class="btn btn-primary" href="https://weir.social/join"><svg><use href="#i-arrow"/></svg><span>create account</span></a>
+      <a class="btn btn-ghost" href="https://portal.weir.social/" id="doors"><svg><use href="#i-arrow"/></svg><span>open an account door</span></a>
+      <a class="btn btn-quiet" href="https://weir.social/.well-known/weir-agent.json" id="manifest"><svg><use href="#i-out"/></svg><span>for software: the machine manifest</span></a></div>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="grid"></span>Agent access</p><h2>The doors an agent uses</h2><p>People browse weir.social. Agents get three doors, and none of them needs a person on the keyboard.</p></div>
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="grid"></span>Agent access</p><h2>The doors an agent uses</h2><p>People browse weir.social. Software gets the same three doors, and none of them needs a person on the keyboard &mdash; your script, bot or agent holds the account exactly as you do.</p></div>
     <div class="ls" data-reveal>
       <div class="ls-head"><span>CMD</span><span>NAME</span><span>STATUS</span><span>WHAT IT DOES</span><span>PRICE</span></div>
       <a class="ls-row" href="https://portal.weir.social/"><span class="c">portal</span><b>portal.weir.social</b><span class="tag tag-live">[ LIVE ]</span><span class="w">the web door. An account opens in the browser, binds a Sui address by signature &mdash; through Google or your own wallet, no email &mdash; and can be held by an agent the same way a person holds one.</span><span class="pr">free account</span></a>
@@ -55,5 +59,5 @@ import Layout from '../layouts/Layout.astro';
     <p class="small faint" style="margin-top:16px" data-reveal>Registration is soulbound: a lost key is a lost account. The manifest's key script writes to a 0600 file and never prints the secret, for exactly that reason.</p>
   </div>
 </section>
-<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">See the other four: <a href="/verify">Verify</a><a href="https://protocolx.io">Draws</a><a href="/more">Names</a><a href="/more">Range</a></p></div></section>
+<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">Weir is one of five: <a href="/verify">Verify</a><a href="https://protocolx.io">Draws</a><a href="/more">Names</a><a href="/more">Range</a><a href="/contact">or talk to the lab</a></p></div></section>
 </Layout>

@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="On chain" path="/on-chain" description="Published Move packages with full addresses, and the public source that reproduces them. Every line checkable on its own.">
+<Layout title="On chain" path="/on-chain" description="Every claim on this site points at something you can check. The Move packages behind the live products, listed with full addresses.">
 <section class="page-hero">
   <div class="hero-field" data-field></div>
   <div class="wrap">
     <div class="hero-grid">
-      <div><p class="cmd"><span data-glyph="hash"></span>On-chain records</p><h1>On chain.</h1><p class="lede">Published packages and public source, listed so each line can be checked without asking us. Addresses are full, not truncated.</p></div>
+      <div><p class="cmd"><span data-glyph="hash"></span>On-chain records</p><h1>On chain.</h1><p class="lede">Every claim on this site points at something you can check. This page lists the packages behind the live products &mdash; full addresses, no shortcuts.</p></div>
       <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,sui" role="img" aria-label="Blocks building the X, then the word sui."></div></figure>
     </div>
   </div>
@@ -18,8 +18,9 @@ import Layout from '../layouts/Layout.astro';
     <p class="small faint" style="margin-top:16px" data-reveal>Every published package behind the live products, listed with its full address so each row is checkable on its own — weir&#39;s own agent manifest names the latest and original core packages, and every row below resolved on Sui mainnet over GraphQL when this table was last checked (2026-11-25). A row appears only once its address resolves; accounts and vaults are not packages, so they are not table rows.</p>
     <div class="twocol" style="margin-top:48px">
       <div data-reveal><p class="cmd"><span data-glyph="terminal"></span>Reproduce anything</p>
+        <p class="muted" style="margin-top:8px">Clone the verify repository and run the same gate suite our CI runs &mdash; on your machine, against your checkout.</p>
         <div class="term"><div class="term-body" style="min-height:0"><div class="c">git clone https://github.com/Northlatch-Labs-LLC/protocolx-verify.git</div><div class="c">cd protocolx-verify</div><div class="c">bash scripts/run-self-gates.sh</div><div class="out">&gt; the same 25 steps CI runs, on your machine <span class="pass">[ ok ]</span></div><div class="out">&gt; a step that cannot run locally is named and skipped, never folded into a pass</div><div class="out">&gt; digest matches.       exit 0</div></div></div></div>
-      <div data-reveal><p class="cmd"><span data-glyph="eye"></span>What is public</p><ul class="gets"><li>source of the verify action and its engine</li><li>gate configurations</li><li>test corpus for the tests gate</li><li>release digests since v0.1, in git history</li></ul></div>
+      <div data-reveal><p class="cmd"><span data-glyph="eye"></span>What is public</p><ul class="gets"><li>Source of the verify action and its engine.</li><li>Gate configurations.</li><li>Test corpus for the tests gate.</li><li>Release digests since v0.1, in git history.</li></ul></div>
     </div>
   </div>
 </section>

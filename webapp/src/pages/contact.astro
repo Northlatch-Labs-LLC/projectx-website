@@ -1,15 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Contact" path="/contact" description="Sales, integration questions, disclosure, or a note.">
+<Layout title="Contact" path="/contact" description="Tell us what you need built. A scoped, honest answer — including 'you don't need this' — within one business day.">
   <Fragment slot="head"><script is:inline src="/js/dev.js" defer></script></Fragment>
 <section class="page-hero">
   <div class="hero-field" data-field></div>
   <div class="wrap">
     <div class="hero-grid">
-      <div><p class="cmd"><span data-glyph="ask"></span>Contact us</p><h1>Say hello.</h1><p class="lede">Sales, integration questions, disclosure, or a note. Anything on-topic gets a real reply.</p>
+      <div><p class="cmd"><span data-glyph="ask"></span>Contact us</p><h1>Talk to the lab.</h1><p class="lede">Tell us what you need built. You get a scoped, honest answer &mdash; including &ldquo;you don&rsquo;t need this&rdquo; &mdash; within one business day.</p>
         <p style="margin-top:32px"><a class="mail-big" href="mailto:hello@projectxprotocol.dev"><span>&rarr;</span>hello@projectxprotocol.dev</a></p>
-        <p class="small faint" style="margin-top:8px">goes to one person. that person is me.</p>
+        <p class="small faint" style="margin-top:8px">routes to the operator&rsquo;s inbox through Cloudflare. A person reads every message.</p>
         <details style="margin-top:20px"><summary class="small muted" style="cursor:pointer">&#9656; other addresses</summary>
           <div class="others-mail"><a href="mailto:security@projectxprotocol.dev">security@projectxprotocol.dev</a><a href="mailto:legal@projectxprotocol.dev">legal@projectxprotocol.dev</a><a href="mailto:privacy@projectxprotocol.dev">privacy@projectxprotocol.dev</a></div></details>
       </div>
@@ -25,6 +25,23 @@ import Layout from '../layouts/Layout.astro';
           <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn btn-primary" type="submit">&rarr; send</button><span data-form-status class="small faint">reply within 1 business day</span></div>
         </div>
       </form>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="bolt"></span>The process</p><h2>What happens after you write.</h2></div>
+    <div class="principles">
+      <div class="card" data-reveal><span class="n">01</span><h3>We read it the same day.</h3><p>Every message lands in the operator&rsquo;s inbox &mdash; the same inbox the email address reaches. No ticket queue in between.</p></div>
+      <div class="card" data-reveal><span class="n">02</span><h3>You get scope, price and timeline.</h3><p>Within one business day: what the work takes, what it costs, and when it lands. A scoped answer, not a form letter.</p></div>
+      <div class="card" data-reveal><span class="n">03</span><h3>If it is not a fit, we say so.</h3><p>When a live product already covers part of the problem, we point you to it instead of selling you a build you do not need.</p></div>
+    </div>
+    <div class="twocol" style="margin-top:48px">
+      <div data-reveal><p class="cmd"><span data-glyph="grid"></span>What to include</p>
+        <ul class="gets" style="margin-top:16px"><li>The problem, in your words. No spec required.</li><li>Your timeline &mdash; when does this need to exist?</li><li>Whether a live product already covers part of it.</li></ul></div>
+      <div data-reveal><p class="cmd"><span data-glyph="key"></span>What you can ask for</p>
+        <ul class="gets" style="margin-top:16px"><li>A promotion engine on ProtocolX &mdash; draws shaped to your campaign.</li><li>Agent automation on Weir accounts &mdash; software that holds its own budget.</li><li>A private deployment, an integration, or something the products do not do yet.</li></ul></div>
     </div>
   </div>
 </section>

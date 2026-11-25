@@ -928,3 +928,58 @@ a.family:hover, .family a:hover { color: var(--text); }
 .prod .cta svg { width: 15px; height: 15px; }
 .prod .cta:hover { color: var(--accent-hover); }
 .prod .more { margin-top: 0; }
+
+/* =============================================== product grid (terminal) === */
+/* Deliberate layout: 4-up desktop, 2-up tablet, 1-up phone. Never auto-reflow. */
+.pgrid { display: grid; gap: var(--s4); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .pgrid { grid-template-columns: minmax(0, 1fr); } }
+
+.pcard { position: relative; display: flex; flex-direction: column; min-width: 0;
+  border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-raised);
+  text-decoration: none; color: var(--text); overflow: hidden;
+  box-shadow: 0 1px 2px rgb(0 0 0 / .05);
+  transition: border-color var(--fast), box-shadow var(--fast), transform var(--fast); }
+.pcard:hover, .pcard:focus-visible { border-color: var(--accent-line); transform: translateY(-2px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / .05), 0 6px 18px rgb(0 0 0 / .18); outline: none; }
+
+.pcard-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  border-bottom: 1px solid var(--line); background: var(--bg-sunken);
+  font: 700 .6875rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.pcard-glyph { width: 14px; height: 14px; color: var(--accent); flex: none; }
+.pcard-path { color: var(--text-faint); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard-live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
+.pcard-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 0); animation: pulse 2.4s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--accent-wash); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+.pcard-body { padding: var(--s4) var(--s4) var(--s3); flex: 1; }
+.pcard-body h3 { margin: 0 0 var(--s2); font-size: 1.25rem; }
+.pcard-what { margin: 0 0 var(--s2); color: var(--text); font-size: .95rem; }
+.pcard-for { margin: 0; color: var(--text-muted); font-size: .875rem; }
+.pcard-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2);
+  padding: var(--s3) var(--s4); border-top: 1px solid var(--line); }
+.pcard-stat { padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 999px;
+  color: var(--accent); font: 700 .75rem/1 var(--mono); white-space: nowrap; }
+.pcard-cta { color: var(--accent); font-weight: 700; font-size: .875rem; white-space: nowrap; transition: color var(--fast); }
+.pcard:hover .pcard-cta { color: var(--accent-hover); }
+.pcard-scan { position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(180deg, transparent 0%, var(--accent-wash) 50%, transparent 100%);
+  background-size: 100% 220%; background-position: 0 -120%; transition: opacity var(--fast); }
+.pcard:hover .pcard-scan { opacity: 1; animation: scan 900ms linear; }
+@keyframes scan { from { background-position: 0 -120%; } to { background-position: 0 120%; } }
+.js .pcard[data-reveal] { transition-delay: calc(var(--i, 0) * 90ms); }
+
+.pstrip { display: grid; gap: var(--s4); grid-template-columns: 1fr; margin-top: var(--s5); }
+@media (min-width: 720px) { .pstrip { grid-template-columns: 1fr 1fr; } }
+.pstrip-group { display: flex; flex-direction: column; border: 1px solid var(--line);
+  border-radius: var(--r-lg); background: var(--bg-raised); overflow: hidden; }
+.pstrip-label { padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg-sunken);
+  color: var(--text-faint); font: 700 .6875rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.pstrip-item { display: flex; align-items: baseline; gap: 10px; padding: var(--s3) var(--s4);
+  color: var(--text); text-decoration: none; font-size: .875rem; transition: background var(--fast), color var(--fast); }
+.pstrip-item + .pstrip-item { border-top: 1px solid var(--line); }
+.pstrip-item:hover { background: var(--bg-hover); color: var(--accent); }
+.pstrip-item .tag { font-size: .6875rem; color: var(--muted); white-space: nowrap; }
+.pstrip-text { color: var(--text-muted); flex: 1; min-width: 0; }
+.pstrip-arrow { color: var(--accent); }
