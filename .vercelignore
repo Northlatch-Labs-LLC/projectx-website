@@ -4,12 +4,8 @@
 .env.*
 
 node_modules
-.next
 out
 *.tsbuildinfo
-
-# Self-host only.
-Dockerfile
 
 .DS_Store
 *.log
