@@ -49,6 +49,15 @@ hr "Build"
 ( cd webapp && npm run build ) || fail "astro build"
 printf '\033[32mbuild green (dead links would have failed it)\033[0m\n'
 
+# The desktop header stays short: products live in the grid and footer, not the menu.
+"$NODE" -e '
+const src = require("fs").readFileSync("webapp/src/layouts/Layout.astro","utf8");
+const nav = src.match(/<nav class="nav-links"[^>]*>([\s\S]*?)<\/nav>/);
+const n = nav ? (nav[1].match(/<a /g) || []).length : -1;
+if (n < 0 || n > 5) { console.error("desktop nav has " + n + " links; keep it at 5 or fewer"); process.exit(1); }
+console.log("desktop nav: " + n + " links");
+' || fail "nav budget"
+
 hr "Claims"
 # Copy that was wrong once must not return — denylist in config/claims-banned.json.
 "$NODE" --no-warnings scripts/verify-claims.mjs || fail "claims check (baseline)"

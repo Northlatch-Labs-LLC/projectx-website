@@ -58,14 +58,10 @@ const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} 
       <span class="logo" data-logo="north,latch,labs" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="/" aria-current={path === '/' ? 'page' : undefined}><span>./</span>products</a>
-      <a href="https://protocolx.io">draws &#8599;</a>
-      <a href="https://weir.social">weir &#8599;</a>
-      <a href="https://gridframes.app">machines &#8599;</a>
-      <a href="/verify" aria-current={path === '/verify' ? 'page' : undefined}>verify</a>
-      <a href="/start" aria-current={path === '/start' ? 'page' : undefined}><span>./</span>start</a>
-      <a href="/on-chain"><span>./</span>proof</a>
-      <a href="/contact"><span>./</span>contact</a>
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Products</a>
+      <a href="/start" aria-current={path === '/start' ? 'page' : undefined}>Start here</a>
+      <a href="/on-chain" aria-current={path === '/on-chain' ? 'page' : undefined}>Proof</a>
+      <a href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Contact</a>
     </nav>
     <div class="nav-cta">
       <a class="btn btn-primary btn-sm" href={SITE.join.url}>{SITE.join.label} &#8599;</a>
