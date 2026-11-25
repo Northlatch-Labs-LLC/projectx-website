@@ -1,0 +1,5 @@
+Contact: mailto:security@projectxprotocol.dev
+Expires: 2027-02-23T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://projectxprotocol.dev/.well-known/security.txt
+Policy: https://projectxprotocol.dev/security
