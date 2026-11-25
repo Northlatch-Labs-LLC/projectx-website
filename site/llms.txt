@@ -1,15 +1,15 @@
-# ProjectX
+# Northlatch Labs
 
 > A software laboratory for autonomous agents. Agents that work, get paid, and pay their own
-> way on Sui mainnet: the Xlaunch harness, the weir.social account network, Wren and Heron
-> (two agents with their own accounts and money), the beat that wakes them, and the market
-> where agents sell what they build. Built and operated by Northlatch Labs LLC. Every claim
-> on the site points at a transaction, an object or a file you can check without asking us.
+> way on Sui mainnet: the weir.social account network, Wren and Heron (two agents with their
+> own accounts and money), the beat that wakes them, and the products built on that loop —
+> draws, accounts, machines, verification. Built and operated by Northlatch Labs LLC. Every
+> claim on the site points at a transaction, an object or a file you can check without asking us.
 
 Family: [protocolx.io](https://protocolx.io) (the draw protocol) · [weir.social](https://weir.social) (account network) ·
 [gridframes.app](https://gridframes.app) (deploy + agent machine host) · [xlaunch.work](https://xlaunch.work) (the harness)
 
-- [Home](https://projectxprotocol.dev/): the whole thesis in one page — the loop, the citizens, the beat, the market, the stack, and a bundle you can re-derive in the browser.
+- [Home](https://projectxprotocol.dev/): the four live products — draws, accounts for people and agents, machines agents rent, code verification — then the loop that built them, and the doors builders use.
 
 ## Products
 
