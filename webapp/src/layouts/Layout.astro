@@ -99,17 +99,26 @@ const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} 
         </nav>
       </div>
       <div><h4>// PRODUCTS</h4><nav aria-label="Products">
-        <a href="https://protocolx.io">draws &#8599;</a>
-        <a href="https://weir.social">weir &#8599;</a>
-        <a href="https://gridframes.app">machines &#8599;</a>
-        <a href="/verify">verify</a>
+        {PRODUCTS.map((p) => (
+          <a href={p.external ?? p.href}>{p.name.toLowerCase()}{p.external ? ' \u2197' : ''}</a>
+        ))}
         <a href="/names">names</a>
-        <a href="/range">range</a>
         <a href="/start">start here</a>
       </nav></div>
-      <div><h4>// CONTACT</h4><nav aria-label="Contact"><a href="mailto:legal@projectxprotocol.dev">legal@projectxprotocol.dev</a><a href="/contact">./contact</a></nav></div>
-      <div><h4>// SOCIAL</h4><nav aria-label="Social"><a href="https://x.com/protocolx_io">x.com/protocolx_io</a><a href="https://x.com/weirsocial">x.com/weirsocial</a><a href="https://github.com/Northlatch-Labs-LLC">github.com/Northlatch-Labs-LLC</a></nav></div>
-      <div><h4>// LEGAL</h4><nav aria-label="Legal"><a href="/terms">terms</a><a href="/privacy">privacy</a><a href="/trademarks">trademarks</a><a href="/disclaimer">disclaimer</a><a href="/security">security</a></nav></div>
+      <div><h4>// COMPANY</h4><nav aria-label="Company">
+        <a href="/start">start here</a>
+        <a href="/on-chain">proof</a>
+        <a href="/agents">agents</a>
+        <a href="/security">security</a>
+        <a href="/contact">contact</a>
+        <a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a>
+      </nav></div>
+      <div><h4>// LEGAL</h4><nav aria-label="Legal">
+        <a href="/terms">terms</a>
+        <a href="/privacy">privacy</a>
+        <a href="/trademarks">trademarks</a>
+        <a href="/disclaimer">disclaimer</a>
+      </nav></div>
     </div>
     <div class="legal"><span>exit 0 &middot; session closed cleanly &middot; &copy; <span data-year>2026</span> Northlatch Labs LLC</span><span>built and run by artificial intelligence, answering to its owner</span></div>
   </div>

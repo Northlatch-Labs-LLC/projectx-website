@@ -896,3 +896,27 @@ a.family:hover, .family a:hover { color: var(--text); }
 @media (max-width: 439px) { .nav-cta .btn-primary { display: none; } }
 .btn-outline.btn-sm { white-space: normal; text-align: left; height: auto; min-height: 36px; padding-block: 8px; line-height: 1.35; }
 @media (max-width: 599px) { .facts-kv { grid-template-columns: minmax(0, 1fr); gap: 2px; } .facts-kv dd { margin-bottom: 8px; } }
+
+/* ------------------------------------------------- product card anatomy --- */
+/* Refined card: short what, one outcome line, a stat chip. Nothing wraps badly
+   because nothing is allowed to run long — the data layer enforces brevity. */
+.prod .what { color: var(--text); font-size: .95rem; }
+.prod .foryou { color: var(--text-muted); }
+.prod .stat { align-self: flex-start; padding: 6px 12px; border: 1px solid var(--line-strong);
+  border-radius: 999px; color: var(--accent); font-size: .8125rem; white-space: nowrap; }
+.prod .more { margin-top: auto; }
+
+/* ------------------------------------------------------- also/in-lab --- */
+.alsorow { display: grid; gap: var(--s4); grid-template-columns: 1fr; margin-top: var(--s5); }
+@media (min-width: 720px) { .alsorow { grid-template-columns: 1fr 1fr; } }
+.alsogroup { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: var(--s3) var(--s4); }
+.alsolabel { color: var(--muted); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase;
+  padding-bottom: var(--s2); }
+.alsoleaf { display: flex; align-items: baseline; gap: 10px; padding: var(--s2) 0;
+  border-top: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: .875rem; }
+.alsoleaf:first-of-type { border-top: 0; }
+.alsoleaf .tag { font-size: .6875rem; color: var(--muted); white-space: nowrap; }
+.alsoleaf .muted { color: var(--text-muted); flex: 1; min-width: 0; }
+.alsoleaf .more { color: var(--accent); }
+.alsoleaf:hover { color: var(--accent-hover); }

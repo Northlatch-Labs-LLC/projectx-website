@@ -3,11 +3,11 @@
 // how (compressed) → start. The jobs router lives on /start; the deep lab
 // story lives on /agents and /on-chain. This page stays thin on purpose.
 import Layout from '../layouts/Layout.astro';
-import { SITE, PRODUCTS, ALSO, INBUILD } from '../data/site.ts';
+import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 ---
 
 <Layout title="Software that runs itself" path="/"
-  description="Four live products: provably fair draws your community can audit, accounts for people and agents, machines rented in SUI credits, and CI verification for Move contracts. Built by AI, proven on chain.">
+  description="Live products: provably fair draws your community can audit, accounts for people and agents, machines rented in SUI credits, CI verification for Move contracts — plus .sui names and the agent harness. Built by AI, proven on chain.">
 <section class="hero">
   <div class="hero-field" data-field></div>
   <div class="wrap">
@@ -19,7 +19,7 @@ import { SITE, PRODUCTS, ALSO, INBUILD } from '../data/site.ts';
       <a class="btn btn-ghost" href="/start">new here? three-minute primer</a>
       <a class="btn btn-quiet" href="/contact">contact</a>
     </div>
-    <p class="hero-note">four live products &middot; every claim links to a record you can check</p>
+    <p class="hero-note">every claim links to a record you can check</p>
   </div>
 </section>
 
@@ -27,28 +27,35 @@ import { SITE, PRODUCTS, ALSO, INBUILD } from '../data/site.ts';
   <div class="wrap">
     <div class="head" data-reveal>
       <p class="cmd"><span data-glyph="grid"></span>$ ls ./products</p>
-      <h2>Four products. All live.</h2>
-      <p>Each card links straight to the product itself &mdash; no tour, no waitlist. The number on each card is the one it publishes today.</p>
+      <h2>{PRODUCTS.length} products. All live.</h2>
+      <p>Each card links straight to the product. The number on each card is the one it publishes today.</p>
     </div>
     <div class="platform">
       {PRODUCTS.map((p) => (
         <a class="prod card" href={p.external ?? p.href} data-reveal>
           <div class="top"><h3>{p.name}</h3><span class="tag tag-live">{p.tag}</span></div>
-          <p>{p.what}</p>
-          <p class="small" style="color:var(--text-muted)">{p.forYou}</p>
-          <p><b class="accent num">{p.metric}</b></p>
-          <span class="more">{p.external ? p.external.replace('https://','') : 'the product page'} {p.external ? <svg><use href="#i-out"/></svg> : <svg><use href="#i-arrow"/></svg>}</span>
+          <p class="what">{p.what}</p>
+          <p class="foryou">{p.forYou}</p>
+          <div class="stat">{p.stat}</div>
+          <span class="more">{p.external ? p.external.replace('https://','') : 'learn more'} {p.external ? <svg><use href="#i-out"/></svg> : <svg><use href="#i-arrow"/></svg>}</span>
         </a>
       ))}
     </div>
-    <div class="platform" style="margin-top:16px">
-      {ALSO.map((a) => (
-        <a class="card" style="padding:16px 20px;display:flex;gap:12px;align-items:baseline" href={a.external ?? a.href} data-reveal>
-          <b>{a.name}</b><span class="tag" style="color:var(--muted)">[ {a.live} ]</span><span class="small muted" style="flex:1">{a.text}</span><span class="more">{a.external ? '\u2197' : '\u2192'}</span>
-        </a>
-      ))}
-      <div class="card" style="padding:16px 20px;display:flex;gap:12px;align-items:baseline" data-reveal>
-        <b style="color:var(--muted)">{INBUILD.name}</b><span class="tag" style="color:var(--muted)">[ IN BUILD ]</span><span class="small muted" style="flex:1">{INBUILD.text}</span>
+
+    <div class="alsorow" data-reveal>
+      <div class="alsogroup">
+        <span class="alsolabel">also live</span>
+        {ALSO.map((a) => (
+          a.external
+            ? <a class="alsoleaf" href={a.external}>{a.name} <span class="tag">[ {a.live} ]</span> <span class="muted">{a.text}</span><span class="more">{'\u2197'}</span></a>
+            : <a class="alsoleaf" href={a.href}>{a.name} <span class="tag">[ {a.live} ]</span> <span class="muted">{a.text}</span><span class="more">{'\u2192'}</span></a>
+        ))}
+      </div>
+      <div class="alsogroup">
+        <span class="alsolabel">in the lab</span>
+        {IN_LAB.map((a) => (
+          <a class="alsoleaf" href={a.href}>{a.name} <span class="tag">[ {a.live} ]</span> <span class="muted">{a.text}</span><span class="more">{'\u2192'}</span></a>
+        ))}
       </div>
     </div>
   </div>
@@ -74,7 +81,7 @@ import { SITE, PRODUCTS, ALSO, INBUILD } from '../data/site.ts';
   </div>
 </section>
 
-<section class="section" id="start" style="padding-block:64px">
+<section class="section" id="door" style="padding-block:64px">
   <div class="wrap">
     <div class="head" data-reveal>
       <p class="cmd"><span data-glyph="play"></span>$ start</p>

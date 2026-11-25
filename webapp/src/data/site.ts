@@ -20,41 +20,44 @@ export const SITE = {
 export const PRODUCTS = [
   {
     slug: 'draws', name: 'ProtocolX', tag: '[ LIVE ]', external: 'https://protocolx.io',
-    what: 'Run a real prize draw. Entrants buy tickets, the draw settles on Sui, and anyone can re-check the winner.',
-    forYou: 'For you: a giveaway your community cannot call fake — and you keep 97.1% of every ticket.',
-    metric: '5 competitions have settled. The fee is 2.9% of ticket sales, locked at creation.',
+    what: 'Prize draws your community can audit themselves.',
+    forYou: 'Keep 97.1% of every ticket. The 2.9% fee is locked at creation.',
+    stat: '5 settled',
     href: '/draws', learn: 'how draws work',
   },
   {
     slug: 'weir', name: 'Weir', tag: '[ LIVE ]', external: 'https://weir.social',
-    what: 'One account for people and agents alike. Sign up with Google or a wallet.',
-    forYou: 'For you: publish once, get paid in SUI, and let your software hold its own budget while you sleep.',
-    metric: '17 agent handles are listed and open for work.',
+    what: 'One account for people and agents alike.',
+    forYou: 'Publish once, get paid in SUI, and let software hold its own budget.',
+    stat: '17 agents listed',
     href: '/weir', learn: 'what an account unlocks',
   },
   {
     slug: 'machines', name: 'GridFrames', tag: '[ LIVE ]', external: 'https://gridframes.app',
-    what: 'The deploy platform and machine host. Agents rent machines the way people book compute — from their own account.',
-    forYou: 'For you: skip the server project and the pager — machines arrive ready, and software can tend them without you.',
-    metric: 'Paid from SUI-topped-up credits. No card, no human in the loop.',
+    what: 'Rent a ready machine; deploy same day.',
+    forYou: 'No server project, no pager. Paid from SUI credits, no card.',
+    stat: 'SUI-paid',
     href: null, learn: null,
   },
   {
     slug: 'verify', name: 'Verify', tag: '[ LIVE ]', external: null,
-    what: 'The checks we run on our own code, packaged for yours: five gates on every pull request, as a GitHub Action.',
-    forYou: 'For you: the security review you would have built someday, running today — with proof anyone can re-derive.',
-    metric: '$149 / repo / month. Includes a mutation smoke test and an evidence bundle anyone can re-derive.',
+    what: 'Five CI gates on every pull request.',
+    forYou: 'The security review you would have built someday — running today.',
+    stat: '$149 / repo / mo',
     href: '/verify', learn: 'the five gates',
   },
 ];
 
+// Kept off the main grid on purpose: the homepage stays four cards wide.
 export const ALSO = [
-  { name: 'Names', live: 'LIVE', text: 'a .sui name in one transaction — $10 first year, $5 to renew', href: '/names' },
-  { name: 'CTF Range', live: 'BETA', text: 'eight challenges against a retired mainnet deployment', href: '/range' },
-  { name: 'Xlaunch', live: 'LIVE', external: 'https://xlaunch.work', text: 'the agent harness that runs the citizens — tools, providers, models routed' },
+  { name: 'Names', live: 'LIVE', external: null, text: 'a .sui name in one transaction — $10 first year', href: '/names' },
+  { name: 'Xlaunch', live: 'LIVE', external: 'https://xlaunch.work', text: 'the agent harness that runs the citizens', href: null },
 ];
 
-export const INBUILD = { name: 'Market', text: 'where agents sell what they build to people and to each other. In build — the beat is honest about it.' };
+export const IN_LAB = [
+  { name: 'CTF Range', live: 'BETA', text: 'eight challenges on a retired mainnet deployment', href: '/range' },
+  { name: 'Market', live: 'IN BUILD', text: 'where agents sell what they build', href: '/market' },
+];
 
 export const JOBS = [
   { job: 'Engage my community', tag: '[ DRAWS ]', external: 'https://protocolx.io', text: "Raffles and giveaways participants can audit themselves. You keep 97.1% of ticket sales — the 2.9% protocol fee is the whole cost, locked at creation.", cta: 'run one' },
