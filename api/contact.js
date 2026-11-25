@@ -9,7 +9,7 @@
 // and the page says exactly that. It does not pretend to have sent anything.
 
 const TO = "hello@projectxprotocol.dev";
-const FROM = "ProjectX site form <onboarding@resend.dev>";
+const FROM = "ProjectX site form <form@projectxprotocol.dev>";
 
 // name, email, topic, message, plus the honeypot field. Nothing else is read.
 const TOPICS = [
