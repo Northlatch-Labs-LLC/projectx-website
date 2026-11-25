@@ -87,12 +87,12 @@
   }
 
   /* ---------------------------------------------------------- contact */
-  /* posts to this site's own endpoint, /api/contact.js — a Vercel function
+  /* posts to this site's own endpoint, /api/contact — a Vercel function
      that validates, holds the honeypot server-side, and sends via the mail
      transport disclosed in privacy.html. Without its key configured it
      answers 503 "form transport not configured", and that is what this
      code prints: the form never claims a send that did not happen. */
-  var FORM = "/api/contact.js";
+  var FORM = "/api/contact";
   function contact() {
     var f = $("[data-contact]"); if (!f) return;
     var btn = $("button[type=submit]", f), msg = $("[data-form-status]", f);
