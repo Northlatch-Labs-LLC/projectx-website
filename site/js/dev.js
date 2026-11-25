@@ -87,25 +87,26 @@
   }
 
   /* ---------------------------------------------------------- contact */
-  /* the same form endpoint the current site posts to; the honeypot field
-     is dropped before sending and a filled one is treated as sent */
-  var FORM = "https://readdy.ai/api/form/daj07qjp14a1h3mr7aog";
+  /* posts to this site's own endpoint, /api/contact.js — a Vercel function
+     that validates, holds the honeypot server-side, and sends via the mail
+     transport disclosed in privacy.html. Without its key configured it
+     answers 503 "form transport not configured", and that is what this
+     code prints: the form never claims a send that did not happen. */
+  var FORM = "/api/contact.js";
   function contact() {
     var f = $("[data-contact]"); if (!f) return;
     var btn = $("button[type=submit]", f), msg = $("[data-form-status]", f);
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var data = new FormData(f);
-      if (String(data.get("company_alt") || "").trim()) { f.reset(); msg.className = "pass small"; msg.textContent = "[ ok ] message received"; return; }
-      data.delete("company_alt");
+      data.delete("company_alt"); /* honeypot: the server keeps its own */
       var body = new URLSearchParams(); data.forEach(function (v, k) { body.append(k, String(v)); });
       btn.disabled = true; btn.textContent = "sending\u2026"; msg.textContent = "";
-      fetch(FORM, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() })
-        .then(function (r) { return r.text().then(function (t) { var j = {}; try { j = JSON.parse(t); } catch (x) { /* plain text */ } return { r: r, j: j, t: t }; }); })
+      fetch(FORM, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(body)) })
+        .then(function (r) { return r.text().then(function (t) { var j = {}; try { j = JSON.parse(t); } catch (x) { /* not JSON */ } return { r: r, j: j }; }); })
         .then(function (x) {
-          var m = (x.j && x.j.meta && (x.j.meta.message || x.j.meta.detail)) || x.t || "";
-          if (x.r.ok && x.j && x.j.code === "OK" && !/spam/i.test(m)) { f.reset(); msg.className = "pass small"; msg.textContent = "[ ok ] message received \u00b7 reply within 1 business day"; }
-          else { msg.className = "small"; msg.style.color = "var(--fail)"; msg.textContent = "[ err ] " + (m || "submission failed"); }
+          if (x.r.ok && x.j && x.j.ok) { f.reset(); msg.className = "pass small"; msg.style.color = ""; msg.textContent = "[ ok ] message received \u00b7 reply within 1 business day"; }
+          else { msg.className = "small"; msg.style.color = "var(--fail)"; msg.textContent = "[ err ] " + ((x.j && x.j.error) || ("submission failed (" + x.r.status + ")")); }
         }, function (err) { msg.className = "small"; msg.style.color = "var(--fail)"; msg.textContent = "[ err ] " + (err && err.message || "network error"); })
         .then(function () { btn.disabled = false; btn.textContent = "\u2192 send"; });
     });
