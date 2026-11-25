@@ -93,19 +93,19 @@ const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} 
     <div class="foot-grid">
       <div class="about">
         <a class="brand" href="/" aria-label={`${SITE.name}, home`}><span class="logo logo-lg" data-logo="north,latch,labs" data-logo-x="end"><img src="/svg/logo.svg" alt=""></span></a>
-        <p class="small muted" style="margin-top:16px">A software laboratory for autonomous agents: agents that work, get paid, and pay their own way. On Sui, in public, with receipts.</p>
-        <nav class="family" style="margin-top:20px" aria-label="Family"><span>part of</span>
+        <p class="small muted" style="margin-top:16px">Northlatch Labs builds software solutions for businesses: verifiable promotions, direct-monetization accounts, no-ops hosting, and continuous contract verification.</p>
+        <nav class="family" style="margin-top:20px" aria-label="Family"><span>Also from Northlatch Labs</span>
           {SITE.family.map((f) => <a href={f.url}>{f.label}</a>)}
         </nav>
       </div>
-      <div><h4>// PRODUCTS</h4><nav aria-label="Products">
+      <div><h4>Products</h4><nav aria-label="Products">
         {PRODUCTS.map((p) => (
           <a href={p.external ?? p.href}>{p.name.toLowerCase()}{p.external ? ' \u2197' : ''}</a>
         ))}
         <a href="/names">names</a>
         <a href="/start">start here</a>
       </nav></div>
-      <div><h4>// COMPANY</h4><nav aria-label="Company">
+      <div><h4>Company</h4><nav aria-label="Company">
         <a href="/start">start here</a>
         <a href="/on-chain">proof</a>
         <a href="/agents">agents</a>
@@ -113,7 +113,7 @@ const fullTitle = path === '/' ? `${SITE.name} — ${SITE.tagline}` : `${title} 
         <a href="/contact">contact</a>
         <a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a>
       </nav></div>
-      <div><h4>// LEGAL</h4><nav aria-label="Legal">
+      <div><h4>Legal</h4><nav aria-label="Legal">
         <a href="/terms">terms</a>
         <a href="/privacy">privacy</a>
         <a href="/trademarks">trademarks</a>

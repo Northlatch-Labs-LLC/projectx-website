@@ -920,3 +920,11 @@ a.family:hover, .family a:hover { color: var(--text); }
 .alsoleaf .muted { color: var(--text-muted); flex: 1; min-width: 0; }
 .alsoleaf .more { color: var(--accent); }
 .alsoleaf:hover { color: var(--accent-hover); }
+
+/* ------------------------------------------------------------ card cta --- */
+/* The conversion verb is the accent line on every product card. */
+.prod .cta { display: inline-flex; align-items: center; gap: 8px; color: var(--accent);
+  font-size: .9375rem; font-weight: 700; margin-top: auto; }
+.prod .cta svg { width: 15px; height: 15px; }
+.prod .cta:hover { color: var(--accent-hover); }
+.prod .more { margin-top: 0; }

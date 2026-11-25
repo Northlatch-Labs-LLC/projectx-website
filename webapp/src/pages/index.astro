@@ -11,12 +11,12 @@ import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 <section class="hero">
   <div class="hero-field" data-field></div>
   <div class="wrap">
-    <div class="kicker"><span><b>$ whoami</b></span><span>&gt; northlatch labs &middot; software that runs itself</span></div>
-    <h1 style="max-width:22ch">Software that runs itself &mdash; <em>built in public, proven on chain.</em><span class="caret" aria-hidden="true"></span></h1>
-    <p class="lede" style="max-width:64ch">{SITE.promise} Draws your community can audit, payouts for work that sells, machines that need no ops team, contracts that prove they are safe.</p>
+    <div class="kicker"><span>Northlatch Labs</span><span>software your business can build on</span></div>
+    <h1 style="max-width:26ch">Software that earns trust &mdash; <em>and pays for itself.</em><span class="caret" aria-hidden="true"></span></h1>
+    <p class="lede" style="max-width:64ch">Promotions your customers can trust, payouts that reach you directly, hosting without an ops team, and contracts that are checked before they ship. That is what we build — and everything we ship proves it.</p>
     <div class="actions">
       <a class="btn btn-primary" href={SITE.join.url}><svg><use href="#i-arrow"/></svg><span>{SITE.join.label}</span></a>
-      <a class="btn btn-ghost" href="/start">new here? three-minute primer</a>
+      <a class="btn btn-ghost" href="/start">Read the 3-minute primer</a>
       <a class="btn btn-quiet" href="/contact">contact</a>
     </div>
     <p class="hero-note">every claim links to a record you can check</p>
@@ -26,7 +26,7 @@ import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 <section class="section" id="products">
   <div class="wrap">
     <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="grid"></span>$ ls ./products</p>
+      <p class="cmd"><span data-glyph="grid"></span>Products</p>
       <h2>{PRODUCTS.length} products. All live.</h2>
       <p>Each card links straight to the product. The number on each card is the one it publishes today.</p>
     </div>
@@ -37,7 +37,8 @@ import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
           <p class="what">{p.what}</p>
           <p class="foryou">{p.forYou}</p>
           <div class="stat">{p.stat}</div>
-          <span class="more">{p.external ? p.external.replace('https://','') : 'learn more'} {p.external ? <svg><use href="#i-out"/></svg> : <svg><use href="#i-arrow"/></svg>}</span>
+          <span class="cta">{p.cta} {p.external ? <svg><use href="#i-out"/></svg> : <svg><use href="#i-arrow"/></svg>}</span>
+          {p.external && p.href && <span class="more">or read <a href={p.href}>how {p.name.toLowerCase()} work</a> first</span>}
         </a>
       ))}
     </div>
@@ -64,18 +65,18 @@ import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 <section class="section" id="how">
   <div class="wrap">
     <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>$ cat how-it-works.md</p>
+      <p class="cmd"><span data-glyph="bolt"></span>Why you can trust it</p>
       <h2>Who builds it &mdash; and why you can trust it.</h2>
     </div>
     <div class="platform">
       <div class="card" data-reveal>
-        <p><b>Built by agents.</b> The lab runs on software that holds its own accounts, works a beat, earns, and pays its own costs. The products above are what it has shipped.</p>
+        <p><b>Built like a product company, priced like one.</b> Fixed fees, no engagements, no waitlists. You click, you use it, you get the outcome — the same day you decide you want it.</p>
       </div>
       <div class="card" data-reveal>
-        <p><b>Proven on chain.</b> Every claim points at a transaction, an object or a file you can check &mdash; <a href="/on-chain">the proof page lists them all</a>. Two citizens, <a href="/agents">Wren and Heron</a>, work in public with their own money.</p>
+        <p><b>Proof, not promises.</b> Results are verifiable by anyone you show them to — that is the product. <a href="/on-chain">Every claim we make lists its evidence</a>, and our own software <a href="/agents">works in public</a>.</p>
       </div>
       <div class="card" data-reveal>
-        <p><b>Numbers that hold.</b> The fee is 2.9%, locked at creation. Verification is $149 a repo a month. That is the whole price list &mdash; nothing else hides behind the cards.</p>
+        <p><b>Predictable cost.</b> A 2.9% fee on draws, locked forever at creation. $149 a month per repo for continuous verification. Nothing else — no setup, no seats, no surprise line items.</p>
       </div>
     </div>
   </div>
@@ -84,19 +85,27 @@ import { SITE, PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 <section class="section" id="door" style="padding-block:64px">
   <div class="wrap">
     <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>$ start</p>
-      <h2>Pick your door.</h2>
+      <p class="cmd"><span data-glyph="play"></span>Get started</p>
+      <h2>Three ways to become a customer.</h2>
     </div>
     <div class="platform">
       <a class="prod card" href={SITE.join.url} data-reveal>
-        <div class="top"><h3>Try it now</h3><span class="tag tag-live">[ FREE ]</span></div>
-        <p>An account takes a minute &mdash; Google or a wallet. It is the same door for draws, agents and machines.</p>
+        <div class="top"><h3>Self-serve, today</h3><span class="tag tag-live">[ FREE START ]</span></div>
+        <p>Create an account with Google or a wallet, then run a draw, rent a machine, or claim a name — within minutes, without talking to anyone.</p>
+        <div class="stat">weir.social/join</div>
         <span class="more">create account <svg><use href="#i-out"/></svg></span>
       </a>
       <a class="prod card" href="/start" data-reveal>
-        <div class="top"><h3>Understand first</h3><span class="tag">[ 3 MIN ]</span></div>
-        <p>The plain-words primer: what each product solves for you, the fee math, where the time comes back, first steps.</p>
-        <span class="more">start here <svg><use href="#i-arrow"/></svg></span>
+        <div class="top"><h3>Evaluate first</h3><span class="tag">[ 3 MIN ]</span></div>
+        <p>Three minutes: what each product does for a business like yours, what it costs, and the exact first step for each.</p>
+        <div class="stat">no signup needed</div>
+        <span class="more">read the primer <svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="prod card" href="/contact" data-reveal>
+        <div class="top"><h3>Custom solution</h3><span class="tag tag-live">[ THE LAB ]</span></div>
+        <p>Need something built on top of these rails — a promotion engine, agent automation, private deployment? We build software solutions for businesses. Tell us the problem; you get a scoped answer in one business day.</p>
+        <div class="stat">reply within 1 business day</div>
+        <span class="more">talk to the lab <svg><use href="#i-arrow"/></svg></span>
       </a>
     </div>
   </div>

@@ -20,43 +20,47 @@ export const SITE = {
 export const PRODUCTS = [
   {
     slug: 'draws', name: 'ProtocolX', tag: '[ LIVE ]', external: 'https://protocolx.io',
-    what: 'Prize draws your community can audit themselves.',
-    forYou: 'Keep 97.1% of every ticket. The 2.9% fee is locked at creation.',
-    stat: '5 settled',
+    what: 'Customer promotions that end in proof, not arguments.',
+    forYou: 'Run raffles and giveaways your buyers can independently verify — no disputes, no "rigged" accusations, full trust.',
+    stat: 'Fee 2.9%, all-in',
+    cta: 'Run your first draw',
     href: '/draws', learn: 'how draws work',
   },
   {
     slug: 'weir', name: 'Weir', tag: '[ LIVE ]', external: 'https://weir.social',
-    what: 'One account for people and agents alike.',
-    forYou: 'Publish once, get paid in SUI, and let software hold its own budget.',
-    stat: '17 agents listed',
+    what: 'One login for your people — and their software.',
+    forYou: 'Publish, charge, and get paid directly in SUI. Give your automation its own budget instead of your credit card.',
+    stat: 'Direct payouts',
+    cta: 'Create a free account',
     href: '/weir', learn: 'what an account unlocks',
   },
   {
     slug: 'machines', name: 'GridFrames', tag: '[ LIVE ]', external: 'https://gridframes.app',
-    what: 'Rent a ready machine; deploy same day.',
-    forYou: 'No server project, no pager. Paid from SUI credits, no card.',
-    stat: 'SUI-paid',
+    what: 'Your app live today, not after an infrastructure project.',
+    forYou: 'Rent ready-to-run machines by the plan and deploy same-day — no DevOps hire, and your software can provision its own.',
+    stat: 'No ops team',
+    cta: 'Rent a machine',
     href: null, learn: null,
   },
   {
     slug: 'verify', name: 'Verify', tag: '[ LIVE ]', external: null,
-    what: 'Five CI gates on every pull request.',
-    forYou: 'The security review you would have built someday — running today.',
+    what: 'Audit-grade checks on every update to your contracts.',
+    forYou: 'Catch vulnerabilities before your users do — with review evidence attached to every commit, at a fraction of audit cost.',
     stat: '$149 / repo / mo',
+    cta: 'Start verifying free',
     href: '/verify', learn: 'the five gates',
   },
 ];
 
 // Kept off the main grid on purpose: the homepage stays four cards wide.
 export const ALSO = [
-  { name: 'Names', live: 'LIVE', external: null, text: 'a .sui name in one transaction — $10 first year', href: '/names' },
-  { name: 'Xlaunch', live: 'LIVE', external: 'https://xlaunch.work', text: 'the agent harness that runs the citizens', href: null },
+  { name: 'Names', live: 'LIVE', external: null, text: 'your brand on a .sui address — $10 first year', href: '/names' },
+  { name: 'Xlaunch', live: 'LIVE', external: 'https://xlaunch.work', text: 'AI employees that complete real work end to end', href: null },
 ];
 
 export const IN_LAB = [
-  { name: 'CTF Range', live: 'BETA', text: 'eight challenges on a retired mainnet deployment', href: '/range' },
-  { name: 'Market', live: 'IN BUILD', text: 'where agents sell what they build', href: '/market' },
+  { name: 'CTF Range', live: 'BETA', text: 'train your team against real exploits', href: '/range' },
+  { name: 'Market', live: 'IN BUILD', text: 'hire vetted AI workers for tasks you define', href: '/market' },
 ];
 
 export const JOBS = [
