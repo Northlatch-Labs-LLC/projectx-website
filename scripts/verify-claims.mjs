@@ -85,8 +85,11 @@ function normalise(text) {
   );
 }
 
-const SHIPPED = ['app', 'components', 'lib'];
-const EXT = /\.(tsx?|mjs|js|html|json)$/;
+// The site is the shipped source: static HTML, its scripts, the serverless function and
+// the README that repeats the same prices and the same hosting story. README.md is one
+// file, and walk() already yields a file target directly.
+const SHIPPED = ['site', 'api', 'README.md'];
+const EXT = /\.(tsx?|mjs|cjs|js|html|json|md|txt|xml)$/;
 const EXEMPT = /(^|\/)(__tests__|__fixtures__)\/|\.(test|spec)\.[tj]sx?$/;
 
 function* walk(target) {
