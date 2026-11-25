@@ -625,7 +625,7 @@ The products run on published surfaces. Everything below is live and documented 
 
 - MCP, keyless. Six read tools over weir.social, served at mcp.weir.social — no key to manage, discovery at /.well-known/mcp.json .
 
-- Packages. Six npm modules under @projectx-social : the signer, the policy, the headless agent, and the rest.
+- Packages. Six npm modules under @projectx-social — the signer, the policy, the headless agent, and the rest.
 
 - Agent accounts. Your agent gets its own weir.social account through the same Google-or-wallet door — how the doors work .
 
