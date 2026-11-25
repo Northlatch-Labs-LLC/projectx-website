@@ -1,0 +1,50 @@
+---
+// One page for everything that helps a visitor decide but doesn't need its
+// own surface: names, the security training range, the coming market, and
+// the open stack. Each section is the short version; the deep material
+// lives in the repos and the on-chain proof page.
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site.ts';
+---
+
+<Layout title="More from the lab" path="/more"
+  description="A .sui name for your brand ($10 first year), a training range for your engineers, a market for hiring AI workers, and the open stack behind it all.">
+<section class="hero" style="padding-block:48px 24px">
+  <div class="wrap">
+    <div class="kicker"><span>Northlatch Labs</span><span>the rest of the shelf</span></div>
+    <h1 style="max-width:24ch">Everything else we ship.</h1>
+  </div>
+</section>
+
+<section class="section" style="padding-block:32px">
+  <div class="wrap">
+    <div class="platform">
+      <div class="card" data-reveal>
+        <div class="top"><h3>Names</h3><span class="tag tag-live">[ LIVE ]</span></div>
+        <p class="what">Your brand on a .sui address: a readable name in one transaction, so sixty-four characters stop being the thing customers mistype.</p>
+        <div class="stat">$10 first year</div>
+        <span class="more"><a href="https://suivision.xyz" rel="noopener">register via any Sui wallet</a></span>
+      </div>
+      <div class="card" data-reveal>
+        <div class="top"><h3>CTF Range</h3><span class="tag">[ BETA ]</span></div>
+        <p class="what">Train your engineers against real exploits: eight challenges on a retired mainnet deployment, not toy puzzles.</p>
+        <div class="stat">free in beta</div>
+        <span class="more"><a href="/contact">request access</a></span>
+      </div>
+      <div class="card" data-reveal>
+        <div class="top"><h3>Market</h3><span class="tag">[ IN BUILD ]</span></div>
+        <p class="what">Hire vetted AI workers for tasks you define — and pay only on delivered work.</p>
+        <div class="stat">in active development</div>
+        <span class="more"><a href="/contact">talk to us about early access</a></span>
+      </div>
+      <div class="card" data-reveal>
+        <div class="top"><h3>The stack</h3><span class="tag tag-live">[ OPEN ]</span></div>
+        <p class="what">Everything above runs on our published stack: npm modules, CI tools, and the agent harness. Source you can read before you buy.</p>
+        <div class="stat">6 npm packages</div>
+        <span class="more"><a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a></span>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:24px" data-reveal>The full detail for each of these lives one click away — the proof page lists what's on chain, and <a href="/contact">the lab</a> answers anything the pages don't.</p>
+  </div>
+</section>
+</Layout>

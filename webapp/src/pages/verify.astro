@@ -12,10 +12,10 @@ import { SITE } from '../data/site.ts';
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="cmd"><span data-glyph="terminal"></span>$ ./verify --describe</p>
+        <p class="cmd"><span data-glyph="terminal"></span>How Verify works</p>
         <h1>ProtocolX Verify <span class="tag tag-live">[ LIVE ]</span></h1>
         <p class="for">for engineering leads shipping Move</p>
-        <p class="lede">Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.</p>
+        <p class="lede">Audit-grade checks on every update, for a fraction of audit cost: five CI gates on every pull request, and every run leaves an evidence bundle with a re-derivable digest.</p>
       </div>
       <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,verify" role="img" aria-label="Blocks building the X, then the word verify."></div></figure>
     </div>
@@ -31,18 +31,18 @@ import { SITE } from '../data/site.ts';
     <div><span>exit</span><span>0</span></div>
   </div>
 </div>
-<p class="note-mono">// this bundle is the artifact your customer keeps</p>
+<p class="note-mono">This bundle is the artifact your customer keeps</p>
 
   </div>
 </section>
 <section class="section">
   <div class="wrap twocol">
     <div data-reveal>
-      <p class="cmd"><span data-glyph="ask"></span>// problem</p>
+      <p class="cmd"><span data-glyph="ask"></span>The problem today</p>
       <p class="prob">Test suites go green while the guards holding user funds sit untested. When a fund draws the wrong balance in production, the record of what you checked is missing.</p>
     </div>
     <div data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>// what you get</p>
+      <p class="cmd"><span data-glyph="bolt"></span>What you get</p>
       <ul class="gets"><li>Five CI gates on every pull request: build, digest, tests, pin, mutation-smoke.</li><li>Every run drops an evidence bundle with a re-derivable digest.</li><li>A one-line reproduce command a customer, auditor, or exchange can run on their own.</li><li>Hosted runners with retention. Private repos supported.</li></ul>
     </div>
   </div>
@@ -50,14 +50,14 @@ import { SITE } from '../data/site.ts';
 
 <section class="section">
   <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="steps"></span>$ ls ./gates</p><h2>Five gates, one bundle</h2></div>
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="steps"></span>The five gates</p><h2>Five gates, one bundle</h2></div>
     <figure class="gates-fig" data-reveal><div class="gates" data-gates="31,29" role="img" aria-label="A bundle passes five gates. At mutation-smoke 31 mutants are derived, 29 killed, 2 survive."></div>
     <ul class="gate-list" style="margin-top:24px"><li data-reveal><span class="gn">gate.01</span><span class="pass">[ PASS ]</span><span class="gd"><b>build</b>the package compiles on a runner that has never seen it, with a pinned Sui CLI</span></li><li data-reveal><span class="gn">gate.02</span><span class="pass">[ PASS ]</span><span class="gd"><b>digest</b>the source still builds to the digest the chain holds</span></li><li data-reveal><span class="gn">gate.03</span><span class="pass">[ PASS ]</span><span class="gd"><b>tests</b>the Move suite runs green against the exact commit proposed</span></li><li data-reveal><span class="gn">gate.04</span><span class="pass">[ PASS ]</span><span class="gd"><b>pin</b>the framework dependency stays where you pinned it</span></li><li data-reveal><span class="gn">gate.05</span><span class="pass">[ PASS ]</span><span class="gd"><b>mutation-smoke</b>assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span></li></ul></figure>
   </div>
 </section>
 <section class="section">
   <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="eye"></span>$ verify bundle.json</p><h2>Re-derive a bundle here</h2><p>The same digest the CLI prints, computed in your browser from the text on the left.</p></div>
+    <div class="head" data-reveal><p class="cmd"><span data-glyph="eye"></span>Verify an evidence bundle</p><h2>Re-derive a bundle here</h2><p>The same digest the CLI prints, computed in your browser from the text on the left.</p></div>
     <div class="vbox" data-verify>
   <div class="editor">
     <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>~/bundle.json</span><span class="right" data-count>1142 chars</span></div>
@@ -130,21 +130,21 @@ import { SITE } from '../data/site.ts';
     <p class="small faint">Change one character on the left. The digest moves, and about half of the 256 blocks move with it. That is the whole idea.</p>
   </div>
 </div>
-    <div style="margin-top:32px" data-reveal><p class="cmd"><span data-glyph="grid"></span>$ ls ./supports</p><div class="cats"><span>Move on Sui</span><span>GitHub Actions</span><span>GitLab CI</span><span>self-hosted runners</span></div></div>
+    <div style="margin-top:32px" data-reveal><p class="cmd"><span data-glyph="grid"></span>How support works</p><div class="cats"><span>Move on Sui</span><span>GitHub Actions</span><span>GitLab CI</span><span>self-hosted runners</span></div></div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap twocol">
     <div data-reveal>
-      <p class="cmd"><span data-glyph="tag"></span>$ pricing</p>
+      <p class="cmd"><span data-glyph="tag"></span>Pricing</p>
       <div class="pricing"><div><span>the Action, in your own CI</span><b>free</b></div><div><span>First Report (one-shot audit output)</span><b>$1,000</b></div><div><span>The App, hosted by us</span><b>$149 / repo / month</b></div></div>
     </div>
     <div data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>$ start</p>
-      <div class="startcmds"><span class="lbl">install &middot; one workflow step</span><div class="cline"><span class="p">$</span><code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code><button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">or scaffold it with the installer</span><div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">run</span><div class="cline"><span class="p">$</span><code>git push &amp;&amp; open the check run</code><button class="copy" type="button" data-copy="git push &amp;&amp; open the check run" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">share</span><div class="cline"><span class="p">$</span><code>download bundle.json from the run artifacts</code><button class="copy" type="button" data-copy="download bundle.json from the run artifacts" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div><p class="small faint" style="margin-top:16px">// downloaded, then run — not piped. Read the script first; --check prints without writing.</p>
+      <p class="cmd"><span data-glyph="play"></span>Get started</p>
+      <div class="startcmds"><span class="lbl">install &middot; one workflow step</span><div class="cline"><span class="p">$</span><code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code><button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">or scaffold it with the installer</span><div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">run</span><div class="cline"><span class="p">$</span><code>git push &amp;&amp; open the check run</code><button class="copy" type="button" data-copy="git push &amp;&amp; open the check run" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">share</span><div class="cline"><span class="p">$</span><code>download bundle.json from the run artifacts</code><button class="copy" type="button" data-copy="download bundle.json from the run artifacts" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div><p class="small faint" style="margin-top:16px">Downloaded, then run &mdash; not piped. Read the script first; --check prints without writing.</p>
     </div>
   </div>
 </section>
-<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">more? see the other four: <a href="/weir">./weir</a><a href="/draws">./draws</a><a href="/names">./names</a><a href="/range">./range</a></p></div></section>
+<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">See the other four: <a href="/weir">Weir</a><a href="https://protocolx.io">Draws</a><a href="/more">Names</a><a href="/more">Range</a></p></div></section>
 </Layout>

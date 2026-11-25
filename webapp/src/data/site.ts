@@ -24,7 +24,7 @@ export const PRODUCTS = [
     forYou: 'Run raffles and giveaways your buyers can independently verify — no disputes, no "rigged" accusations, full trust.',
     stat: 'Fee 2.9%, all-in',
     cta: 'Run your first draw',
-    href: '/draws', learn: 'how draws work',
+    href: null, learn: null,
   },
   {
     slug: 'weir', name: 'Weir', tag: '[ LIVE ]', external: 'https://weir.social',
@@ -54,13 +54,13 @@ export const PRODUCTS = [
 
 // Kept off the main grid on purpose: the homepage stays four cards wide.
 export const ALSO = [
-  { name: 'Names', live: 'LIVE', external: null, text: 'your brand on a .sui address — $10 first year', href: '/names' },
+  { name: 'Names', live: 'LIVE', external: null, text: 'your brand on a .sui address — $10 first year', href: '/more' },
   { name: 'Xlaunch', live: 'LIVE', external: 'https://xlaunch.work', text: 'AI employees that complete real work end to end', href: null },
 ];
 
 export const IN_LAB = [
-  { name: 'CTF Range', live: 'BETA', text: 'train your team against real exploits', href: '/range' },
-  { name: 'Market', live: 'IN BUILD', text: 'hire vetted AI workers for tasks you define', href: '/market' },
+  { name: 'CTF Range', live: 'BETA', text: 'train your team against real exploits', href: '/more' },
+  { name: 'Market', live: 'IN BUILD', text: 'hire vetted AI workers for tasks you define', href: '/more' },
 ];
 
 export const JOBS = [

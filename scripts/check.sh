@@ -98,9 +98,14 @@ grep -q 'Sitemap: https://northlatch.tech/sitemap-index.xml' webapp/dist/robots.
   || { printf 'robots.txt does not name the sitemap-index\n'; fail "robots.txt"; }
 [ -f webapp/dist/sitemap-index.xml ] || { printf 'sitemap-index.xml missing\n'; fail "sitemap.xml"; }
 "$NODE" -e '
+const { readdirSync } = require("fs");
+// The route floor derives from the pages that exist in src/pages — a fold or
+// an addition updates this automatically; the sitemap must simply match it.
+const srcPages = readdirSync("webapp/src/pages").filter(f=>f.endsWith(".astro"));
+const expect = srcPages.filter(f=>f!=="404.astro").length;
 const n = (require("fs").readFileSync("webapp/dist/sitemap-0.xml","utf8").match(/<loc>/g)||[]).length;
-if (n < 17) { console.error("sitemap-0.xml has "+n+" routes, expected >= 17"); process.exit(1); }
-console.log("sitemap: "+n+" routes");
+if (n !== expect) { console.error("sitemap has "+n+" routes, src/pages implies "+expect); process.exit(1); }
+console.log("sitemap: "+n+" routes == src/pages count");
 ' || fail "sitemap"
 [ -f webapp/dist/.well-known/security.txt ] && [ -f webapp/dist/.well-known/agent-card.json ] \
   || { printf '.well-known surface incomplete\n'; fail ".well-known"; }
