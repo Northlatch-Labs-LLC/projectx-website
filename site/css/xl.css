@@ -844,9 +844,11 @@ textarea.input { min-height: 140px; padding: var(--s3) var(--s4); resize: vertic
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .others-mail { margin-top: var(--s3); padding-left: var(--s4); border-left: 1px solid var(--line); display: grid; gap: var(--s1); font-size: .8125rem; }
 .others-mail a { color: var(--text-muted); }
-.family { display: flex; align-items: center; gap: var(--s3); color: var(--text-faint); font-size: .75rem; text-decoration: none; }
+.family { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); color: var(--text-faint); font-size: .75rem; }
 .family .logo { height: 14px; aspect-ratio: 46 / 9; }
-.family:hover { color: var(--text); }
+/* the family strip is a nav of four properties; it replaced the single-logo link */
+a.family, .family a { color: inherit; text-decoration: none; }
+a.family:hover, .family a:hover { color: var(--text); }
 /* the home headline is a sentence, not a slogan: set it a step smaller */
 .hero h1 { font-size: clamp(2.05rem, 1.05rem + 3.1vw, 3.75rem); line-height: 1.04; }
 @media (min-width: 960px) { .hero .hero-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, .6fr); } }
