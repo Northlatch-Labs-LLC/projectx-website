@@ -1,9 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Security" path="/security" description="Security for ProjectX by Northlatch Labs LLC.">
-<section class="page-hero" style="padding-bottom:24px"><div class="wrap wrap-narrow"><p class="cmd"><span data-glyph="ledger"></span>Security policy</p><h1>Security</h1></div></section>
-<section class="section" style="border-top:0;padding-top:0"><div class="wrap wrap-narrow">
-  <div class="less"><ol><li class="h1"># Security</li><li>&nbsp;</li><li class="h2">## disclosure</li><li class="p">Report vulnerabilities to security@projectxprotocol.dev.</li><li class="p">Acknowledgement within 24 hours.</li><li>&nbsp;</li><li class="h2">## scope</li><li class="p">All packages listed on the on-chain page. Web front ends at</li><li class="p">projectxprotocol.dev and weir.social.</li><li>&nbsp;</li><li class="h2">## safe harbor</li><li class="p">Good-faith research on the listed scope is authorised. No legal action</li><li class="p">taken against researchers acting in good faith.</li><li>&nbsp;</li><li class="h2">## rewards</li><li class="p">Case-by-case. Critical fund-loss reports have paid up to $50,000.</li><li>&nbsp;</li></ol><span class="end">(END)</span><div class="mod">// last-modified 2026-09-21</div></div>
-</div></section>
+
+<Layout
+  title="Security Policy"
+  path="/security"
+  description="Security vulnerability disclosure policy, scope, safe harbor, and bounty program for Northlatch Labs LLC."
+>
+  <section class="page-hero" style="padding-bottom:28px">
+    <div class="wrap wrap-narrow">
+      <p class="cmd">Trust &amp; Security</p>
+      <h1>Security Policy</h1>
+      <p class="lede">Responsible vulnerability disclosure, authorized testing scope, and safe harbor commitments for Northlatch Labs LLC.</p>
+    </div>
+  </section>
+
+  <section class="section" style="border-top:0;padding-top:0">
+    <div class="wrap wrap-narrow">
+      <div class="doc-card">
+        <div class="doc-section">
+          <h2>Vulnerability Disclosure</h2>
+          <p>Report potential security vulnerabilities directly to <a href="mailto:security@projectxprotocol.dev" class="accent">security@projectxprotocol.dev</a>. All reports are acknowledged within 24 hours.</p>
+        </div>
+
+        <div class="doc-section">
+          <h2>Authorized Scope</h2>
+          <p>All Move packages listed on the <a href="/on-chain" class="accent">On-Chain Proof page</a>, as well as the web front ends served at <code>northlatch.tech</code>, <code>projectxprotocol.dev</code>, and <code>weir.social</code>.</p>
+        </div>
+
+        <div class="doc-section">
+          <h2>Safe Harbor</h2>
+          <p>Good-faith security research conducted within the listed scope is authorized. Northlatch Labs LLC will not pursue legal action against researchers acting in good faith.</p>
+        </div>
+
+        <div class="doc-section">
+          <h2>Bounty Rewards</h2>
+          <p>Rewards are evaluated case-by-case based on severity and impact. Critical fund-loss reports have paid up to $50,000.</p>
+        </div>
+
+        <div class="doc-meta">Last updated 2026-09-21 &middot; Northlatch Labs LLC</div>
+      </div>
+    </div>
+  </section>
 </Layout>

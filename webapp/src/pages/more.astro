@@ -1,50 +1,159 @@
 ---
-// One page for everything that helps a visitor decide but doesn't need its
-// own surface: names, the security training range, the coming market, and
-// the open stack. Each section is the short version; the deep material
-// lives in the repos and the on-chain proof page.
 import Layout from '../layouts/Layout.astro';
-import { SITE } from '../data/site.ts';
 ---
 
-<Layout title="More from the lab" path="/more"
-  description="A .sui name for your brand ($10 first year), a training range for your engineers, a market for hiring AI workers, and the open stack behind it all.">
-<section class="hero" style="padding-block:48px 24px">
-  <div class="wrap">
-    <div class="kicker"><span>Northlatch Labs</span><span>the rest of the shelf</span></div>
-    <h1 style="max-width:24ch">Everything else we ship.</h1>
-  </div>
-</section>
+<Layout
+  title="More Solutions & Open Source"
+  path="/more"
+  description="Open-source software, specialized tools, and lab programs from Northlatch Labs and 0xda7: Hivex control plane, Kestrel Surgical, Sui Move Security Skills, Xlaunch Gateway, .sui names, CTF Range, and Market."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow-pill"><i></i>Open Source &amp; Specialized Programs</span>
+      <h1>More solutions &amp; public repositories.</h1>
+      <p class="lede">
+        Explore the open-source control planes, vertical clinical software, developer security packs, and emerging beta programs published across <code>github.com/Northlatch-Labs-LLC</code> and <code>github.com/0xda7</code>.
+      </p>
+    </div>
+  </section>
 
-<section class="section" style="padding-block:32px">
-  <div class="wrap">
-    <div class="platform">
-      <div class="card" data-reveal>
-        <div class="top"><h3>Names</h3><span class="tag tag-live">[ LIVE ]</span></div>
-        <p class="what">Your brand on a .sui address: a readable name in one transaction, so sixty-four characters stop being the thing customers mistype.</p>
-        <div class="stat">$10 first year</div>
-        <span class="more"><a href="https://suivision.xyz" rel="noopener">register via any Sui wallet</a></span>
+  <section class="section">
+    <div class="wrap">
+      <div class="pgrid">
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Agent Control Plane</span>
+            <span class="pcard-status"><i></i>MIT Open Source</span>
+          </div>
+          <h3 class="pcard-title">Hivex</h3>
+          <p class="pcard-headline">One-human control plane for an agentic company</p>
+          <p class="pcard-summary">Single loopback Go binary (<code>127.0.0.1:7891</code>) embedding a React Office UI, broker, provider-neutral inference router, T0&ndash;T3 Gridframe approval gates, and 8 append-only CSV ledgers.</p>
+          <div class="pcard-pricing">
+            <strong>MIT License</strong>
+            <span>Go &ge; 1.25 · enterprise support available</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://github.com/Northlatch-Labs-LLC/hivex">
+              <span>View on GitHub</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-hivex">Request enterprise setup &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Healthcare AI (Local-Only)</span>
+            <span class="tag tag-beta">DESIGN PILOT</span>
+          </div>
+          <h3 class="pcard-title">Kestrel Surgical</h3>
+          <p class="pcard-headline">Operative notes &amp; CPT drafting that never leave your Mac</p>
+          <p class="pcard-summary">Dictation-first op-note workspace covering 50 built-in procedures with AES-GCM Keychain encryption, crash-safe persistence, and a local hash-chained export audit trail. Refuses rather than guesses.</p>
+          <div class="pcard-pricing">
+            <strong>Free Pilot</strong>
+            <span>macOS Apple Silicon &amp; Intel · 10-min demo</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://github.com/0xda7/kestrel-surgical-site">
+              <span>Inspect Pilot Details</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-kestrel">Join pilot &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Developer Security</span>
+            <span class="pcard-status"><i></i>CC BY-SA 4.0</span>
+          </div>
+          <h3 class="pcard-title">Sui Move Security Skills</h3>
+          <p class="pcard-headline">9 Sui-native vulnerability detectors for AI agents</p>
+          <p class="pcard-summary">Purpose-built security skills for Claude Code and agentskills.io clients covering Cetus-class arithmetic shifts, capability leaks, shared-object access control, hot-potato structs, and upgrade cap discipline.</p>
+          <div class="pcard-pricing">
+            <strong>Free / Open Standard</strong>
+            <span>Pairs with ProtocolX Verify CI</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://github.com/Northlatch-Labs-LLC/sui-move-security-skills">
+              <span>View Skills Repo</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/verify">Open Verify &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Model Routing</span>
+            <span class="pcard-status"><i></i>Self-Hostable</span>
+          </div>
+          <h3 class="pcard-title">Xlaunch Gateway</h3>
+          <p class="pcard-headline">Unified 44-provider LLM gateway with automatic failover</p>
+          <p class="pcard-summary">Node/Express + SQLite + React dashboard speaking OpenAI, Anthropic, Gemini, Ollama, and MCP wire formats across 44 providers with per-key quota tracking and cooldowns.</p>
+          <div class="pcard-pricing">
+            <strong>Proprietary License</strong>
+            <span>Commercial license required for production use</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://github.com/Northlatch-Labs-LLC/xlaunch-gateway">
+              <span>Inspect Repository</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-xlaunch">License inquiry &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Brand Identity</span>
+            <span class="pcard-status"><i></i>Live</span>
+          </div>
+          <h3 class="pcard-title">SuiNS Brand Names</h3>
+          <p class="pcard-headline">Human-readable .sui addresses</p>
+          <p class="pcard-summary">Give your brand, product, or agent a readable <code>.sui</code> name in one transaction so customers never have to verify or mistype a 64-character hex address.</p>
+          <div class="pcard-pricing">
+            <strong>$10 first year</strong>
+            <span>Standard SuiNS DAO renewal schedule applies</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://suivision.xyz" rel="noopener">
+              <span>Register via Sui Wallet</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">Security Training</span>
+            <span class="tag tag-beta">BETA</span>
+          </div>
+          <h3 class="pcard-title">CTF Security Range</h3>
+          <p class="pcard-headline">Train engineers on real Move exploits</p>
+          <p class="pcard-summary">Eight realistic smart-contract security challenges running against a retired mainnet deployment &mdash; built for engineering teams hardening Move codebases.</p>
+          <div class="pcard-pricing">
+            <strong>Free in Beta</strong>
+            <span>Request team access via contact</span>
+          </div>
+          <div class="pcard-actions">
+            <a class="btn btn-outline btn-sm" href="/contact#topic-range">Request Beta Access &rarr;</a>
+          </div>
+        </article>
       </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>CTF Range</h3><span class="tag">[ BETA ]</span></div>
-        <p class="what">Train your engineers against real exploits: eight challenges on a retired mainnet deployment, not toy puzzles.</p>
-        <div class="stat">free in beta</div>
-        <span class="more"><a href="/contact">request access</a></span>
-      </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>Market</h3><span class="tag">[ IN BUILD ]</span></div>
-        <p class="what">Hire vetted AI workers for tasks you define — and pay only on delivered work.</p>
-        <div class="stat">in active development</div>
-        <span class="more"><a href="/contact">talk to us about early access</a></span>
-      </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>The stack</h3><span class="tag tag-live">[ OPEN ]</span></div>
-        <p class="what">Everything above runs on our published stack: npm modules, CI tools, and the agent harness. Source you can read before you buy.</p>
-        <div class="stat">6 npm packages</div>
-        <span class="more"><a href="https://github.com/Northlatch-Labs-LLC">github &#8599;</a></span>
+
+      <div class="card" style="margin-top:32px" data-reveal>
+        <div class="top">
+          <h3>Autonomous Work Market (In Build) &amp; Complete GitHub Directory</h3>
+          <span class="tag tag-beta">EARLY ACCESS</span>
+        </div>
+        <p>We are also building an agentic task marketplace where vetted AI workers complete scoped deliverables and receive payment upon verification, alongside our open citizen harnesses (<code>labs</code>, <code>labs-sibling</code>) and MCP server (<code>weir-protocol</code>).</p>
+        <div class="actions" style="margin-top:20px">
+          <a class="btn btn-primary btn-sm" href="/contact#topic-sales">Request Early Access</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/Northlatch-Labs-LLC">Northlatch Org &#8599;</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/0xda7">0xda7 GitHub &#8599;</a>
+        </div>
       </div>
     </div>
-    <p class="small muted" style="margin-top:24px" data-reveal>The full detail for each of these lives one click away — the proof page lists what's on chain, and <a href="/contact">the lab</a> answers anything the pages don't.</p>
-  </div>
-</section>
+  </section>
 </Layout>

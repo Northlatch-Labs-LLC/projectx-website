@@ -1,48 +1,137 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site.ts';
 ---
-<Layout title="Contact" path="/contact" description="Tell us what you need built. A scoped, honest answer — including 'you don't need this' — within one business day.">
+
+<Layout
+  title="Contact Sales & Engineering"
+  path="/contact"
+  description="Contact Northlatch Labs to scope a custom software build, request a ProtocolX Verify First Report, or discuss enterprise deployments. Reply within one business day."
+>
   <Fragment slot="head"><script is:inline src="/js/dev.js" defer></script></Fragment>
-<section class="page-hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="hero-grid">
-      <div><p class="cmd"><span data-glyph="ask"></span>Contact us</p><h1>Talk to the lab.</h1><p class="lede">Tell us what you need built. You get a scoped, honest answer &mdash; including &ldquo;you don&rsquo;t need this&rdquo; &mdash; within one business day.</p>
-        <p style="margin-top:32px"><a class="mail-big" href="mailto:hello@projectxprotocol.dev"><span>&rarr;</span>hello@projectxprotocol.dev</a></p>
-        <p class="small faint" style="margin-top:8px">routes to the operator&rsquo;s inbox through Cloudflare. A person reads every message.</p>
-        <details style="margin-top:20px"><summary class="small muted" style="cursor:pointer">&#9656; other addresses</summary>
-          <div class="others-mail"><a href="mailto:security@projectxprotocol.dev">security@projectxprotocol.dev</a><a href="mailto:legal@projectxprotocol.dev">legal@projectxprotocol.dev</a><a href="mailto:privacy@projectxprotocol.dev">privacy@projectxprotocol.dev</a></div></details>
+
+  <section class="page-hero">
+    <div class="wrap hero-grid" style="align-items:start">
+      <div>
+        <span class="eyebrow-pill"><i></i>Direct Engineering Access</span>
+        <h1>Talk to Northlatch Labs.</h1>
+        <p class="lede">
+          Whether you want to order a $1,000 Verify First Report, configure a custom ProtocolX campaign, or commission a bespoke software or AI agent build &mdash; describe what you need and receive a concrete scope, price, and timeline within one business day.
+        </p>
+
+        <div class="card" style="margin-top:28px">
+          <p class="cmd">Direct Email</p>
+          <p style="margin-bottom:8px">
+            <a class="mail-big" href={`mailto:${SITE.contactEmail}`}>
+              <span>&rarr;</span>{SITE.contactEmail}
+            </a>
+          </p>
+          <p class="small faint">Delivered directly to the engineering operator's inbox. No ticket queues or automated sales bots.</p>
+          <details style="margin-top:16px">
+            <summary class="small muted" style="cursor:pointer">Department addresses (Security, Legal, Privacy)</summary>
+            <div class="others-mail">
+              <a href={`mailto:${SITE.securityEmail}`}>{SITE.securityEmail}</a>
+              <a href={`mailto:${SITE.legalEmail}`}>{SITE.legalEmail}</a>
+              <a href={`mailto:${SITE.privacyEmail}`}>{SITE.privacyEmail}</a>
+            </div>
+          </details>
+        </div>
       </div>
-      <form class="panel" data-contact style="position:relative" novalidate>
-        <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>Send a message</span></div>
+
+      <form class="panel" data-contact novalidate>
+        <div class="panel-head">
+          <strong>Project &amp; Sales Inquiry</strong>
+          <span class="live-pill"><i></i>1-business-day SLA</span>
+        </div>
         <div class="bd form-grid">
-          <label class="field"><span>name</span><input class="input" name="name" required autocomplete="name"></label>
-          <label class="field"><span>email</span><input class="input" name="email" type="email" required autocomplete="email"></label>
-          <label class="field"><span>topic</span><select class="input" name="topic"><option>sales</option><option>verify</option><option>weir</option><option>draws</option><option>names</option><option>range</option><option>security disclosure</option><option>press</option></select></label>
-          <label class="field"><span>company (optional)</span><input class="input" name="company" autocomplete="organization"></label>
-          <label class="field full"><span>message</span><textarea class="input" name="message" maxlength="500" required></textarea><span class="hint">max 500 chars</span></label>
-          <div class="hp-field" aria-hidden="true"><label>Company website<input type="text" name="company_alt" tabindex="-1" autocomplete="off"></label></div>
-          <div class="full" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center"><button class="btn btn-primary" type="submit">&rarr; send</button><span data-form-status class="small faint">reply within 1 business day</span></div>
+          <label class="field">
+            <span>Your Name *</span>
+            <input class="input" name="name" required autocomplete="name" placeholder="Alex Rivera">
+          </label>
+          <label class="field">
+            <span>Work Email *</span>
+            <input class="input" name="email" type="email" required autocomplete="email" placeholder="alex@company.com">
+          </label>
+          <label class="field">
+            <span>Solution / Topic *</span>
+            <select class="input" name="topic" data-topic-select>
+              <option id="topic-sales" value="sales">Custom Build / General Sales</option>
+              <option id="topic-synappse" value="synappse">Synappse (Team Plan / Self-Hosting)</option>
+              <option id="topic-xlaunch" value="xlaunch">Xlaunch (Harness &amp; Gateway Licensing)</option>
+              <option id="topic-kestrel" value="kestrel">Kestrel AI Engine / Kestrel Surgical Pilot</option>
+              <option id="topic-hivex" value="hivex">Hivex (Enterprise Control Plane)</option>
+              <option id="topic-verify" value="verify">ProtocolX Verify (Hosted App / $1,000 First Report)</option>
+              <option id="topic-draws" value="draws">ProtocolX Draws (Promotions &amp; Custom Campaigns)</option>
+              <option id="topic-weir" value="weir">Weir (Payouts &amp; Agent Automation)</option>
+              <option id="topic-names" value="names">SuiNS Brand Names</option>
+              <option id="topic-range" value="range">CTF Security Range (Beta Access)</option>
+              <option id="topic-security" value="security disclosure">Security Disclosure</option>
+              <option id="topic-press" value="press">Press &amp; Partnerships</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Company / Project (Optional)</span>
+            <input class="input" name="company" autocomplete="organization" placeholder="Acme Corp">
+          </label>
+          <label class="field full">
+            <span>How can we help? *</span>
+            <textarea class="input" name="message" maxlength="2000" required placeholder="Tell us what you want to launch, your target timeline, and any technical context..."></textarea>
+            <span class="hint" data-char-count>0 / 2,000 characters</span>
+          </label>
+          <div class="hp-field" aria-hidden="true">
+            <label>Company website<input type="text" name="company_alt" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <div class="full" style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+            <button class="btn btn-primary" type="submit">Send Inquiry &rarr;</button>
+            <span data-form-status class="small faint">Direct response within 1 business day</span>
+          </div>
         </div>
       </form>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="bolt"></span>The process</p><h2>What happens after you write.</h2></div>
-    <div class="principles">
-      <div class="card" data-reveal><span class="n">01</span><h3>We read it the same day.</h3><p>Every message lands in the operator&rsquo;s inbox &mdash; the same inbox the email address reaches. No ticket queue in between.</p></div>
-      <div class="card" data-reveal><span class="n">02</span><h3>You get scope, price and timeline.</h3><p>Within one business day: what the work takes, what it costs, and when it lands. A scoped answer, not a form letter.</p></div>
-      <div class="card" data-reveal><span class="n">03</span><h3>If it is not a fit, we say so.</h3><p>When a live product already covers part of the problem, we point you to it instead of selling you a build you do not need.</p></div>
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Engagement Process</p>
+        <h2>What happens after you submit.</h2>
+      </div>
+      <div class="principles">
+        <div class="card" data-reveal>
+          <span class="n">01 / SAME-DAY REVIEW</span>
+          <h3>Read directly by the operator</h3>
+          <p>Every inquiry goes straight to our engineering leadership inbox &mdash; never filtered through outsourced support tiers.</p>
+        </div>
+        <div class="card" data-reveal>
+          <span class="n">02 / CLEAR SCOPING</span>
+          <h3>Scope, price &amp; timeline in 24h</h3>
+          <p>Within one business day you receive a practical answer detailing deliverables, fixed pricing, and realistic launch timing.</p>
+        </div>
+        <div class="card" data-reveal>
+          <span class="n">03 / HONEST FIT CHECK</span>
+          <h3>No unnecessary custom builds</h3>
+          <p>If one of our self-serve products already solves 100% of your use case, we point you straight to it instead of billing for redundant work.</p>
+        </div>
+      </div>
+
+      <div class="twocol" style="margin-top:48px">
+        <div class="card" data-reveal>
+          <p class="cmd">Helpful Context to Share</p>
+          <ul class="gets" style="margin-top:12px">
+            <li>The business outcome you want to achieve &mdash; no formal technical spec required.</li>
+            <li>Your target launch window or deadline.</li>
+            <li>Whether you are evaluating self-serve tiers or need custom integrations.</li>
+          </ul>
+        </div>
+        <div class="card" data-reveal>
+          <p class="cmd">Common Requests</p>
+          <ul class="gets" style="margin-top:12px">
+            <li>Custom promotion campaigns &amp; branded raffle flows on ProtocolX.</li>
+            <li>First Report ($1,000) or multi-repo rollout for ProtocolX Verify.</li>
+            <li>Policy-bounded AI agent automation using Weir accounts &amp; GridFrames compute.</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="twocol" style="margin-top:48px">
-      <div data-reveal><p class="cmd"><span data-glyph="grid"></span>What to include</p>
-        <ul class="gets" style="margin-top:16px"><li>The problem, in your words. No spec required.</li><li>Your timeline &mdash; when does this need to exist?</li><li>Whether a live product already covers part of it.</li></ul></div>
-      <div data-reveal><p class="cmd"><span data-glyph="key"></span>What you can ask for</p>
-        <ul class="gets" style="margin-top:16px"><li>A promotion engine on ProtocolX &mdash; draws shaped to your campaign.</li><li>Agent automation on Weir accounts &mdash; software that holds its own budget.</li><li>A private deployment, an integration, or something the products do not do yet.</li></ul></div>
-    </div>
-  </div>
-</section>
+  </section>
 </Layout>

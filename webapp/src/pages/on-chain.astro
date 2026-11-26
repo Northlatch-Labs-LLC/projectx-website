@@ -1,27 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="On chain" path="/on-chain" description="Every claim on this site points at something you can check. The Move packages behind the live products, listed with full addresses.">
-<section class="page-hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="hero-grid">
-      <div><p class="cmd"><span data-glyph="hash"></span>On-chain records</p><h1>On chain.</h1><p class="lede">Every claim on this site points at something you can check. This page lists the packages behind the live products &mdash; full addresses, no shortcuts.</p></div>
-      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,sui" role="img" aria-label="Blocks building the X, then the word sui."></div></figure>
+
+<Layout
+  title="On-Chain Proof"
+  path="/on-chain"
+  description="Verifiable Move package addresses on Sui mainnet and reproducible CI verification for every live Northlatch Labs product."
+>
+  <section class="page-hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow-pill"><i></i>Public Verification</span>
+        <h1>Verifiable on Sui mainnet.</h1>
+        <p class="lede">
+          Every product claim on northlatch.tech is backed by published packages and inspectable source code. Review our live mainnet deployments below without needing to ask our sales team for access.
+        </p>
+      </div>
+      <figure class="markfig">
+        <div class="markfield" data-mark="hero" data-mark-seq="mark,sui" role="img" aria-label="Animated geometric blocks forming the Sui mark."></div>
+      </figure>
     </div>
-  </div>
-</section>
-<section class="section" style="border-top:0;padding-top:0">
-  <div class="wrap">
-    <div class="table-wrap" data-reveal><table class="pk"><thead><tr><th>package</th><th>address</th><th class="r">chain state</th></tr></thead>
-      <tbody><tr><td class="accent">weir core</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0xdc6dbb96885ba049c5d860d0b775b9e968cf9053a227861ae006f22e352884b5">0xdc6dbb96885ba049c5d860d0b775b9e968cf9053a227861ae006f22e352884b5</a></td><td class="r num">v5 &middot; account, creator, entitlement, key_registry, platform, stake</td></tr><tr><td class="accent">weir core (original)</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0xc5c833991ed1123d70b1001c0bcdb01ec5728b09f25dfc42a0edaf16005d404d">0xc5c833991ed1123d70b1001c0bcdb01ec5728b09f25dfc42a0edaf16005d404d</a></td><td class="r num">v5 lineage root &middot; also the Seal namespace package</td></tr><tr><td class="accent">weir payments (USDC)</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7">0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7</a></td><td class="r num">v1 &middot; usdc</td></tr><tr><td class="accent">weir key server</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0x9636e0c761e7476b8579cb13d543838e3732ca482dc0a64f086f57b60c024e23">0x9636e0c761e7476b8579cb13d543838e3732ca482dc0a64f086f57b60c024e23</a></td><td class="r num">v5 &middot; key_server, hmac, kdf, gf256</td></tr><tr><td class="accent">projectx_raffle</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0xb475146208b53d16c3498c9757d623386c17fc197df544386ed496a74e79f8ee">0xb475146208b53d16c3498c9757d623386c17fc197df544386ed496a74e79f8ee</a></td><td class="r num">v6 &middot; fenwick, raffle_v1</td></tr><tr><td class="accent">northlatch_soul</td><td class="num"><a class="addr" href="https://suivision.xyz/package/0x8d6567ed7bf34d99eefefe745c3a282fd89a12fdcd77e6bd10b19b35b599635f">0x8d6567ed7bf34d99eefefe745c3a282fd89a12fdcd77e6bd10b19b35b599635f</a></td><td class="r num">v1 &middot; soul</td></tr></tbody></table></div>
-    <p class="small faint" style="margin-top:16px" data-reveal>Every published package behind the live products, listed with its full address so each row is checkable on its own — weir&#39;s own agent manifest names the latest and original core packages, and every row below resolved on Sui mainnet over GraphQL when this table was last checked (2026-11-25). A row appears only once its address resolves; accounts and vaults are not packages, so they are not table rows.</p>
-    <div class="twocol" style="margin-top:48px">
-      <div data-reveal><p class="cmd"><span data-glyph="terminal"></span>Reproduce anything</p>
-        <p class="muted" style="margin-top:8px">Clone the verify repository and run the same gate suite our CI runs &mdash; on your machine, against your checkout.</p>
-        <div class="term"><div class="term-body" style="min-height:0"><div class="c">git clone https://github.com/Northlatch-Labs-LLC/protocolx-verify.git</div><div class="c">cd protocolx-verify</div><div class="c">bash scripts/run-self-gates.sh</div><div class="out">&gt; the same 25 steps CI runs, on your machine <span class="pass">[ ok ]</span></div><div class="out">&gt; a step that cannot run locally is named and skipped, never folded into a pass</div><div class="out">&gt; digest matches.       exit 0</div></div></div></div>
-      <div data-reveal><p class="cmd"><span data-glyph="eye"></span>What is public</p><ul class="gets"><li>Source of the verify action and its engine.</li><li>Gate configurations.</li><li>Test corpus for the tests gate.</li><li>Release digests since v0.1, in git history.</li></ul></div>
+  </section>
+
+  <section class="section" style="padding-top:0;border-top:0">
+    <div class="wrap">
+      <div class="table-wrap" data-reveal>
+        <table class="pk">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Mainnet Address</th>
+              <th class="r">Version &amp; Modules</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="accent"><strong>weir core</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0xdc6dbb96885ba049c5d860d0b775b9e968cf9053a227861ae006f22e352884b5">0xdc6dbb96885ba049c5d860d0b775b9e968cf9053a227861ae006f22e352884b5</a></td>
+              <td class="r num">v5 &middot; account, creator, entitlement, key_registry, platform, stake</td>
+            </tr>
+            <tr>
+              <td class="accent"><strong>weir core (original)</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0xc5c833991ed1123d70b1001c0bcdb01ec5728b09f25dfc42a0edaf16005d404d">0xc5c833991ed1123d70b1001c0bcdb01ec5728b09f25dfc42a0edaf16005d404d</a></td>
+              <td class="r num">v5 lineage root &middot; Seal namespace package</td>
+            </tr>
+            <tr>
+              <td class="accent"><strong>weir payments (USDC)</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7">0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7</a></td>
+              <td class="r num">v1 &middot; usdc</td>
+            </tr>
+            <tr>
+              <td class="accent"><strong>weir key server</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0x9636e0c761e7476b8579cb13d543838e3732ca482dc0a64f086f57b60c024e23">0x9636e0c761e7476b8579cb13d543838e3732ca482dc0a64f086f57b60c024e23</a></td>
+              <td class="r num">v5 &middot; key_server, hmac, kdf, gf256</td>
+            </tr>
+            <tr>
+              <td class="accent"><strong>projectx_raffle</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0xb475146208b53d16c3498c9757d623386c17fc197df544386ed496a74e79f8ee">0xb475146208b53d16c3498c9757d623386c17fc197df544386ed496a74e79f8ee</a></td>
+              <td class="r num">v6 &middot; fenwick, raffle_v1</td>
+            </tr>
+            <tr>
+              <td class="accent"><strong>northlatch_soul</strong></td>
+              <td class="num"><a class="addr" href="https://suivision.xyz/package/0x8d6567ed7bf34d99eefefe745c3a282fd89a12fdcd77e6bd10b19b35b599635f">0x8d6567ed7bf34d99eefefe745c3a282fd89a12fdcd77e6bd10b19b35b599635f</a></td>
+              <td class="r num">v1 &middot; soul</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small faint" style="margin-top:16px" data-reveal>
+        Every published package behind our live products is listed with its full Sui mainnet address (resolved over Sui GraphQL on 2026-11-25). Accounts and vaults are live objects rather than packages, and are linked directly on the <a href="/agents" class="accent">Agents page</a>.
+      </p>
+
+      <div class="twocol" style="margin-top:48px">
+        <div data-reveal>
+          <p class="cmd">Reproducible Verification</p>
+          <h2 style="font-size:1.5rem;margin-bottom:10px">Run our CI gate suite locally.</h2>
+          <p class="muted" style="margin-bottom:16px">Clone the public Verify repository and run the exact 25 verification steps executed in our own CI pipeline.</p>
+          <div class="term">
+            <div class="term-body">
+              <div class="c">git clone https://github.com/Northlatch-Labs-LLC/protocolx-verify.git</div>
+              <div class="c">cd protocolx-verify</div>
+              <div class="c">bash scripts/run-self-gates.sh</div>
+              <div class="out">&gt; runs the same 25 steps CI executes locally <span class="pass">[ ok ]</span></div>
+              <div class="out">&gt; unavailable local steps are named and skipped explicitly</div>
+              <div class="out">&gt; digest matches. exit 0</div>
+            </div>
+          </div>
+        </div>
+        <div data-reveal>
+          <p class="cmd">Open Artifacts</p>
+          <h2 style="font-size:1.5rem;margin-bottom:16px">What your team can inspect today.</h2>
+          <ul class="gets">
+            <li>Full source code for the ProtocolX Verify GitHub Action and verification engine.</li>
+            <li>Gate configurations and canonical evidence-manifest schema.</li>
+            <li>Complete Move test corpus used by the automated test gate.</li>
+            <li>Historical release digests tracked cleanly in git history since v0.1.</li>
+          </ul>
+          <div class="actions" style="margin-top:24px">
+            <a class="btn btn-primary btn-sm" href="/verify">Try Browser Bundle Verifier</a>
+            <a class="btn btn-ghost btn-sm" href="/contact#topic-sales">Talk to Engineering</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 </Layout>

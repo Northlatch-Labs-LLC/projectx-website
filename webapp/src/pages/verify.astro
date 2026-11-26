@@ -2,67 +2,117 @@
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site.ts';
 ---
-<Layout title="ProtocolX Verify" path="/verify" description="Five CI gates on every pull request. Every run leaves an evidence bundle with a re-derivable digest.">
+
+<Layout
+  title="ProtocolX Verify"
+  path="/verify"
+  description="Five automated CI security gates on every pull request for Sui Move packages. Generates a cryptographic SHA-256 evidence bundle anyone can re-derive."
+>
   <Fragment slot="head">
     <script is:inline src="/js/canon.js" defer></script>
     <script is:inline src="/js/dev.js" defer></script>
   </Fragment>
-<section class="page-hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="hero-grid">
+
+  <section class="page-hero">
+    <div class="wrap hero-grid">
       <div>
-        <p class="cmd"><span data-glyph="terminal"></span>How Verify works</p>
-        <h1>ProtocolX Verify <span class="tag tag-live">[ LIVE ]</span></h1>
-        <p class="for">for engineering leads shipping Move</p>
-        <p class="lede">Audit-grade checks on every update, for a fraction of audit cost: five CI gates on every pull request, and every run leaves an evidence bundle with a re-derivable digest.</p>
+        <span class="eyebrow-pill"><i></i>Contract Security CI &middot; Live</span>
+        <h1>ProtocolX Verify</h1>
+        <p class="for">Continuous assurance for engineering leads shipping Sui Move</p>
+        <p class="lede">
+          Audit-grade automated verification on every pull request at a fraction of manual audit cost. Five CI gates run on every commit and output a portable SHA-256 evidence bundle any customer, auditor, or exchange can verify.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#try-verifier">
+            <span>Try Browser Verifier</span>
+            <svg><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/contact#topic-verify">Order $1,000 First Report</a>
+        </div>
       </div>
-      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,verify" role="img" aria-label="Blocks building the X, then the word verify."></div></figure>
+      <figure class="markfig">
+        <div class="markfield" data-mark="hero" data-mark-seq="mark,verify" role="img" aria-label="Animated geometric blocks forming the ProtocolX Verify mark."></div>
+      </figure>
     </div>
-    
-<div class="run" style="margin-top:clamp(40px,6vw,64px)" data-reveal>
-  <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>verify run --repo example/pkg --pr 482 &middot; illustrative</span><span class="right">bundle &middot; sha256</span></div>
-  <div class="rows"><!-- illustrative: gate names and counts are what a real run reports; the repo and PR named here are examples --><div class="row"><span class="k">gate.01</span><span class="d"><b style="color:var(--text);font-weight:500">build</b> &mdash; the package compiles on a runner that has never seen it, with a pinned Sui CLI</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.02</span><span class="d"><b style="color:var(--text);font-weight:500">digest</b> &mdash; the source still builds to the digest the chain holds</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.03</span><span class="d"><b style="color:var(--text);font-weight:500">tests</b> &mdash; the Move suite runs green against the exact commit proposed</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.04</span><span class="d"><b style="color:var(--text);font-weight:500">pin</b> &mdash; the framework dependency stays where you pinned it</span><span class="pass">[ PASS ]</span></div><div class="row"><span class="k">gate.05</span><span class="d"><b style="color:var(--text);font-weight:500">mutation-smoke</b> &mdash; assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span><span class="pass">[ PASS ]</span></div></div>
-  <div class="meta">
-    <div><span>status</span><span class="pass">ready to merge</span></div>
-    <div><span>engine</span><span>protocolx-verify &middot; self-gates</span></div>
-    <div><span>digest</span><code>sha256:8f42a9c1d0b6e73f4c2e5a90b7d1e6c3ab52f7d0e9c48d31bf6a02e5d7c9a1b8</code></div>
-    <div><span>re-derive</span><code>verify reproduce &lt;digest&gt;</code></div>
-    <div><span>exit</span><span>0</span></div>
-  </div>
-</div>
-<p class="note-mono">This bundle is the artifact your customer keeps</p>
 
-  </div>
-</section>
-<section class="section">
-  <div class="wrap twocol">
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="ask"></span>The problem today</p>
-      <p class="prob">Test suites go green while the guards holding user funds sit untested. When a fund draws the wrong balance in production, the record of what you checked is missing.</p>
+    <div class="wrap" style="margin-top:clamp(36px,5vw,56px)">
+      <div class="run" data-reveal>
+        <div class="winbar">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>Sample CI Output &middot; example/pkg PR #482 (illustrative)</span>
+          <span class="right">bundle &middot; sha256</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="k">gate.01</span><span class="d"><b style="color:var(--text);font-weight:600">build</b> &mdash; Package compiles cleanly on an isolated runner with a pinned Sui CLI</span><span class="pass">[ PASS ]</span></div>
+          <div class="row"><span class="k">gate.02</span><span class="d"><b style="color:var(--text);font-weight:600">digest</b> &mdash; Source reproduces the exact bytecode digest deployed on-chain</span><span class="pass">[ PASS ]</span></div>
+          <div class="row"><span class="k">gate.03</span><span class="d"><b style="color:var(--text);font-weight:600">tests</b> &mdash; Full Move test suite passes against the proposed commit</span><span class="pass">[ PASS ]</span></div>
+          <div class="row"><span class="k">gate.04</span><span class="d"><b style="color:var(--text);font-weight:600">pin</b> &mdash; Framework dependencies remain locked to verified revisions</span><span class="pass">[ PASS ]</span></div>
+          <div class="row"><span class="k">gate.05</span><span class="d"><b style="color:var(--text);font-weight:600">mutation-smoke</b> &mdash; Deletes assertions one by one and re-runs tests to measure real suite coverage (derived, executed, killed, survived)</span><span class="pass">[ PASS ]</span></div>
+        </div>
+        <div class="meta">
+          <div><span>status</span><span class="pass">ready to merge</span></div>
+          <div><span>engine</span><span>protocolx-verify &middot; self-gates</span></div>
+          <div><span>digest</span><code>sha256:8f42a9c1d0b6e73f4c2e5a90b7d1e6c3ab52f7d0e9c48d31bf6a02e5d7c9a1b8</code></div>
+          <div><span>re-derive</span><code>verify reproduce &lt;digest&gt;</code></div>
+        </div>
+      </div>
+      <p class="note-mono">Every PR produces a verifiable bundle.json artifact your team and customers can independently check.</p>
     </div>
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>What you get</p>
-      <ul class="gets"><li>Five CI gates on every pull request: build, digest, tests, pin, mutation-smoke.</li><li>Every run drops an evidence bundle with a re-derivable digest.</li><li>A one-line reproduce command a customer, auditor, or exchange can run on their own.</li><li>Hosted runners with retention. Private repos supported.</li></ul>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="steps"></span>The five gates</p><h2>Five gates, one bundle</h2></div>
-    <figure class="gates-fig" data-reveal><div class="gates" data-gates="31,29" role="img" aria-label="A bundle passes five gates. At mutation-smoke 31 mutants are derived, 29 killed, 2 survive."></div>
-    <ul class="gate-list" style="margin-top:24px"><li data-reveal><span class="gn">gate.01</span><span class="pass">[ PASS ]</span><span class="gd"><b>build</b>the package compiles on a runner that has never seen it, with a pinned Sui CLI</span></li><li data-reveal><span class="gn">gate.02</span><span class="pass">[ PASS ]</span><span class="gd"><b>digest</b>the source still builds to the digest the chain holds</span></li><li data-reveal><span class="gn">gate.03</span><span class="pass">[ PASS ]</span><span class="gd"><b>tests</b>the Move suite runs green against the exact commit proposed</span></li><li data-reveal><span class="gn">gate.04</span><span class="pass">[ PASS ]</span><span class="gd"><b>pin</b>the framework dependency stays where you pinned it</span></li><li data-reveal><span class="gn">gate.05</span><span class="pass">[ PASS ]</span><span class="gd"><b>mutation-smoke</b>assertions are deleted one at a time and the suite re-runs against each, up to a set limit. The bundle records how many were derivable, how many ran, how many were killed and how many survived.</span></li></ul></figure>
-  </div>
-</section>
-<section class="section">
-  <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="eye"></span>Verify an evidence bundle</p><h2>Re-derive a bundle here</h2><p>The same digest the CLI prints, computed in your browser from the text on the left.</p></div>
-    <div class="vbox" data-verify>
-  <div class="editor">
-    <div class="winbar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>~/bundle.json</span><span class="right" data-count>1142 chars</span></div>
-    <label class="sr" for="bundle-src">evidence bundle JSON</label>
-    <textarea is:raw id="bundle-src" spellcheck="false" autocomplete="off" autocapitalize="off">{
+  <section class="section">
+    <div class="wrap twocol">
+      <div data-reveal>
+        <p class="cmd">Why Teams Adopt Verify</p>
+        <p class="prob">Passing unit tests can leave critical balance and permission assertions untested. Between formal audits, teams lack an objective, continuous record proving every pull request was verified.</p>
+      </div>
+      <div data-reveal>
+        <p class="cmd">Deliverables</p>
+        <ul class="gets">
+          <li>Five automated CI gates on every pull request: build, digest, tests, pin, and mutation-smoke.</li>
+          <li>Cryptographic SHA-256 evidence bundle attached to every run.</li>
+          <li>One-line verification command for customers, exchanges, and auditors.</li>
+          <li>Optional hosted runners with artifact retention and private repo support.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Pipeline Architecture</p>
+        <h2>Five gates, one portable proof bundle.</h2>
+      </div>
+      <figure class="gates-fig" data-reveal>
+        <div class="gates" data-gates="31,29" role="img" aria-label="Visualization of the five verification gates and mutation smoke testing."></div>
+        <ul class="gate-list" style="margin-top:24px">
+          <li><span class="gn">gate.01</span><span class="pass">[ PASS ]</span><span class="gd"><b>build</b>Compiles the package from scratch on a clean runner with a pinned Sui CLI</span></li>
+          <li><span class="gn">gate.02</span><span class="pass">[ PASS ]</span><span class="gd"><b>digest</b>Confirms local source matches the on-chain package bytecode digest</span></li>
+          <li><span class="gn">gate.03</span><span class="pass">[ PASS ]</span><span class="gd"><b>tests</b>Executes the full Move test suite against the exact PR commit</span></li>
+          <li><span class="gn">gate.04</span><span class="pass">[ PASS ]</span><span class="gd"><b>pin</b>Verifies Move framework dependencies have not drifted unexpectedly</span></li>
+          <li><span class="gn">gate.05</span><span class="pass">[ PASS ]</span><span class="gd"><b>mutation-smoke</b>Deletes assertions iteratively up to a set limit and records how many mutants were derived, killed, or survived</span></li>
+        </ul>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="try-verifier">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Interactive Product Demo</p>
+        <h2>Test an evidence bundle in your browser.</h2>
+        <p>Edit any character in the JSON manifest on the left or drop your own <code>bundle.json</code> file. Your browser recomputes the canonical SHA-256 digest locally with zero network calls.</p>
+      </div>
+      <div class="vbox" data-verify>
+        <div class="editor">
+          <div class="winbar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>bundle.json</span>
+            <span class="right" data-count>1142 chars</span>
+          </div>
+          <label class="sr" for="bundle-src">Evidence bundle JSON</label>
+          <textarea is:raw id="bundle-src" spellcheck="false" autocomplete="off" autocapitalize="off">{
   &quot;schema&quot;: &quot;protocolx-verify/evidence-manifest&quot;,
   &quot;schemaVersion&quot;: 1,
   &quot;subject&quot;: {
@@ -120,31 +170,69 @@ import { SITE } from '../data/site.ts';
   },
   &quot;bundleDigest&quot;: &quot;sha256:a6821ad2cdf557c60a6c800ad800683dc0fc1d101b240e6762e5be330b315d52&quot;
 }</textarea>
-    <div class="foot"><button class="btn btn-primary btn-sm" type="button" data-run>re-derive</button><button class="btn btn-ghost btn-sm" type="button" data-reset>reset</button><span class="faint">or drop a file on the box</span></div>
-  </div>
-  <div class="vresult" aria-live="polite">
-    <div class="digestgrid" data-digestgrid role="img" aria-label="The computed digest drawn as 256 blocks, one per bit."></div>
-    <p class="vstatus" data-status>waiting</p>
-    <div class="vline"><span>computed here</span><code data-computed>&mdash;</code></div>
-    <div class="vline"><span>claimed by the bundle</span><code data-claimed>&mdash;</code></div>
-    <p class="small faint">Change one character on the left. The digest moves, and about half of the 256 blocks move with it. That is the whole idea.</p>
-  </div>
-</div>
-    <div style="margin-top:32px" data-reveal><p class="cmd"><span data-glyph="grid"></span>How support works</p><div class="cats"><span>Move on Sui</span><span>GitHub Actions</span><span>GitLab CI</span><span>self-hosted runners</span></div></div>
-  </div>
-</section>
+          <div class="foot">
+            <button class="btn btn-primary btn-sm" type="button" data-run>Re-derive Digest</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-reset>Reset Sample</button>
+            <span class="faint">Or drag &amp; drop a bundle.json file</span>
+          </div>
+        </div>
+        <div class="vresult" aria-live="polite">
+          <div class="digestgrid" data-digestgrid role="img" aria-label="Visual 256-bit SHA-256 fingerprint grid."></div>
+          <p class="vstatus" data-status>waiting</p>
+          <div class="vline"><span>Computed locally</span><code data-computed>&mdash;</code></div>
+          <div class="vline"><span>Claimed by bundle</span><code data-claimed>&mdash;</code></div>
+          <p class="small faint">Modifying even one character flips roughly half of the 256 digest bits &mdash; making tampering immediately detectable.</p>
+        </div>
+      </div>
 
-<section class="section">
-  <div class="wrap twocol">
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="tag"></span>Pricing</p>
-      <div class="pricing"><div><span>the Action, in your own CI</span><b>free</b></div><div><span>First Report (one-shot audit output)</span><b>$1,000</b></div><div><span>The App, hosted by us</span><b>$149 / repo / month</b></div></div>
+      <div style="margin-top:32px" data-reveal>
+        <p class="cmd">Supported Environments</p>
+        <div class="cats">
+          <span>Move on Sui</span>
+          <span>GitHub Actions</span>
+          <span>GitLab CI</span>
+          <span>Self-Hosted Runners</span>
+        </div>
+      </div>
     </div>
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>Get started</p>
-      <div class="startcmds"><span class="lbl">install &middot; one workflow step</span><div class="cline"><span class="p">$</span><code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code><button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">or scaffold it with the installer</span><div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">run</span><div class="cline"><span class="p">$</span><code>git push &amp;&amp; open the check run</code><button class="copy" type="button" data-copy="git push &amp;&amp; open the check run" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div><span class="lbl">share</span><div class="cline"><span class="p">$</span><code>download bundle.json from the run artifacts</code><button class="copy" type="button" data-copy="download bundle.json from the run artifacts" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div></div><p class="small faint" style="margin-top:16px">Downloaded, then run &mdash; not piped. Read the script first; --check prints without writing.</p>
+  </section>
+
+  <section class="section">
+    <div class="wrap twocol">
+      <div data-reveal>
+        <p class="cmd">Pricing Plans</p>
+        <h2>Simple, transparent tiers.</h2>
+        <div class="pricing" style="margin-top:20px">
+          <div><span>GitHub Action (in your own CI)</span><b>Free</b></div>
+          <div><span>First Report (one-shot audit output)</span><b>$1,000</b></div>
+          <div><span>Hosted App (managed runners &amp; retention)</span><b>$149 / repo / month</b></div>
+        </div>
+        <div class="actions" style="margin-top:24px">
+          <a class="btn btn-primary" href="/contact#topic-verify">Get Started with Hosted App or First Report</a>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <p class="cmd">Self-Serve Installation</p>
+        <h2>Add to your repository in minutes.</h2>
+        <div class="startcmds" style="margin-top:20px">
+          <span class="lbl">1 &middot; Add one step to GitHub Actions</span>
+          <div class="cline"><span class="p">$</span><code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code><button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy workflow step"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
+
+          <span class="lbl">2 &middot; Or scaffold with the verified installer</span>
+          <div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
+
+          <span class="lbl">3 &middot; Push a commit &amp; download bundle.json</span>
+          <div class="cline"><span class="p">$</span><code>git push &amp;&amp; open the check run</code><button class="copy" type="button" data-copy="git push && open the check run" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
+        </div>
+        <p class="small faint" style="margin-top:14px">Downloaded, then run &mdash; never piped directly to a shell. Pass <code>--check</code> to inspect without writing files.</p>
+      </div>
     </div>
-  </div>
-</section>
-<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">See the other four: <a href="/weir">Weir</a><a href="https://protocolx.io">Draws</a><a href="/more">Names</a><a href="/more">Range</a></p></div></section>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap">
+      <p class="others">Explore more solutions: <a href="/weir">Weir Accounts</a><a href="https://protocolx.io">ProtocolX Draws</a><a href="https://gridframes.app">GridFrames Hosting</a><a href="/more">SuiNS Names &amp; Range</a></p>
+    </div>
+  </section>
 </Layout>

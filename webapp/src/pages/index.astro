@@ -1,86 +1,385 @@
 ---
-// The front door. One idea per band: promise → products → also shipping →
-// how (compressed) → start. The jobs router lives on /start; the deep lab
-// story lives on /agents and /on-chain. This page stays thin on purpose.
 import Layout from '../layouts/Layout.astro';
-import { SITE } from '../data/site.ts';
 import ProductGrid from '../components/ProductGrid.astro';
+import { SITE, PRODUCTS, SOLUTION_MATCHES, ONBOARDING_PATHS, FAQS } from '../data/site.ts';
 ---
 
-<Layout title="Software that runs itself" path="/"
-  description="Live products: provably fair draws your community can audit, accounts for people and agents, machines rented in SUI credits, CI verification for Move contracts — plus .sui names and the agent harness. Built by AI, proven on chain.">
-<section class="hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="kicker"><span>Northlatch Labs</span><span>Software solutions for business &middot; live on Sui</span></div>
-    <h1 style="max-width:26ch">Software that earns trust &mdash; <em>and pays for itself.</em><span class="caret" aria-hidden="true"></span></h1>
-    <p class="lede" style="max-width:64ch">Promotions your customers can trust, payouts that reach you directly, hosting without an ops team, and contracts that are checked before they ship. That is what we build — and everything we ship proves it.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href={SITE.join.url}><svg><use href="#i-arrow"/></svg><span>{SITE.join.label}</span></a>
-      <a class="btn btn-ghost" href="/start">Read the 3-minute primer</a>
-      <a class="btn btn-quiet" href="/contact">contact</a>
-    </div>
-    <p class="hero-note">every claim links to a record you can check</p>
-  </div>
-</section>
-
-<section class="section" id="products">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="grid"></span>Products</p>
-      <h2>Some of our products, live</h2>
-      <p>Each one is live right now &mdash; click a card and you are using it, not joining a waitlist.</p>
-    </div>
-    <ProductGrid />
-  </div>
-</section>
-
-<section class="section" id="how">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>Why you can trust it</p>
-      <h2>Why businesses buy from us.</h2>
-    </div>
-    <div class="platform">
-      <div class="card" data-reveal>
-        <p><b>Self-serve, priced like a product.</b> Fixed fees, no sales cycle, no waitlists. You decide in the morning and ship with it the same afternoon.</p>
+<Layout
+  title={SITE.tagline}
+  path="/"
+  description={SITE.description}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-split">
+      <div>
+        <span class="eyebrow-pill"><i></i>Northlatch Labs &middot; Applied AI &amp; Verifiable Software</span>
+        <h1>Commercial AI workforces, local inference, and <em>verifiable software</em>.</h1>
+        <p class="lede">
+          Northlatch Labs builds production software across two complementary pillars:
+          collaborative AI teams (<strong>Synappse</strong>), autonomous engineering (<strong>Xlaunch</strong>), and local macOS inference (<strong>Kestrel</strong>) &mdash;
+          paired with verifiable Sui contract CI (<strong>Verify</strong>), provably fair promotions (<strong>ProtocolX</strong>), zero-ops hosting (<strong>GridFrames</strong>), and payout accounts (<strong>Weir</strong>).
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#solutions">
+            <span>Explore Solutions</span>
+            <svg><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#get-started">How to Become a Customer</a>
+          <a class="btn btn-quiet" href="/contact">Talk to Sales &rarr;</a>
+        </div>
+        <div class="hero-trust">
+          <span><svg><use href="#i-check"/></svg>Self-serve SaaS &amp; open-source apps</span>
+          <span><svg><use href="#i-check"/></svg>Published transparent pricing</span>
+          <span><svg><use href="#i-check"/></svg>1-day custom scoping</span>
+        </div>
       </div>
-      <div class="card" data-reveal>
-        <p><b>Proof your customers can check.</b> Draw results come with publicly verifiable evidence — which ends the "was it rigged?" conversation for good. <a href="/on-chain">Every claim here lists its receipt</a>.</p>
-      </div>
-      <div class="card" data-reveal>
-        <p><b>Costs that stay put.</b> 2.9% on draws, locked when you create it. $149 a month per repo, everything included. No setup fees, no per-seat math, no renewal surprises.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="door" style="padding-block:64px">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>Get started</p>
-      <h2>Three ways to become a customer.</h2>
+      <aside class="hero-panel" aria-label="Quick product directory">
+        <div class="hero-panel-head">
+          <span class="hero-panel-title">Flagship Commercial Suite</span>
+          <span class="live-pill"><i></i>6 Flagship Products</span>
+        </div>
+        <div class="hero-panel-list">
+          {PRODUCTS.map((p) => (
+            <a class="hero-panel-item" href={p.primaryHref}>
+              <div>
+                <strong>{p.name}</strong>
+                <span>{p.headline}</span>
+              </div>
+              <span class="hero-panel-price">{p.priceLabel}</span>
+            </a>
+          ))}
+        </div>
+        <div class="hero-panel-foot">
+          <span>Also shipping: GridFrames, Hivex, Kestrel Surgical &amp; Move Skills</span>
+          <a href="#solutions">See all &rarr;</a>
+        </div>
+      </aside>
     </div>
-    <div class="platform">
-      <a class="prod card" href={SITE.join.url} data-reveal>
-        <div class="top"><h3>Self-serve, today</h3><span class="tag tag-live">[ FREE START ]</span></div>
-        <p>Create an account with Google or a wallet, then run a draw, rent a machine, or claim a name — within minutes, without talking to anyone.</p>
-        <div class="stat">weir.social/join</div>
-        <span class="more">create account <svg><use href="#i-out"/></svg></span>
-      </a>
-      <a class="prod card" href="/start" data-reveal>
-        <div class="top"><h3>Evaluate first</h3><span class="tag">[ 3 MIN ]</span></div>
-        <p>Three minutes: what each product does for a business like yours, what it costs, and the exact first step for each.</p>
-        <div class="stat">no signup needed</div>
-        <span class="more">read the primer <svg><use href="#i-arrow"/></svg></span>
-      </a>
-      <a class="prod card" href="/contact" data-reveal>
-        <div class="top"><h3>Custom solution</h3><span class="tag tag-live">[ THE LAB ]</span></div>
-        <p>Need something built on top of these rails — a promotion engine, agent automation, private deployment? We build software solutions for businesses. Tell us the problem; you get a scoped answer in one business day.</p>
-        <div class="stat">reply within 1 business day</div>
-        <span class="more">talk to the lab <svg><use href="#i-arrow"/></svg></span>
-      </a>
+  </section>
+
+  <!-- Proof / Trust Strip -->
+  <section class="trust-strip" aria-label="Verified operational facts">
+    <div class="wrap trust-grid">
+      <div class="trust-stat" data-reveal>
+        <b>10+ Live Solutions</b>
+        <span>SaaS platforms, local AI apps &amp; open-source repos</span>
+      </div>
+      <div class="trust-stat" data-reveal>
+        <b>44 Providers &middot; 111 Models</b>
+        <span>Unified failover routing in Xlaunch Gateway</span>
+      </div>
+      <div class="trust-stat" data-reveal>
+        <b>5 Automated CI Gates</b>
+        <span>Re-derivable SHA-256 verification bundles</span>
+      </div>
+      <div class="trust-stat" data-reveal>
+        <b>1 Business Day</b>
+        <span>Direct engineering scope &amp; quote turnaround</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Interactive Solution Matcher -->
+  <section class="section" id="find-solution">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Solution Finder</p>
+        <h2>Which Northlatch solution fits your goal?</h2>
+        <p>Select what you want to deploy to see the matching product, transparent pricing, and direct onboarding path.</p>
+      </div>
+
+      <div class="matcher" data-matcher data-reveal>
+        <div class="matcher-tabs" role="tablist" aria-label="Business goals">
+          {SOLUTION_MATCHES.map((m, idx) => (
+            <button
+              type="button"
+              class="matcher-tab"
+              role="tab"
+              id={`tab-${m.id}`}
+              aria-selected={idx === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${m.id}`}
+              tabindex={idx === 0 ? 0 : -1}
+              data-target={m.id}
+            >
+              {m.tabLabel}
+            </button>
+          ))}
+        </div>
+
+        <div class="matcher-body">
+          {SOLUTION_MATCHES.map((m, idx) => (
+            <div
+              class="matcher-panel"
+              role="tabpanel"
+              id={`panel-${m.id}`}
+              aria-labelledby={`tab-${m.id}`}
+              data-panel={m.id}
+              hidden={idx !== 0}
+            >
+              <div class="matcher-grid">
+                <div>
+                  <div class="matcher-meta">
+                    <span class="matcher-prod">{m.recommended}</span>
+                    <span class="matcher-badge">{m.badge}</span>
+                  </div>
+                  <h3 class="matcher-goal">{m.goal}</h3>
+
+                  <div class="matcher-cols">
+                    <div class="matcher-box">
+                      <h4>The Challenge</h4>
+                      <p>{m.problem}</p>
+                    </div>
+                    <div class="matcher-box">
+                      <h4>Our Solution</h4>
+                      <p>{m.solution}</p>
+                    </div>
+                  </div>
+
+                  <div class="actions" style="margin-top:0">
+                    <a class="btn btn-primary" href={m.primaryHref}>
+                      <span>{m.primaryLabel}</span>
+                      <svg><use href={m.primaryExternal ? '#i-out' : '#i-arrow'}/></svg>
+                    </a>
+                    <a class="btn btn-ghost" href={m.secondaryHref}>{m.secondaryLabel}</a>
+                  </div>
+                </div>
+
+                <div class="matcher-aside">
+                  <div class="matcher-kv">
+                    <div>
+                      <span>Transparent Pricing</span>
+                      <strong>{m.pricing}</strong>
+                    </div>
+                    <div>
+                      <span>Time to Production</span>
+                      <strong>{m.timeToLive}</strong>
+                    </div>
+                  </div>
+                  <ul class="matcher-highlights">
+                    {m.highlights.map((h) => <li>{h}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Solutions Catalog -->
+  <section class="section" id="solutions">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Complete Portfolio</p>
+        <h2>Production software you can adopt today.</h2>
+        <p>Start self-serve on our SaaS platforms, download our open-source macOS and Go binaries from GitHub, or engage our team for commercial licensing and custom builds.</p>
+      </div>
+      <ProductGrid />
+    </div>
+  </section>
+
+  <!-- Pricing & Fee Calculator -->
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Transparent Pricing</p>
+        <h2>Published pricing across the entire suite.</h2>
+        <p>Start free across our core platforms and upgrade only when your team, repositories, or campaign volume grows.</p>
+      </div>
+
+      <div class="pricing-layout">
+        <div class="price-table-card" data-reveal>
+          <div class="price-row">
+            <div>
+              <strong>Synappse AI Teams</strong>
+              <small>Collaborative roles, shared memory &amp; plugin governance</small>
+            </div>
+            <small class="muted">Free (3 agents) · Pro (10 agents) · Team (unlimited)</small>
+            <div class="price-val">$0 / $25 mo / $25 seat</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Xlaunch Harness &amp; Gateway</strong>
+              <small>21-tool AI engineer + 44-provider / 111-model API router</small>
+            </div>
+            <small class="muted">Free starter tier · card or SUI top-up</small>
+            <div class="price-val">Metered usage</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Kestrel AI Engine &amp; Surgical</strong>
+              <small>Local macOS LLM/speech/image app &amp; surgical op-notes</small>
+            </div>
+            <small class="muted">GPL-3.0 free · dual-license &amp; free surgical pilot</small>
+            <div class="price-val">Free / Dual-License</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>ProtocolX Verify</strong>
+              <small>5 automated CI security gates for Sui Move packages</small>
+            </div>
+            <small class="muted">Free CI Action · $149/repo/mo Hosted App · $1,000 First Report</small>
+            <div class="price-val">Free / $149 mo</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>ProtocolX Draws</strong>
+              <small>Provably fair raffles &amp; giveaways on Sui mainnet</small>
+            </div>
+            <small class="muted">No setup or listing fee; locked at draw creation</small>
+            <div class="price-val">2.9% of ticket sales</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Weir Accounts &amp; GridFrames</strong>
+              <small>Direct SUI creator/agent accounts &amp; credit-billed servers</small>
+            </div>
+            <small class="muted">0% fee on withdrawable deposits · 5% yield fee · plan hosting</small>
+            <div class="price-val">Free / 5% yield</div>
+          </div>
+          <div class="price-row">
+            <div>
+              <strong>Hivex &amp; Custom Engineering</strong>
+              <small>Self-hosted agent control plane &amp; bespoke system builds</small>
+            </div>
+            <small class="muted">MIT open source · custom scope in 1 business day</small>
+            <div class="price-val">Free / Fixed Quote</div>
+          </div>
+        </div>
+
+        <div class="calc-card" data-fee-calc data-reveal>
+          <h3>ProtocolX Draw Fee Estimator</h3>
+          <p class="sub">See the exact cost of running a customer promotion on ProtocolX. The 2.9% fee is locked on-chain when you create the draw.</p>
+
+          <div class="calc-input-row">
+            <label for="pool-input">Estimated Ticket Sales Pool (SUI)</label>
+            <div class="calc-num-wrap">
+              <input id="pool-input" class="input" type="number" min="0" max="1000000" step="50" value="1000" data-pool-input>
+              <span class="calc-unit">SUI</span>
+            </div>
+            <input class="calc-range" type="range" min="100" max="50000" step="100" value="1000" aria-label="Ticket pool slider" data-pool-range>
+          </div>
+
+          <div class="calc-results">
+            <div class="calc-res-line">
+              <span>Protocol Fee (2.9% all-in)</span>
+              <strong data-fee-out>29.00 SUI</strong>
+            </div>
+            <div class="calc-res-line highlight">
+              <span>You Keep (97.1%)</span>
+              <strong data-net-out>971.00 SUI</strong>
+            </div>
+          </div>
+
+          <div class="actions" style="margin-top:0">
+            <a class="btn btn-primary btn-block" href="https://protocolx.io">
+              <span>Launch a Draw on ProtocolX</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="btn btn-ghost btn-block" href="/contact#topic-draws">Need a Custom Campaign? Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Become a Customer -->
+  <section class="section" id="get-started">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Customer Onboarding</p>
+        <h2>Three clear ways to become a customer.</h2>
+        <p>Start self-serve in minutes, book a turnkey First Report or pilot, or engage our engineering team for commercial licensing and custom builds.</p>
+      </div>
+
+      <div class="onboard-grid">
+        {ONBOARDING_PATHS.map((path) => (
+          <article class="onboard-card" data-reveal>
+            <div class="onboard-head">
+              <span class="onboard-step">{path.step} &middot; {path.track}</span>
+              <span class="onboard-time">{path.time}</span>
+            </div>
+            <h3>{path.title}</h3>
+            <p class="desc">{path.description}</p>
+            <ul class="onboard-steps">
+              {path.steps.map((s) => <li>{s}</li>)}
+            </ul>
+            <a class="btn btn-outline btn-block" href={path.ctaHref}>{path.ctaLabel} &rarr;</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Northlatch / Proof -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Verifiable Engineering</p>
+        <h2>Why teams trust Northlatch Labs.</h2>
+        <p>Every product is backed by inspectable source repositories, mainnet contract addresses, or local-first cryptographic guarantees.</p>
+      </div>
+
+      <div class="principles">
+        <div class="card" data-reveal>
+          <span class="n">01 / OPEN REPOSITORIES</span>
+          <h3>Inspectable Source &amp; Releases</h3>
+          <p>Explore Synappse, Kestrel, Hivex, ProtocolX Verify, and Sui Move Security Skills publicly across our GitHub organization and founder repositories.</p>
+          <a class="more" href="https://github.com/Northlatch-Labs-LLC">Browse Northlatch GitHub &#8599;</a>
+        </div>
+        <div class="card" data-reveal>
+          <span class="n">02 / ON-CHAIN RECEIPTS</span>
+          <h3>Auditable Mainnet Contracts</h3>
+          <p>Every Move package behind ProtocolX and Weir resolves on Sui mainnet, paired with live production proof from Wren and Heron.</p>
+          <a class="more" href="/on-chain">Inspect mainnet packages <svg><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="card" data-reveal>
+          <span class="n">03 / SECURITY FIRST</span>
+          <h3>Local-Only &amp; Policy Boundaries</h3>
+          <p>From Kestrel's Keychain-sealed offline inference to Hivex's T0–T3 gates and Verify's SHA-256 bundles, security is architectural &mdash; not a toggle.</p>
+          <a class="more" href="/security">Read security policy <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap wrap-narrow">
+      <div class="head center" data-reveal>
+        <p class="cmd">Common Questions</p>
+        <h2>Answers before you start.</h2>
+      </div>
+      <div class="faq" data-reveal>
+        {FAQS.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Conversion Band -->
+  <section class="section section-tight">
+    <div class="wrap">
+      <div class="cta-band" data-reveal>
+        <div>
+          <h2>Ready to launch or scope a custom deployment?</h2>
+          <p>Start self-serve on Synappse, Xlaunch, or ProtocolX today, or describe your requirements and receive a scoped proposal within one business day.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn btn-primary" href="/contact">
+            <span>Talk to Sales</span>
+            <svg><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/start">Read Onboarding Guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -4,12 +4,7 @@
  * Generate webapp/dist/llms.txt and webapp/dist/llms-full.txt from the built HTML.
  *
  * Runs as the package.json postbuild step, so the corpus can never go stale: it is
- * regenerated from the exact HTML that shipped, every build. llms.txt is the curated
- * index (hand-shaped, short); llms-full.txt is every page's headings and text,
- * tag-stripped, generated — never hand-maintained, because a hand-maintained copy of
- * eighteen pages is a second source of truth that drifts.
- *
- *     node scripts/gen-llms.mjs            # reads webapp/dist/*.html, writes both files
+ * regenerated from the exact HTML that shipped, every build.
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -17,7 +12,6 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DIST = join(HERE, '..', 'dist');
-const ORIGIN = 'https://northlatch.tech';
 
 const PAGES = readdirSync(DIST)
   .filter((f) => f.endsWith('.html'))
@@ -89,69 +83,58 @@ writeFileSync(join(DIST, 'llms-full.txt'), header + out);
 console.log(`llms-full.txt written: ${PAGES.length} pages, ${header.length + out.length} bytes`);
 
 // ---- llms.txt: the curated index -------------------------------------------
-// Shape (v2, carried over from the legacy site): H1 Northlatch Labs, intro, family,
-// then the section groups. Route set is derived from what actually built, so a page
-// that fails to build drops out here instead of rotting into a dead link.
 const has = (r) => PAGES.includes(r === '/' ? 'index.html' : r.replace(/^\//, '') + '.html');
 
 const lines = [];
 lines.push('# Northlatch Labs');
 lines.push('');
-lines.push('> A software laboratory for autonomous agents. Agents that work, get paid, and pay their own');
-lines.push('> way on Sui mainnet: the weir.social account network, Wren and Heron (two agents with their');
-lines.push('> own accounts and money), the beat that wakes them, and the products built on that loop —');
-lines.push('> draws, accounts, machines, verification. Built and operated by Northlatch Labs LLC. Every');
-lines.push('> claim on the site points at a transaction, an object or a file you can check without asking us.');
+lines.push('> Commercial AI workforces, local macOS inference, and verifiable Web3/security software');
+lines.push('> built and operated by Northlatch Labs LLC. Live products include Synappse (AI team');
+lines.push('> collaboration runtime), Xlaunch (autonomous engineering harness & 44-provider gateway),');
+lines.push('> Kestrel AI Engine & Kestrel Surgical (local macOS LLM/speech/image & clinical op-note');
+lines.push('> workspace), Hivex (one-human agent control plane), GridFrames (managed compute),');
+lines.push('> ProtocolX Verify (5-gate Move CI verification), ProtocolX (fair raffles), and Weir');
+lines.push('> (direct payouts & policy-bounded agent accounts).');
 lines.push('');
-lines.push('Family: [protocolx.io](https://protocolx.io) (the draw protocol) · [weir.social](https://weir.social) (account network) ·');
-lines.push('[gridframes.app](https://gridframes.app) (deploy + agent machine host) · [xlaunch.work](https://xlaunch.work) (the harness)');
+lines.push('Ecosystem: [synappse.work](https://synappse.work) · [xlaunch.work](https://xlaunch.work) · [protocolx.io](https://protocolx.io) · [weir.social](https://weir.social) · [gridframes.app](https://gridframes.app)');
 lines.push('');
-if (has('/')) lines.push('- [Home](https://northlatch.tech/): the four live products — draws, accounts for people and agents, machines agents rent, code verification — then the loop that built them, and the doors builders use.');
-if (has('/start')) lines.push('- [Start here](https://northlatch.tech/start): the plain-words primer — what the products solve for you, the fee math, where the time comes back, and your first five minutes. Three minutes to read.');
+if (has('/')) lines.push('- [Home](https://northlatch.tech/): Interactive solution finder, full product portfolio, transparent pricing & fee estimator, and three onboarding paths.');
+if (has('/start')) lines.push('- [How to Start](https://northlatch.tech/start): Step-by-step customer onboarding playbooks across Synappse, Xlaunch, Kestrel, Verify, ProtocolX, Weir, and GridFrames.');
 lines.push('');
 lines.push('## Products');
 lines.push('');
-if (has('/weir')) lines.push('- [Weir](https://northlatch.tech/weir): supporters park SUI, yield streams to creators, deposits stay withdrawable. Includes the agent doors: portal.weir.social, mcp.weir.social/mcp (six free read tools), and the machine manifest.');
-if (has('/more')) lines.push('- [More from the lab](https://northlatch.tech/more): .sui names for brands ($10 first year), the CTF training range (beta), the coming AI-work market, and the open stack behind the products.');
-if (has('/verify')) lines.push('- [ProtocolX Verify](https://northlatch.tech/verify): five CI gates on every pull request for Sui Move packages, with an evidence bundle anyone can re-derive. Free in your own CI; re-derive a bundle in the browser on this page.');
-lines.push('- [Xlaunch](https://xlaunch.work): the harness the citizens run on — 21 agent tools, 48 model providers, 111 models routed.');
-lines.push('- [GridFrames](https://gridframes.app): deploy + agent machine host. Agents are first-class customers: an account proves a Sui address it owns and rents machines paid from SUI-topped-up credits.');
+lines.push('- [Synappse](https://synappse.work): AI collaboration runtime for teams — role-based teammates, shared memory, governed plugins/MCP, and event triggers ($0 Free, $25/mo Pro, $25/seat/mo Team).');
+lines.push('- [Xlaunch](https://xlaunch.work): Autonomous AI engineering harness (21 tools, shared browser workbench) and 44-provider / 111-model gateway.');
+lines.push('- [Kestrel AI Engine](https://github.com/0xda7/kestrel): Native macOS local LLM, Whisper speech, and image studio with AMD GPU Metal acceleration (GPL-3.0 + commercial licensing).');
+lines.push('- [Kestrel Surgical](https://github.com/0xda7/kestrel-surgical-site): Local-only macOS operative note & CPT workspace for surgeons (free design-partner pilot).');
+lines.push('- [Hivex](https://github.com/Northlatch-Labs-LLC/hivex): One-human loopback Go control plane with Gridframe T0–T3 governance and append-only ledgers (MIT).');
+if (has('/verify')) lines.push('- [ProtocolX Verify](https://northlatch.tech/verify): Five automated CI security gates for Sui Move contracts with re-derivable SHA-256 evidence bundles. Free Action, $149/repo/mo Hosted App, $1,000 First Report.');
+if (has('/weir')) lines.push('- [Weir](https://northlatch.tech/weir): Direct SUI monetization and withdrawable supporter staking yield (95% to creators, 5% fee on yield), plus programmatic agent doors.');
+if (has('/more')) lines.push('- [More Solutions & Open Source](https://northlatch.tech/more): Hivex, Kestrel Surgical, Sui Move Security Skills, Xlaunch Gateway, .sui brand names ($10 first year), CTF security range (beta), and early-access work market.');
+lines.push('- [GridFrames](https://gridframes.app): Zero-ops managed compute and agent machine hosting funded via SUI credits.');
 lines.push('');
-lines.push('## Agents');
+lines.push('## Agents & Proof');
 lines.push('');
-if (has('/agents')) lines.push('- [The agents](https://northlatch.tech/agents): how Wren and Heron are built — the model/policy/signer boundary, the beat, the on-chain employment record, and how to run one yourself.');
-lines.push('- [Wren\'s repository](https://github.com/Northlatch-Labs-LLC/wren): her whole mind, policy, signer, host recipe and Move contract. BUSL-1.1 until 2029-09-01.');
-lines.push('- [Heron\'s public record](https://github.com/Northlatch-Labs-LLC/heron): first citizen of weir.social; beat paused since 2026-10-04, record stays up.');
+if (has('/agents')) lines.push('- [Autonomous Agents](https://northlatch.tech/agents): Live production deployments Wren and Heron demonstrating strict model/policy/signer separation on Sui mainnet.');
+if (has('/on-chain')) lines.push('- [On-Chain Proof](https://northlatch.tech/on-chain): Full Sui mainnet Move package addresses and reproducible local CI verification steps.');
+lines.push('- [Weir machine manifest](https://weir.social/.well-known/weir-agent.json): Machine contract for programmatic Weir account registration and usage.');
+lines.push('- [Weir MCP discovery](https://mcp.weir.social/.well-known/mcp.json): Keyless, read-only hosted MCP endpoint metadata.');
 lines.push('');
-lines.push('## Proof');
+lines.push('## Company & Governance');
 lines.push('');
-if (has('/on-chain')) lines.push('- [On chain](https://northlatch.tech/on-chain): published Move packages with full, resolvable addresses, and the reproduce path. Table checked 2026-11-25.');
-lines.push('- [Weir machine manifest](https://weir.social/.well-known/weir-agent.json): the agent contract for weir.social — key generation, registration, every endpoint with its proof and budget.');
-lines.push('- [Weir MCP discovery](https://mcp.weir.social/.well-known/mcp.json): machine-readable description of the hosted, keyless, read-only MCP endpoint.');
+if (has('/contact')) lines.push('- [Contact Sales & Engineering](https://northlatch.tech/contact): Project scoping, First Report orders, and sales inquiries (1-business-day response).');
+if (has('/security')) lines.push('- [Security Policy](https://northlatch.tech/security): Vulnerability disclosure policy, scope, safe harbor, and bounty rewards.');
+if (has('/privacy')) lines.push('- [Privacy Policy](https://northlatch.tech/privacy): Data handling, first-party contact form processing via Resend, and user rights.');
+if (has('/terms')) lines.push('- [Terms of Service](https://northlatch.tech/terms): Terms governing hosted services, CLIs, and software libraries.');
+if (has('/disclaimer')) lines.push('- [Disclaimer](https://northlatch.tech/disclaimer): Disclaimers on financial advice, automated verification, and third-party chains.');
+if (has('/trademarks')) lines.push('- [Trademarks](https://northlatch.tech/trademarks): Protected marks and usage guidelines.');
 lines.push('');
-lines.push('## Tools');
+lines.push('## Machine Surface');
 lines.push('');
-if (has('/tools')) lines.push('- [The stack](https://northlatch.tech/tools): every published artifact — six npm packages (@projectx-social/*), the protocolx-verify action, and what runs inside it.');
-lines.push('- [@projectx-social/mcp (npm)](https://www.npmjs.com/package/@projectx-social/mcp): run the weir MCP server yourself with your own key.');
-lines.push('- [@projectx-social/agent (npm)](https://www.npmjs.com/package/@projectx-social/agent): a headless agent library with its own keypair, address and account.');
-lines.push('- [protocolx-verify (GitHub)](https://github.com/Northlatch-Labs-LLC/protocolx-verify): the action, the sandbox, the tripwire, the mutation engine — all readable.');
-lines.push('');
-lines.push('## Company');
-lines.push('');
-if (has('/market')) lines.push('- [Market](https://northlatch.tech/market): the agentic market, and how an author is paid into its own vault.');
-if (has('/security')) lines.push('- [Security](https://northlatch.tech/security): disclosure policy, scope, safe harbor. Reports to security@projectxprotocol.dev.');
-if (has('/privacy')) lines.push('- [Privacy](https://northlatch.tech/privacy): what is stored, the contact form\'s one hop outside this origin (Resend), retention, rights.');
-if (has('/terms')) lines.push('- [Terms](https://northlatch.tech/terms): the terms the site is provided under.');
-if (has('/disclaimer')) lines.push('- [Disclaimer](https://northlatch.tech/disclaimer): what the site\'s copy is and is not.');
-if (has('/trademarks')) lines.push('- [Trademarks](https://northlatch.tech/trademarks): names, marks, and what may use them.');
-if (has('/contact')) lines.push('- [Contact](https://northlatch.tech/contact): hello@projectxprotocol.dev, and the form.');
-lines.push('');
-lines.push('## Optional');
-lines.push('');
-lines.push('- [Full text](https://northlatch.tech/llms-full.txt): every page\'s complete text, generated from the shipped HTML.');
-lines.push('- [Sitemap](https://northlatch.tech/sitemap-index.xml): all routes.');
-lines.push('- [Security contact](https://northlatch.tech/.well-known/security.txt): RFC 9116.');
-lines.push('- [Agent card](https://northlatch.tech/.well-known/agent-card.json): the weir MCP server as JSON.');
+lines.push('- [Full text](https://northlatch.tech/llms-full.txt): Complete plain-text corpus generated from shipped HTML.');
+lines.push('- [Sitemap](https://northlatch.tech/sitemap-index.xml): XML sitemap of all routes.');
+lines.push('- [Security contact](https://northlatch.tech/.well-known/security.txt): RFC 9116 security.txt.');
+lines.push('- [Agent card](https://northlatch.tech/.well-known/agent-card.json): Weir MCP server metadata.');
 lines.push('');
 
 writeFileSync(join(DIST, 'llms.txt'), lines.join('\n'));
@@ -171,8 +154,6 @@ if (phantom.length > 0) console.error(`llms.txt lists routes that do not exist: 
 if (missing.length || phantom.length) process.exit(1);
 console.log('llms.txt route check: ok');
 
-// The market page exists in the legacy set; guard it explicitly so a future
-// rebuild either keeps it listed or drops it on purpose, not by accident.
 if (!existsSync(join(DIST, 'market.html'))) {
   console.log('note: market.html not in dist — market intentionally absent from llms.txt index');
 }

@@ -1,10 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Not found" path="/404" description="Nothing lives at this address.">
+
+<Layout
+  title="Page Not Found"
+  path="/404"
+  description="The requested page could not be found on northlatch.tech."
+>
   <Fragment slot="head"><meta name="robots" content="noindex" /></Fragment>
-<section class="page-hero"><div class="wrap wrap-narrow center">
-<div class="markfield" data-mark="hero" data-mark-seq="mark,proof" style="aspect-ratio:5/2;border:0;background:transparent;margin-bottom:24px" role="img" aria-label="Blocks building a word."></div>
-<p class="cmd"><span data-glyph="ask"></span>Page not found</p><h1>The page you asked for does not exist. Everything that does is one click away.</h1><p class="lede" style="margin-inline:auto">. Everything that exists is linked from the top of this page.</p>
-<div class="actions" style="justify-content:center"><a class="btn btn-primary" href="/">&larr; cd ~</a><a class="btn btn-ghost" href="/more">./tools</a></div></div></section>
+  <section class="page-hero">
+    <div class="wrap wrap-narrow center">
+      <span class="eyebrow-pill"><i></i>404 &middot; Not Found</span>
+      <h1>We couldn't find that page.</h1>
+      <p class="lede" style="margin-inline:auto">
+        The link you followed may have moved during our site redesign. Explore our live software solutions or reach out to our team below.
+      </p>
+      <div class="actions" style="justify-content:center">
+        <a class="btn btn-primary" href="/">Return Home &rarr;</a>
+        <a class="btn btn-ghost" href="/start">Onboarding Guide</a>
+        <a class="btn btn-quiet" href="/contact">Contact Sales</a>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -1,9 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Disclaimer" path="/disclaimer" description="Disclaimer for ProjectX by Northlatch Labs LLC.">
-<section class="page-hero" style="padding-bottom:24px"><div class="wrap wrap-narrow"><p class="cmd"><span data-glyph="ledger"></span>Disclaimer</p><h1>Disclaimer</h1></div></section>
-<section class="section" style="border-top:0;padding-top:0"><div class="wrap wrap-narrow">
-  <div class="less"><ol><li class="h1"># Disclaimer</li><li>&nbsp;</li><li class="h2">## not financial advice</li><li class="p">Nothing on this site is financial or investment advice.</li><li>&nbsp;</li><li class="h2">## not audit substitute</li><li class="p">Verify gates are strong, but a green Verify run is not a formal audit.</li><li class="p">Combine with human review before shipping funds.</li><li>&nbsp;</li><li class="h2">## third-party chains</li><li class="p">Sui is operated by third parties. Their availability is outside our</li><li class="p">control.</li><li>&nbsp;</li></ol><span class="end">(END)</span><div class="mod">// last-modified 2026-09-21</div></div>
-</div></section>
+
+<Layout
+  title="Disclaimer"
+  path="/disclaimer"
+  description="Important legal disclaimers for Northlatch Labs LLC software and documentation."
+>
+  <section class="page-hero" style="padding-bottom:28px">
+    <div class="wrap wrap-narrow">
+      <p class="cmd">Governance</p>
+      <h1>Disclaimer</h1>
+      <p class="lede">Clarifications regarding financial advice, smart contract verification, and underlying network availability.</p>
+    </div>
+  </section>
+
+  <section class="section" style="border-top:0;padding-top:0">
+    <div class="wrap wrap-narrow">
+      <div class="doc-card">
+        <div class="doc-section">
+          <h2>Not Financial Advice</h2>
+          <p>Nothing published on this website constitutes financial, investment, tax, or legal advice.</p>
+        </div>
+
+        <div class="doc-section">
+          <h2>Not a Formal Audit Substitute</h2>
+          <p>ProtocolX Verify CI gates provide strong automated assurance, but a passing Verify run is not a formal human security audit. Always combine automated CI verification with qualified human review before deploying code that secures user funds.</p>
+        </div>
+
+        <div class="doc-section">
+          <h2>Third-Party Networks</h2>
+          <p>The Sui blockchain network is operated by independent third-party validators. Network uptime and finality remain outside the control of Northlatch Labs LLC.</p>
+        </div>
+
+        <div class="doc-meta">Last updated 2026-09-21 &middot; Northlatch Labs LLC</div>
+      </div>
+    </div>
+  </section>
 </Layout>

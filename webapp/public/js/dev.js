@@ -1,6 +1,6 @@
-/* ProjectX - page behaviour: the command-line tabs, the bundle verifier and
-   the contact form. Everything else (reveal, copy, menu) is in site.js, and
-   every moving block is in blocks.js. */
+/* Northlatch Labs — page behaviour: the bundle verifier on /verify and
+   the inquiry form on /contact (query-param topic prefill, live character count,
+   and first-party submission to /api/contact). */
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -9,7 +9,6 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
   /* ------------------------------------------------ command-line tabs */
-  /* transcripts, not recordings: each line is real text you can select */
   function tabs() {
     var root = $("[data-tabs]"); if (!root) return;
     var data; try { data = JSON.parse($("script[type='application/json']", root).textContent); } catch (e) { return; }
@@ -67,8 +66,8 @@
         out.textContent = d;
         if (grid.__grid) grid.__grid.set(d);
         if (typeof claimed !== "string") setStatus("err", "digest computed \u00b7 no bundleDigest to compare");
-        else if (claimed === d) setStatus("ok", "match \u00b7 this bundle is what it says");
-        else setStatus("bad", "mismatch \u00b7 the bundle was changed after it was signed");
+        else if (claimed === d) setStatus("ok", "match \u00b7 bundle integrity verified");
+        else setStatus("bad", "mismatch \u00b7 bundle was modified after signing");
       }, function (e) { setStatus("err", "could not hash: " + e.message); });
     }
     function soon() { clearTimeout(t); t = setTimeout(run, 280); }
@@ -79,36 +78,85 @@
     ["dragleave", "drop"].forEach(function (ev) { editor.addEventListener(ev, function (e) { e.preventDefault(); editor.classList.remove("drag"); }); });
     editor.addEventListener("drop", function (e) {
       var f = e.dataTransfer && e.dataTransfer.files[0]; if (!f) return;
-      if (f.size > 2e6) { setStatus("err", "that file is over 2 MB; a bundle is a few KB"); return; }
+      if (f.size > 2e6) { setStatus("err", "file exceeds 2 MB limit"); return; }
       f.text().then(function (txt) { ta.value = txt; run(); });
     });
-    /* the grid mounts after this script on a slow device; wait for it */
     (function ready(n) { if (grid.__grid || n > 40) run(); else setTimeout(function () { ready(n + 1); }, 50); })(0);
   }
 
   /* ---------------------------------------------------------- contact */
-  /* posts to this site's own endpoint, /api/contact — a Vercel function
-     that validates, holds the honeypot server-side, and sends via the mail
-     transport disclosed in privacy.html. Without its key configured it
-     answers 503 "form transport not configured", and that is what this
-     code prints: the form never claims a send that did not happen. */
   var FORM = "/api/contact";
   function contact() {
     var f = $("[data-contact]"); if (!f) return;
     var btn = $("button[type=submit]", f), msg = $("[data-form-status]", f);
+    var select = $("[data-topic-select]", f);
+    var ta = $("textarea[name='message']", f);
+    var counter = $("[data-char-count]", f);
+
+    /* Pre-select topic from ?topic=... query parameter or #topic-... hash */
+    if (select) {
+      var hashTopic = (window.location.hash || "").indexOf("#topic-") === 0
+        ? window.location.hash.slice("#topic-".length)
+        : "";
+      var queryTopic = window.URLSearchParams
+        ? (new URLSearchParams(window.location.search).get("topic") || "")
+        : "";
+      var chosen = queryTopic || hashTopic;
+      if (chosen) {
+        for (var i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === chosen) {
+            select.value = chosen;
+            break;
+          }
+        }
+      }
+    }
+
+    /* Live character counter */
+    if (ta && counter) {
+      var updateCount = function () {
+        counter.textContent = ta.value.length.toLocaleString("en-US") + " / 2,000 characters";
+      };
+      ta.addEventListener("input", updateCount);
+      updateCount();
+    }
+
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var data = new FormData(f);
-      data.delete("company_alt"); /* honeypot: the server keeps its own */
-      var body = new URLSearchParams(); data.forEach(function (v, k) { body.append(k, String(v)); });
-      btn.disabled = true; btn.textContent = "sending\u2026"; msg.textContent = "";
-      fetch(FORM, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(body)) })
-        .then(function (r) { return r.text().then(function (t) { var j = {}; try { j = JSON.parse(t); } catch (x) { /* not JSON */ } return { r: r, j: j }; }); })
+      data.delete("company_alt");
+      var body = new URLSearchParams();
+      data.forEach(function (v, k) { body.append(k, String(v)); });
+      btn.disabled = true; btn.textContent = "Sending\u2026"; msg.textContent = "";
+      fetch(FORM, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(body))
+      })
+        .then(function (r) {
+          return r.text().then(function (t) {
+            var j = {};
+            try { j = JSON.parse(t); } catch (x) { /* not JSON */ }
+            return { r: r, j: j };
+          });
+        })
         .then(function (x) {
-          if (x.r.ok && x.j && x.j.ok) { f.reset(); msg.className = "pass small"; msg.style.color = ""; msg.textContent = "[ ok ] message received \u00b7 reply within 1 business day"; }
-          else { msg.className = "small"; msg.style.color = "var(--fail)"; msg.textContent = "[ err ] " + ((x.j && x.j.error) || ("submission failed (" + x.r.status + ")")); }
-        }, function (err) { msg.className = "small"; msg.style.color = "var(--fail)"; msg.textContent = "[ err ] " + (err && err.message || "network error"); })
-        .then(function () { btn.disabled = false; btn.textContent = "\u2192 send"; });
+          if (x.r.ok && x.j && x.j.ok) {
+            f.reset();
+            if (ta && counter) counter.textContent = "0 / 2,000 characters";
+            msg.className = "pass small"; msg.style.color = "";
+            msg.textContent = "Inquiry received — we will reply within 1 business day.";
+          } else {
+            msg.className = "small"; msg.style.color = "var(--fail)";
+            msg.textContent = ((x.j && x.j.error) || ("Submission failed (" + x.r.status + ")")) + " — you can also email hello@projectxprotocol.dev directly.";
+          }
+        }, function (err) {
+          msg.className = "small"; msg.style.color = "var(--fail)";
+          msg.textContent = (err && err.message || "Network error") + " — please email hello@projectxprotocol.dev directly.";
+        })
+        .then(function () {
+          btn.disabled = false; btn.textContent = "Send Inquiry \u2192";
+        });
     });
   }
 

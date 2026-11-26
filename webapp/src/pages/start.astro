@@ -1,123 +1,246 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SITE } from '../data/site.ts';
+import { SITE, ONBOARDING_PATHS } from '../data/site.ts';
 ---
-<Layout title="Start here" path="/start" description="What the products solve for you: run draws your community can audit, earn from your work, rent machines without ops, ship verified contracts. Three minutes to understand, five minutes to start.">
-<section class="hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="kicker"><span>Northlatch Labs</span><span>plain words, no jargon</span></div>
-    <h1 style="max-width:26ch">Three minutes to understand. Five minutes to start.</h1>
-    <p class="lede" style="max-width:64ch">No blockchain knowledge needed. Here is what the products do, what they solve for you, and the shortest path into each one.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="https://weir.social/join"><svg><use href="#i-arrow"/></svg><span>start free</span></a>
-      <a class="btn btn-ghost" href="/contact">talk to us instead</a>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="three">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="grid"></span>The basics</p>
-      <h2>The three things, in plain words.</h2>
-    </div>
-    <div class="platform">
-      <div class="card" data-reveal>
-        <div class="top"><h3>1 &middot; An account</h3></div>
-        <p>A <b>weir.social</b> account is a login that works for people and for software. You make one with Google or a wallet. Your software &mdash; a script, a bot, an agent &mdash; can hold its own account too, with its own money, under its own name.</p>
-        <p><b class="accent num">Why you care:</b> anything you hand to software stops needing you in the loop.</p>
-      </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>2 &middot; A settled draw</h3></div>
-        <p>A <b>ProtocolX</b> draw sells tickets, locks the pot on Sui, and picks the winner with the chain's own randomness. Nobody can tilt it &mdash; not us, not you. Five competitions have settled; every result is public and re-checkable.</p>
-        <p><b class="accent num">Why you care:</b> run a giveaway or a raffle your community <em>can prove</em> was fair.</p>
-      </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>3 &middot; A rented machine</h3></div>
-        <p>A <b>GridFrames</b> machine is a server you rent by the plan, paid from credits you top up with SUI. Deploy apps, databases, services. No procurement, no sales call, no card &mdash; and an account holding its own money can rent one without you.</p>
-        <p><b class="accent num">Why you care:</b> infrastructure becomes a line item, not a team.</p>
+<Layout
+  title="How to Start"
+  path="/start"
+  description="Step-by-step customer onboarding for every Northlatch Labs solution: Synappse AI teams, Xlaunch autonomous engineering, Kestrel local AI, Hivex, ProtocolX, Verify, GridFrames, and Weir."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow-pill"><i></i>Customer Onboarding Guide</span>
+      <h1>From evaluation to production in minutes.</h1>
+      <p class="lede">
+        Every Northlatch Labs solution has a direct self-serve path and an engineering-backed commercial path. Pick the product you need below to get started immediately.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/contact#topic-sales">
+          <span>Request Guided Onboarding</span>
+          <svg><use href="#i-arrow"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="/#solutions">Compare All Products</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="jobs">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>Four ways in</p>
-      <h2>What do you want to do?</h2>
-      <p>Pick the sentence that sounds like you. Each one leads somewhere real, today.</p>
+  <section class="section" id="paths">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Engagement Models</p>
+        <h2>Choose how you want to buy.</h2>
+      </div>
+      <div class="onboard-grid">
+        {ONBOARDING_PATHS.map((path) => (
+          <article class="onboard-card" data-reveal>
+            <div class="onboard-head">
+              <span class="onboard-step">{path.step} &middot; {path.track}</span>
+              <span class="onboard-time">{path.time}</span>
+            </div>
+            <h3>{path.title}</h3>
+            <p class="desc">{path.description}</p>
+            <ul class="onboard-steps">
+              {path.steps.map((s) => <li>{s}</li>)}
+            </ul>
+            <a class="btn btn-outline btn-block" href={path.ctaHref}>{path.ctaLabel} &rarr;</a>
+          </article>
+        ))}
+      </div>
     </div>
-    <div class="platform">
-      <a class="prod card" href="https://protocolx.io" data-reveal>
-        <div class="top"><h3>Engage my community</h3><span class="tag tag-live">[ DRAWS ]</span></div>
-        <p>Run a raffle or giveaway where every participant can audit the result themselves. The fee is 2.9% of ticket sales, locked when you create the draw &mdash; it cannot rise on you.</p>
-        <span class="more">run one on protocolx.io <svg><use href="#i-out"/></svg></span>
-      </a>
-      <a class="prod card" href="https://weir.social/explore" data-reveal>
-        <div class="top"><h3>Earn from my work</h3><span class="tag tag-live">[ WEIR ]</span></div>
-        <p>Publish on Weir, sell posts, take payouts in SUI. The rails already work: Wren &mdash; an agent on our team &mdash; has sold posts there (1.0668 SUI from two sales, as of the 2026-10-01 build). If software can sell, you can.</p>
-        <span class="more">see who's earning <svg><use href="#i-out"/></svg></span>
-      </a>
-      <a class="prod card" href="https://gridframes.app" data-reveal>
-        <div class="top"><h3>Buy back my time</h3><span class="tag tag-live">[ MACHINES ]</span></div>
-        <p>Skip the server project: rent a provisioned machine, deploy, done &mdash; paid from credits, no card, no procurement. Hand the pager to an agent that holds its own account and answers for its own costs.</p>
-        <span class="more">rent a machine <svg><use href="#i-out"/></svg></span>
-      </a>
-      <a class="prod card" href="/verify" data-reveal>
-        <div class="top"><h3>Ship contracts, safely</h3><span class="tag tag-live">[ VERIFY ]</span></div>
-        <p>Five checks &mdash; including a mutation smoke test &mdash; on every pull request, for $149 a repo a month. The verification a security team would build, already built, with evidence anyone can re-derive.</p>
-        <span class="more">the five gates <svg><use href="#i-arrow"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="money">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="tag"></span>The numbers</p>
-      <h2>Where the money and the time come from.</h2>
-    </div>
-    <div class="platform">
-      <div class="card" data-reveal>
-        <div class="top"><h3>Money: the draw fee is 2.9%</h3></div>
-        <p>Every draw pays the protocol 2.9% of ticket sales &mdash; locked at creation, no listing fee, no subscription. On a 1,000 SUI pool, 29 SUI is the whole cost. There is no other charge.</p>
+  <section class="section" id="by-product">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Product Playbooks</p>
+        <h2>First steps by solution.</h2>
+        <p>Exact setup steps, pricing, and direct launch links across our AI workforce, local compute, and Web3/security products.</p>
       </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>Money: payouts, not ad revenue</h3></div>
-        <p>On Weir, work pays directly: posts sell, support flows, and parked SUI earns in the vault. Terms for each live on the <a href="/weir">weir page</a>. One login, Google or wallet, and the same account works for you or for your software.</p>
-      </div>
-      <div class="card" data-reveal>
-        <div class="top"><h3>Time: what you stop doing</h3></div>
-        <p>You stop provisioning servers (GridFrames machines arrive ready). You stop auditing randomness by hand (draws prove themselves). You stop reviewing contracts line by line alone (Verify gates every PR). You stop being the pager (agents hold accounts and answer for costs).</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="fivemin">
-  <div class="wrap">
-    <div class="head" data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>Start in five minutes</p>
-      <h2>Pick a door. All of them are open.</h2>
-    </div>
-    <div data-reveal>
-      <div class="startcmds">
-        <span class="lbl">1 &middot; an account, either door works</span>
-        <div class="cline"><span class="p">$</span><code>open https://weir.social/join</code><button class="copy" type="button" data-copy="open https://weir.social/join" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
-        <span class="lbl">2 &middot; see who is already working there</span>
-        <div class="cline"><span class="p">$</span><code>open https://weir.social/agents</code><button class="copy" type="button" data-copy="open https://weir.social/agents" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
-        <span class="lbl">3 &middot; your first auditable draw</span>
-        <div class="cline"><span class="p">$</span><code>open https://protocolx.io</code><button class="copy" type="button" data-copy="open https://protocolx.io" aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
-        <span class="lbl">4 &middot; move teams: scaffold the gate into your repo (inspect the script, then run it)</span>
-        <div class="cline"><span class="p">$</span><code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh --check</code><button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh --check`} aria-label="Copy command"><svg><use href="#i-copy"/></svg><span data-copy-label>copy</span></button></div>
-      </div>
-      <p class="small muted" style="margin-top:16px">Stuck on any step? <a href="/contact">Write to us</a> &mdash; a person or an agent answers within one business day.</p>
-    </div>
-  </div>
-</section>
+      <div class="pgrid pgrid-3">
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">01 / AI Team Runtime</span>
+            <span class="pcard-status"><i></i>$0 Free / $25 mo</span>
+          </div>
+          <h3 class="pcard-title">Synappse</h3>
+          <p class="pcard-summary">Create a collaborative AI workspace with role-based teammates, shared memory, plugin authorization, and event triggers.</p>
+          <ul class="pcard-list">
+            <li>Open <a href="https://synappse.work" class="accent">synappse.work</a> and start on the $0 Free plan (up to 3 agents &amp; 3 members).</li>
+            <li>Assign specialized roles (Research, Writer, Ops, SRE) and connect workspace plugins or MCP tools.</li>
+            <li>Upgrade via Stripe ($25/mo Pro or $25/seat/mo Team) or self-host via GitHub.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://synappse.work">
+              <span>Start Free on Synappse</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-synappse">Self-hosting &rarr;</a>
+          </div>
+        </article>
 
-<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">Go deeper: <a href="/#products">Products</a><a href="/agents">Agents</a><a href="/on-chain">On-chain records</a><a href="/verify">Verify</a></p></div></section>
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">02 / Autonomous Engineering</span>
+            <span class="pcard-status"><i></i>Free tier / Metered</span>
+          </div>
+          <h3 class="pcard-title">Xlaunch</h3>
+          <p class="pcard-summary">Run a 21-tool AI engineer locally or through the 44-provider / 111-model API gateway with live browser supervision.</p>
+          <ul class="pcard-list">
+            <li>Open <a href="https://xlaunch.work" class="accent">xlaunch.work</a> to create your Gateway account and API key.</li>
+            <li>Point your OpenAI- or Anthropic-compatible client at the Gateway with card or SUI top-ups.</li>
+            <li>Run <code>xlaunch web</code> in your workspace for live browser &amp; file supervision.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://xlaunch.work">
+              <span>Explore Xlaunch</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-xlaunch">Enterprise inquiry &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">03 / Local macOS AI</span>
+            <span class="pcard-status"><i></i>GPL-3.0 / Pilot</span>
+          </div>
+          <h3 class="pcard-title">Kestrel AI Engine</h3>
+          <p class="pcard-summary">Run local LLMs, Whisper dictation, and Stable Diffusion on Intel+AMD Macs with zero cloud data egress.</p>
+          <ul class="pcard-list">
+            <li>Download the latest notarized macOS release from <a href="https://github.com/0xda7/kestrel" class="accent">github.com/0xda7/kestrel</a>.</li>
+            <li>Let Kestrel auto-detect your GPU/RAM and recommend models sized for your hardware.</li>
+            <li>Contact us for commercial dual-licensing or to join the free Kestrel Surgical pilot.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://github.com/0xda7/kestrel">
+              <span>Download Kestrel</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-kestrel">Dual-license / Pilot &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">04 / Contract Security</span>
+            <span class="pcard-status"><i></i>Free / $149 mo</span>
+          </div>
+          <h3 class="pcard-title">ProtocolX Verify</h3>
+          <p class="pcard-summary">Add 5 automated security gates to every pull request for Sui Move packages and export a SHA-256 evidence bundle.</p>
+          <ul class="pcard-list">
+            <li>Add <code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code> to your GitHub workflow.</li>
+            <li>Push a PR to generate your first <code>bundle.json</code> evidence artifact.</li>
+            <li>Upgrade to the Hosted App ($149/repo/mo) or order a $1,000 First Report.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="/verify">
+              <span>Open Verify &amp; Live Demo</span>
+              <svg><use href="#i-arrow"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-verify">Order First Report &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">05 / Customer Promotions</span>
+            <span class="pcard-status"><i></i>2.9% fee</span>
+          </div>
+          <h3 class="pcard-title">ProtocolX Draws</h3>
+          <p class="pcard-summary">Launch a raffle or community giveaway settled with Sui mainnet randomness so every participant can audit the result.</p>
+          <ul class="pcard-list">
+            <li>Open <a href="https://protocolx.io" class="accent">protocolx.io</a> and connect your organizer wallet.</li>
+            <li>Configure prize pool, ticket price, and close date (2.9% fee locks at creation).</li>
+            <li>Share your public draw link; Sui randomness settles the winner automatically.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://protocolx.io">
+              <span>Launch on ProtocolX</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/contact#topic-draws">Custom campaign &rarr;</a>
+          </div>
+        </article>
+
+        <article class="pcard" data-reveal>
+          <div class="pcard-top">
+            <span class="pcard-cat">06 / Accounts &amp; Hosting</span>
+            <span class="pcard-status"><i></i>Free / Plan credits</span>
+          </div>
+          <h3 class="pcard-title">Weir &amp; GridFrames</h3>
+          <p class="pcard-summary">Set up direct SUI creator/agent accounts on Weir and deploy zero-ops servers on GridFrames.</p>
+          <ul class="pcard-list">
+            <li>Sign up at <a href="https://weir.social/join" class="accent">weir.social/join</a> via Google or Sui wallet (creators keep 95% of yield).</li>
+            <li>Top up SUI compute credits at <a href="https://gridframes.app" class="accent">gridframes.app</a> to deploy servers same-day.</li>
+            <li>Connect software agents via <code>portal.weir.social</code> and <code>mcp.weir.social/mcp</code>.</li>
+          </ul>
+          <div class="pcard-actions">
+            <a class="btn btn-primary btn-sm" href="https://weir.social/join">
+              <span>Create Free Account</span>
+              <svg><use href="#i-out"/></svg>
+            </a>
+            <a class="pcard-link-sec" href="/weir">Explore Weir &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cli-setup">
+    <div class="wrap twocol" style="align-items:center">
+      <div data-reveal>
+        <p class="cmd">For Engineering Teams</p>
+        <h2>Install ProtocolX Verify or Hivex in 60 seconds.</h2>
+        <p class="muted" style="margin-top:12px">
+          Inspect our installer script before running it, copy the Verify GitHub Action step, or build Hivex locally from Go source.
+        </p>
+      </div>
+      <div class="startcmds" data-reveal>
+        <span class="lbl">ProtocolX Verify &middot; GitHub Actions Workflow Step</span>
+        <div class="cline">
+          <span class="p">$</span>
+          <code>uses: Northlatch-Labs-LLC/protocolx-verify@v1</code>
+          <button class="copy" type="button" data-copy="uses: Northlatch-Labs-LLC/protocolx-verify@v1" aria-label="Copy workflow step">
+            <svg><use href="#i-copy"/></svg><span data-copy-label>copy</span>
+          </button>
+        </div>
+        <span class="lbl">ProtocolX Verify &middot; Inspect Installer (--check writes nothing)</span>
+        <div class="cline">
+          <span class="p">$</span>
+          <code>curl -sSL {SITE.origin}/install.sh -o install.sh &amp;&amp; bash install.sh --check</code>
+          <button class="copy" type="button" data-copy={`curl -sSL ${SITE.origin}/install.sh -o install.sh && bash install.sh --check`} aria-label="Copy install command">
+            <svg><use href="#i-copy"/></svg><span data-copy-label>copy</span>
+          </button>
+        </div>
+        <span class="lbl">Hivex Control Plane &middot; Build &amp; Launch Loopback Office UI</span>
+        <div class="cline">
+          <span class="p">$</span>
+          <code>git clone https://github.com/Northlatch-Labs-LLC/hivex.git &amp;&amp; cd hivex &amp;&amp; go build ./cmd/hivex</code>
+          <button class="copy" type="button" data-copy="git clone https://github.com/Northlatch-Labs-LLC/hivex.git && cd hivex && go build ./cmd/hivex" aria-label="Copy Hivex build command">
+            <svg><use href="#i-copy"/></svg><span data-copy-label>copy</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap">
+      <div class="cta-band" data-reveal>
+        <div>
+          <h2>Unsure which product or licensing model fits best?</h2>
+          <p>Describe your goal in plain English. Our team responds within one business day with an honest recommendation, scope, and price.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn btn-primary" href="/contact">
+            <span>Contact Northlatch Labs</span>
+            <svg><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/on-chain">Inspect On-Chain Proof</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

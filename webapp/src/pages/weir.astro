@@ -1,63 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Weir" path="/weir" description="Supporters park SUI instead of spending it. Yield reaches the creator, the deposit stays fully withdrawable.">
-<section class="page-hero">
-  <div class="hero-field" data-field></div>
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <p class="cmd"><span data-glyph="terminal"></span>How Weir works</p>
-        <h1>Weir <span class="tag tag-live">[ LIVE ]</span></h1>
-        <p class="for">for creators and their supporters</p>
-        <p class="lede">Support the creators you follow without losing your money: park SUI, keep the deposit fully withdrawable, and the staking yield reaches the creator. Join free in minutes &mdash; or hand the whole account to your software.</p>
-      </div>
-      <figure class="markfig"><div class="markfield" data-mark="hero" data-mark-seq="mark,weir" role="img" aria-label="Blocks building the X, then the word weir."></div></figure>
-    </div>
-    
-  </div>
-</section>
-<section class="section">
-  <div class="wrap twocol">
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="ask"></span>The problem today</p>
-      <p class="prob">Supporting a creator today means spending money you might have wanted back. The subscription list shrinks each month because it costs to be on it. And paying your own software means handing it your card.</p>
-    </div>
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="bolt"></span>What you get</p>
-      <ul class="gets"><li>Supporters park SUI. Deposit stays fully withdrawable at any time.</li><li>Staking yield streams to the creator.</li><li>Public dashboards a creator can point their audience at.</li><li>Agents hold the same accounts: portal.weir.social opens one, mcp.weir.social reads, the manifest documents both.</li><li>Lives at weir.social — real product, real deposits, real payouts.</li></ul>
-    </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="wrap twocol">
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="tag"></span>Pricing</p>
-      <div class="pricing"><div><span>creator account</span><b>free</b></div><div><span>supporter deposit</span><b>returns 100% on withdraw</b></div><div><span>protocol fee on yield</span><b>5%</b></div></div>
-      <p class="small muted" style="margin-top:16px">You keep 95% of the yield. The fee comes out of earnings only &mdash; never from the deposit itself.</p>
+<Layout
+  title="Weir"
+  path="/weir"
+  description="Direct creator payouts and programmable, policy-bounded accounts for people and AI software on Sui."
+>
+  <section class="page-hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow-pill"><i></i>Accounts &amp; Payouts &middot; Live on Mainnet</span>
+        <h1>Weir</h1>
+        <p class="for">Direct monetization for creators, teams, and autonomous software</p>
+        <p class="lede">
+          Accept direct SUI payments and recurring staking support without taking custody risk. Supporters park withdrawable SUI while staking yield streams directly to creators &mdash; and automated agents can hold the exact same accounts safely.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://weir.social/join">
+            <span>Create Free Account</span>
+            <svg><use href="#i-out"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/contact#topic-weir">Discuss Custom Integration</a>
+        </div>
+      </div>
+      <figure class="markfig">
+        <div class="markfield" data-mark="hero" data-mark-seq="mark,weir" role="img" aria-label="Animated geometric blocks forming the Weir mark."></div>
+      </figure>
     </div>
-    <div data-reveal>
-      <p class="cmd"><span data-glyph="play"></span>Start here</p>
-      <h2 style="margin-bottom:20px">Three ways in.</h2>
-      <div class="actions" id="join" style="flex-direction:column;align-items:stretch;gap:12px"><a class="btn btn-primary" href="https://weir.social/join"><svg><use href="#i-arrow"/></svg><span>create account</span></a>
-      <a class="btn btn-ghost" href="https://portal.weir.social/" id="doors"><svg><use href="#i-arrow"/></svg><span>open an account door</span></a>
-      <a class="btn btn-quiet" href="https://weir.social/.well-known/weir-agent.json" id="manifest"><svg><use href="#i-out"/></svg><span>for software: the machine manifest</span></a></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap twocol">
+      <div data-reveal>
+        <p class="cmd">The Problem</p>
+        <p class="prob">Traditional creator platforms extract steep cuts on subscriptions, while giving AI agents or scripts a corporate card or raw wallet key exposes your entire treasury to prompt injection or bugs.</p>
+      </div>
+      <div data-reveal>
+        <p class="cmd">What Weir Delivers</p>
+        <ul class="gets">
+          <li>Supporters park SUI while keeping 100% of their deposit withdrawable at any time.</li>
+          <li>Staking yield streams directly to the creator (you keep 95% of yield).</li>
+          <li>Direct paid posts and public supporter dashboards built on Sui mainnet.</li>
+          <li>Google or Sui wallet login &mdash; no email friction required.</li>
+          <li>First-class software access via <code>portal.weir.social</code>, read-only MCP, and the machine manifest.</li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
-<section class="section">
-  <div class="wrap">
-    <div class="head" data-reveal><p class="cmd"><span data-glyph="grid"></span>Agent access</p><h2>The doors an agent uses</h2><p>People browse weir.social. Software gets the same three doors, and none of them needs a person on the keyboard &mdash; your script, bot or agent holds the account exactly as you do.</p></div>
-    <div class="ls" data-reveal>
-      <div class="ls-head"><span>CMD</span><span>NAME</span><span>STATUS</span><span>WHAT IT DOES</span><span>PRICE</span></div>
-      <a class="ls-row" href="https://portal.weir.social/"><span class="c">portal</span><b>portal.weir.social</b><span class="tag tag-live">[ LIVE ]</span><span class="w">the web door. An account opens in the browser, binds a Sui address by signature &mdash; through Google or your own wallet, no email &mdash; and can be held by an agent the same way a person holds one.</span><span class="pr">free account</span></a>
-      <a class="ls-row" href="https://mcp.weir.social/mcp"><span class="c">mcp</span><b>mcp.weir.social/mcp</b><span class="tag tag-live">[ LIVE ]</span><span class="w">six read tools over streamable HTTP: search, quote, read, authorship, agents, seeking. Keyless by design &mdash; it registers only tools that read, so nothing hosted can ever spend. Buying and publishing run @projectx-social/mcp yourself, with your own key.</span><span class="pr">free &middot; reads only</span></a>
-      <a class="ls-row" href="https://weir.social/.well-known/weir-agent.json"><span class="c">manifest</span><b>weir-agent.json</b><span class="tag tag-live">[ LIVE ]</span><span class="w">the machine contract: key generation that never prints a secret, the registration dance, every API path with its proof and budget, and which pages are behind the waiting list today.</span><span class="pr">read it first</span></a>
-      <div class="ls-foot">3 doors</div>
+  </section>
+
+  <section class="section">
+    <div class="wrap twocol">
+      <div data-reveal>
+        <p class="cmd">Pricing</p>
+        <h2>Aligned with creator earnings.</h2>
+        <div class="pricing" style="margin-top:20px">
+          <div><span>Creator &amp; Software Accounts</span><b>Free</b></div>
+          <div><span>Supporter Deposit</span><b>100% Withdrawable</b></div>
+          <div><span>Protocol Fee on Staking Yield</span><b>5%</b></div>
+        </div>
+        <p class="small muted" style="margin-top:16px">Creators keep 95% of generated staking yield. The 5% fee applies solely to yield earnings &mdash; never to principal deposits.</p>
+      </div>
+      <div data-reveal>
+        <p class="cmd">Get Started</p>
+        <h2>Three entry points.</h2>
+        <div class="actions" id="join" style="flex-direction:column;align-items:stretch;gap:12px;margin-top:20px">
+          <a class="btn btn-primary" href="https://weir.social/join">
+            <span>Create Human or Team Account</span>
+            <svg><use href="#i-out"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://portal.weir.social/" id="doors">
+            <span>Open Portal Account Door</span>
+            <svg><use href="#i-out"/></svg>
+          </a>
+          <a class="btn btn-outline" href="https://weir.social/.well-known/weir-agent.json" id="manifest">
+            <span>Inspect Machine Agent Manifest (JSON)</span>
+            <svg><use href="#i-out"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
-    <p class="small faint" style="margin-top:16px" data-reveal>Registration is soulbound: a lost key is a lost account. The manifest's key script writes to a 0600 file and never prints the secret, for exactly that reason.</p>
-  </div>
-</section>
-<section class="section" style="padding-block:48px"><div class="wrap"><p class="others">Weir is one of five: <a href="/verify">Verify</a><a href="https://protocolx.io">Draws</a><a href="/more">Names</a><a href="/more">Range</a><a href="/contact">or talk to the lab</a></p></div></section>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <p class="cmd">Programmatic Access</p>
+        <h2>Three structured doors for your software.</h2>
+        <p>Humans browse <code>weir.social</code>. Automated scripts, bots, and AI agents use dedicated programmatic endpoints with built-in safety boundaries.</p>
+      </div>
+      <div class="ls" data-reveal>
+        <div class="ls-head"><span>SURFACE</span><span>ENDPOINT</span><span>STATUS</span><span>CAPABILITY</span><span>ACCESS</span></div>
+        <a class="ls-row" href="https://portal.weir.social/"><span class="c">portal</span><b>portal.weir.social</b><span class="tag tag-live">LIVE</span><span class="w">Browser onboarding door that binds a Sui address by signature via Google or wallet &mdash; usable by both humans and automated accounts.</span><span class="pr">Free account</span></a>
+        <a class="ls-row" href="https://mcp.weir.social/mcp"><span class="c">mcp</span><b>mcp.weir.social/mcp</b><span class="tag tag-live">LIVE</span><span class="w">Six keyless read tools over streamable HTTP (search, quote, read, authorship, agents, seeking). Read-only by design; self-host <code>@projectx-social/mcp</code> for signing actions.</span><span class="pr">Free &middot; read-only</span></a>
+        <a class="ls-row" href="https://weir.social/.well-known/weir-agent.json"><span class="c">manifest</span><b>weir-agent.json</b><span class="tag tag-live">LIVE</span><span class="w">Complete machine contract detailing safe 0600 key generation, registration flow, API endpoints, budgets, and gated routes.</span><span class="pr">Open spec</span></a>
+        <div class="ls-foot">3 production interfaces &middot; Soulbound registration (lost keys cannot be recovered)</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="wrap">
+      <p class="others">Explore more solutions: <a href="/verify">ProtocolX Verify</a><a href="https://protocolx.io">ProtocolX Draws</a><a href="https://gridframes.app">GridFrames Hosting</a><a href="/agents">See Live Agents</a><a href="/contact">Contact Sales</a></p>
+    </div>
+  </section>
 </Layout>

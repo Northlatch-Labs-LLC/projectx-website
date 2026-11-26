@@ -1,67 +1,108 @@
 ---
-// The product grid: one deliberate layout for the lab's software products.
-// Each card is a terminal-style panel with its own header strip, status rail,
-// and live motion. The grid is 4-up on desktop, 2-up on tablet, 1-up on phone,
-// and never reflows by accident.
-import { PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
-
-// Each product gets its own glyph so the shelf reads as distinct software,
-// not four copies of one card. Glyph names map to the site's inline icon set.
-const GLYPH: Record<string, string> = {
-  draws: 'terminal',
-  weir: 'people',
-  machines: 'grid',
-  verify: 'key',
-};
+// Commercial product showcase:
+// 1. Flagship 6-product portfolio (3-up desktop, 2-up tablet, 1-up mobile)
+// 2. Infrastructure, Control Planes & Vertical Solutions (2-up grid)
+// 3. Ecosystem Add-ons & Beta Programs strip
+import { PRODUCTS, PLATFORM_PRODUCTS, ALSO, IN_LAB } from '../data/site.ts';
 ---
 
-<div class="pgrid" role="list">
-  {PRODUCTS.map((p, i) => (
-    <a
-      class="pcard"
-      role="listitem"
-      href={p.external ?? p.href ?? '/contact'}
-      data-reveal
-      style={`--i:${i}`}
-      aria-label={`${p.name}: ${p.what}`}
-    >
-      <div class="pcard-bar">
-        <span class="pcard-glyph" data-glyph={GLYPH[p.slug] ?? 'grid'} aria-hidden="true"></span>
-        <span class="pcard-path">northlatch/{p.slug}</span>
-        <span class="pcard-live"><i></i>LIVE</span>
+<div class="pgrid pgrid-3" role="list">
+  {PRODUCTS.map((p) => (
+    <article class="pcard" role="listitem" data-reveal>
+      <div class="pcard-top">
+        <span class="pcard-cat">{p.category}</span>
+        <span class="pcard-status"><i></i>{p.status}</span>
       </div>
-      <div class="pcard-body">
-        <h3>{p.name}</h3>
-        <p class="pcard-what">{p.what}</p>
-        <p class="pcard-for">{p.forYou}</p>
+
+      <h3 class="pcard-title">{p.name}</h3>
+      <p class="pcard-audience">For {p.audience}</p>
+      <p class="pcard-headline">{p.headline}</p>
+      <p class="pcard-summary">{p.summary}</p>
+
+      <ul class="pcard-list">
+        {p.bullets.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+
+      <div class="pcard-pricing">
+        <strong>{p.priceLabel}</strong>
+        <span>{p.priceDetail}</span>
       </div>
-      <div class="pcard-foot">
-        <span class="pcard-stat">{p.stat}</span>
-        <span class="pcard-cta">{p.cta} <span aria-hidden="true">{p.external ? '↗' : '→'}</span></span>
+
+      <div class="pcard-actions">
+        <a class="btn btn-primary btn-sm" href={p.primaryHref}>
+          <span>{p.primaryCta}</span>
+          <svg><use href={p.external ? '#i-out' : '#i-arrow'}/></svg>
+        </a>
+        {p.secondaryCta && p.secondaryHref && (
+          <a class="pcard-link-sec" href={p.secondaryHref}>{p.secondaryCta} &rarr;</a>
+        )}
       </div>
-      <span class="pcard-scan" aria-hidden="true"></span>
-    </a>
+    </article>
+  ))}
+</div>
+
+<div class="subhead" style="margin-top:56px" data-reveal>
+  <p class="cmd">Infrastructure, Control Planes &amp; Specialized Solutions</p>
+  <h3>Dedicated runtimes, medical AI &amp; open-source tooling</h3>
+</div>
+
+<div class="pgrid" role="list" style="margin-top:20px">
+  {PLATFORM_PRODUCTS.map((p) => (
+    <article class="pcard" role="listitem" data-reveal>
+      <div class="pcard-top">
+        <span class="pcard-cat">{p.category}</span>
+        <span class="pcard-status"><i></i>{p.status}</span>
+      </div>
+
+      <h3 class="pcard-title">{p.name}</h3>
+      <p class="pcard-audience">For {p.audience}</p>
+      <p class="pcard-headline">{p.headline}</p>
+      <p class="pcard-summary">{p.summary}</p>
+
+      <ul class="pcard-list">
+        {p.bullets.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+
+      <div class="pcard-pricing">
+        <strong>{p.priceLabel}</strong>
+        <span>{p.priceDetail}</span>
+      </div>
+
+      <div class="pcard-actions">
+        <a class="btn btn-primary btn-sm" href={p.primaryHref}>
+          <span>{p.primaryCta}</span>
+          <svg><use href={p.external ? '#i-out' : '#i-arrow'}/></svg>
+        </a>
+        {p.secondaryCta && p.secondaryHref && (
+          <a class="pcard-link-sec" href={p.secondaryHref}>{p.secondaryCta} &rarr;</a>
+        )}
+      </div>
+    </article>
   ))}
 </div>
 
 <div class="pstrip" data-reveal>
   <div class="pstrip-group">
-    <span class="pstrip-label">also live</span>
+    <span class="pstrip-label">Open Ecosystem &amp; Developer Packages</span>
     {ALSO.map((a) => (
       <a class="pstrip-item" href={a.external ?? a.href}>
         <b>{a.name}</b>
-        <span class="tag">[ {a.live} ]</span>
+        <span class="tag tag-live">{a.live}</span>
         <span class="pstrip-text">{a.text}</span>
         <span class="pstrip-arrow" aria-hidden="true">{a.external ? '↗' : '→'}</span>
       </a>
     ))}
   </div>
   <div class="pstrip-group">
-    <span class="pstrip-label">in the lab</span>
+    <span class="pstrip-label">In Beta &amp; Active Development</span>
     {IN_LAB.map((a) => (
       <a class="pstrip-item" href={a.href}>
         <b>{a.name}</b>
-        <span class="tag">[ {a.live} ]</span>
+        <span class="tag tag-beta">{a.live}</span>
         <span class="pstrip-text">{a.text}</span>
         <span class="pstrip-arrow" aria-hidden="true">→</span>
       </a>

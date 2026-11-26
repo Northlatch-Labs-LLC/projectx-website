@@ -9,11 +9,15 @@
 // and the page says exactly that. It does not pretend to have sent anything.
 
 const TO = "hello@projectxprotocol.dev";
-const FROM = "ProjectX site form <form@projectxprotocol.dev>";
+const FROM = "Northlatch Labs site form <form@projectxprotocol.dev>";
 
 // name, email, topic, message, plus the honeypot field. Nothing else is read.
 const TOPICS = [
   "sales",
+  "synappse",
+  "xlaunch",
+  "kestrel",
+  "hivex",
   "verify",
   "weir",
   "draws",
@@ -60,7 +64,7 @@ module.exports = async (req, res) => {
   if (name.length < 1 || name.length > 200) problems.push("name is missing or too long");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) problems.push("email does not look like an email");
   if (!TOPICS.includes(topic)) problems.push("topic is not one of the listed ones");
-  if (message.length < 1 || message.length > 500) problems.push("message is missing or over 500 characters");
+  if (message.length < 1 || message.length > 2000) problems.push("message is missing or over 2000 characters");
   if (company.length > 200) problems.push("company is too long");
   if (problems.length > 0) {
     json(res, 400, { error: problems.join("; ") });
@@ -92,7 +96,7 @@ module.exports = async (req, res) => {
         from: FROM,
         to: [TO],
         reply_to: email,
-        subject: "[projectxprotocol.dev] " + topic + " — " + name,
+        subject: "[northlatch.tech] " + topic + " — " + name,
         text:
           lines.map((p) => p[0] + ": " + p[1]).join("\n") +
           "\n\n" +
